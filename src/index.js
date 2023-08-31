@@ -21,15 +21,20 @@ Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(workspaceBlocks, 'text/xm
 const jsonOutputDiv = document.getElementById('json-output')
 const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
-  const json = allGenerators.json.workspaceToCode(workspace)
-  let valid = true
-  try { JSON.parse(json) }
-  catch(e) {
-    valid = false
-    console.error(e)
+  try {
+
+    const json = allGenerators.json.workspaceToCode(workspace)
+    let valid = true
+    try { JSON.parse(json) }
+    catch(e) {
+      valid = false
+      console.error(e)
+    }
+    const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
+    jsonOutputDiv.innerText = `${validation}\n\n${json}`
+  } catch(e) {
+    jsonOutputDiv.innerText = `JSON Generation Failed:\n${e}`
   }
-  const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
-  jsonOutputDiv.innerText = `${validation}\n\n${json}`
 
   const markdown = allGenerators.markdown.workspaceToCode(workspace)
   markdownOutputDiv.innerText = markdown

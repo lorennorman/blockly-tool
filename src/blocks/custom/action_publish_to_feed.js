@@ -29,7 +29,19 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for action_publish_to_feed.js"'
+      const
+        feed = generator.valueToCode(block, 'FEED', 0) || 'null',
+        value = generator.valueToCode(block, 'VALUE', 0) || 'null',
+
+        lines = [
+          `"action": "publish_to_feed"`,
+          `"feed": ${feed}`,
+          `"value": ${value}`
+        ],
+
+        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
+
+      return `{\n${indentedLines}\n}`
     },
 
     markdown: (block, generator) => {
