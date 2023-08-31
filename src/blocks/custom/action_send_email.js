@@ -55,7 +55,21 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for action_send_email.js"'
+      const
+        email = block.getFieldValue('EMAIL_ADDRESS'),
+        subject = block.getFieldValue('EMAIL_SUBJECT'),
+        body = block.getFieldValue('EMAIL_BODY'),
+
+        lines = [
+          `"action": "send_email"`,
+          `"address": "${email}"`,
+          `"subject": "${subject}"`,
+          `"body": "${body}"`,
+        ],
+
+        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
+
+      return `{\n${indentedLines}\n}`
     },
 
     markdown: (block, generator) => {
