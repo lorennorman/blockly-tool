@@ -1,7 +1,7 @@
 {
 	"Custom Block": {
 		"scope": "javascript",
-		"prefix": "blk",
+		"prefix": "cstblk",
 		"body": [
 			"export const",
 			"  toolbox = {",
@@ -23,6 +23,29 @@
 			"  }"
 		],
 		"description": "Custom Block skeleton"
+	},
+	"Common Block": {
+		"scope": "javascript",
+		"prefix": "comblk",
+		"body": [
+			"export const",
+			"  toolbox = {",
+			"    category: '$1',",
+			"  },",
+			"",
+			"  commonType = '$TM_FILENAME_BASE',",
+			"",
+			"  generators = {",
+			"    json: (block, generator) => {",
+			"      return '{ \"message\": \"JSON not implemented for $TM_FILENAME\"'",
+			"    },",
+			"",
+			"    markdown: (block, generator) => {",
+			"      return '# $TM_FILENAME'",
+			"    }",
+			"  }"
+		],
+		"description": "Common Block skeleton"
 	},
 	"Block XML": {
 		"scope": "xml",

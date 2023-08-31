@@ -23,13 +23,16 @@ const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
   const json = allGenerators.json.workspaceToCode(workspace)
   jsonOutputDiv.innerText = json
-  console.log("json:", json)
 
   const markdown = allGenerators.markdown.workspaceToCode(workspace)
   markdownOutputDiv.innerText = markdown
 }
 
 // register listeners
+
+// enforce one top-level block
+workspace.addChangeListener(Blockly.Events.disableOrphans)
+
 // auto-save on non-UI changes
 workspace.addChangeListener((e) => e.isUiEvent || save(workspace))
 
