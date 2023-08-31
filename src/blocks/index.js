@@ -1,11 +1,13 @@
 import * as Blockly from 'blockly';
 
+import * as action_root from './action_root'
 import * as trigger_on_change from './trigger_on_change'
 
 
 const
   ALL_BLOCKS = {
-    trigger_on_change
+    action_root,
+    trigger_on_change,
   },
   jsonGenerator = new Blockly.Generator('JSON'),
   markdownGenerator = new Blockly.Generator('markdown')

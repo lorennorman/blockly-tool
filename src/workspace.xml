@@ -1,0 +1,5 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+  <block type="action_root" id="KQN$}3HRW/nG0PBrd^Lo" deletable="false" movable="false" x="163" y="63">
+    <field name="ACTION_FREQUENCY">10</field>
+  </block>
+</xml>

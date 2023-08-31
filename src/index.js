@@ -2,6 +2,7 @@ import * as Blockly from 'blockly'
 import { allBlocksJson, allGenerators } from './blocks'
 import toolbox from './toolbox'
 import { save, load } from './serialization'
+import workspaceBlocks from './workspace.xml?raw'
 
 import './index.css'
 
@@ -11,36 +12,38 @@ Blockly.defineBlocksWithJsonArray(allBlocksJson)
 
 // inject blockly with our toolbox
 const blocklyDiv = document.getElementById('blocklyDiv')
-const ws = Blockly.inject(blocklyDiv, {toolbox})
+const workspace = Blockly.inject(blocklyDiv, {toolbox})
 
-// TODO: inject workspace blocks
+// inject workspace blocks
+Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(workspaceBlocks, 'text/xml'), workspace)
 
 // prepare generators and their dom targets
-const codeDiv = document.getElementById('generatedCode').firstChild
-const outputDiv = document.getElementById('output')
+const jsonOutputDiv = document.getElementById('json-output')
+const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
-  const json = allGenerators.json.workspaceToCode(ws)
-  codeDiv.innerText = json
+  const json = allGenerators.json.workspaceToCode(workspace)
+  jsonOutputDiv.innerText = json
+  console.log("json:", json)
 
-  const markdown = allGenerators.markdown.workspaceToCode(ws)
-  outputDiv.innerText = markdown
+  const markdown = allGenerators.markdown.workspaceToCode(workspace)
+  markdownOutputDiv.innerText = markdown
 }
 
 // register listeners
 // auto-save on non-UI changes
-ws.addChangeListener((e) => e.isUiEvent || save(ws))
+workspace.addChangeListener((e) => e.isUiEvent || save(workspace))
 
 // auto-regenerate code
-ws.addChangeListener((e) => {
+workspace.addChangeListener((e) => {
   if(e.isUiEvent || // no UI events
      e.type == Blockly.Events.FINISHED_LOADING || // no on-load
-     ws.isDragging()) // not while dragging
+     workspace.isDragging()) // not while dragging
   { return }
 
   regenerate()
 })
 
 // load last sketch from storage
-load(ws)
+load(workspace)
 // run the generators
 regenerate()

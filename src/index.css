@@ -29,11 +29,11 @@ pre, code {
     margin: 1rem;
 }
 
-#generatedCode {
+#json-output-container {
     height: 50%;
     background-color: rgb(247, 240, 228);
 }
 
-#output {
+#markdown-output {
     height: 50%;
 }
