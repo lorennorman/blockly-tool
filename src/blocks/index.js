@@ -17,6 +17,9 @@ import logic_compare from './common/logic_compare'
 import logic_negate from './common/logic_negate'
 import logic_operation from './common/logic_operation'
 import math_arithmetic from './common/math_arithmetic'
+import variables_set from './common/variables_set'
+import variables_get from './common/variables_get'
+import math_change from './common/math_change'
 
 
 const
@@ -36,6 +39,10 @@ const
     text_multiline,
     logic_boolean,
     logic_null,
+
+    variables_set,
+    variables_get,
+    math_change,
 
     math_arithmetic,
 

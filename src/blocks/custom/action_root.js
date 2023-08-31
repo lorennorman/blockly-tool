@@ -71,8 +71,20 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      // TODO
-      return '{ "name": "action_root" }'
+      const
+        frequency = block.getFieldValue('ACTION_FREQUENCY'),
+        triggers = generator.statementToCode(block, 'TRIGGERS'),
+        actions = generator.statementToCode(block, 'ACTIONS')
+
+      return `{
+        "blocklyActionsVersion": "1.0.0",
+        "triggers": [
+          ${triggers}
+        ],
+        "actions": [
+          ${actions}
+        ]
+      }`
     },
 
     markdown: (block, generator) => {

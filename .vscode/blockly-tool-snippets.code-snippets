@@ -3,16 +3,16 @@
 		"scope": "javascript",
 		"prefix": "cstblk",
 		"body": [
-			"export const",
-			"  toolbox = {",
+			"export default {",
+			"  toolbox: {",
 			"    category: '$1',",
 			"  },",
 			"",
-			"  json = {",
+			"  json: {",
 			"    ${2:// insert Block json here}",
 			"  },",
 			"",
-			"  generators = {",
+			"  generators: {",
 			"    json: (block, generator) => {",
 			"      return '{ \"message\": \"JSON not implemented for $TM_FILENAME\"'",
 			"    },",
@@ -20,7 +20,9 @@
 			"    markdown: (block, generator) => {",
 			"      return '# $TM_FILENAME'",
 			"    }",
-			"  }"
+			"  }",
+			"}",
+			""
 		],
 		"description": "Custom Block skeleton"
 	},
@@ -28,14 +30,14 @@
 		"scope": "javascript",
 		"prefix": "comblk",
 		"body": [
-			"export const",
-			"  toolbox = {",
+			"export default {",
+			"  toolbox: {",
 			"    category: '$1',",
 			"  },",
 			"",
-			"  commonType = '$TM_FILENAME_BASE',",
+			"  commonType: '$TM_FILENAME_BASE',",
 			"",
-			"  generators = {",
+			"  generators: {",
 			"    json: (block, generator) => {",
 			"      return '{ \"message\": \"JSON not implemented for $TM_FILENAME\"'",
 			"    },",
@@ -43,7 +45,9 @@
 			"    markdown: (block, generator) => {",
 			"      return '# $TM_FILENAME'",
 			"    }",
-			"  }"
+			"  }",
+			"}",
+			""
 		],
 		"description": "Common Block skeleton"
 	},
