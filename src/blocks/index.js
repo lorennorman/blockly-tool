@@ -28,14 +28,14 @@ Object.keys(ALL_BLOCKS).map(key => {
   allBlocksJson.push(json)
 
   // sort blocks into their declared categories
-  const { label, category, categories=[] } = toolbox
+  const { category, categories=[] } = toolbox
   categories.concat([category]).forEach(category => {
     allBlockCategories[category] = (allBlockCategories[category] || [])
     allBlockCategories[category].push(json.type)
   })
 
-  if(label) {
-    allBlockLabels[json.type] = label
+  if(json.tooltip) {
+    allBlockLabels[json.type] = json.tooltip
   }
 
   // register generators

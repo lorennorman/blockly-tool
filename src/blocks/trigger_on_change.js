@@ -1,8 +1,7 @@
 
 export const
   toolbox = {
-    category: 'Triggers',
-    label: "Triggers when a feed receives a new value."
+    category: 'Triggers'
   },
 
   json = {

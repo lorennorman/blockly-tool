@@ -1,0 +1,27 @@
+{
+	"Custom Block": {
+		"scope": "javascript",
+		"prefix": "blk",
+		"body": [
+			"export const",
+			"  toolbox = {",
+			"    category: '$1',",
+			"  },",
+			"",
+			"  json = {",
+			"    // insert Block json here",
+			"  },",
+			"",
+			"  generators = {",
+			"    json: (block, generator) => {",
+			"      return '{ \"message\": \"JSON not implemented for $TM_FILENAME\"'",
+			"    },",
+			"",
+			"    markdown: (block, generator) => {",
+			"      return '# $TM_FILENAME'",
+			"    }",
+			"  }"
+		],
+		"description": "Custom Block skeleton"
+	}
+}
