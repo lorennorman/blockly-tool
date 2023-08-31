@@ -1,21 +1,22 @@
 import * as Blockly from 'blockly';
 
-import action_root from './action_root'
-import feed_selector from './feed_selector'
-import trigger_all from './trigger_all'
-import trigger_on_change from './trigger_on_change'
-import action_publish_to_feed from './action_publish_to_feed'
-import action_send_email from './action_send_email'
-import math_number from './math_number'
-import text from './text'
-import text_multiline from './text_multiline'
-import logic_boolean from './logic_boolean'
-import logic_null from './logic_null'
-import controls_if from './controls_if'
-import logic_compare from './logic_compare'
-import logic_negate from './logic_negate'
-import logic_operation from './logic_operation'
-import math_arithmetic from './math_arithmetic'
+import action_root from './custom/action_root'
+import feed_selector from './custom/feed_selector'
+import trigger_all from './custom/trigger_all'
+import trigger_on_change from './custom/trigger_on_change'
+import action_publish_to_feed from './custom/action_publish_to_feed'
+import action_send_email from './custom/action_send_email'
+
+import math_number from './common/math_number'
+import text from './common/text'
+import text_multiline from './common/text_multiline'
+import logic_boolean from './common/logic_boolean'
+import logic_null from './common/logic_null'
+import controls_if from './common/controls_if'
+import logic_compare from './common/logic_compare'
+import logic_negate from './common/logic_negate'
+import logic_operation from './common/logic_operation'
+import math_arithmetic from './common/math_arithmetic'
 
 
 const
