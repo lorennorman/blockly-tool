@@ -1,0 +1,60 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="factory_base" id="b6/G{/rol$NA38SgaJ8q" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">trigger_on_change</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="19@il?b$a_V;F)$f{4bj">
+        <field name="INPUTNAME">FEED_CHECK</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mBA#K[0mL`AoZdj+Zcx`">
+            <field name="TEXT">Feed Check:</field>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="9gPLIk7f{~@+f%?(TS7a"></shadow>
+        </value>
+        <next>
+          <block type="input_dummy" id="!)h9czI+i/XUO02_ry|u">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="8Gn/nezO.6NO?`uD5=c|">
+                <field name="TEXT">Reactive?</field>
+                <next>
+                  <block type="field_checkbox" id="r9(=+Z980/IoQ[UJk(Bc">
+                    <field name="CHECKED">TRUE</field>
+                    <field name="FIELDNAME">REACTIVE</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="7f[ONAS~Ta3ScSB[!9pH" deletable="false" movable="false">
+        <field name="TEXT">Plug in a Feed, or Logic that references a Feed.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="aP6i628P/(_u0;MXu`;N" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="eW9bs?,x2JXQZHE*_8.]"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="K1d+,^X!e)=.dAgE^ke$"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="NWv?/Gla*%g19=#ijEAX">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block>
+</xml>

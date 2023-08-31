@@ -1,0 +1,23 @@
+{
+  "name": "blockly-tool",
+  "version": "1.0.0",
+  "description": "A Blockly tooling project",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "blockly"
+  ],
+  "author": "Loren Norman",
+  "license": "",
+  "devDependencies": {
+    "vite": "^4.4.9"
+  },
+  "dependencies": {
+    "blockly": "^10.1.3"
+  }
+}
