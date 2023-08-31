@@ -9,7 +9,7 @@
 			"  },",
 			"",
 			"  json = {",
-			"    // insert Block json here",
+			"    ${2:// insert Block json here}",
 			"  },",
 			"",
 			"  generators = {",
@@ -23,5 +23,15 @@
 			"  }"
 		],
 		"description": "Custom Block skeleton"
+	},
+	"Block XML": {
+		"scope": "xml",
+		"prefix": "blkxml",
+		"body": [
+			"<xml xmlns=\"https://developers.google.com/blockly/xml\">",
+			"  $1",
+			"</xml>"
+		],
+		"description": "Blockly XML wrapper for interop with Blockly Dev Tools"
 	}
 }

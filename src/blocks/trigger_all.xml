@@ -1,0 +1,44 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="factory_base" id="Kl}#E$H(r*__3kty+^3t" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">trigger_all</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_statement" id="H5DAAmge~5GRxSZ0=S[e">
+        <field name="INPUTNAME">TRIGGERS</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mM:!Ab_axpfCF3AA$#;O">
+            <field name="TEXT">All:</field>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="fCjN]5JcfCuH4*wFXX[:"></shadow>
+        </value>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="Hb6*AZ9[v?*Xk$8%64NV" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="MDB-doI{E?Zv:J:#1oLx" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="B-*6Spt;tGU:W`t7E,#{"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id=")%!md4~/g:5j38msHeqX"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="O{WOXuu/EI|6n7Q*yI8V">
+        <mutation colour="#80a55b"></mutation>
+        <field name="HUE">90</field>
+      </block>
+    </value>
+  </block>
+</xml>
