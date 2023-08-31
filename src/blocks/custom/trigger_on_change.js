@@ -34,7 +34,7 @@ export default {
 
         lines = [
           `"trigger": "feed_check",`,
-          `"feedKey": "${feedToCheck}",`,
+          `"check": ${feedToCheck},`,
           `"reactive": ${isReactive}`,
         ],
 

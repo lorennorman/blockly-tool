@@ -35,7 +35,7 @@ export default {
   generators: {
     json: (block, generator) => {
       const feedKey = block.getFieldValue('FEED_KEY')
-      return [feedKey, 0]
+      return [`{ "feedKey": "${feedKey}" }`, 0]
     },
 
     markdown: (block, generator) => {

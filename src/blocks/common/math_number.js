@@ -7,7 +7,7 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for math_number.js"'
+      return [Number(block.getFieldValue('NUM')), 0]
     },
 
     markdown: (block, generator) => {
