@@ -7,7 +7,7 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for logic_null.js"'
+      return ['null', 0]
     },
 
     markdown: (block, generator) => {

@@ -7,7 +7,9 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for text.js"'
+      const text = block.getFieldValue('TEXT')
+
+      return [`"${text}"`, 0]
     },
 
     markdown: (block, generator) => {

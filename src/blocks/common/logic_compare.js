@@ -9,10 +9,11 @@ export default {
     json: (block, generator) => {
       const
         operator = block.getFieldValue('OP'),
-        argument0 = generator.valueToCode(block, 'A', 0),
-        argument1 = generator.valueToCode(block, 'B', 0),
+        argument0 = generator.valueToCode(block, 'A', 0) || '0',
+        argument1 = generator.valueToCode(block, 'B', 0) || '0',
 
         lines = [
+          `"logic": "compare"`,
           `"a": ${argument0}`,
           `"op": "${operator}"`,
           `"b": ${argument1}`,

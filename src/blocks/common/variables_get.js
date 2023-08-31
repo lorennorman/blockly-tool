@@ -5,7 +5,8 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for variables_get.js"'
+      const variableName = block.getField('VAR').getText()
+      return [`{ "variable": "${variableName}" }`, 0]
     },
 
     markdown: (block, generator) => {

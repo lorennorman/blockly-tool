@@ -7,7 +7,8 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for logic_boolean.js"'
+      const bool = block.getFieldValue('BOOL') === 'TRUE'
+      return [bool, 0]
     },
 
     markdown: (block, generator) => {

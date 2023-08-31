@@ -5,7 +5,12 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for variables_set.js"'
+      const
+        variableName = block.getField('VAR').getText(),
+        value = generator.valueToCode(block, 'VALUE', 0),
+        defaultedValue = value || (value !== 0 && value !== null) && 'false'
+
+      return `{ "set_variable": "${variableName}", "value": ${defaultedValue} }`
     },
 
     markdown: (block, generator) => {

@@ -7,7 +7,7 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return [Number(block.getFieldValue('NUM')), 0]
+      return [Number(block.getFieldValue('NUM')) || '0', 0]
     },
 
     markdown: (block, generator) => {

@@ -7,7 +7,9 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for text_multiline.js"'
+      const text = block.getFieldValue('TEXT')
+
+      return [`"${text.replaceAll('\n', '\\n')}"`, 0]
     },
 
     markdown: (block, generator) => {

@@ -79,8 +79,8 @@ export default {
         lines = [
           `"blocklyActionsVersion": "1.0.0"`,
           `"frequency": ${frequency}`,
-          `"triggers": [ \n${triggers}\n ]`,
-          `"actions": [ \n${actions}\n ]`,
+          `"triggers": [\n${triggers}\n]`,
+          `"actions": [\n${actions}\n]`,
         ],
 
         indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)

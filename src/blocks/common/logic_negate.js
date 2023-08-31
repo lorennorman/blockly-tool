@@ -7,7 +7,11 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for logic_negate.js"'
+      const
+        booleanLogic = generator.valueToCode(block, 'BOOL', 0),
+        negatedLogic = generator.prefixLines(`"not": ${booleanLogic}`, generator.INDENT)
+
+      return [`{\n${negatedLogic}\n}`, 0]
     },
 
     markdown: (block, generator) => {

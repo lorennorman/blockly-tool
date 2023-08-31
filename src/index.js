@@ -22,7 +22,6 @@ const jsonOutputDiv = document.getElementById('json-output')
 const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
   try {
-
     const json = allGenerators.json.workspaceToCode(workspace)
     let valid = true
     try { JSON.parse(json) }
@@ -55,7 +54,8 @@ workspace.addChangeListener((e) => {
      workspace.isDragging()) // not while dragging
   { return }
 
-  regenerate()
+  // generate next cycle to orphans get disabled first
+  setTimeout(regenerate)
 })
 
 // load last sketch from storage
