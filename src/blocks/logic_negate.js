@@ -1,11 +1,11 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Logic',
   },
 
-  commonType = 'logic_negate',
+  commonType: 'logic_negate',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for logic_negate.js"'
     },
@@ -14,3 +14,4 @@ export const
       return '# logic_negate.js'
     }
   }
+}

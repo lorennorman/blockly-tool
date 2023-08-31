@@ -1,11 +1,11 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Values',
   },
 
-  commonType = 'logic_boolean',
+  commonType: 'logic_boolean',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for logic_boolean.js"'
     },
@@ -14,3 +14,4 @@ export const
       return '# logic_boolean.js'
     }
   }
+}

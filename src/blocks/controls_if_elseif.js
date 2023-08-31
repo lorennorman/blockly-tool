@@ -1,9 +1,9 @@
-export const
-  toolbox = { },
+export default {
+  toolbox: { },
 
-  commonType = 'controls_if_elseif',
+  commonType: 'controls_if_elseif',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for controls_if_elseif.js"'
     },
@@ -12,3 +12,4 @@ export const
       return '# controls_if_elseif.js'
     }
   }
+}

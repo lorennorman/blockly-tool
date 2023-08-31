@@ -1,11 +1,11 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Values',
   },
 
-  commonType = 'text',
+  commonType: 'text',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for text.js"'
     },
@@ -14,3 +14,4 @@ export const
       return '# text.js'
     }
   }
+}

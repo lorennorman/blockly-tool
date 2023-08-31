@@ -1,9 +1,9 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Actions',
   },
 
-  json = {
+  json: {
     "type": "action_publish_to_feed",
     "message0": "Publish to Feed %1 Feed: %2 Value: %3",
     "args0": [
@@ -27,7 +27,7 @@ export const
     "helpUrl": ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for action_publish_to_feed.js"'
     },
@@ -36,3 +36,4 @@ export const
       return '# action_publish_to_feed.js'
     }
   }
+}

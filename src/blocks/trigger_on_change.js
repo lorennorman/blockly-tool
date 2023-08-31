@@ -1,10 +1,10 @@
 
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Triggers'
   },
 
-  json = {
+  json: {
     type: "trigger_on_change",
     message0: "Feed Check: %1 Reactive? %2",
     args0: [
@@ -26,7 +26,7 @@ export const
     helpUrl: ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       var value_feed_check = generator.valueToCode(block, 'FEED_CHECK', 0);
       var checkbox_reactive = block.getFieldValue('REACTIVE') === 'TRUE';
@@ -39,3 +39,4 @@ export const
       return 'markity'
     }
   }
+}

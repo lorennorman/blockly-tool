@@ -1,11 +1,11 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Logic',
   },
 
-  commonType = 'logic_compare',
+  commonType: 'logic_compare',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for logic_compare.js"'
     },
@@ -14,3 +14,4 @@ export const
       return '# logic_compare.js'
     }
   }
+}

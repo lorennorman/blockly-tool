@@ -1,9 +1,9 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Feeds',
   },
 
-  json = {
+  json: {
     "type": "feed_selector",
     "message0": "Feed: %1",
     "args0": [
@@ -32,7 +32,7 @@ export const
     "helpUrl": ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for feed_selector.js"'
     },
@@ -41,3 +41,4 @@ export const
       return '# feed_selector.js'
     }
   }
+}

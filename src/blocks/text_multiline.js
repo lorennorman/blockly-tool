@@ -1,11 +1,11 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Values',
   },
 
-  commonType = 'text_multiline',
+  commonType: 'text_multiline',
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for text_multiline.js"'
     },
@@ -14,3 +14,4 @@ export const
       return '# text_multiline.js'
     }
   }
+}

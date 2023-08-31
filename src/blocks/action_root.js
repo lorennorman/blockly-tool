@@ -1,8 +1,8 @@
 
-export const
-  toolbox = { },
+export default {
+  toolbox: { },
 
-  json = {
+  json: {
     "type": "action_root",
     "message0": "Action Root %1 Max Frequency: %2 %3 %4 Triggers %5 Any: %6 %7 Actions %8 All: %9",
     "args0": [
@@ -69,17 +69,17 @@ export const
     "helpUrl": ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       // TODO
-      var json = '{ "name": "action_root" }'
-      return json
+      return '{ "name": "action_root" }'
     },
 
     markdown: (block, generator) => {
       return '# Action Root'
     }
   }
+}
 
 
 

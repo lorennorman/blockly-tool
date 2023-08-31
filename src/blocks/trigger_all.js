@@ -1,9 +1,9 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Triggers',
   },
 
-  json = {
+  json: {
     "type": "trigger_all",
     "message0": "All: %1",
     "args0": [
@@ -19,7 +19,7 @@ export const
     "helpUrl": ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for trigger_all.js"'
     },
@@ -28,3 +28,4 @@ export const
       return '# trigger_all.js'
     }
   }
+}

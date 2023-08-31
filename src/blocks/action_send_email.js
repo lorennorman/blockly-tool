@@ -1,9 +1,9 @@
-export const
-  toolbox = {
+export default {
+  toolbox: {
     category: 'Actions',
   },
 
-  json = {
+  json: {
     "type": "action_send_email",
     "message0": "Send an Email %1 To: %2 %3 Subject: %4 %5 Body: %6",
     "args0": [
@@ -53,7 +53,7 @@ export const
     "helpUrl": ""
   },
 
-  generators = {
+  generators: {
     json: (block, generator) => {
       return '{ "message": "JSON not implemented for action_send_email.js"'
     },
@@ -62,3 +62,4 @@ export const
       return '# action_send_email.js'
     }
   }
+}
