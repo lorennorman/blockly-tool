@@ -21,7 +21,8 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for trigger_all.js"'
+      const triggers = generator.statementToCode(block, 'TRIGGERS')
+      return `{ "all": [\n${triggers}\n]}`
     },
 
     markdown: (block, generator) => {

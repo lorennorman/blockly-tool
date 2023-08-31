@@ -34,7 +34,8 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      return '{ "message": "JSON not implemented for feed_selector.js"'
+      const feedKey = block.getFieldValue('FEED_KEY')
+      return [feedKey, 0]
     },
 
     markdown: (block, generator) => {

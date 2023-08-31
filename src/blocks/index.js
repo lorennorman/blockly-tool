@@ -54,6 +54,14 @@ const
   jsonGenerator = new Blockly.Generator('JSON'),
   markdownGenerator = new Blockly.Generator('markdown')
 
+jsonGenerator.scrub_ = (block, previousJson, thisOnly) => {
+  const nextBlock = block.nextConnection?.targetBlock()
+
+  return nextBlock && !thisOnly
+    ? `${ previousJson },\n${ jsonGenerator.blockToCode(nextBlock) }`
+    : previousJson
+}
+
 export const
   allBlocksJson = [],
   allBlockCategories = {},

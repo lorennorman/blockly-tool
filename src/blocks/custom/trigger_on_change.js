@@ -28,11 +28,19 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      var value_feed_check = generator.valueToCode(block, 'FEED_CHECK', 0);
-      var checkbox_reactive = block.getFieldValue('REACTIVE') === 'TRUE';
-      // TODO: Assemble javascript into code variable.
-      var code = '...\n';
-      return code;
+      const
+        feedToCheck = generator.valueToCode(block, 'FEED_CHECK', 0),
+        isReactive = block.getFieldValue('REACTIVE') === 'TRUE',
+
+        lines = [
+          `"trigger": "feed_check",`,
+          `"feedKey": "${feedToCheck}",`,
+          `"reactive": ${isReactive}`,
+        ],
+
+        indentedLines = generator.prefixLines(lines.join('\n'), generator.INDENT)
+
+      return `{\n${ indentedLines }\n}`
     },
 
     markdown: (block, generator) => {
