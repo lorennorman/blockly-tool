@@ -13,6 +13,7 @@ const
     { name: 'Values', colour: 156 },
     { name: 'Variables', colour: 208, extras: { custom: "VARIABLE" } },
     { name: 'Math', colour: 260 },
+    { name: 'Transformers', colour: 285 },
     { name: 'Logic', colour: 312 },
   ]
 

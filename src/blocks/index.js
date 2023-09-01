@@ -6,6 +6,7 @@ import trigger_all from './custom/trigger_all'
 import trigger_on_change from './custom/trigger_on_change'
 import action_publish_to_feed from './custom/action_publish_to_feed'
 import action_send_email from './custom/action_send_email'
+import transform_regex from './custom/transform_regex'
 
 import math_number from './common/math_number'
 import text from './common/text'
@@ -45,6 +46,8 @@ const
     math_change,
 
     math_arithmetic,
+
+    transform_regex,
 
     controls_if,
     logic_compare,

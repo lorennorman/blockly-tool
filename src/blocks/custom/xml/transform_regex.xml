@@ -1,0 +1,56 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="factory_base" id="SL`iG/R]}%n39)Spr(_Y" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">transform_regex</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="H%hT-sOd^ZcNLxCEyta)">
+        <field name="INPUTNAME">MATCH_STRING</field>
+        <field name="ALIGN">RIGHT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="wA;DYRRyV?CD5R[3@4EB">
+            <field name="TEXT">Input:</field>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="m2lkLxR/a_^56{y|:_,:"></shadow>
+        </value>
+        <next>
+          <block type="input_value" id="8wuNnb}SdAh0NEw(|2i:">
+            <field name="INPUTNAME">REGEX_STRING</field>
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="tE9?dt0#Ir?fqM-eS3$y">
+                <field name="TEXT">Regex:</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="8]t@1)CU]-9d3Jz5qI?6"></shadow>
+              <block type="type_string" id="Bye]%[Tl!;rPKN-G8-XO"></block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="MONR9pXNWDI0?xeCFLgI" deletable="false" movable="false">
+        <field name="TEXT">Returns the first match, or an empty string if there's no match.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="xZxyL%Eg|hmp?3Nz1#`S" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="vV:2D:vRFa.3Vl93hw!F"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="F/iZR~a5+)P?D]TlrSyt">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block>
+</xml>
