@@ -1,5 +1,4 @@
-<xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="factory_base" id="pTm]Hpk1SYWSmtw3Fpnm" deletable="false" movable="false" x="10" y="10">
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="factory_base" id="pTm]Hpk1SYWSmtw3Fpnm" deletable="false" movable="false" x="10" y="10">
     <mutation connections="NONE"></mutation>
     <field name="NAME">action_root</field>
     <field name="INLINE">AUTO</field>
@@ -13,77 +12,79 @@
           </block>
         </statement>
         <next>
-          <block type="input_dummy" id="L*j`dFgy#}rSo`!Aa2,D">
-            <field name="ALIGN">LEFT</field>
+          <block type="input_value" id="d6[JV^0k1;T:Z23?K85B">
+            <field name="INPUTNAME">TRIGGER</field>
+            <field name="ALIGN">RIGHT</field>
             <statement name="FIELDS">
-              <block type="field_static" id="y@F%Xu-R~3@5+PxWl.(1">
-                <field name="TEXT">Max Frequency:</field>
-                <next>
-                  <block type="field_dropdown" id="M@0A1E.s;at)9C_$cW5f">
-                    <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
-                    <field name="FIELDNAME">ACTION_FREQUENCY</field>
-                    <field name="USER0">10 seconds</field>
-                    <field name="CPU0">10</field>
-                    <field name="USER1">30 seconds</field>
-                    <field name="CPU1">30</field>
-                    <field name="USER2">1 minute</field>
-                    <field name="CPU2">60</field>
-                    <field name="USER3">5 minutes</field>
-                    <field name="CPU3">300</field>
-                    <field name="USER4">1 hour</field>
-                    <field name="CPU4">3600</field>
-                  </block>
-                </next>
+              <block type="field_static" id="M0HaRcqi~mv3cJ*EX=yB">
+                <field name="TEXT">Trigger:</field>
               </block>
             </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="JD?J`y9ls4t8tF8,J~/L"></shadow>
+              <block type="type_other" id="(fwh^0;EGGx:pRZKD7w!">
+                <field name="TYPE">trigger</field>
+              </block>
+            </value>
             <next>
-              <block type="input_dummy" id="6lF{R3=jv);r5(M;%xU1">
-                <field name="ALIGN">CENTRE</field>
+              <block type="input_value" id="aj]d}3pJ)^9bdhDt~smL">
+                <field name="INPUTNAME">ACTION</field>
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="@P.l1P6v!JN$+PQpzut#">
+                    <field name="TEXT">Action:</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow type="type_null" id="}KQ4OZ]z2j0(FNvXgIa1"></shadow>
+                  <block type="type_other" id="T4mugAdoltgx:{amQQn_">
+                    <field name="TYPE">action</field>
+                  </block>
+                </value>
                 <next>
-                  <block type="input_dummy" id="k?wQ8*ny9:9w*Arx=t)u">
+                  <block type="input_dummy" id="6lF{R3=jv);r5(M;%xU1">
                     <field name="ALIGN">CENTRE</field>
                     <statement name="FIELDS">
-                      <block type="field_static" id="M0HaRcqi~mv3cJ*EX=yB">
-                        <field name="TEXT">Triggers</field>
+                      <block type="field_static" id="y@F%Xu-R~3@5+PxWl.(1">
+                        <field name="TEXT">Limit Every</field>
                       </block>
                     </statement>
                     <next>
-                      <block type="input_statement" id="hw_1LHy~rY70-eaRQ/,7">
-                        <field name="INPUTNAME">TRIGGERS</field>
-                        <field name="ALIGN">LEFT</field>
+                      <block type="input_dummy" id="L*j`dFgy#}rSo`!Aa2,D">
+                        <field name="ALIGN">CENTRE</field>
                         <statement name="FIELDS">
-                          <block type="field_static" id="ylyOWeGo(Iwsvx3$do;)">
-                            <field name="TEXT">Any:</field>
+                          <block type="field_dropdown" id="M@0A1E.s;at)9C_$cW5f">
+                            <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                            <field name="FIELDNAME">ACTION_FREQUENCY</field>
+                            <field name="USER0">10 seconds</field>
+                            <field name="CPU0">10</field>
+                            <field name="USER1">30 seconds</field>
+                            <field name="CPU1">30</field>
+                            <field name="USER2">1 minute</field>
+                            <field name="CPU2">60</field>
+                            <field name="USER3">5 minutes</field>
+                            <field name="CPU3">300</field>
+                            <field name="USER4">1 hour</field>
+                            <field name="CPU4">3600</field>
                           </block>
                         </statement>
-                        <value name="TYPE">
-                          <shadow type="type_null" id="RptP},Q;R;Vpb|c|QB!B"></shadow>
-                        </value>
                         <next>
-                          <block type="input_dummy" id="lGhQ.j).d(^i0xeCTwXe">
+                          <block type="input_dummy" id="AH36V-v!K$=SE.-S^;~P">
                             <field name="ALIGN">CENTRE</field>
-                            <next>
-                              <block type="input_dummy" id="ev.;#.*J*JBn/%-Er},T">
-                                <field name="ALIGN">CENTRE</field>
-                                <statement name="FIELDS">
-                                  <block type="field_static" id="@P.l1P6v!JN$+PQpzut#">
-                                    <field name="TEXT">Actions</field>
-                                  </block>
-                                </statement>
+                            <statement name="FIELDS">
+                              <block type="field_checkbox" id="=NlN%5}z7w|67Pa5`HYi">
+                                <field name="CHECKED">TRUE</field>
+                                <field name="FIELDNAME">NAME</field>
                                 <next>
-                                  <block type="input_statement" id="{_pB)q@[pR5z{^=1w9l(">
-                                    <field name="INPUTNAME">ACTIONS</field>
-                                    <field name="ALIGN">LEFT</field>
-                                    <statement name="FIELDS">
-                                      <block type="field_static" id="c7d*ot[gT[.2?^]6mh~U">
-                                        <field name="TEXT">All:</field>
-                                      </block>
-                                    </statement>
-                                    <value name="TYPE">
-                                      <shadow type="type_null" id="X!+Vq3vrBqF/`:1ZtH#6"></shadow>
-                                    </value>
+                                  <block type="field_static" id="A[a.?AViz[}%cPh;/~#8">
+                                    <field name="TEXT">Notify on Reset?</field>
                                   </block>
                                 </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="input_dummy" id="Mwyq6uUw5e7=XUj?{I)X">
+                                <field name="ALIGN">RIGHT</field>
                               </block>
                             </next>
                           </block>
@@ -114,5 +115,4 @@
         <field name="HUE">120</field>
       </block>
     </value>
-  </block>
-</xml>
+  </block></xml>

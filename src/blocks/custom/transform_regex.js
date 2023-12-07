@@ -1,3 +1,13 @@
+// regex considerations:
+// - timeout
+// - case-sensitivity
+// - single vs multi-line
+// - regex-escaping strings
+// - match? true/false
+// - matches: 0 or more
+// - numbered matches
+// - named matches
+
 export default {
   toolbox: {
     category: 'Transformers',

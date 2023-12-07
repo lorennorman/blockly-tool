@@ -26,7 +26,7 @@ export default {
         ]
       }
     ],
-    "output": null,
+    "output": "feed",
     "colour": 30,
     "tooltip": "",
     "helpUrl": ""

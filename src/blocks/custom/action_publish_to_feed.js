@@ -13,15 +13,22 @@ export default {
       },
       {
         "type": "input_value",
-        "name": "FEED"
+        "name": "FEED",
+        "check": "feed",
+        "align": "RIGHT"
       },
       {
         "type": "input_value",
-        "name": "VALUE"
+        "name": "VALUE",
+        "check": [
+          "Boolean",
+          "String",
+          "Number"
+        ],
+        "align": "RIGHT"
       }
     ],
-    "previousStatement": null,
-    "nextStatement": null,
+    "output": "action",
     "colour": 345,
     "tooltip": "",
     "helpUrl": ""

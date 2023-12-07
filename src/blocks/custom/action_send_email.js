@@ -5,11 +5,17 @@ export default {
 
   json: {
     "type": "action_send_email",
-    "message0": "Send an Email %1 To: %2 %3 Subject: %4 %5 Body: %6",
+    "message0": "Send an Email %1 Select a Feed: %2 To: %3 %4 Subject: %5 %6 Body: %7",
     "args0": [
       {
         "type": "input_dummy",
         "align": "CENTRE"
+      },
+      {
+        "type": "input_value",
+        "name": "FEED",
+        "check": "feed",
+        "align": "RIGHT"
       },
       {
         "type": "field_dropdown",
@@ -35,7 +41,7 @@ export default {
       {
         "type": "field_input",
         "name": "EMAIL_SUBJECT",
-        "text": "A Great Subject"
+        "text": "{{feed_name}} updated"
       },
       {
         "type": "input_dummy"
@@ -43,11 +49,10 @@ export default {
       {
         "type": "field_input",
         "name": "EMAIL_BODY",
-        "text": "body with {{ value }}"
+        "text": "{{feed_name}} got value {{value}} at {{created_at}}"
       }
     ],
-    "previousStatement": null,
-    "nextStatement": null,
+    "output": "action",
     "colour": 345,
     "tooltip": "",
     "helpUrl": ""
