@@ -15,7 +15,8 @@
   "author": "Loren Norman",
   "license": "",
   "devDependencies": {
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "eslint": "^8.49.0"
   },
   "dependencies": {
     "blockly": "^10.1.3"
