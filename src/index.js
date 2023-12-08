@@ -1,4 +1,4 @@
-import * as Blockly from 'blockly'
+import Blockly from 'blockly'
 import { allBlocksJson, allGenerators } from './blocks'
 import toolbox from './toolbox'
 import { save, load } from './serialization'

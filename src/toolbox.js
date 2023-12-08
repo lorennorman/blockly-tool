@@ -1,4 +1,4 @@
-import { allBlockCategories, allBlockLabels } from './blocks'
+import { allBlockCategories, allBlockLabels } from './blocks/index.js'
 
 
 const
