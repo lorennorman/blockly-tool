@@ -1,6 +1,9 @@
 # OS
 .ds_store
 
+# Blockly exports
+export
+
 # Logs
 logs
 *.log
