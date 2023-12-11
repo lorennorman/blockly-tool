@@ -37,18 +37,12 @@ export default {
   generators: {
     json: (block, generator) => {
       const
-        feed = generator.valueToCode(block, 'FEED', 0) || 'null',
-        value = generator.valueToCode(block, 'VALUE', 0) || 'null',
+        payload = {
+          action_feed_id: generator.valueToCode(block, 'FEED', 0) || 'null',
+          action_value: generator.valueToCode(block, 'VALUE', 0) || 'null',
+        }
 
-        lines = [
-          `"action": "publish_to_feed"`,
-          `"feed": ${feed}`,
-          `"value": ${value}`
-        ],
-
-        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
-
-      return `{\n${indentedLines}\n}`
+      return [ payload, 0 ]
     },
 
     markdown: (block, generator) => {

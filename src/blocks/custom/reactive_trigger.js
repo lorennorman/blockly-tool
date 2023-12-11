@@ -43,7 +43,7 @@ export default {
       },
       {
         "type": "field_dropdown",
-        "name": "LIMIT_EVERY",
+        "name": "NOTIFY_LIMIT",
         "options": [
           [
             "10 seconds",
@@ -61,7 +61,7 @@ export default {
       },
       {
         "type": "field_checkbox",
-        "name": "NAME",
+        "name": "NOTIFY_ON_RESET",
         "checked": true
       }
     ],
@@ -75,18 +75,23 @@ export default {
   generators: {
     json: (block, generator) => {
       const
-        feedToCheck = generator.valueToCode(block, 'FEED_CHECK', 0),
-        isReactive = block.getFieldValue('REACTIVE') === 'TRUE',
+        comparisonTargetType = block.getInputTargetBlock('FEED_B')?.type,
+        comparisonTargetKey = (comparisonTargetType == 'feed_selector')
+          ? 'to_feed_id'
+          : 'value',
+        comparisonTargetValue = generator.valueToCode(block, 'FEED_B', 0) || null,
+        comparisonPayload = { [comparisonTargetKey]: comparisonTargetValue },
 
-        lines = [
-          `"trigger": "feed_check",`,
-          `"check": ${feedToCheck},`,
-          `"reactive": ${isReactive}`,
-        ],
+        payload = {
+          trigger_type: 'reactive',
+          feed_id: generator.valueToCode(block, 'FEED_A', 0) || null,
+          operator: generator.valueToCode(block, 'COMPARATOR', 0) || null,
+          notify_limit: block.getFieldValue('NOTIFY_LIMIT'),
+          notify_on_reset: block.getFieldValue('NOTIFY_ON_RESET') === 'TRUE',
+          ...comparisonPayload
+        }
 
-        indentedLines = generator.prefixLines(lines.join('\n'), generator.INDENT)
-
-      return `{\n${ indentedLines }\n}`
+      return [ payload, 0 ]
     },
 
     markdown: (block, generator) => {

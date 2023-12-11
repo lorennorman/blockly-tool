@@ -32,20 +32,35 @@ export default {
   generators: {
     json: (block, generator) => {
       const
-        frequency = block.getFieldValue('ACTION_FREQUENCY'),
-        triggers = generator.statementToCode(block, 'TRIGGERS'),
-        actions = generator.statementToCode(block, 'ACTIONS'),
+        trigger = generator.valueToCode(block, 'TRIGGER', 0),
+        action = generator.valueToCode(block, 'ACTION', 0)
 
-        lines = [
-          `"blocklyActionsVersion": "1.0.0"`,
-          `"frequency": ${frequency}`,
-          `"triggers": [\n${triggers}\n]`,
-          `"actions": [\n${actions}\n]`,
-        ],
-
-        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
-
-      return `{\n${ indentedLines }\n}`
+      return JSON.stringify({
+        "trigger": {
+          "id": null,
+          "trigger_type_id": null,
+          "status": "started",
+          // trigger
+          "feed_id": null,
+          "operator": null,
+          "value": null,
+          "to_feed_id": null,
+          "trigger_type": null,
+          "notify_limit": null,
+          "notify_on_reset": true,
+          "timer_extend": null,
+          "timer_wait": null,
+          ...trigger,
+          // action
+          "action": null,
+          "action_feed_id": null,
+          "action_value": null,
+          "subject_template": null,
+          "body_template": null,
+          "form_encoded": null,
+          ...action
+        }
+      }, null, 2)
     },
 
     markdown: (block, generator) => {

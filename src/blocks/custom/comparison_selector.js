@@ -9,7 +9,7 @@ export default {
     "args0": [
       {
         "type": "field_dropdown",
-        "name": "NAME",
+        "name": "OPERATOR",
         "options": [
           [
             "any",
@@ -53,7 +53,7 @@ export default {
   },
 
   generators: {
-    json: (block, generator) => '""',
+    json: block => [ block.getFieldValue('OPERATOR'), 0 ],
 
     markdown: (block, generator) => '# comparison_selector.js'
   }

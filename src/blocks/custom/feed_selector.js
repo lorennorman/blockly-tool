@@ -9,20 +9,20 @@ export default {
     "args0": [
       {
         "type": "field_dropdown",
-        "name": "FEED_KEY",
+        "name": "FEED_ID",
         "options": [
           [
-            "🤖 Thermostat",
-            "device:thermostat-feed"
+            "Feed A",
+            "1001"
           ],
           [
-            "🌡️ Room Temp C° (funhouse)",
-            "funhouse123456:ws-001"
+            "Feed B",
+            "1002"
           ],
           [
-            "more options...",
-            "OPTIONNAME"
-          ]
+            "Feed C",
+            "1003"
+          ],
         ]
       }
     ],
@@ -33,10 +33,7 @@ export default {
   },
 
   generators: {
-    json: (block, generator) => {
-      const feedKey = block.getFieldValue('FEED_KEY')
-      return [`{ "feedKey": "${feedKey}" }`, 0]
-    },
+    json: block => [ block.getFieldValue('FEED_ID'), 0 ],
 
     markdown: (block, generator) => {
       return '# feed_selector.js'
