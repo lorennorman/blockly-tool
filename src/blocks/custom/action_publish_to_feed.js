@@ -38,8 +38,8 @@ export default {
     json: (block, generator) => {
       const
         payload = {
-          action_feed_id: generator.valueToCode(block, 'FEED', 0) || 'null',
-          action_value: generator.valueToCode(block, 'VALUE', 0) || 'null',
+          action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
+          action_value: generator.valueToCode(block, 'VALUE', 0) || null,
         }
 
       return [ payload, 0 ]

@@ -60,21 +60,13 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      const
-        email = block.getFieldValue('EMAIL_ADDRESS'),
-        subject = block.getFieldValue('EMAIL_SUBJECT'),
-        body = block.getFieldValue('EMAIL_BODY'),
+      const payload = {
+        action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
+        subject_template: block.getFieldValue('EMAIL_SUBJECT'),
+        body_template: block.getFieldValue('EMAIL_BODY')
+      }
 
-        lines = [
-          `"action": "send_email"`,
-          `"address": "${email}"`,
-          `"subject": "${subject}"`,
-          `"body": "${body}"`,
-        ],
-
-        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
-
-      return `{\n${indentedLines}\n}`
+      return [ payload, 0]
     },
 
     markdown: (block, generator) => {
