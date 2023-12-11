@@ -19,7 +19,7 @@ Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(workspaceBlocks, 'text/xm
 
 // prepare generators and their dom targets
 const jsonOutputDiv = document.getElementById('json-output')
-const markdownOutputDiv = document.getElementById('markdown-output')
+// const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
   try {
     const json = allGenerators.json.workspaceToCode(workspace)
@@ -35,8 +35,8 @@ const regenerate = () => {
     jsonOutputDiv.innerText = `JSON Generation Failed:\n${e}`
   }
 
-  const markdown = allGenerators.markdown.workspaceToCode(workspace)
-  markdownOutputDiv.innerText = markdown
+  // const markdown = allGenerators.markdown.workspaceToCode(workspace)
+  // markdownOutputDiv.innerText = markdown
 }
 
 // register listeners
