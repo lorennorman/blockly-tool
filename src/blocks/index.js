@@ -2,27 +2,16 @@ import Blockly from 'blockly'
 
 import action_root from './custom/action_root.js'
 import feed_selector from './custom/feed_selector.js'
-// import trigger_all from './custom/trigger_all.js'
 import reactive_trigger from './custom/reactive_trigger.js'
 import comparison_selector from './custom/comparison_selector.js'
-// import trigger_on_change from './custom/trigger_on_change.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
-// import transform_regex from './custom/transform_regex.js'
 
 import math_number from './common/math_number.js'
 import text from './common/text.js'
 import text_multiline from './common/text_multiline.js'
 import logic_boolean from './common/logic_boolean.js'
 import logic_null from './common/logic_null.js'
-// import controls_if from './common/controls_if.js'
-// import logic_compare from './common/logic_compare.js'
-// import logic_negate from './common/logic_negate.js'
-// import logic_operation from './common/logic_operation.js'
-// import math_arithmetic from './common/math_arithmetic.js'
-// import variables_set from './common/variables_set.js'
-// import variables_get from './common/variables_get.js'
-// import math_change from './common/math_change.js'
 
 
 const

@@ -7,7 +7,7 @@ import workspaceBlocks from './workspace.xml?raw'
 import './index.css'
 
 
-// export block library json
+// import block library json
 Blockly.defineBlocksWithJsonArray(allBlocksJson)
 
 // inject blockly with our toolbox
