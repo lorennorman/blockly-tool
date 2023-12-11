@@ -4,7 +4,7 @@ export default {
   },
 
   json: {
-    "type": "comparison_selector",
+    "type": "selector_comparison",
     "message0": "%1",
     "args0": [
       {
@@ -55,6 +55,6 @@ export default {
   generators: {
     json: block => [ block.getFieldValue('OPERATOR'), 0 ],
 
-    markdown: (block, generator) => '# comparison_selector.js'
+    markdown: (block, generator) => '# selector_comparison.js'
   }
 }

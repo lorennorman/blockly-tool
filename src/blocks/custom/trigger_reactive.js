@@ -5,7 +5,7 @@ export default {
   },
 
   json: {
-    "type": "reactive_trigger",
+    "type": "trigger_reactive",
     "implicitAlign0": "RIGHT",
     "message0": "Reactive Trigger %1 Compare Feeds: %2 Feed %3 Operator %4 Feed or Number %5 Limit Every %6 %7 %8 %9 Notify on Reset",
     "args0": [
@@ -76,7 +76,7 @@ export default {
     json: (block, generator) => {
       const
         comparisonTargetType = block.getInputTargetBlock('FEED_B')?.type,
-        comparisonTargetKey = (comparisonTargetType == 'feed_selector')
+        comparisonTargetKey = (comparisonTargetType == 'selector_feed')
           ? 'to_feed_id'
           : 'value',
         comparisonTargetValue = generator.valueToCode(block, 'FEED_B', 0) || null,

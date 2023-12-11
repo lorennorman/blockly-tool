@@ -1,7 +1,7 @@
 import Blockly from 'blockly'
 import { allBlocksJson, allGenerators } from './blocks'
 import toolbox from './toolbox'
-import { save, load } from './serialization'
+import { clear, load, save } from './serialization'
 import workspaceBlocks from './workspace.xml?raw'
 
 import './index.css'
@@ -56,6 +56,13 @@ workspace.addChangeListener((e) => {
 
   // generate next cycle to orphans get disabled first
   setTimeout(regenerate)
+})
+
+// provide a way to clear the workspace and persistent memory
+const clearButton = document.getElementById('button-clear')
+clearButton.addEventListener('click', () => {
+  clear(workspace)
+  Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(workspaceBlocks, 'text/xml'), workspace)
 })
 
 // load last sketch from storage

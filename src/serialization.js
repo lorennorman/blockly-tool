@@ -3,6 +3,15 @@ import Blockly from 'blockly/core'
 const storageKey = 'blocklyToolWorkspace'
 
 /**
+ * Clears the workspace and wipes the browser's local storage.
+ * @param {Blockly.Workspace} workspace Blockly workspace to save.
+ */
+export const clear = function(workspace) {
+  window.localStorage?.removeItem(storageKey)
+  workspace.clear()
+}
+
+/**
  * Saves the state of the workspace to browser's local storage.
  * @param {Blockly.Workspace} workspace Blockly workspace to save.
  */

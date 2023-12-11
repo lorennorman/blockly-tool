@@ -3,7 +3,7 @@ export default {
   toolbox: { },
 
   json: {
-    "type": "action_root",
+    "type": "root_block",
     "message0": "Action Root %1 Trigger: %2 Action: %3",
     "args0": [
       {

@@ -1,9 +1,9 @@
 import Blockly from 'blockly'
 
-import action_root from './custom/action_root.js'
-import feed_selector from './custom/feed_selector.js'
-import reactive_trigger from './custom/reactive_trigger.js'
-import comparison_selector from './custom/comparison_selector.js'
+import root_block from './custom/root_block.js'
+import selector_feed from './custom/selector_feed.js'
+import trigger_reactive from './custom/trigger_reactive.js'
+import selector_comparison from './custom/selector_comparison.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
 
@@ -17,15 +17,15 @@ import logic_null from './common/logic_null.js'
 const
   ALL_BLOCKS = {
     // not in toolbox
-    action_root,
+    root_block,
 
     // IO
 
     // Feeds
-    feed_selector,
+    selector_feed,
 
     // Triggers
-    reactive_trigger,
+    trigger_reactive,
     // trigger_all,
     // trigger_on_change,
 
@@ -43,7 +43,7 @@ const
     logic_null,
 
     // Comparisons
-    comparison_selector,
+    selector_comparison,
 
     // variables_set,
     // variables_get,

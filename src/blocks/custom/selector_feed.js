@@ -4,7 +4,7 @@ export default {
   },
 
   json: {
-    "type": "feed_selector",
+    "type": "selector_feed",
     "message0": "Feed: %1",
     "args0": [
       {
@@ -36,7 +36,7 @@ export default {
     json: block => [ block.getFieldValue('FEED_ID'), 0 ],
 
     markdown: (block, generator) => {
-      return '# feed_selector.js'
+      return '# selector_feed.js'
     }
   }
 }
