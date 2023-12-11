@@ -1,5 +1,4 @@
 import Blockly from 'blockly'
-import _ from 'lodash'
 
 import ALL_BLOCKS from './all.js'
 import generators from './generators.js'
