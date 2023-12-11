@@ -34,9 +34,6 @@ const regenerate = () => {
   } catch(e) {
     jsonOutputDiv.innerText = `JSON Generation Failed:\n${e}`
   }
-
-  // const markdown = allGenerators.markdown.workspaceToCode(workspace)
-  // markdownOutputDiv.innerText = markdown
 }
 
 // register listeners
@@ -54,7 +51,7 @@ workspace.addChangeListener((e) => {
      workspace.isDragging()) // not while dragging
   { return }
 
-  // generate next cycle to orphans get disabled first
+  // generate next cycle so orphans get disabled first
   setTimeout(regenerate)
 })
 
