@@ -5,7 +5,7 @@ export default {
 
   json: {
     "type": "action_send_email",
-    "message0": "Send an Email %1 Select a Feed: %2 To: %3 %4 Subject: %5 %6 Body: %7",
+    "message0": "Send an Email %1 Select a Feed: %2 Subject: %3 %4 Body: %5",
     "args0": [
       {
         "type": "input_dummy",
@@ -16,27 +16,6 @@ export default {
         "name": "FEED",
         "check": "feed",
         "align": "RIGHT"
-      },
-      {
-        "type": "field_dropdown",
-        "name": "EMAIL_ADDRESS",
-        "options": [
-          [
-            "me@example.com",
-            "email_id_1"
-          ],
-          [
-            "my@otheremail.com",
-            "email_id_2"
-          ],
-          [
-            "...",
-            "OPTIONNAME"
-          ]
-        ]
-      },
-      {
-        "type": "input_dummy"
       },
       {
         "type": "field_input",
