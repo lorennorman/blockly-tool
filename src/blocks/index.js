@@ -6,13 +6,14 @@ import generators from './generators.js'
 
 export const
   allBlocksJson = [],
-  allBlockCategories = {},
+  allBlocksByCategory = {},
   allBlockLabels = {},
   allGenerators = generators
 
 Object.keys(ALL_BLOCKS).map(key => {
   const
-    { json={}, commonType, toolbox, generators } = ALL_BLOCKS[key],
+    block = ALL_BLOCKS[key],
+    { json={}, commonType, toolbox, generators } = block,
     type = commonType || json.type
 
   if(!type) { throw new Error(`No "type" declared for block: ${key}`) }
@@ -31,8 +32,8 @@ Object.keys(ALL_BLOCKS).map(key => {
   // sort blocks into their declared categories
   const { category, categories=[] } = toolbox
   categories.concat([category]).forEach(category => {
-    allBlockCategories[category] = (allBlockCategories[category] || [])
-    allBlockCategories[category].push(type)
+    allBlocksByCategory[category] = (allBlocksByCategory[category] || {})
+    allBlocksByCategory[category][type] = block
   })
 
   // toolbox labels
