@@ -6,28 +6,40 @@ export default {
 
   json: {
     "type": "trigger_reactive",
-    "implicitAlign0": "RIGHT",
-    "message0": "Reactive Trigger %1 Compare Feeds: %2 Feed %3 Operator %4 Feed or Number %5 Limit Every %6 %7 %8 %9 Notify on Reset",
+    "message0": "Reactive Trigger %1",
     "args0": [
       {
         "type": "input_dummy",
         "align": "CENTRE"
-      },
+      }
+    ],
+    "message1": "Compare Feeds %1",
+    "args1": [
       {
-        "type": "input_dummy"
-      },
+        "type": "input_dummy",
+        "align": "CENTRE"
+      }
+    ],
+    "message2": "Feed: %1",
+    "args2": [
       {
         "type": "input_value",
         "name": "FEED_A",
         "check": "feed",
         "align": "RIGHT"
-      },
+      }
+    ],
+    "message3": "Operator: %1",
+    "args3": [
       {
         "type": "input_value",
         "name": "COMPARATOR",
         "check": "comparison_operator",
         "align": "RIGHT"
-      },
+      }
+    ],
+    "message4": "Feed: %1",
+    "args4": [
       {
         "type": "input_value",
         "name": "FEED_B",
@@ -36,29 +48,31 @@ export default {
           "Number"
         ],
         "align": "RIGHT"
-      },
+      }
+    ],
+    "message5": "Limit Every: %1",
+    "args5": [
       {
         "type": "input_dummy",
         "align": "CENTRE"
-      },
+      }
+    ],
+    "message6": "%1 %2",
+    "args6": [
       {
         "type": "field_dropdown",
         "name": "NOTIFY_LIMIT",
         "options": [
-          [
-            "10 seconds",
-            "10"
-          ],
-          [
-            "1 day",
-            "10000"
-          ]
+          [ "10 seconds", "10" ],
+          [ "1 day", "10000" ]
         ]
-      },
-      {
+      }, {
         "type": "input_dummy",
         "align": "CENTRE"
-      },
+      }
+    ],
+    "message7": "Notify on Reset? %1",
+    "args7": [
       {
         "type": "field_checkbox",
         "name": "NOTIFY_ON_RESET",
@@ -70,6 +84,24 @@ export default {
     "colour": 230,
     "tooltip": "",
     "helpUrl": ""
+  },
+
+  inputs: {
+    FEED_A: {
+      shadow: {
+        type: 'selector_feed'
+      }
+    },
+    COMPARATOR: {
+      shadow: {
+        type: 'selector_comparison'
+      }
+    },
+    FEED_B: {
+      shadow: {
+        type: 'selector_feed'
+      }
+    },
   },
 
   generators: {

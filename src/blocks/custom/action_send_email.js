@@ -35,7 +35,7 @@ export default {
       {
         "type": "input_value",
         "name": "BODY",
-        "text": "{{feed_name}} got value {{value}} at {{created_at}}",
+        "check": "String",
         "align": "RIGHT"
       }
     ],
@@ -44,6 +44,32 @@ export default {
     "colour": 345,
     "tooltip": "",
     "helpUrl": ""
+  },
+
+  inputs: {
+    FEED: {
+      shadow: {
+        type: 'selector_feed'
+      }
+    },
+    SUBJECT: {
+      shadow: {
+        type: 'text',
+        fields: { TEXT: '{{ feed_name }} updated' }
+      }
+    },
+    BODY: {
+      shadow: {
+        type: 'text_multiline',
+        fields: {
+          TEXT: [
+            `ABC {{ feed_name }} DEF`,
+            `XYZ {{ feed_value }} DEF`,
+            `ABC {{ feed_name }} DEF`
+          ].join('\n')
+        }
+      }
+    },
   },
 
   generators: {
