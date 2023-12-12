@@ -27,12 +27,13 @@ const regenerate = () => {
     try { JSON.parse(json) }
     catch(e) {
       valid = false
+      console.error('Failed to JSON.parse:', json)
       console.error(e)
     }
     const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
     jsonOutputDiv.innerText = `${validation}\n\n${json}`
   } catch(e) {
-    jsonOutputDiv.innerText = `JSON Generation Failed:\n${e}`
+    jsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
   }
 }
 
