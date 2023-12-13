@@ -11,38 +11,14 @@ export default {
         "type": "field_dropdown",
         "name": "OPERATOR",
         "options": [
-          [
-            "any",
-            "any"
-          ],
-          [
-            ">",
-            "gt"
-          ],
-          [
-            ">=",
-            "gte"
-          ],
-          [
-            "<",
-            "lt"
-          ],
-          [
-            "<=",
-            "lte"
-          ],
-          [
-            "=",
-            "equal_to"
-          ],
-          [
-            "≠",
-            "not_equal_to"
-          ],
-          [
-            "includes",
-            "inc"
-          ]
+          [ "any", "any" ],
+          [ ">", "gt" ],
+          [ ">=", "gte" ],
+          [ "<", "lt" ],
+          [ "<=", "lte" ],
+          [ "=", "equal_to" ],
+          [ "≠", "not_equal_to" ],
+          [ "includes", "inc" ]
         ]
       }
     ],

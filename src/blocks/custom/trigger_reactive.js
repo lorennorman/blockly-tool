@@ -50,38 +50,33 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "message5": "Limit Every: %1",
-    "args5": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message6": "%1 %2",
-    "args6": [
-      {
+    "message5": "Limit Every: %1 %2",
+    "args5": [ {
         "type": "field_dropdown",
         "name": "NOTIFY_LIMIT",
         "options": [
-          [ 'Ten Seconds', '0' ],
-          [ 'One Minute', '1' ],
-          [ 'Fifteen Minutes', '15' ],
-          [ 'Thirty Minutes', '30' ],
-          [ 'One Hour', '60' ],
-          [ 'Six Hours', '360' ],
-          [ 'One Day', '1440' ]
+          [ '10 sec', '0' ],
+          [ '1 min', '1' ],
+          [ '15 min', '15' ],
+          [ '30 min', '30' ],
+          [ '1 hour', '60' ],
+          [ '6 hour', '360' ],
+          [ '1 day', '1440' ]
         ]
       }, {
         "type": "input_dummy",
-        "align": "CENTRE"
+        "align": "RIGHT"
       }
     ],
-    "message7": "Notify on Reset? %1",
-    "args7": [
+    "message6": "Notify on Reset? %1 %2",
+    "args6": [
       {
         "type": "field_checkbox",
         "name": "NOTIFY_ON_RESET",
         "checked": true
+      }, {
+        "type": "input_dummy",
+        "align": "RIGHT"
       }
     ],
     "inputsInline": false,
