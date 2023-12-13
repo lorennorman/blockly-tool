@@ -33,15 +33,15 @@ export default {
           ],
           [
             "=",
-            "eq"
+            "equal_to"
           ],
           [
             "≠",
-            "neq"
+            "not_equal_to"
           ],
           [
             "includes",
-            "includes"
+            "inc"
           ]
         ]
       }

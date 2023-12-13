@@ -11,18 +11,9 @@ export default {
         "type": "field_dropdown",
         "name": "FEED_ID",
         "options": [
-          [
-            "Feed A",
-            "1001"
-          ],
-          [
-            "Feed B",
-            "1002"
-          ],
-          [
-            "Feed C",
-            "1003"
-          ],
+          [ "Feed_A", "1001" ],
+          [ "Feed_B", "1002" ],
+          [ "Feed_C", "1003" ],
         ]
       }
     ],

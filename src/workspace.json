@@ -1,0 +1,14 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "root_block",
+        "deletable": false,
+        "movable": false,
+        "x": 20,
+        "y": 20
+      }
+    ]
+  }
+}

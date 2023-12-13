@@ -8,8 +8,8 @@ import toolbox from './src/toolbox.js'
 if(fs.existsSync('export')) { fs.rmSync('export', { recursive: true, force: true }) }
 fs.mkdirSync('export')
 
-// export/workspace.xml
-fs.copyFileSync('./src/workspace.xml', 'export/workspace.xml')
+// export/workspace.json
+fs.copyFileSync('./src/workspace.json', 'export/workspace.json')
 
 // export/blocks.json
 fs.writeFileSync('export/blocks.json', JSON.stringify(allBlocksJson, null, 2))
