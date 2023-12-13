@@ -55,18 +55,14 @@ export default {
     SUBJECT: {
       shadow: {
         type: 'text',
-        fields: { TEXT: '{{ feed_name }} updated' }
+        fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
       }
     },
     BODY: {
       shadow: {
         type: 'text_multiline',
         fields: {
-          TEXT: [
-            `ABC {{ feed_name }} DEF`,
-            `XYZ {{ feed_value }} DEF`,
-            `ABC {{ feed_name }} DEF`
-          ].join('\n')
+          TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}'
         }
       }
     },

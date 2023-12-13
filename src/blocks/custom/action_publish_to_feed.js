@@ -34,10 +34,24 @@ export default {
     "helpUrl": ""
   },
 
+  inputs: {
+    FEED: {
+      shadow: {
+        type: 'selector_feed'
+      }
+    },
+    VALUE: {
+      shadow: {
+        type: 'text'
+      }
+    },
+  },
+
   generators: {
     json: (block, generator) => {
       const
         payload = {
+          action: 'feed',
           action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
           action_value: generator.valueToCode(block, 'VALUE', 0) || null,
         }
