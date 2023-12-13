@@ -26,6 +26,7 @@ export default {
         ]
       }
     ],
+    "extensions": [ "populate_feeds_dropdown" ],
     "output": "feed",
     "colour": 30,
     "tooltip": "",

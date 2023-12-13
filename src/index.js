@@ -63,6 +63,8 @@ clearButton.addEventListener('click', () => {
   Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(workspaceBlocks, 'text/xml'), workspace)
 })
 
+Blockly.Extensions.register('populate_feeds_dropdown', () => {})
+
 // load last sketch from storage
 load(workspace)
 // run the generators

@@ -6,7 +6,7 @@ export default {
 
   json: {
     "type": "trigger_reactive",
-    "message0": "Reactive Trigger %1",
+    "message0": "📥 Reactive Trigger %1",
     "args0": [
       {
         "type": "input_dummy",

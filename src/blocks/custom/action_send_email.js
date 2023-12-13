@@ -75,6 +75,7 @@ export default {
   generators: {
     json: (block, generator) => {
       const payload = {
+        action: 'email',
         action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
         subject_template: generator.valueToCode(block, 'SUBJECT', 0) || "",
         body_template: generator.valueToCode(block, 'BODY', 0) || ""

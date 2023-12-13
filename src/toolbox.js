@@ -1,4 +1,4 @@
-import { reduce } from 'lodash'
+import { reduce } from 'lodash-es'
 
 import { allBlocksByCategory, allBlockLabels } from './blocks/index.js'
 
@@ -33,7 +33,7 @@ export default {
         colour: category.colour,
         ...category.extras,
         contents: reduce(allBlocksByCategory[category.name] || {}, (acc, block, type) => {
-          const { inputs={}, fields={} } = block
+          const { inputs, fields } = block
           // add tooltip as a toolbox label, if present
           allBlockLabels[type] && acc.push({ kind: 'label', text: allBlockLabels[type] })
           // add the block. inputs and fields provide defaults, shadows, etc
