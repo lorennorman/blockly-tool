@@ -63,8 +63,13 @@ export default {
         "type": "field_dropdown",
         "name": "NOTIFY_LIMIT",
         "options": [
-          [ "10 seconds", "10" ],
-          [ "1 day", "10000" ]
+          [ 'Ten Seconds', '0' ],
+          [ 'One Minute', '1' ],
+          [ 'Fifteen Minutes', '15' ],
+          [ 'Thirty Minutes', '30' ],
+          [ 'One Hour', '60' ],
+          [ 'Six Hours', '360' ],
+          [ 'One Day', '1440' ]
         ]
       }, {
         "type": "input_dummy",
