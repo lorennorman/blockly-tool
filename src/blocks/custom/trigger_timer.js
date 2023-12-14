@@ -6,7 +6,7 @@ export default {
 
   json: {
     "type": "trigger_timer",
-    "message0": "⏲️ Timer Trigger %1",
+    "message0": "⏲️ Timer %1",
     "args0": [
       {
         "type": "input_dummy",
