@@ -55,13 +55,13 @@ export default {
         "type": "field_dropdown",
         "name": "RUN_AFTER",
         "options": [
-          [ '10 sec', '0' ],
-          [ '1 min', '1' ],
-          [ '15 min', '15' ],
-          [ '30 min', '30' ],
-          [ '1 hrs', '60' ],
-          [ '6 hrs', '360' ],
-          [ '1 day', '1440' ]
+          [ '10 sec', '10' ],
+          [ '1 min', '60' ],
+          [ '15 min', '900' ],
+          [ '30 min', '1800' ],
+          [ '1 hr', '3600' ],
+          [ '6 hrs', '21600' ],
+          [ '1 day', '86400' ]
         ]
       }, {
         "type": "input_dummy",
