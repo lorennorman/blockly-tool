@@ -107,10 +107,6 @@ export default {
       }
 
       return [ payload, 0 ]
-    },
-
-    markdown: (block, generator) => {
-      return '# action_post_webhook.js'
     }
   }
 }

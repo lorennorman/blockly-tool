@@ -19,7 +19,6 @@ Blockly.serialization.workspaces.load(workspaceBlocks, workspace)
 
 // prepare generators and their dom targets
 const jsonOutputDiv = document.getElementById('json-output')
-// const markdownOutputDiv = document.getElementById('markdown-output')
 const regenerate = () => {
   try {
     const json = allGenerators.json.workspaceToCode(workspace)

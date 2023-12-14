@@ -29,8 +29,6 @@ export default {
   },
 
   generators: {
-    json: block => [ block.getFieldValue('OPERATOR'), 0 ],
-
-    markdown: (block, generator) => '# selector_comparison.js'
+    json: block => [ block.getFieldValue('OPERATOR'), 0 ]
   }
 }

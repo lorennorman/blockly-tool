@@ -61,23 +61,6 @@ export default {
           ...action
         }
       }, null, 2)
-    },
-
-    markdown: (block, generator) => {
-      const
-        frequency = block.getFieldValue('ACTION_FREQUENCY'),
-        triggers = generator.statementToCode(block, 'TRIGGERS'),
-        actions = generator.statementToCode(block, 'ACTIONS')
-
-      return `# Action Root
-        - Frequency: ${frequency}
-
-        ## Triggers:
-        ${triggers}
-
-        ## Actions:
-        ${actions}
-      `
     }
   }
 }

@@ -22,10 +22,6 @@ export default {
         indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
 
       return [`{\n${indentedLines}\n}`, 0]
-    },
-
-    markdown: (block, generator) => {
-      return '# logic_compare.js'
     }
   }
 }

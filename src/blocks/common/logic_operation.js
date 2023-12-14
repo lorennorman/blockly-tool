@@ -23,10 +23,6 @@ export default {
 
       return [`{\n${indentedLines}\n}`, 0]
 
-    },
-
-    markdown: (block, generator) => {
-      return '# logic_operation.js'
     }
   }
 }

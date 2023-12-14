@@ -10,10 +10,6 @@ export default {
         delta = generator.valueToCode(block, 'DELTA', 0)
 
       return `{ "change_variable": "${variableName}", "delta": ${delta} }`
-    },
-
-    markdown: (block, generator) => {
-      return '# math_change.js'
     }
   }
 }

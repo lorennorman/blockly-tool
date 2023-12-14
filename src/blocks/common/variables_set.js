@@ -11,10 +11,6 @@ export default {
         defaultedValue = value || (value !== 0 && value !== null) && 'false'
 
       return `{ "set_variable": "${variableName}", "value": ${defaultedValue} }`
-    },
-
-    markdown: (block, generator) => {
-      return '# variables_set.js'
     }
   }
 }

@@ -12,10 +12,6 @@ export default {
         negatedLogic = generator.prefixLines(`"not": ${booleanLogic}`, generator.INDENT)
 
       return [`{\n${negatedLogic}\n}`, 0]
-    },
-
-    markdown: (block, generator) => {
-      return '# logic_negate.js'
     }
   }
 }

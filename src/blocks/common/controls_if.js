@@ -43,10 +43,6 @@ export default {
       const indentedLines = generator.prefixLines(lines.join('\n'), generator.INDENT)
 
       return `{\n${indentedLines}\n}`
-    },
-
-    markdown: (block, generator) => {
-      return '# controls_if.js'
     }
   }
 }

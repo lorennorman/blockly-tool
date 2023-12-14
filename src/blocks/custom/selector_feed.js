@@ -25,10 +25,6 @@ export default {
   },
 
   generators: {
-    json: block => [ block.getFieldValue('FEED_ID'), 0 ],
-
-    markdown: (block, generator) => {
-      return '# selector_feed.js'
-    }
+    json: block => [ block.getFieldValue('FEED_ID'), 0 ]
   }
 }

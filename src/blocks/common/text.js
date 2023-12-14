@@ -10,10 +10,6 @@ export default {
       const text = block.getFieldValue('TEXT')
 
       return [ text, 0 ]
-    },
-
-    markdown: (block, generator) => {
-      return '# text.js'
     }
   }
 }

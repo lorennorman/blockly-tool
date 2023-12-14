@@ -78,10 +78,6 @@ export default {
       }
 
       return [ payload, 0 ]
-    },
-
-    markdown: (block, generator) => {
-      return '# action_send_email.js'
     }
   }
 }

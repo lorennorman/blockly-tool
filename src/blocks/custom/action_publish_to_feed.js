@@ -57,10 +57,6 @@ export default {
         }
 
       return [ payload, 0 ]
-    },
-
-    markdown: (block, generator) => {
-      return '# action_publish_to_feed.js'
     }
   }
 }
