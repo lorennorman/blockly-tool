@@ -39,7 +39,7 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "message4": "Encode as HTTP Form? %1 %2",
+    "message4": "Form Encode? %1 %2",
     "args4": [
       {
         "type": "field_checkbox",
