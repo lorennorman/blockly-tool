@@ -4,6 +4,7 @@ import trigger_reactive from './custom/trigger_reactive.js'
 import selector_comparison from './custom/selector_comparison.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
+import action_send_sms from './custom/action_send_sms.js'
 
 import math_number from './common/math_number.js'
 import text from './common/text.js'
@@ -26,6 +27,7 @@ export default {
     // Actions
     action_publish_to_feed,
     action_send_email,
+    action_send_sms,
 
     // ---
 
