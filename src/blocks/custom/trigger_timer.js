@@ -5,8 +5,8 @@ export default {
   },
 
   json: {
-    "type": "trigger_reactive",
-    "message0": "📥 Reactive Trigger %1",
+    "type": "trigger_timer",
+    "message0": "⏲️ Timer Trigger %1",
     "args0": [
       {
         "type": "input_dummy",
@@ -50,10 +50,10 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "message5": "Limit Every: %1 %2",
+    "message5": "Run After: %1 %2",
     "args5": [ {
         "type": "field_dropdown",
-        "name": "NOTIFY_LIMIT",
+        "name": "RUN_AFTER",
         "options": [
           [ '10 sec', '0' ],
           [ '1 min', '1' ],
@@ -68,11 +68,11 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "message6": "Notify on Reset? %1 %2",
+    "message6": "Extend Timer? %1 %2",
     "args6": [
       {
         "type": "field_checkbox",
-        "name": "NOTIFY_ON_RESET",
+        "name": "EXTEND_TIMER",
         "checked": true
       }, {
         "type": "input_dummy",
@@ -115,11 +115,11 @@ export default {
         comparisonPayload = { [comparisonTargetKey]: comparisonTargetValue },
 
         payload = {
-          trigger_type: 'reactive',
+          trigger_type: 'timer',
           feed_id: generator.valueToCode(block, 'FEED_A', 0) || null,
           operator: generator.valueToCode(block, 'COMPARATOR', 0) || null,
-          notify_limit: block.getFieldValue('NOTIFY_LIMIT'),
-          notify_on_reset: block.getFieldValue('NOTIFY_ON_RESET') === 'TRUE',
+          timer_wait: block.getFieldValue('RUN_AFTER'),
+          timer_extend: block.getFieldValue('EXTEND_TIMER') === 'TRUE',
           ...comparisonPayload
         }
 

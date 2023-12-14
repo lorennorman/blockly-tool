@@ -1,6 +1,7 @@
 import root_block from './custom/root_block.js'
 import selector_feed from './custom/selector_feed.js'
 import trigger_reactive from './custom/trigger_reactive.js'
+import trigger_timer from './custom/trigger_timer.js'
 import selector_comparison from './custom/selector_comparison.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
@@ -24,6 +25,7 @@ export default {
 
     // Triggers
     trigger_reactive,
+    trigger_timer,
 
     // Actions
     action_publish_to_feed,
