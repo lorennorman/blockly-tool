@@ -9,7 +9,7 @@ export default {
     json: (block, generator) => {
       const text = block.getFieldValue('TEXT')
 
-      return [`"${text.replaceAll('\n', '\\n')}"`, 0]
+      return [ text, 0 ]
     },
 
     markdown: (block, generator) => {
