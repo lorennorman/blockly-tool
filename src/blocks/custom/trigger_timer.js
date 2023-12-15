@@ -45,7 +45,8 @@ export default {
         "name": "FEED_B",
         "check": [
           "feed",
-          "Number"
+          "Number",
+          "String"
         ],
         "align": "RIGHT"
       }
