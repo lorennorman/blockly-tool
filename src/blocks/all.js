@@ -15,37 +15,38 @@ import text_multiline from './common/text_multiline.js'
 import logic_boolean from './common/logic_boolean.js'
 import logic_null from './common/logic_null.js'
 
+
 export default {
-    // not in toolbox
-    root_block,
+  // not in toolbox
+  root_block,
 
-    //// IO
+  //// IO
 
-    // Feeds
-    selector_feed,
+  // Feeds
+  selector_feed,
 
-    // Triggers
-    trigger_reactive,
-    trigger_timer,
-    trigger_schedule,
+  // Triggers
+  trigger_reactive,
+  trigger_timer,
+  trigger_schedule,
 
-    // Actions
-    action_publish_to_feed,
-    action_send_email,
-    action_send_sms,
-    action_post_webhook,
+  // Actions
+  action_publish_to_feed,
+  action_send_email,
+  action_send_sms,
+  action_post_webhook,
 
-    // ---
+  // ---
 
-    //// Tools
+  //// Tools
 
-    // Values
-    math_number,
-    text,
-    text_multiline,
-    logic_boolean,
-    logic_null,
+  // Values
+  math_number,
+  text,
+  text_multiline,
+  logic_boolean,
+  logic_null,
 
-    // Comparisons
-    selector_comparison,
+  // Comparisons
+  selector_comparison,
 }
