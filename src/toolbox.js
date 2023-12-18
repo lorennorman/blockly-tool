@@ -1,4 +1,4 @@
-import { reduce } from 'lodash-es'
+import { flatMap, map } from 'lodash-es'
 
 import { allBlocksByCategory, allBlockLabels } from './blocks/index.js'
 
@@ -6,12 +6,12 @@ import { allBlocksByCategory, allBlockLabels } from './blocks/index.js'
 const
   SEP = '---',
   TOOLBOX_CONFIG = [
-    { name: 'IO' },
-    { name: 'Feeds', colour: '0' },
+    // { name: 'IO' },
     { name: 'Triggers', colour: 52 },
     { name: 'Actions', colour: 104 },
     SEP,
-    { name: 'Tools' },
+    // { name: 'Tools' },
+    { name: 'Feeds', colour: 0 },
     { name: 'Values', colour: 156 },
     { name: 'Comparisons', colour: 208 },
     // { name: 'Variables', colour: 208, extras: { custom: "VARIABLE" } },
@@ -22,26 +22,22 @@ const
 
 export default {
   kind: 'categoryToolbox',
-  contents: TOOLBOX_CONFIG.reduce((acc, category, idx) => {
-    if(category === SEP) {
-      acc.push({ kind: 'sep' })
-
-    } else {
-      acc.push({
-        kind: 'category',
-        name: category.name,
-        colour: category.colour,
-        ...category.extras,
-        contents: reduce(allBlocksByCategory[category.name] || {}, (acc, block, type) => {
-          const { inputs, fields } = block
-          // add tooltip as a toolbox label, if present
-          allBlockLabels[type] && acc.push({ kind: 'label', text: allBlockLabels[type] })
-          // add the block. inputs and fields provide defaults, shadows, etc
-          acc.push({ kind: 'block', type, ...{ inputs, fields } })
-          return acc
-        } , [])
-      })
-    }
-    return acc
-  }, [])
+  contents: map(TOOLBOX_CONFIG, category =>
+    category === SEP
+      ? { kind: 'sep' }
+      : {
+          kind: 'category',
+          name: category.name,
+          colour: category.colour?.toString(),
+          ...category.extras,
+          contents: flatMap(allBlocksByCategory[category.name] || {}, ({ inputs, fields }, type) => {
+            const toolboxRows = []
+            // add tooltip as a toolbox label, if present
+            allBlockLabels[type] && toolboxRows.push({ kind: 'label', text: allBlockLabels[type] })
+            // add the block. inputs and fields provide defaults, shadows, etc
+            toolboxRows.push({ kind: 'block', type, ...{ inputs, fields } })
+            return toolboxRows
+          })
+        }
+  )
 }
