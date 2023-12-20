@@ -1,21 +1,21 @@
 import Blockly from 'blockly'
-import { allBlocksJson, allGenerators } from './blocks'
-import toolbox from './toolbox'
+import { customBlocksJson, allGenerators } from './blocks'
+import toolbox from './toolboxes'
 import { clear, load, save } from './serialization'
-import workspaceBlocks from './workspace.json'
+import initialWorkspace from './workspaces/workspace.json'
 
 import './index.css'
 
 
 // import block library json
-Blockly.defineBlocksWithJsonArray(allBlocksJson)
+Blockly.defineBlocksWithJsonArray(customBlocksJson)
 
 // inject blockly with our toolbox
 const blocklyDiv = document.getElementById('blocklyDiv')
 const workspace = Blockly.inject(blocklyDiv, {toolbox})
 
 // inject workspace blocks
-Blockly.serialization.workspaces.load(workspaceBlocks, workspace)
+Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 
 // prepare generators and their dom targets
 const jsonOutputDiv = document.getElementById('json-output')
@@ -59,7 +59,7 @@ workspace.addChangeListener((e) => {
 const clearButton = document.getElementById('button-clear')
 clearButton.addEventListener('click', () => {
   clear(workspace)
-  Blockly.serialization.workspaces.load(workspaceBlocks, workspace)
+  Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 })
 
 Blockly.Extensions.register('populate_feeds_dropdown', () => {})

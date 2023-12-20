@@ -1,18 +1,18 @@
 import fs from 'fs'
 import { map } from 'lodash-es'
 
-import { allBlocksJson, allGenerators } from './src/blocks/index.js'
-import toolbox from './src/toolbox.js'
+import { customBlocksJson, allGenerators } from './src/blocks/index.js'
+import toolbox from './src/toolboxes/index.js'
 
 // export/
 if(fs.existsSync('export')) { fs.rmSync('export', { recursive: true, force: true }) }
 fs.mkdirSync('export')
 
 // export/workspace.json
-fs.copyFileSync('./src/workspace.json', 'export/workspace.json')
+fs.copyFileSync('./src/workspaces/workspace.json', 'export/workspace.json')
 
 // export/blocks.json
-fs.writeFileSync('export/blocks.json', JSON.stringify(allBlocksJson, null, 2))
+fs.writeFileSync('export/blocks.json', JSON.stringify(customBlocksJson, null, 2))
 
 // export/toolbox.json
 fs.writeFileSync('export/toolbox.json', JSON.stringify(toolbox, null, 2))
