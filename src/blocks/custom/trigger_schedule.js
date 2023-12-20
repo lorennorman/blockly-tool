@@ -25,7 +25,6 @@ export default {
         "align": "CENTRE"
       }
     ],
-    "inputsInline": false,
     "output": "trigger",
     "colour": 230,
     "tooltip": "",

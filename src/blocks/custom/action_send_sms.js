@@ -30,7 +30,6 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "inputsInline": false,
     "output": "action",
     "colour": 345,
     "tooltip": "",

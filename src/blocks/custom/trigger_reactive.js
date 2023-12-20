@@ -80,7 +80,6 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "inputsInline": false,
     "output": "trigger",
     "colour": 230,
     "tooltip": "",

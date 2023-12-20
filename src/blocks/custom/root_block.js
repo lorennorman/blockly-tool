@@ -23,7 +23,6 @@ export default {
         "align": "RIGHT"
       }
     ],
-    "inputsInline": false,
     "colour": 120,
     "tooltip": "",
     "helpUrl": ""
