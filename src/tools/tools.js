@@ -1,4 +1,6 @@
-import { forEach, includes, isObject, isString, keys, map, reduce, values, without } from 'lodash-es'
+import { flatMap, forEach, includes, isObject, isString, keys, reduce, values, without } from 'lodash-es'
+
+import { defaultAlignment } from '../blocks/defaults.js'
 
 export const toBlockJSON = block => {
   const json = {
@@ -99,44 +101,50 @@ const processLine = (line, data={}) => {
   // expect 'text' key
   if(!isString(lineValue.text)) { throw new Error(`No text given for line: ${JSON.stringify(line, null, 2)}`)}
   // expect optional 'input' key
-  // expect no other keys
   const otherKeys = without(keys(lineValue), 'text', 'input')
+  // expect no other keys
   if(otherKeys.length) { throw new Error(`Expected no keys other than "text" and "input", got:\n${otherKeys}\nfor line: ${JSON.stringify(line, null, 2)}`)}
 
-  const args = []
-  let message = lineValue.text
+  const
+    args = [],
+    allDataKeys = flatMap([ keys(data.fields), keys(data.inputValues), keys(data.inputStatements)])
+
+  let { message, inputKey } = lineToMessageAndInput(lineValue, allDataKeys)
 
   // process alignment and input into args
-  if(lineValue.input) {
+  if(inputKey) {
     // lookup in values, fields, statements
     // TODO: ensure only one found
-    const fieldInput = data.fields?.[lineValue.input]
+    const fieldInput = data.fields?.[inputKey]
     if(fieldInput) {
       args.push({
         type: (fieldInput.options && "field_dropdown")
           || (includes(keys(fieldInput), "checked") && "field_checkbox"),
-        name: lineValue.input,
+        name: inputKey,
         check: fieldInput.check,
         options: fieldInput.options
       })
     }
-    const valueInput = data.inputValues?.[lineValue.input]
+    const valueInput = data.inputValues?.[inputKey]
     if(valueInput) {
       args.push({
         type: "input_value",
-        name: lineValue.input,
+        name: inputKey,
         check: valueInput.check
       })
     }
-    const statementInput = data.inputStatements?.[lineValue.input]
+    const statementInput = data.inputStatements?.[inputKey]
     if(statementInput){
       throw new Error(`Not implemented: statement inputs`)
     }
   }
 
   if(alignment) {
-    if(args.length) {
+    // append alignment to an existing input
+    if(args[0]?.type === "input_value") {
       args[0].align = alignment.toUpperCase()
+
+    // make an input just for alignment
     } else {
       args.push({
         "type": "input_dummy",
@@ -158,7 +166,7 @@ const processLine = (line, data={}) => {
 const validAlignments = ['center', 'centre', 'right', 'left']
 const splitAlignment = line => {
   if(isString(line)) {
-    return { alignment: undefined, lineValue: { text: line } }
+    return { alignment: defaultAlignment, lineValue: { text: line } }
   }
 
   // look for alignment keys
@@ -182,9 +190,42 @@ const splitAlignment = line => {
 
   // if found, alignment must be only key
   return  {
-    alignment,
+    alignment: alignment || defaultAlignment,
     lineValue: isString(lineValue)
       ? { text: lineValue }
       : lineValue
   }
+}
+
+const DATA_REGEX = / %\w+/ // a space, then %, then one or more word characters
+const lineToMessageAndInput = ({ text, input }, dataKeys) => {
+  // check if this text contains a data string
+  const replacementString = text.match(DATA_REGEX)?.[0]
+
+  if(text && input) {
+    if(replacementString) {
+      // should send an input and a data string
+      throw new Error(`Received text with a datastring and an input, use one or the other!\ntext: "${text}"\ninput: "${input}")`)
+    }
+
+    return { message: text, inputKey: input }
+  }
+
+  let
+    inputKey,
+    message = text
+
+  if(replacementString) {
+    // insert an inputKey for it
+    inputKey = replacementString.slice(2)
+    // look up the data entry
+
+    if(!includes(dataKeys, inputKey)) {
+      throw new Error(`Data input not found: ${inputKey}`)
+    }
+    // remove it from the text
+    message = message.replace(replacementString, '')
+  }
+
+  return { message, inputKey }
 }

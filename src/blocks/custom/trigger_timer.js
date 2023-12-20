@@ -52,27 +52,12 @@ export default {
 
   lines: [
     { center: "⏲️ Timer" },
-    { center: "Compare Feeds" },
-    { right: {
-        text: 'Feed:',
-        input: 'FEED_A',
-    }},
-    { right: {
-        text: "Compare Feeds",
-        input: 'COMPARATOR',
-    }},
-    { right: {
-        text: "Feed or Value:",
-        input: 'FEED_B',
-    }},
-    { right: {
-        text: "Run After:",
-        input: 'RUN_AFTER',
-    }},
-    { right: {
-        text: "Extend Timer?",
-        input: 'EXTEND_TIMER',
-    }}
+    { center: "Compare % Feeds" },
+    'Feed: %FEED_A',
+    "Compare Feeds: %COMPARATOR",
+    "Feed or Value: %FEED_B",
+    "Run After: %RUN_AFTER",
+    "Extend Timer? %EXTEND_TIMER"
   ],
 
   generators: {
