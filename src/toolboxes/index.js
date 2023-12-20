@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { includes, map, filter, mapValues } from 'lodash-es'
+import { includes, isString, map, filter, mapValues } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 import { getBlockType } from '../tools/util.js'
@@ -18,7 +18,12 @@ const
 
   blockToInputs = block =>
     block.data?.inputValues
-      ? mapValues(block.data?.inputValues, ({ shadow }) => ({ shadow: { type: shadow }}))
+      // shadow processing
+      ? mapValues(block.data?.inputValues, ({ shadow }) =>
+        isString(shadow) // shorthand
+          ? { shadow: { type: shadow }}
+          : shadow
+      )
       : block.inputs,
 
   blockToFields = block => {

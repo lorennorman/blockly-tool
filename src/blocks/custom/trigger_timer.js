@@ -6,11 +6,6 @@ export default {
     category: 'Triggers'
   },
 
-  help: {
-    tooltip: "",
-    helpUrl: ""
-  },
-
   visualization: {
     colour: 230
   },

@@ -1,71 +1,48 @@
 export default {
+  type: "action_send_email",
+
   toolbox: {
     category: 'Actions',
   },
 
-  json: {
-    "type": "action_send_email",
-    "message0": "📧 Send an Email %1",
-    "args0": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message1": "Select a Feed: %1",
-    "args1": [
-      {
-        "type": "input_value",
-        "name": "FEED",
-        "check": "feed",
-        "align": "RIGHT"
-      }
-    ],
-    "message2": "Subject: %1",
-    "args2": [
-      {
-        "type": "input_value",
-        "name": "SUBJECT",
-        "check": "String",
-        "align": "RIGHT"
-      }
-    ],
-    "message3": "Body: %1",
-    "args3": [
-      {
-        "type": "input_value",
-        "name": "BODY",
-        "check": "String",
-        "align": "RIGHT"
-      }
-    ],
-    "output": "action",
-    "colour": 345,
-    "tooltip": "",
-    "helpUrl": ""
+  visualization: {
+    colour: 345,
   },
 
-  inputs: {
-    FEED: {
-      shadow: {
-        type: 'selector_feed'
-      }
-    },
-    SUBJECT: {
-      shadow: {
-        type: 'text',
-        fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
-      }
-    },
-    BODY: {
-      shadow: {
-        type: 'text_multiline',
-        fields: {
-          TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}'
-        }
-      }
-    },
+  connections: {
+    mode: "value",
+    output: "action",
   },
+
+  data: {
+    inputValues: {
+      FEED: {
+        check: 'feed',
+        shadow: 'selector_feed',
+      },
+      SUBJECT: {
+        check: 'String',
+        shadow: {
+          type: 'text',
+          fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
+        }
+      },
+      BODY: {
+        check: 'String',
+        shadow: {
+          type: 'text_multiline',
+          fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
+        }
+      },
+    }
+  },
+
+  lines: [
+    { center: "📧 Send an Email" },
+    "Select a Feed: %FEED",
+    "Subject: %SUBJECT",
+    "Body: %BODY",
+  ],
 
   generators: {
     json: (block, generator) => {
