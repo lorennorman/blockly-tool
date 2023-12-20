@@ -1,5 +1,7 @@
 import Blockly from 'blockly'
-import { customBlocksJson, allGenerators } from './blocks'
+
+import { customBlocksJson } from './blocks'
+import allGenerators from './blocks/generators'
 import toolbox from './toolboxes'
 import { clear, load, save } from './serialization'
 import initialWorkspace from './workspaces/workspace.json'

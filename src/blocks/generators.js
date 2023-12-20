@@ -1,6 +1,7 @@
 import Blockly from 'blockly'
 
-import allBlocks from './all.js'
+import { allBlockDefinitions } from './index.js'
+
 
 const SCRUB_FUNCTIONS = {
   json: (block, previousJSON, thisOnly) => {
@@ -19,11 +20,13 @@ const makeGenerator = generatorType => {
 
   if(scrubFunction) { generator.scrub_ = scrubFunction }
 
-  for (const blockName in allBlocks) {
-    const block = allBlocks[blockName]
+  for (const blockName in allBlockDefinitions) {
+    const block = allBlockDefinitions[blockName]
     const blockGenerator = block.generators[generatorType]
     if(blockGenerator) {
       generator.forBlock[blockName] = blockGenerator
+    } else {
+      console.warn(`Block ${block.type} doesn't have a "${generatorType}" generator`)
     }
   }
 

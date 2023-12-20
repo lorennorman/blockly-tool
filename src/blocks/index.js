@@ -1,8 +1,7 @@
-import { compact, concat, map } from 'lodash-es'
+import { map } from 'lodash-es'
 import Blockly from 'blockly'
 
 import ALL_BLOCKS from './all.js'
-import generators from './generators.js'
 import { toBlockJSON } from '../tools/tools.js'
 import { getBlockType } from '../tools/util.js'
 
@@ -10,8 +9,7 @@ import { getBlockType } from '../tools/util.js'
 export const
   allBlockDefinitions = ALL_BLOCKS,
   customBlocksJson = [],
-  allBlocksByCategory = {},
-  allGenerators = generators
+  allBlocksByCategory = {}
 
 const processCommonBlock = commonBlock => {
   const { commonType } = commonBlock
