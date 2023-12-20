@@ -1,6 +1,7 @@
 import { map } from 'lodash-es'
 import Blockly from 'blockly'
 
+import blockDefaults from './defaults.js'
 import ALL_BLOCKS from './all.js'
 import { toBlockJSON } from '../tools/tools.js'
 import { getBlockType } from '../tools/util.js'
@@ -20,11 +21,12 @@ const processCommonBlock = commonBlock => {
 }
 
 const processCustomBlock = customBlock => {
-  customBlocksJson.push(
-    customBlock.type
-      ? toBlockJSON(customBlock)
-      : customBlock.json
-  )
+  customBlocksJson.push({
+      ...blockDefaults,
+      ...customBlock.type
+        ? toBlockJSON(customBlock)
+        : customBlock.json
+    })
 }
 
 

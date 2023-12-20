@@ -12,7 +12,6 @@ export default {
   },
 
   visualization: {
-    inputsInline: false,
     colour: 230
   },
 
