@@ -15,6 +15,8 @@ import text_multiline from './common/text_multiline.js'
 import logic_boolean from './common/logic_boolean.js'
 import logic_null from './common/logic_null.js'
 
+import { toBlockJSON } from './tools.js'
+
 
 export default {
   // not in toolbox
@@ -27,6 +29,7 @@ export default {
 
   // Triggers
   trigger_reactive,
+  // trigger_timer: { ...trigger_timer, json: toBlockJSON(trigger_timer) },
   trigger_timer,
   trigger_schedule,
 

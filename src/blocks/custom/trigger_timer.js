@@ -1,8 +1,87 @@
 
 export default {
+  type: "trigger_timer",
+
+  // where and how this block appears in the toolbox
   toolbox: {
     category: 'Triggers'
   },
+
+  help: {
+    tooltip: "",
+    helpUrl: ""
+  },
+
+  connections: {
+    mode: "value",
+    output: "trigger",
+  },
+
+  visualization: {
+    inputsInline: false,
+    colour: 230
+  },
+
+  // specify all data this block contains
+  input: {
+    // inline form elements
+    fields: {
+      RUN_AFTER: { options: [
+        [ '10 sec', '10' ],
+        [ '1 min', '60' ],
+        [ '15 min', '900' ],
+        [ '30 min', '1800' ],
+        [ '1 hr', '3600' ],
+        [ '6 hrs', '21600' ],
+        [ '1 day', '86400' ]
+      ]},
+      EXTEND_TIMER: { checked: true }
+    },
+    // single block attachments
+    values: {
+      FEED_A: {
+        check: 'feed',
+        shadow: 'feed_selector'
+      },
+      COMPARATOR: {
+        check: 'comparison_operator',
+        shadow: 'selector_comparison'
+      },
+      FEED_B: {
+        check: [ "feed", "Number", "String" ],
+        shadow: 'feed_selector'
+      },
+    },
+    // list of block attachments
+    statements: {}
+  },
+
+  // what the block actually looks like
+  // each line from top to bottom
+  lines: [
+    { center: "⏲️ Timer" },
+    { center: "Compare Feeds" },
+    { right: {
+        text: 'Feed:',
+        input: 'FEED_A',
+    }},
+    { right: {
+        text: "Compare Feeds",
+        input: 'COMPARATOR',
+    }},
+    { right: {
+        text: "Feed or Value:",
+        input: 'FEED_B',
+    }},
+    { right: {
+        text: "Run After:",
+        input: 'RUN_AFTER',
+    }},
+    { right: {
+        text: "Extend Timer?",
+        input: 'EXTEND_TIMER',
+    }}
+  ],
 
   json: {
     "type": "trigger_timer",
