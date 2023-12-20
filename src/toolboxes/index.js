@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { flatMap, includes, map, filter } from 'lodash-es'
+import { includes, map, filter, mapValues } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 import { getBlockType } from '../tools/util.js'
@@ -16,20 +16,27 @@ const
     { name: 'Comparisons', colour: 208 },
   ],
 
+  blockToInputs = block =>
+    block.data?.inputValues
+      ? mapValues(block.data?.inputValues, ({ shadow }) => ({ shadow: { type: shadow }}))
+      : block.inputs,
+
+  blockToFields = block => {
+    return block.fields
+  },
+
   selectBlocksByCategoryName = name =>
     filter(allBlockDefinitions, def =>
       def.toolbox.category === name || includes(def.toolbox.categories, name)
     ),
 
-  generateCategoryContents = ({ name }) => flatMap(
-    selectBlocksByCategoryName(name), block => {
-      const
-        { inputs, fields } = block,
-        type = getBlockType(block)
-
-      // inject other kinds of cateogry objects here
-      return { kind: 'block', type, ...{ inputs, fields } }
-    }
+  generateCategoryContents = ({ name }) =>
+    map(selectBlocksByCategoryName(name), block => ({
+      kind: 'block',
+      type: getBlockType(block),
+      inputs: blockToInputs(block),
+      fields: blockToFields(block)
+    })
   ),
 
   generateToolboxContents = () => map(TOOLBOX_CONFIG, category =>

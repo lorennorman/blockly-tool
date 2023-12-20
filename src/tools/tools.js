@@ -80,16 +80,16 @@ const processConnections = block => {
 const processLines = block => {
   // grab block settings
   // process each line
-  const { lines, input } = block
+  const { lines, data } = block
   return reduce(lines, (allLines, line, lineNumber) => {
-    const { message, args } = processLine(line, input)
+    const { message, args } = processLine(line, data)
     allLines[`message${lineNumber}`] = message
     allLines[`args${lineNumber}`] = args
     return allLines
   }, {})
 }
 
-const processLine = (line, inputValues={}) => {
+const processLine = (line, data={}) => {
   if(!isString(line) && !isObject(line)) {
     throw new Error(`Given non-object, non-string line: ${line}`)
   }
@@ -110,7 +110,7 @@ const processLine = (line, inputValues={}) => {
   if(lineValue.input) {
     // lookup in values, fields, statements
     // TODO: ensure only one found
-    const fieldInput = inputValues.fields?.[lineValue.input]
+    const fieldInput = data.fields?.[lineValue.input]
     if(fieldInput) {
       args.push({
         type: (fieldInput.options && "field_dropdown")
@@ -120,7 +120,7 @@ const processLine = (line, inputValues={}) => {
         options: fieldInput.options
       })
     }
-    const valueInput = inputValues.values?.[lineValue.input]
+    const valueInput = data.inputValues?.[lineValue.input]
     if(valueInput) {
       args.push({
         type: "input_value",
@@ -128,7 +128,7 @@ const processLine = (line, inputValues={}) => {
         check: valueInput.check
       })
     }
-    const statementInput = inputValues.statements?.[lineValue.input]
+    const statementInput = data.inputStatements?.[lineValue.input]
     if(statementInput){
       throw new Error(`Not implemented: statement inputs`)
     }
