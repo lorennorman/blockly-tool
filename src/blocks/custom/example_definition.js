@@ -83,11 +83,13 @@ export default {
       // TODO: inputStatement
       // if it's a single field input
       field: 'FIELD_NAME',
+      text: 'whatever', // makes a text field
+      spellcheck: true, // text field option
       checked: true, // makes a checkbox field
       options: [ // makes a dropdown field
         ['user text', 'computer id'],
         // ...
-      ]
+      ],
       // TODO: multiple fields: {}
     }],
 
