@@ -14,34 +14,32 @@ export default {
     output: "action",
   },
 
-  data: {
-    inputValues: {
-      FEED: {
-        check: 'feed',
-        shadow: 'selector_feed',
-      },
-      SUBJECT: {
-        check: 'String',
-        shadow: {
-          type: 'text',
-          fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
-        }
-      },
-      BODY: {
-        check: 'String',
-        shadow: {
-          type: 'text_multiline',
-          fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
-        }
-      },
-    }
-  },
-
   lines: [
-    { center: "📧 Send an Email" },
-    "Select a Feed: %FEED",
-    "Subject: %SUBJECT",
-    "Body: %BODY",
+    [ "📧 Send an Email", 'CENTER'],
+
+    [ "Select a Feed:", {
+      inputValue: "FEED",
+      check: 'feed',
+      shadow: 'selector_feed',
+    }],
+
+    [ "Subject:", {
+      inputValue: "SUBJECT",
+      check: 'String',
+      shadow: {
+        type: 'text',
+        fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
+      }
+    }],
+
+    [ "Body:", {
+      inputValue: "BODY",
+      check: 'String',
+      shadow: {
+        type: 'text_multiline',
+        fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
+      }
+    }],
   ],
 
   generators: {
