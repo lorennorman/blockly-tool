@@ -121,10 +121,13 @@ const processLine = (line, data={}) => {
     } else if(lineData.field) {
       args.push({
         type: (lineData.options && "field_dropdown")
-          || (includes(keys(lineData), "checked") && "field_checkbox"),
+          || (includes(keys(lineData), "checked") && "field_checkbox")
+          || (includes(keys(lineData), "text") && "field_input"),
         name: lineData.field,
         checked: lineData.checked,
-        options: lineData.options
+        options: lineData.options,
+        text: lineData.text,
+        spellcheck: lineData.spellcheck,
       })
 
     } else {
@@ -218,8 +221,8 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
-    // TODO: allow second.align option
-    return { alignment: defaultAlignment, lineValue: { text }, lineData: second }
+    const alignment = second.align || defaultAlignment
+    return { alignment, lineValue: { text }, lineData: second }
   }
 
   throw new Error(`second index invalid for line: ${JSON.stringify(line, null, 2)}`)
