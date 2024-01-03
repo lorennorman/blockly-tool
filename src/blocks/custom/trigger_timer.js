@@ -55,8 +55,6 @@ export default {
       field: "EXTEND_TIMER",
       checked: true
     }]
-
-    // could also do multiple fields: {} and use the template string
   ],
 
   generators: {

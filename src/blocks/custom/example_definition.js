@@ -64,7 +64,34 @@ export default {
 
   // describes each line of the block, from top to bottom
   lines: [
-    "line contents", // bare string: simple line text
+    "line contents", // bare string: simple text line,
+
+    // ARRAY LINES
+    // 2 strings: text with alignment
+    [ "line contents", "alignment" ],
+    // string and object: text with inputValue or fields
+    [ "line contents", {
+      // if it's a single block input
+      inputValue: 'INPUT_NAME',
+      check: 'input_block_output',
+      shadow: 'block_type_to_shadow', //
+      shadow: {
+        type: 'block_type_to_shadow',
+        inputs: "set shadow inputs",
+        fields: "set shadow fields"
+      },
+      // TODO: inputStatement
+      // if it's a single field input
+      field: 'FIELD_NAME',
+      checked: true, // makes a checkbox field
+      options: [ // makes a dropdown field
+        ['user text', 'computer id'],
+        // ...
+      ]
+      // TODO: multiple fields: {}
+    }],
+
+    // OBJECT LINES (moving away from this)
     { // bare object:
       // - text is line text
       // - input refers to any input collection key
