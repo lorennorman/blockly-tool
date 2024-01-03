@@ -1,7 +1,6 @@
 export default {
   type: "trigger_timer",
 
-  // where and how this block appears in the toolbox
   toolbox: {
     category: 'Triggers'
   },
@@ -15,9 +14,33 @@ export default {
     output: "trigger",
   },
 
-  data: {
-    fields: {
-      RUN_AFTER: { options: [
+  lines: [
+    [ "⏲️ Timer", "center" ], // alignment shorthand
+    [ "Compare Feeds", "center" ],
+
+    [ 'Feed:', {
+      inputValue: "FEED_A", // input value
+      check: 'feed',
+      shadow: 'selector_feed'
+    }],
+
+    [ "Compare Feeds:", {
+      inputValue: "COMPARATOR",
+      check: 'comparison_operator',
+      shadow: {
+        type: 'selector_comparison'
+      }
+    }],
+
+    [ "Feed or Value:", {
+      inputValue: "FEED_B",
+      check: 'feed',
+      shadow: 'selector_feed'
+    }],
+
+    [ "Run After:", {
+      field: "RUN_AFTER", // field
+      options: [
         [ '10 sec', '10' ],
         [ '1 min', '60' ],
         [ '15 min', '900' ],
@@ -25,34 +48,15 @@ export default {
         [ '1 hr', '3600' ],
         [ '6 hrs', '21600' ],
         [ '1 day', '86400' ]
-      ]},
-      EXTEND_TIMER: { checked: true }
-    },
+      ]
+    }],
 
-    inputValues: {
-      FEED_A: {
-        check: 'feed',
-        shadow: 'selector_feed'
-      },
-      COMPARATOR: {
-        check: 'comparison_operator',
-        shadow: 'selector_comparison'
-      },
-      FEED_B: {
-        check: [ "feed", "Number", "String" ],
-        shadow: 'selector_feed'
-      },
-    },
-  },
+    [ "Extend Timer?", {
+      field: "EXTEND_TIMER",
+      checked: true
+    }]
 
-  lines: [
-    { center: "⏲️ Timer" },
-    { center: "Compare % Feeds" },
-    'Feed: %FEED_A',
-    "Compare Feeds: %COMPARATOR",
-    "Feed or Value: %FEED_B",
-    "Run After: %RUN_AFTER",
-    "Extend Timer? %EXTEND_TIMER"
+    // could also do multiple fields: {} and use the template string
   ],
 
   generators: {
@@ -65,6 +69,8 @@ export default {
         comparisonTargetValue = generator.valueToCode(block, 'FEED_B', 0) || null,
         comparisonPayload = { [comparisonTargetKey]: comparisonTargetValue },
 
+        // pair with api -> blockly diagram code in io-rails
+        // imagine an expressive, generative middle layer...
         payload = {
           trigger_type: 'timer',
           feed_id: generator.valueToCode(block, 'FEED_A', 0) || null,

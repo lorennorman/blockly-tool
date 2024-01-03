@@ -1,4 +1,4 @@
-import { flatMap, forEach, includes, isObject, isString, keys, reduce, values, without } from 'lodash-es'
+import { flatMap, forEach, includes, isArray, isObject, isString, keys, reduce, values, without } from 'lodash-es'
 
 import { defaultAlignment } from '../blocks/defaults.js'
 
@@ -96,7 +96,7 @@ const processLine = (line, data={}) => {
     throw new Error(`Given non-object, non-string line: ${line}`)
   }
 
-  const { alignment, lineValue } = splitAlignment(line)
+  const { alignment, lineValue, lineData } = splitAlignment(line)
 
   // expect 'text' key
   if(!isString(lineValue.text)) { throw new Error(`No text given for line: ${JSON.stringify(line, null, 2)}`)}
@@ -105,37 +105,67 @@ const processLine = (line, data={}) => {
   // expect no other keys
   if(otherKeys.length) { throw new Error(`Expected no keys other than "text" and "input", got:\n${otherKeys}\nfor line: ${JSON.stringify(line, null, 2)}`)}
 
-  const
-    args = [],
-    allDataKeys = flatMap([ keys(data.fields), keys(data.inputValues), keys(data.inputStatements)])
+  const args = []
+  let message = ''
 
-  let { message, inputKey } = lineToMessageAndInput(lineValue, allDataKeys)
-
-  // process alignment and input into args
-  if(inputKey) {
-    // lookup in values, fields, statements
-    // TODO: ensure only one found
-    const fieldInput = data.fields?.[inputKey]
-    if(fieldInput) {
-      args.push({
-        type: (fieldInput.options && "field_dropdown")
-          || (includes(keys(fieldInput), "checked") && "field_checkbox"),
-        name: inputKey,
-        check: fieldInput.check,
-        options: fieldInput.options
-      })
-    }
-    const valueInput = data.inputValues?.[inputKey]
-    if(valueInput) {
+  if(lineData) {
+    message = lineValue.text
+    // check for inputValue or field keys
+    if(lineData.inputValue) {
       args.push({
         type: "input_value",
-        name: inputKey,
-        check: valueInput.check
+        name: lineData.inputValue,
+        check: lineData.check
       })
+
+    } else if(lineData.field) {
+      args.push({
+        type: (lineData.options && "field_dropdown")
+          || (includes(keys(lineData), "checked") && "field_checkbox"),
+        name: lineData.field,
+        checked: lineData.checked,
+        options: lineData.options
+      })
+
+    } else {
+      throw new Error(`No data type in data parameter: ${JSON.stringify(lineData, null, 2)}`)
     }
-    const statementInput = data.inputStatements?.[inputKey]
-    if(statementInput){
-      throw new Error(`Not implemented: statement inputs`)
+
+  } else {
+    const
+      allDataKeys = flatMap([ keys(data.fields), keys(data.inputValues), keys(data.inputStatements)]),
+      messageAndInput = lineToMessageAndInput(lineValue, allDataKeys),
+      { inputKey } = messageAndInput
+
+    message = messageAndInput.message
+
+
+    // process alignment and input into args
+    if(inputKey) {
+      // lookup in values, fields, statements
+      // TODO: ensure only one found
+      const fieldInput = data.fields?.[inputKey]
+      if(fieldInput) {
+        args.push({
+          type: (fieldInput.options && "field_dropdown")
+            || (includes(keys(fieldInput), "checked") && "field_checkbox"),
+          name: inputKey,
+          check: fieldInput.check,
+          options: fieldInput.options
+        })
+      }
+      const valueInput = data.inputValues?.[inputKey]
+      if(valueInput) {
+        args.push({
+          type: "input_value",
+          name: inputKey,
+          check: valueInput.check
+        })
+      }
+      const statementInput = data.inputStatements?.[inputKey]
+      if(statementInput){
+        throw new Error(`Not implemented: statement inputs`)
+      }
     }
   }
 
@@ -169,6 +199,33 @@ const splitAlignment = line => {
     return { alignment: defaultAlignment, lineValue: { text: line } }
   }
 
+  if(isArray(line)) {
+    return parseArrayLine(line)
+  }
+
+  if(isObject(line)) {
+    return parseObjectLine(line)
+  }
+
+  throw new Error(`Line not valid: ${JSON.stringify(line, null, 2)}`)
+}
+
+const parseArrayLine = line => {
+  const [ text, second ] = line
+
+  if(isString(second)) {
+    return { alignment: second, lineValue: { text } }
+  }
+
+  if(isObject(second)) {
+    // TODO: allow second.align option
+    return { alignment: defaultAlignment, lineValue: { text }, lineData: second }
+  }
+
+  throw new Error(`second index invalid for line: ${JSON.stringify(line, null, 2)}`)
+}
+
+const parseObjectLine = line => {
   // look for alignment keys
   const lineKeys = keys(line)
   let alignment
