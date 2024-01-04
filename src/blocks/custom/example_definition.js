@@ -21,6 +21,7 @@ export default {
     colour: 230
   },
 
+  // TODO: consider something simpler, maybe leftOutput, topOutput, and bottomCheck?
   // Block connections
   connections: {
     // mode options:
