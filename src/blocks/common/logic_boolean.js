@@ -1,9 +1,9 @@
 export default {
+  commonType: 'logic_boolean',
+
   toolbox: {
     category: 'Values',
   },
-
-  commonType: 'logic_boolean',
 
   generators: {
     json: (block, generator) => {

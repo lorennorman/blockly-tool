@@ -1,7 +1,7 @@
 export default {
-  toolbox: { },
-
   commonType: 'math_change',
+
+  toolbox: { },
 
   generators: {
     json: (block, generator) => {

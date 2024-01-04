@@ -1,9 +1,9 @@
 export default {
+  commonType: 'logic_compare',
+
   toolbox: {
     category: 'Logic',
   },
-
-  commonType: 'logic_compare',
 
   generators: {
     json: (block, generator) => {

@@ -1,9 +1,9 @@
 export default {
+  commonType: 'logic_operation',
+
   toolbox: {
     category: 'Logic',
   },
-
-  commonType: 'logic_operation',
 
   generators: {
     json: (block, generator) => {

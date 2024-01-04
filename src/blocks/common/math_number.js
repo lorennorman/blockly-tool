@@ -1,9 +1,9 @@
 export default {
+  commonType: 'math_number',
+
   toolbox: {
     category: 'Values',
   },
-
-  commonType: 'math_number',
 
   generators: {
     json: (block, generator) => {

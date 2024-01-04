@@ -1,9 +1,9 @@
 export default {
+  commonType: 'text',
+
   toolbox: {
     category: 'Values',
   },
-
-  commonType: 'text',
 
   generators: {
     json: (block, generator) => {

@@ -1,9 +1,9 @@
 export default {
+  commonType: 'text_multiline',
+
   toolbox: {
     category: 'Values',
   },
-
-  commonType: 'text_multiline',
 
   generators: {
     json: (block, generator) => {
