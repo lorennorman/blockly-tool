@@ -1,74 +1,40 @@
 export default {
+  type: "action_post_webhook",
+
   toolbox: {
     category: 'Actions',
   },
 
-  json: {
-    "type": "action_post_webhook",
-    "message0": "🔗 POST a Webhook %1",
-    "args0": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message1": "Web URL: %1",
-    "args1": [
-      {
-        "type": "input_value",
-        "name": "URL",
-        "check": "String",
-        "align": "RIGHT"
-      }
-    ],
-    "message2": "Select a Feed: %1",
-    "args2": [
-      {
-        "type": "input_value",
-        "name": "FEED",
-        "check": "feed",
-        "align": "RIGHT"
-      }
-    ],
-    "message3": "Body: %1",
-    "args3": [
-      {
-        "type": "input_value",
-        "name": "BODY",
-        "check": "String",
-        "align": "RIGHT"
-      }
-    ],
-    "message4": "Form Encode? %1 %2",
-    "args4": [
-      {
-        "type": "field_checkbox",
-        "name": "FORM_ENCODE",
-        "checked": false
-      }, {
-        "type": "input_dummy",
-        "align": "RIGHT"
-      }
-    ],
-    "output": "action",
-    "colour": 345,
-    "tooltip": "",
-    "helpUrl": ""
+  visualization: {
+    colour: 345,
   },
 
-  inputs: {
-    URL: {
+  connections: {
+    mode: "value",
+    output: "action",
+  },
+
+  lines: [
+    [ "🔗 POST a Webhook", "CENTER" ],
+
+    [ "Web URL:", {
+      inputValue: "URL",
+      check: "String",
       shadow: {
         type: 'text',
         fields: { TEXT: 'https://...' }
       }
-    },
-    FEED: {
-      shadow: {
-        type: 'selector_feed'
-      }
-    },
-    BODY: {
+    }],
+
+    [ "Select a Feed:", {
+      inputValue: "FEED",
+      check: "feed",
+      shadow: 'selector_feed'
+    }],
+
+    [ "Body:", {
+      inputValue: "BODY",
+      check: "String",
       shadow: {
         type: 'text_multiline',
         fields: {
@@ -92,8 +58,13 @@ export default {
 ]`
         }
       }
-    }
-  },
+    }],
+
+    [ "Form Encode?", {
+      field: "FORM_ENCODE",
+      checked: false
+    }],
+  ],
 
   generators: {
     json: (block, generator) => {
