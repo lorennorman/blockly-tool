@@ -35,54 +35,59 @@ export default {
     output: "trigger",
   },
 
-  // specify all data this block contains
-  data: {
-    // inline form elements
-    fields: {
-      // 'options' key makes a dropdown
-      FIELD_A: { options: [
-        [ 'user sees', 'internal id' ], // n times
-      ]},
-      // 'checked' key makes a checkbox
-      FIELD_B: { checked: true }
-    },
+  // // specify all data this block contains
+  // data: {
+  //   // inline form elements
+  //   fields: {
+  //     // 'options' key makes a dropdown
+  //     FIELD_A: { options: [
+  //       [ 'user sees', 'internal id' ], // n times
+  //     ]},
+  //     // 'checked' key makes a checkbox
+  //     FIELD_B: { checked: true }
+  //   },
 
-    // single block attachments
-    inputValues: {
-      INPUT_A: {
-        check: 'other_block_output', // validate connected block is this type
-        shadow: 'other_block_type' // generate this kind of shadow from toolbox
-      },
-      FEED_B: {
-        check: [ "other", "block", "outputs" ], // validate connected block is in this collection of types
-        shadow: 'other_block_type'
-      },
-    },
+  //   // single block attachments
+  //   inputValues: {
+  //     INPUT_A: {
+  //       check: 'other_block_output', // validate connected block is this type
+  //       shadow: 'other_block_type' // generate this kind of shadow from toolbox
+  //     },
+  //     FEED_B: {
+  //       check: [ "other", "block", "outputs" ], // validate connected block is in this collection of types
+  //       shadow: 'other_block_type'
+  //     },
+  //   },
 
-    // list of block attachments (not implemented yet)
-    inputStatements: {}
-  },
+  //   // list of block attachments (not implemented yet)
+  //   inputStatements: {}
+  // },
 
   // describes each line of the block, from top to bottom
   lines: [
-    "line contents", // bare string: simple text line,
+    // STRING LINES
+    "line contents", // simple text line, default alignment,
 
     // ARRAY LINES
-    // 2 strings: text with alignment
+    // [ string, string ]: [ text, alignment ]
     [ "line contents", "alignment" ],
-    // string and object: text with inputValue or fields
+
+    // [ string, object ]: [ text, { inputValue, inputStatement, field, fields } ]
     [ "line contents", {
-      // if it's a single block input
-      inputValue: 'INPUT_NAME',
+      // for a single block input
+      inputValue: 'INPUT_VALUE_NAME',
       check: 'input_block_output',
-      shadow: 'block_type_to_shadow', //
+      shadow: 'block_type_to_shadow', // -> { shadow: { type: 'block_type_to_shadow' }}
       shadow: {
         type: 'block_type_to_shadow',
-        inputs: "set shadow inputs",
-        fields: "set shadow fields"
+        inputs: {}, // fill in the inputs on the shadowed block
+        fields: {}, // fill in the fields on the shadowed block
       },
-      // TODO: inputStatement
-      // if it's a single field input
+
+      // TODO: for multiple block inputs
+      // inputStatement: 'INPUT_STATEMENT_NAME', ...
+
+      // for a single field input
       field: 'FIELD_NAME',
       text: 'whatever', // makes a text field
       spellcheck: true, // text field option
@@ -91,22 +96,23 @@ export default {
         ['user text', 'computer id'],
         // ...
       ],
-      // TODO: multiple fields: {}
+
+      // TODO: for multiple field inputs: {}
     }],
 
-    // OBJECT LINES (moving away from this)
-    { // bare object:
-      // - text is line text
-      // - input refers to any input collection key
-      text: 'line contents with input appended',
-      input: 'INPUT_A',
-    },
-    // alignment key: creates an input dummy for alignment
-    { center: "centered text" }, // bare string value: becomes line text
-    { right: { // object value: text with input options
-        text: 'right-aligned text with an input appended',
-        input: 'INPUT_B',
-    }}
+    // // OBJECT LINES (moving away from this)
+    // { // bare object:
+    //   // - text is line text
+    //   // - input refers to any input collection key
+    //   text: 'line contents with input appended',
+    //   input: 'INPUT_A',
+    // },
+    // // alignment key: creates an input dummy for alignment
+    // { center: "centered text" }, // bare string value: becomes line text
+    // { right: { // object value: text with input options
+    //     text: 'right-aligned text with an input appended',
+    //     input: 'INPUT_B',
+    // }}
   ],
 
   // generators for this block type
