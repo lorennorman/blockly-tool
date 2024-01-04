@@ -1,5 +1,6 @@
 import Blockly from 'blockly'
 
+import "./extensions"
 import { customBlocksJson } from './blocks'
 import allGenerators from './blocks/generators'
 import toolbox from './toolboxes'
@@ -63,8 +64,6 @@ clearButton.addEventListener('click', () => {
   clear(workspace)
   Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 })
-
-Blockly.Extensions.register('populate_feeds_dropdown', () => {})
 
 // load last sketch from storage
 load(workspace)

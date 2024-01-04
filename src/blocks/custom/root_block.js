@@ -6,6 +6,7 @@ export default {
 
   visualization: {
     colour: 120,
+    extensions: [ 'require_trigger_and_action' ],
   },
 
   lines: [
