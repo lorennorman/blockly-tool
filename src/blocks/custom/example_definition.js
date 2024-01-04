@@ -21,6 +21,7 @@ export default {
     colour: 230
   },
 
+  // TODO: consider something simpler, maybe leftOutput, topOutput, and bottomCheck?
   // Block connections
   connections: {
     // mode options:
@@ -34,49 +35,42 @@ export default {
     output: "trigger",
   },
 
-  // specify all data this block contains
-  data: {
-    // inline form elements
-    fields: {
-      // 'options' key makes a dropdown
-      FIELD_A: { options: [
-        [ 'user sees', 'internal id' ], // n times
-      ]},
-      // 'checked' key makes a checkbox
-      FIELD_B: { checked: true }
-    },
-
-    // single block attachments
-    inputValues: {
-      INPUT_A: {
-        check: 'other_block_output', // validate connected block is this type
-        shadow: 'other_block_type' // generate this kind of shadow from toolbox
-      },
-      FEED_B: {
-        check: [ "other", "block", "outputs" ], // validate connected block is in this collection of types
-        shadow: 'other_block_type'
-      },
-    },
-
-    // list of block attachments (not implemented yet)
-    inputStatements: {}
-  },
-
   // describes each line of the block, from top to bottom
   lines: [
-    "line contents", // bare string: simple line text
-    { // bare object:
-      // - text is line text
-      // - input refers to any input collection key
-      text: 'line contents with input appended',
-      input: 'INPUT_A',
-    },
-    // alignment key: creates an input dummy for alignment
-    { center: "centered text" }, // bare string value: becomes line text
-    { right: { // object value: text with input options
-        text: 'right-aligned text with an input appended',
-        input: 'INPUT_B',
-    }}
+    // STRING LINES
+    "line contents", // simple text line, default alignment,
+
+    // ARRAY LINES
+    // [ string, string ]: [ text, alignment ]
+    [ "line contents", "alignment" ],
+
+    // [ string, object ]: [ text, { inputValue, inputStatement, field, fields } ]
+    [ "line contents", {
+      // for a single block input
+      inputValue: 'INPUT_VALUE_NAME',
+      check: 'input_block_output',
+      shadow: 'block_type_to_shadow', // -> { shadow: { type: 'block_type_to_shadow' }}
+      shadow: {
+        type: 'block_type_to_shadow',
+        inputs: {}, // fill in the inputs on the shadowed block
+        fields: {}, // fill in the fields on the shadowed block
+      },
+
+      // TODO: for multiple block inputs
+      // inputStatement: 'INPUT_STATEMENT_NAME', ...
+
+      // for a single field input
+      field: 'FIELD_NAME',
+      text: 'whatever', // makes a text field
+      spellcheck: true, // text field option
+      checked: true, // makes a checkbox field
+      options: [ // makes a dropdown field
+        ['user text', 'computer id'],
+        // ...
+      ],
+
+      // TODO: for multiple field inputs: {}
+    }],
   ],
 
   // generators for this block type

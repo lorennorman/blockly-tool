@@ -1,32 +1,26 @@
 
 export default {
+  type: "root_block",
+
   toolbox: { },
 
-  json: {
-    "type": "root_block",
-    "message0": "Action Root %1 Trigger: %2 Action: %3",
-    "args0": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      },
-      {
-        "type": "input_value",
-        "name": "TRIGGER",
-        "check": "trigger",
-        "align": "RIGHT"
-      },
-      {
-        "type": "input_value",
-        "name": "ACTION",
-        "check": "action",
-        "align": "RIGHT"
-      }
-    ],
-    "colour": 120,
-    "tooltip": "",
-    "helpUrl": ""
+  visualization: {
+    colour: 120,
   },
+
+  lines: [
+    [ "Action Root", "CENTER" ],
+
+    [ "Trigger:", {
+      inputValue: "TRIGGER",
+      check: "trigger",
+    }],
+
+    [ "Action:", {
+      inputValue: "ACTION",
+      check: "action",
+    }],
+  ],
 
   generators: {
     json: (block, generator) => {

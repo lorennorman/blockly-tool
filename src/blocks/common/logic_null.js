@@ -1,9 +1,9 @@
 export default {
+  type: 'logic_null',
+
   toolbox: {
     category: 'Values',
   },
-
-  commonType: 'logic_null',
 
   generators: {
     json: (block, generator) => {

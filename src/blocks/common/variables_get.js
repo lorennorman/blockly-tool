@@ -1,7 +1,7 @@
 export default {
-  toolbox: { },
+  type: 'variables_get',
 
-  commonType: 'variables_get',
+  toolbox: { },
 
   generators: {
     json: (block, generator) => {

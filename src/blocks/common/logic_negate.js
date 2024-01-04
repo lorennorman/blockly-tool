@@ -1,9 +1,9 @@
 export default {
+  type: 'logic_negate',
+
   toolbox: {
     category: 'Logic',
   },
-
-  commonType: 'logic_negate',
 
   generators: {
     json: (block, generator) => {
