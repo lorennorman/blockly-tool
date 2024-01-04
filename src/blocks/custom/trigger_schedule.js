@@ -1,37 +1,28 @@
 export default {
+  type: "trigger_schedule",
+
   toolbox: {
     category: 'Triggers'
   },
 
-  json: {
-    "type": "trigger_schedule",
-    "message0": "📅 Scheduled %1",
-    "args0": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message1": "Schedule %1 %2",
-    "args1": [
-      {
-        "type": "field_input",
-        "name": "CRONTAB",
-        "text": "* * * * *",
-        "spellcheck": false
-      },
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "output": "trigger",
+  visualization: {
     "colour": 230,
-    "tooltip": "",
-    "helpUrl": ""
   },
 
-  inputs: { },
+  connections: {
+    mode: 'value',
+    output: 'trigger'
+  },
+
+  lines: [
+    [ "📅 Scheduled", 'CENTER' ],
+    [ "Schedule", {
+      field: 'CRONTAB',
+      text: "* * * * *",
+      spellcheck: false,
+      align: 'CENTER'
+    }]
+  ],
 
   generators: {
     json: (block, generator) => {

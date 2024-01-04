@@ -1,61 +1,45 @@
 
 export default {
+  type: "trigger_reactive",
+
   toolbox: {
     category: 'Triggers'
   },
 
-  json: {
-    "type": "trigger_reactive",
-    "message0": "📥 Reactive %1",
-    "args0": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message1": "Compare Feeds %1",
-    "args1": [
-      {
-        "type": "input_dummy",
-        "align": "CENTRE"
-      }
-    ],
-    "message2": "Feed: %1",
-    "args2": [
-      {
-        "type": "input_value",
-        "name": "FEED_A",
-        "check": "feed",
-        "align": "RIGHT"
-      }
-    ],
-    "message3": "Operator: %1",
-    "args3": [
-      {
-        "type": "input_value",
-        "name": "COMPARATOR",
-        "check": "comparison_operator",
-        "align": "RIGHT"
-      }
-    ],
-    "message4": "Feed or Value: %1",
-    "args4": [
-      {
-        "type": "input_value",
-        "name": "FEED_B",
-        "check": [
-          "feed",
-          "Number",
-          "String"
-        ],
-        "align": "RIGHT"
-      }
-    ],
-    "message5": "Limit Every: %1 %2",
-    "args5": [ {
-        "type": "field_dropdown",
-        "name": "NOTIFY_LIMIT",
-        "options": [
+  visualization: {
+    "colour": 230,
+  },
+
+  connections: {
+    mode: "value",
+    output: "trigger",
+  },
+
+  lines: [
+    [ "📥 Reactive", "CENTER"],
+    [ "Compare Feeds", "CENTER" ],
+
+    [ "Feed:", {
+        inputValue: "FEED_A",
+        check: "feed",
+        shadow: 'selector_feed'
+    }],
+
+    [ "Operator:", {
+        inputValue: "COMPARATOR",
+        check: "comparison_operator",
+        shadow: 'selector_comparison'
+    }],
+
+    [ "Feed or Value:", {
+        inputValue: "FEED_B",
+        check: [ "feed", "Number", "String" ],
+        shadow: 'selector_feed'
+    }],
+
+    [ "Limit Every:", {
+        field: "NOTIFY_LIMIT",
+        options: [
           [ '10 sec', '0' ],
           [ '1 min', '1' ],
           [ '15 min', '15' ],
@@ -64,45 +48,13 @@ export default {
           [ '6 hrs', '360' ],
           [ '1 day', '1440' ]
         ]
-      }, {
-        "type": "input_dummy",
-        "align": "RIGHT"
-      }
-    ],
-    "message6": "Notify on Reset? %1 %2",
-    "args6": [
-      {
-        "type": "field_checkbox",
-        "name": "NOTIFY_ON_RESET",
-        "checked": true
-      }, {
-        "type": "input_dummy",
-        "align": "RIGHT"
-      }
-    ],
-    "output": "trigger",
-    "colour": 230,
-    "tooltip": "",
-    "helpUrl": ""
-  },
+    }],
 
-  inputs: {
-    FEED_A: {
-      shadow: {
-        type: 'selector_feed'
-      }
-    },
-    COMPARATOR: {
-      shadow: {
-        type: 'selector_comparison'
-      }
-    },
-    FEED_B: {
-      shadow: {
-        type: 'selector_feed'
-      }
-    },
-  },
+    [ "Notify on Reset?", {
+        field: "NOTIFY_ON_RESET",
+        checked: true
+    }],
+  ],
 
   generators: {
     json: (block, generator) => {

@@ -1,9 +1,9 @@
 export default {
+  type: 'controls_if',
+
   toolbox: {
     category: 'Logic',
   },
-
-  commonType: 'controls_if',
 
   generators: {
     json: (block, generator) => {

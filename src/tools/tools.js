@@ -1,4 +1,4 @@
-import { flatMap, forEach, includes, isObject, isString, keys, reduce, values, without } from 'lodash-es'
+import { flatMap, forEach, includes, isArray, isObject, isString, keys, reduce, values, without } from 'lodash-es'
 
 import { defaultAlignment } from '../blocks/defaults.js'
 
@@ -82,22 +82,24 @@ const processConnections = block => {
 const processLines = block => {
   // grab block settings
   // process each line
-  const { lines, data } = block
+  const { lines } = block
   return reduce(lines, (allLines, line, lineNumber) => {
-    const { message, args } = processLine(line, data)
+    const { message, args } = processLine(line)
     allLines[`message${lineNumber}`] = message
     allLines[`args${lineNumber}`] = args
     return allLines
   }, {})
 }
 
-const processLine = (line, data={}) => {
+const processLine = (line) => {
   if(!isString(line) && !isObject(line)) {
     throw new Error(`Given non-object, non-string line: ${line}`)
   }
 
-  const { alignment, lineValue } = splitAlignment(line)
+  const { alignment, lineValue, lineData={} } = parseLine(line)
 
+  // always expect alignment
+  if(!alignment) { throw new Error(`Alignment not detected for line: ${JSON.stringify(line, null, 2)}`) }
   // expect 'text' key
   if(!isString(lineValue.text)) { throw new Error(`No text given for line: ${JSON.stringify(line, null, 2)}`)}
   // expect optional 'input' key
@@ -105,98 +107,104 @@ const processLine = (line, data={}) => {
   // expect no other keys
   if(otherKeys.length) { throw new Error(`Expected no keys other than "text" and "input", got:\n${otherKeys}\nfor line: ${JSON.stringify(line, null, 2)}`)}
 
-  const
-    args = [],
-    allDataKeys = flatMap([ keys(data.fields), keys(data.inputValues), keys(data.inputStatements)])
+  // build up the args
+  const args = []
 
-  let { message, inputKey } = lineToMessageAndInput(lineValue, allDataKeys)
+  // append inputValues to args
+  if(lineData.inputValue) {
+    args.push({
+      type: "input_value",
+      name: lineData.inputValue,
+      check: lineData.check
+    })
 
-  // process alignment and input into args
-  if(inputKey) {
-    // lookup in values, fields, statements
-    // TODO: ensure only one found
-    const fieldInput = data.fields?.[inputKey]
-    if(fieldInput) {
-      args.push({
-        type: (fieldInput.options && "field_dropdown")
-          || (includes(keys(fieldInput), "checked") && "field_checkbox"),
-        name: inputKey,
-        check: fieldInput.check,
-        options: fieldInput.options
-      })
-    }
-    const valueInput = data.inputValues?.[inputKey]
-    if(valueInput) {
-      args.push({
-        type: "input_value",
-        name: inputKey,
-        check: valueInput.check
-      })
-    }
-    const statementInput = data.inputStatements?.[inputKey]
-    if(statementInput){
-      throw new Error(`Not implemented: statement inputs`)
-    }
+  // append fields to args
+  } else if(lineData.field) {
+    args.push({
+      type: (lineData.options && "field_dropdown")
+        || (includes(keys(lineData), "checked") && "field_checkbox")
+        || (includes(keys(lineData), "text") && "field_input"),
+      name: lineData.field,
+      checked: lineData.checked,
+      options: lineData.options,
+      text: lineData.text,
+      spellcheck: lineData.spellcheck,
+    })
   }
 
-  if(alignment) {
-    // append alignment to an existing input
-    if(args[0]?.type === "input_value") {
-      args[0].align = alignment.toUpperCase()
+  // if an input exists, append alignment to it
+  if(args[0]?.type === "input_value") {
+    args[0].align = alignment
 
-    // make an input just for alignment
-    } else {
-      args.push({
-        "type": "input_dummy",
-        "align": alignment.toUpperCase()
-      })
-    }
+  // otherwise make an input for alignment
+  } else {
+    args.push({
+      "type": "input_dummy",
+      "align": alignment
+    })
+  }
+
+  // quick sanity check on args length
+  if(args.length > 2) {
+    throw new Error(`args array longer than 2: ${JSON.stringify(args, null, 2)}`)
   }
 
   // process text into message
-  if(args.length === 1) {
-    message = message.concat(" %1")
-  } else if(args.length === 2) {
-    message = message.concat(" %1 %2")
-  }
+  const
+    argsIndices = (args.length === 1) ? " %1"
+      : (args.length === 2) ? " %1 %2"
+      : '',
+    message = lineValue.text.concat(argsIndices)
 
   return { args, message }
 }
 
-const validAlignments = ['center', 'centre', 'right', 'left']
-const splitAlignment = line => {
-  if(isString(line)) {
-    return { alignment: defaultAlignment, lineValue: { text: line } }
-  }
+const parseLine = line => {
+  if(isString(line)) { return parseStringLine(line) }
 
-  // look for alignment keys
-  const lineKeys = keys(line)
-  let alignment
-  forEach(lineKeys, key => {
-    const lowerKey = key?.toLowerCase()
-    if(includes(validAlignments, lowerKey)) {
-      alignment = (lowerKey === 'center') ? 'centre' : lowerKey
+  if(isArray(line)) { return parseArrayLine(line) }
 
-      if(lineKeys.length > 1) {
-        const lineKeysMessage = without(lineKeys, key).join('", "')
-        throw new Error(`Alignment key ("${key}") should not have sibling keys, but has:\n"${lineKeysMessage}"`)
-      }
-    }
-  })
-
-  const lineValue = alignment
-    ? values(line)[0]
-    : line
-
-  // if found, alignment must be only key
-  return  {
-    alignment: alignment || defaultAlignment,
-    lineValue: isString(lineValue)
-      ? { text: lineValue }
-      : lineValue
-  }
+  throw new Error(`Line not valid: ${JSON.stringify(line, null, 2)}`)
 }
 
+const parseStringLine = text =>
+ ({ alignment: defaultAlignment, lineValue: { text } })
+
+const parseArrayLine = line => {
+  const [ text, second ] = line
+
+  if(isString(second)) {
+    return { alignment: second, lineValue: { text } }
+  }
+
+  if(isObject(second)) {
+    const alignment = parseAlignment(second.align)
+    return { alignment, lineValue: { text }, lineData: second }
+  }
+
+  throw new Error(`second index invalid for line: ${JSON.stringify(line, null, 2)}`)
+}
+
+const validAlignments = [ 'CENTER', 'CENTRE', 'RIGHT', 'LEFT' ]
+const parseAlignment = alignmentString => {
+  // if the input is falsy, return default alignment
+  if( !alignmentString ) { return defaultAlignment }
+
+  alignmentString = alignmentString.toUpperCase()
+  // throw if the downcased string is not in the valid list
+  if( !includes(validAlignments, alignmentString) ) {
+    throw new Error(`Alignment not valid: ${alignmentString}`)
+  }
+
+  // anglocize and return
+  return alignmentString === 'CENTER'
+    ? 'CENTRE'
+    : alignmentString
+}
+
+
+// TODO: re-use this when we want to do inline fields like:
+//   "Field 1: %FIELD_NAME_1 more text then %FIELD_NAME_2 fields not at end"
 const DATA_REGEX = / %\w+/ // a space, then %, then one or more word characters
 const lineToMessageAndInput = ({ text, input }, dataKeys) => {
   // check if this text contains a data string

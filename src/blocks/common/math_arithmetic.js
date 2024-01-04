@@ -1,9 +1,9 @@
 export default {
+  type: 'math_arithmetic',
+
   toolbox: {
     category: 'Math',
   },
-
-  commonType: 'math_arithmetic',
 
   generators: {
     json: (block, generator) => {
