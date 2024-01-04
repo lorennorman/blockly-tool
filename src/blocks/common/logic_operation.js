@@ -1,5 +1,5 @@
 export default {
-  commonType: 'logic_operation',
+  type: 'logic_operation',
 
   toolbox: {
     category: 'Logic',

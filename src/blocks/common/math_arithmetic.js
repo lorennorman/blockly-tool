@@ -1,5 +1,5 @@
 export default {
-  commonType: 'math_arithmetic',
+  type: 'math_arithmetic',
 
   toolbox: {
     category: 'Math',

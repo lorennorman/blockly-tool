@@ -1,5 +1,5 @@
 export default {
-  commonType: 'logic_negate',
+  type: 'logic_negate',
 
   toolbox: {
     category: 'Logic',

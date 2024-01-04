@@ -1,5 +1,5 @@
 export default {
-  commonType: 'logic_compare',
+  type: 'logic_compare',
 
   toolbox: {
     category: 'Logic',

@@ -1,5 +1,5 @@
 export default {
-  commonType: 'text_multiline',
+  type: 'text_multiline',
 
   toolbox: {
     category: 'Values',

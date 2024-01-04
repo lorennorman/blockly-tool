@@ -2,7 +2,6 @@
 import { chain, includes, isString, map, filter } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
-import { getBlockType } from '../tools/util.js'
 
 
 const
@@ -32,7 +31,7 @@ const
   generateCategoryContents = ({ name }) =>
     map(selectBlocksByCategoryName(name), block => ({
       kind: 'block',
-      type: getBlockType(block),
+      type: block.type,
       inputs: blockToInputs(block),
       // fields: {}
     })),

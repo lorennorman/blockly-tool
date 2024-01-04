@@ -1,5 +1,5 @@
 export default {
-  commonType: 'math_number',
+  type: 'math_number',
 
   toolbox: {
     category: 'Values',

@@ -1,5 +1,5 @@
 export default {
-  commonType: 'logic_null',
+  type: 'logic_null',
 
   toolbox: {
     category: 'Values',

@@ -1,5 +1,5 @@
 export default {
-  commonType: 'variables_get',
+  type: 'variables_get',
 
   toolbox: { },
 

@@ -1,5 +1,5 @@
 export default {
-  commonType: 'controls_if',
+  type: 'controls_if',
 
   toolbox: {
     category: 'Logic',

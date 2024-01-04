@@ -1,5 +1,5 @@
 export default {
-  commonType: 'math_change',
+  type: 'math_change',
 
   toolbox: { },
 

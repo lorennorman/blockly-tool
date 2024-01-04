@@ -1,10 +1,9 @@
-import { map } from 'lodash-es'
-import Blockly from 'blockly'
+import { keys, map, without } from 'lodash-es'
+import Blockly, { common } from 'blockly'
 
 import blockDefaults from './defaults.js'
 import ALL_BLOCKS from './all.js'
 import { toBlockJSON } from '../tools/tools.js'
-import { getBlockType } from '../tools/util.js'
 
 
 export const
@@ -12,30 +11,52 @@ export const
   customBlocksJson = [],
   allBlocksByCategory = {}
 
-const processCommonBlock = commonBlock => {
-  const { commonType } = commonBlock
+const
+  COMMON_KEYS = [
+    "type",
+    "toolbox",
+    "generators"
+  ],
 
-  if(!Blockly.Blocks[commonType]) {
-    throw new Error(`Common Block not found for type: ${commonType}`)
-  }
-}
+  CUSTOM_KEYS = COMMON_KEYS.concat([
+    "toolbox",
+    "help",
+    "visualization",
+    "connections",
+    "lines"
+  ]),
 
-const processCustomBlock = customBlock => {
-  customBlocksJson.push({
+  isCommonBlockType = type => !!Blockly.Blocks[type],
+
+  processCommonBlock = commonBlock => {
+    // ensure only supported keys are present
+    const extraKeys = without(keys(commonBlock), ...COMMON_KEYS)
+
+    if(extraKeys.length) {
+      throw new Error(`Common Block definition has unrecognized keys: "${extraKeys.join('", "')}"\nBlock: ${JSON.stringify(commonBlock, null, 2)}`)
+    }
+  },
+
+  processCustomBlock = customBlock => {
+    // ensure only supported keys are present
+    const extraKeys = without(keys(customBlock), ...CUSTOM_KEYS)
+
+    if(extraKeys.length) {
+      throw new Error(`Common Block definition has unrecognized keys: "${extraKeys.join('", "')}"\nBlock: ${JSON.stringify(customBlock, null, 2)}`)
+    }
+
+    customBlocksJson.push({
       ...blockDefaults,
-      ...customBlock.type
-        ? toBlockJSON(customBlock)
-        : customBlock.json
+      ...toBlockJSON(customBlock)
     })
-}
+  }
 
 
+// walk the blocks and process them into the exported collections
 map(ALL_BLOCKS, (block, key) => {
-  const hasType = getBlockType(block)
+  if(!block.type) { throw new Error(`No "type" declared for block: ${key}`) }
 
-  if(!hasType) { throw new Error(`No "type" declared for block: ${key}`) }
-
-  block.commonType
+  isCommonBlockType(block.type)
     ? processCommonBlock(block) // built-in blocks
     : processCustomBlock(block) // our blocks
 })

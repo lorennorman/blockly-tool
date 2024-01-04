@@ -1,5 +1,5 @@
 export default {
-  commonType: 'text',
+  type: 'text',
 
   toolbox: {
     category: 'Values',

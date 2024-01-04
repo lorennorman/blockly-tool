@@ -1,5 +1,5 @@
 export default {
-  commonType: 'variables_set',
+  type: 'variables_set',
 
   toolbox: { },
 

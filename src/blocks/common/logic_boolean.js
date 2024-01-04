@@ -1,5 +1,5 @@
 export default {
-  commonType: 'logic_boolean',
+  type: 'logic_boolean',
 
   toolbox: {
     category: 'Values',
