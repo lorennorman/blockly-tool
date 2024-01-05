@@ -1,4 +1,3 @@
-import { compact } from 'lodash-es'
 import Blockly from 'blockly'
 
 
@@ -16,11 +15,9 @@ Blockly.Extensions.register('require_trigger_and_action', function() {
       return
     }
 
-    const warning = compact([
-      'Must have:',
-      !hasTrigger && '- a Trigger block to determine when to run.',
-      !hasAction && '- an Action block to determine what to do.',
-    ]).join('\n')
+    const warning = 'Must have:' +
+      (!hasTrigger ? '\n- a Trigger block to determine when to run.' : '') +
+      (!hasAction ? '\n- an Action block to determine what to do.' : '')
 
     this.setWarningText(warning)
   })
