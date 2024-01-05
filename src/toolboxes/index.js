@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { chain, includes, isString, map, filter } from 'lodash-es'
+import { chain, includes, isString, keys, map, filter } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 
@@ -22,7 +22,7 @@ const
       : {
           kind: 'category',
           name: category.name,
-          colour: category.colour?.toString(),
+          colour: (category.colour === 0) ? "0" : category.colour,
           ...category.extras,
           contents: generateCategoryContents(category)
         }
@@ -41,13 +41,18 @@ const
       def.toolbox.category === name || includes(def.toolbox.categories, name)
     ),
 
-  blockToInputs = ({ lines }) =>
-    chain(lines)
-      .map('[1]')
-      .filter("inputValue")
-      .keyBy("inputValue")
-      .mapValues(shadowPropertyToInput)
-    .value(),
+  blockToInputs = ({ lines }) => {
+    const inputs = chain(lines)
+        .map('[1]')
+        .filter("inputValue")
+        .keyBy("inputValue")
+        .mapValues(shadowPropertyToInput)
+      .value()
+
+    return keys(inputs).length
+      ? inputs
+      : undefined
+  },
 
   shadowPropertyToInput = ({ shadow }) =>
     isString(shadow) // is shorthand?

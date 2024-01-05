@@ -174,7 +174,8 @@ const parseArrayLine = line => {
   const [ text, second ] = line
 
   if(isString(second)) {
-    return { alignment: second, lineValue: { text } }
+    const alignment = parseAlignment(second)
+    return { alignment, lineValue: { text } }
   }
 
   if(isObject(second)) {
