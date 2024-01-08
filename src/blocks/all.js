@@ -3,6 +3,7 @@ import selector_feed from './custom/selector_feed.js'
 import trigger_reactive from './custom/trigger_reactive.js'
 import trigger_timer from './custom/trigger_timer.js'
 import trigger_schedule from './custom/trigger_schedule.js'
+import schedule_hourly from './custom/schedule_hourly.js'
 import selector_comparison from './custom/selector_comparison.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
@@ -22,9 +23,6 @@ export default {
 
   //// IO
 
-  // Feeds
-  selector_feed,
-
   // Triggers
   trigger_reactive,
   // trigger_timer: { ...trigger_timer, json: toBlockJSON(trigger_timer) },
@@ -40,6 +38,12 @@ export default {
   // ---
 
   //// Tools
+
+  // Feeds
+  selector_feed,
+
+  //  Schedules
+  schedule_hourly,
 
   // Values
   math_number,

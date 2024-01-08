@@ -16,11 +16,10 @@ export default {
 
   lines: [
     [ "📅 Scheduled", 'CENTER' ],
-    [ "Schedule", {
-      field: 'CRONTAB',
-      text: "* * * * *",
-      spellcheck: false,
-      align: 'CENTER'
+
+    [ "When:", {
+      inputValue: 'SCHEDULE',
+      check: 'schedule'
     }]
   ],
 
@@ -29,7 +28,7 @@ export default {
       const
         payload = {
           trigger_type: 'schedule',
-          value: block.getFieldValue('CRONTAB')
+          value: generator.valueToCode(block, 'SCHEDULE', 0) || null
         }
 
       return [ payload, 0 ]

@@ -11,6 +11,7 @@ const
     { name: 'Actions', colour: 104 },
     SEP,
     { name: 'Feeds', colour: 0 },
+    { name: 'Schedules', colour: 232 },
     { name: 'Values', colour: 156 },
     { name: 'Comparisons', colour: 208 },
   ],
