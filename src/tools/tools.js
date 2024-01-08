@@ -150,11 +150,21 @@ const processLine = (line) => {
   }
 
   // process text into message
-  const
-    argsIndices = (args.length === 1) ? " %1"
-      : (args.length === 2) ? " %1 %2"
-      : '',
-    message = lineValue.text.concat(argsIndices)
+
+  // ensure args indices are present in the message
+  let argsIndices = ''
+
+  // if first arg is present in list but not text
+  if(args[0] && !lineValue.text.includes('%1')) {
+    argsIndices += " %1" // append it
+  }
+
+  // if second arg is present in list but not text
+  if(args[1] && !lineValue.text.includes('%2')) {
+    argsIndices += " %2"
+  }
+
+  const message = lineValue.text.concat(argsIndices)
 
   return { args, message }
 }
