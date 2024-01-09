@@ -1,4 +1,4 @@
-import timeLines, { cronTime } from './lines/time'
+import timeLines, { cronTime } from './lines/time.js'
 
 
 export default {
@@ -17,6 +17,7 @@ export default {
     output: 'schedule'
   },
 
+  // TODO: extract lines/days
   lines: [
     ['Weekly', 'LEFT'],
 
@@ -61,7 +62,7 @@ export default {
   generators: {
     json: block => {
       const
-        time = cronTime(block),
+        time = cronTime(block), // TODO: can't really do this!
         days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
           .reduce((days, day) => (
             block.getFieldValue(day) === "TRUE"

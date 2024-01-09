@@ -1,4 +1,4 @@
-import { minuteLine, cronMinute } from './lines/time'
+import { minuteLine, cronMinute } from './lines/time.js'
 
 
 export default {
