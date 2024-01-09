@@ -1,24 +1,62 @@
 {
+	"Line: String": {
+		"scope": "javascript",
+		"prefix": "linestr",
+		"body": [
+			"    '$1',\n",
+    ]
+  },
+	"Line: Aligned String": {
+		"scope": "javascript",
+		"prefix": "lineali",
+		"body": [
+			"    ['$1', '$2']\n",
+    ]
+  },
+	"Line: Field": {
+		"scope": "javascript",
+		"prefix": "linefld",
+		"body": [
+      "    [ '$1', {",
+      "      field: '$2',",
+      "      // checked: true,",
+      "      // text: 'initial value',",
+      "      // options: [",
+      "      //   ['Label', 'id'],",
+      "      // ]",
+      "    }]",
+    ]
+  },
 	"Custom Block": {
 		"scope": "javascript",
 		"prefix": "cstblk",
 		"body": [
 			"export default {",
-			"  toolbox: {",
-			"    category: '$1',",
-			"  },",
-			"",
-			"  json: {",
-			"    ${2:// insert Block json here}",
-			"  },",
-			"",
-			"  generators: {",
-			"    json: (block, generator) => {",
-			"      return '{ \"message\": \"JSON not implemented for $TM_FILENAME\"'",
-			"    }",
-			"  }",
-			"}",
-			""
+      "  type: '$TM_FILENAME_BASE',",
+      "",
+      "  toolbox: {",
+      "    category: '$1',",
+      "  },",
+      "",
+      "  visualization: {",
+      "    colour: 0,",
+      "  },",
+      "",
+      "  connections: {",
+      "    mode: 'value',",
+      "    // output: 'type_checks'",
+      "  },",
+      "",
+      "  lines: [",
+      "    ",
+      "  ],",
+      "",
+      "  generators: {",
+      "    json: block => {",
+      "      return [ '' , 0 ]",
+      "    }",
+      "  }",
+      "}"
 		],
 		"description": "Custom Block skeleton"
 	},
@@ -43,14 +81,4 @@
 		],
 		"description": "Common Block skeleton"
 	},
-	"Block XML": {
-		"scope": "xml",
-		"prefix": "blkxml",
-		"body": [
-			"<xml xmlns=\"https://developers.google.com/blockly/xml\">",
-			"  $1",
-			"</xml>"
-		],
-		"description": "Blockly XML wrapper for interop with Blockly Dev Tools"
-	}
 }
