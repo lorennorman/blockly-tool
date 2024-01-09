@@ -1,4 +1,4 @@
-import { map, times } from 'lodash-es'
+import { minuteLine, cronMinute } from './lines/time'
 
 
 export default {
@@ -26,20 +26,17 @@ export default {
       ]
     }],
 
-    [ "at minute", {
-      field: "AT_MINUTE",
-      options: map(times(60, String), idx => ([ idx, idx ]))
-    }]
+    minuteLine
   ],
 
   generators: {
     json: block => {
       const
         frequency = block.getFieldValue('FREQUENCY'),
-        atMinute = parseInt(block.getFieldValue('AT_MINUTE'), 10),
+        minutes = cronMinute(block),
         crontab = frequency === 'once'
-          ? `${atMinute} * * * *`
-          : `${atMinute%30}/30 * * * *`
+          ? `${minutes} * * * *`
+          : `${minutes%30}/30 * * * *`
 
       return [ crontab , 0 ]
     }
