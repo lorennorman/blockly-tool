@@ -5,6 +5,7 @@ import trigger_timer from './custom/trigger_timer.js'
 import trigger_schedule from './custom/trigger_schedule.js'
 import schedule_hourly from './custom/schedule_hourly.js'
 import schedule_daily from './custom/schedule_daily.js'
+import schedule_weekly from './custom/schedule_weekly.js'
 import selector_comparison from './custom/selector_comparison.js'
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
@@ -46,6 +47,7 @@ export default {
   //  Schedules
   schedule_hourly,
   schedule_daily,
+  schedule_weekly,
 
   // Values
   math_number,
