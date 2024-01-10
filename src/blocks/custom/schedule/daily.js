@@ -1,6 +1,3 @@
-import timeLines, { cronTime } from '../lines/time.js'
-
-
 export default {
   type: "schedule_daily",
 
@@ -20,14 +17,18 @@ export default {
   lines: [
     [ "Daily", "LEFT" ],
 
-    ...timeLines
+    [ "...at time:", {
+      inputValue: 'TIME',
+      check: 'cron_minute_hour',
+      shadow: 'selector_time'
+    }]
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
-        timeCrontab = cronTime(block),
-        crontab = `${timeCrontab} * * *`
+        time = generator.valueToCode(block, 'TIME', 0),
+        crontab = `${time} * * *`
 
       return [ crontab , 0 ]
     }

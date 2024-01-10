@@ -25,7 +25,7 @@ export default {
       ]
     }],
 
-    [ "at minute:", {
+    [ "...at minute:", {
       inputValue: 'MINUTE',
       check: 'cron_minute',
       shadow: 'selector_minute'
