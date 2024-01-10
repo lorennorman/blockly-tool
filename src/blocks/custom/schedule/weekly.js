@@ -17,59 +17,27 @@ export default {
     output: 'schedule'
   },
 
-  // TODO: extract lines/days
   lines: [
     ['Weekly', 'LEFT'],
 
-    [ 'Sun', {
-      field: 'SUN',
-      checked: true,
+    [ "...at:", {
+      inputValue: 'TIME',
+      check: 'cron_minute_hour',
+      shadow: 'selector_time'
     }],
 
-    [ 'Mon', {
-      field: 'MON',
-      checked: true,
-    }],
-
-    [ 'Tue', {
-      field: 'TUE',
-      checked: true,
-    }],
-
-    [ 'Wed', {
-      field: 'WED',
-      checked: true,
-    }],
-
-    [ 'Thu', {
-      field: 'THU',
-      checked: true,
-    }],
-
-    [ 'Fri', {
-      field: 'FRI',
-      checked: true,
-    }],
-
-    [ 'Sat', {
-      field: 'SAT',
-      checked: true,
-    }],
-
-    ...timeLines
+    [ "...on:", {
+      inputValue: 'DAYS_OF_WEEK',
+      check: 'cron_day_of_week',
+      shadow: 'selector_day_of_week'
+    }]
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
-        time = cronTime(block), // TODO: can't really do this!
-        days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-          .reduce((days, day) => (
-            block.getFieldValue(day) === "TRUE"
-              ? days.concat(day)
-              : days
-          ), [])
-          .join(',').toLowerCase()
+        time = generator.valueToCode(block, 'TIME', 0),
+        days = generator.valueToCode(block, 'DAYS_OF_WEEK', 0)
 
       // TODO: validations
       // must select a day

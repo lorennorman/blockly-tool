@@ -18,22 +18,21 @@ export default {
   },
 
   lines: [
-    [ "...at hour:", {
-      field: "AT_HOUR",
-      options: map(range(1, 13), hour => ([ hour.toString(), (hour%12).toString() ]))
-    }],
-
-    [ "...at minute:", {
-      field: "AT_MINUTE",
-      options: map(map(range(60), String), idx => ([ idx, idx ]))
-    }],
-
-    [ "", {
-      field: "AM_PM",
-      options: [
-        ["AM", "am"],
-        ["PM", "pm"],
-      ]
+    [ "Time: %AT_HOUR : %AT_MINUTE %AM_PM", {
+      fields: {
+        AT_HOUR: {
+          options: map(range(1, 13), hour => ([ hour.toString(), (hour%12).toString() ]))
+        },
+        AT_MINUTE: {
+          options: map(map(range(60), String), idx => ([ idx, idx ]))
+        },
+        AM_PM: {
+          options: [
+            ["AM", "am"],
+            ["PM", "pm"],
+          ]
+        }
+      }
     }]
   ],
 

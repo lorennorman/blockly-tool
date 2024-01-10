@@ -1,4 +1,4 @@
-import { flatMap, forEach, includes, isArray, isObject, isString, keys, reduce, values, without } from 'lodash-es'
+import { includes, isArray, isObject, isString, keys, map, range, reduce, without } from 'lodash-es'
 
 import { defaultAlignment } from '../blocks/defaults.js'
 
@@ -118,18 +118,31 @@ const processLine = (line) => {
       check: lineData.check
     })
 
-  // append fields to args
+  // append a field to args
   } else if(lineData.field) {
     args.push({
+      name: lineData.field,
       type: (lineData.options && "field_dropdown")
         || (includes(keys(lineData), "checked") && "field_checkbox")
         || (includes(keys(lineData), "text") && "field_input"),
-      name: lineData.field,
       checked: lineData.checked,
       options: lineData.options,
       text: lineData.text,
       spellcheck: lineData.spellcheck,
     })
+
+  // append multiple fields to args
+  } else if(lineData.fields) {
+    args.push(...map(lineData.fields, (fieldData, fieldName) => ({
+      name: fieldName,
+      type: (fieldData.options && "field_dropdown")
+        || (includes(keys(fieldData), "checked") && "field_checkbox")
+        || (includes(keys(fieldData), "text") && "field_input"),
+      checked: fieldData.checked,
+      options: fieldData.options,
+      text: fieldData.text,
+      spellcheck: fieldData.spellcheck,
+    })))
   }
 
   // if an input exists, append alignment to it
@@ -144,27 +157,28 @@ const processLine = (line) => {
     })
   }
 
-  // quick sanity check on args length
-  if(args.length > 2) {
-    throw new Error(`args array longer than 2: ${JSON.stringify(args, null, 2)}`)
-  }
+  // process template text into message
+  // walk the args and make sure the message refers to them
+  const message = reduce(range(1, args.length+1), (acc, idx) => {
+    // what this arg needs to be represented by in the text
+    const idxToken = `%${idx}` // %1, %2, etc...
+    // already there? move along
+    if(acc.includes(idxToken)) { return acc }
 
-  // process text into message
+    // is the arg present in magic format? (%ARG_NAME)
+    const
+      argName = args[idx-1].name,
+      argToken = `%${argName}`
 
-  // ensure args indices are present in the message
-  let argsIndices = ''
+    if(acc.includes(argToken)) {
+      // replace it with the real token
+      return acc.replace(argToken, idxToken)
+    }
 
-  // if first arg is present in list but not text
-  if(args[0] && !lineValue.text.includes('%1')) {
-    argsIndices += " %1" // append it
-  }
+    // otherwise simply append to the end
+    return `${acc} ${idxToken}`
+  }, lineValue.text)
 
-  // if second arg is present in list but not text
-  if(args[1] && !lineValue.text.includes('%2')) {
-    argsIndices += " %2"
-  }
-
-  const message = lineValue.text.concat(argsIndices)
 
   return { args, message }
 }

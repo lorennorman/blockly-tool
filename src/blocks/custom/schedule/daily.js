@@ -17,7 +17,7 @@ export default {
   lines: [
     [ "Daily", "LEFT" ],
 
-    [ "...at time:", {
+    [ "...at:", {
       inputValue: 'TIME',
       check: 'cron_minute_hour',
       shadow: 'selector_time'

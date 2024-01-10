@@ -14,6 +14,7 @@ import schedule_monthly from './custom/schedule/monthly.js'
 import schedule_annually from './custom/schedule/annually.js'
 import selector_minute from './custom/schedule/selector_minute.js'
 import selector_time from './custom/schedule/selector_time.js'
+import selector_day_of_week from './custom/schedule/selector_day_of_week.js'
 
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
@@ -61,6 +62,7 @@ export default {
   // Schedule selectors
   selector_minute,
   selector_time,
+  selector_day_of_week,
 
   // Values
   math_number,
