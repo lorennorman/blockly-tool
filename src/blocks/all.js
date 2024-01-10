@@ -6,11 +6,13 @@ import selector_comparison from './custom/selector_comparison.js'
 import trigger_reactive from './custom/trigger_reactive.js'
 import trigger_timer from './custom/trigger_timer.js'
 import trigger_schedule from './custom/trigger_schedule.js'
-import schedule_hourly from './custom/schedule_hourly.js'
-import schedule_daily from './custom/schedule_daily.js'
-import schedule_weekly from './custom/schedule_weekly.js'
-import schedule_monthly from './custom/schedule_monthly.js'
-import schedule_annually from './custom/schedule_annually.js'
+
+import schedule_hourly from './custom/schedule/hourly.js'
+import schedule_daily from './custom/schedule/daily.js'
+import schedule_weekly from './custom/schedule/weekly.js'
+import schedule_monthly from './custom/schedule/monthly.js'
+import schedule_annually from './custom/schedule/annually.js'
+import selector_minute from './custom/schedule/selector_minute.js'
 
 import action_publish_to_feed from './custom/action_publish_to_feed.js'
 import action_send_email from './custom/action_send_email.js'
@@ -49,12 +51,14 @@ export default {
   // Feeds
   selector_feed,
 
-  //  Schedules
+  // Schedules
   schedule_hourly,
   schedule_daily,
   schedule_weekly,
   schedule_monthly,
   schedule_annually,
+  // Schedule selectors
+  selector_minute,
 
   // Values
   math_number,

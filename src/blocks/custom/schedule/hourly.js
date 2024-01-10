@@ -1,6 +1,3 @@
-import { minuteLine, cronMinute } from './lines/time.js'
-
-
 export default {
   type: "schedule_hourly",
 
@@ -18,6 +15,8 @@ export default {
   },
 
   lines: [
+    [ "Hourly", "LEFT" ],
+
     [ "%1 an hour", {
       field: "FREQUENCY",
       options: [
@@ -26,14 +25,18 @@ export default {
       ]
     }],
 
-    minuteLine
+    [ "at minute:", {
+      inputValue: 'MINUTE',
+      check: 'cron_minute',
+      shadow: 'selector_minute'
+    }]
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
         frequency = block.getFieldValue('FREQUENCY'),
-        minutes = cronMinute(block),
+        minutes = generator.valueToCode(block, 'MINUTE', 0),
         crontab = frequency === 'once'
           ? `${minutes} * * * *`
           : `${minutes%30}/30 * * * *`
