@@ -18,12 +18,12 @@ export default {
   },
 
   lines: [
-    [ "Time: %AT_HOUR : %AT_MINUTE %AM_PM", {
+    [ "Time of Day: %HOUR : %MINUTE %AM_PM", {
       fields: {
-        AT_HOUR: {
+        HOUR: {
           options: map(range(1, 13), hour => ([ hour.toString(), (hour%12).toString() ]))
         },
-        AT_MINUTE: {
+        MINUTE: {
           options: map(map(range(60), String), idx => ([ idx, idx ]))
         },
         AM_PM: {
@@ -40,8 +40,8 @@ export default {
     json: block => {
       const
         isPm = block.getFieldValue('AM_PM') === "pm",
-        hour = parseInt(block.getFieldValue('AT_HOUR'), 10) + (isPm ? 12 : 0),
-        minute = parseInt(block.getFieldValue('AT_MINUTE'), 10)
+        hour = parseInt(block.getFieldValue('HOUR'), 10) + (isPm ? 12 : 0),
+        minute = parseInt(block.getFieldValue('MINUTE'), 10)
 
       return [ `${minute} ${hour}` , 0 ]
     }

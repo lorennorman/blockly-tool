@@ -17,7 +17,7 @@ export default {
   lines: [
     [ "Hourly", "LEFT" ],
 
-    [ "%1 an hour", {
+    [ "", {
       field: "FREQUENCY",
       options: [
         [ "Once", "once" ],
