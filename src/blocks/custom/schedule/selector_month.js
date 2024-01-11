@@ -15,48 +15,30 @@ export default {
   },
 
   lines: [
-    [ 'Jan: %JAN Feb: %FEB Mar: %MAR Apr: %APR', {
-      align: 'CENTER',
-      fields: {
-        JAN: { checked: true },
-        FEB: { checked: true },
-        MAR: { checked: true },
-        APR: { checked: true }
-      },
+    [ "Month:", {
+      field: 'MONTH',
+      options: [
+        [ 'Jan', 'JAN' ],
+        [ 'Feb', 'FEB' ],
+        [ 'Mar', 'MAR' ],
+        [ 'Apr', 'APR' ],
+        [ 'May', 'MAY' ],
+        [ 'Jun', 'JUN' ],
+        [ 'Jul', 'JUL' ],
+        [ 'Aug', 'AUG' ],
+        [ 'Sep', 'SEP' ],
+        [ 'Oct', 'OCT' ],
+        [ 'Nov', 'NOV' ],
+        [ 'Dec', 'DEC' ]
+      ]
     }],
-
-    [ 'May: %MAY Jun: %JUN Jul: %JUL Aug: %AUG', {
-      align: 'CENTER',
-      fields: {
-        MAY: { checked: true },
-        JUN: { checked: true },
-        JUL: { checked: true },
-        AUG: { checked: true },
-      }
-    }],
-
-    [ 'Sep: %SEP Oct: %OCT Nov: %NOV Dec: %DEC', {
-      align: 'CENTER',
-      fields: {
-        SEP: { checked: true },
-        OCT: { checked: true },
-        NOV: { checked: true },
-        DEC: { checked: true },
-      }
-    }]
   ],
 
   generators: {
     json: block => {
-      const months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]
-        .reduce((months, month) => (
-          block.getFieldValue(month) === "TRUE"
-            ? months.concat(month)
-            : months
-        ), [])
-        .join(',').toLowerCase()
+      const month = block.getFieldValue('MONTH').toLowerCase()
 
-      return [ months, 0 ]
+      return [ month, 0 ]
     }
   }
 }

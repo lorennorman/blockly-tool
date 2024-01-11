@@ -32,7 +32,7 @@ export default {
     [ '...of:', {
       inputValue: 'MONTHS',
       check: 'cron_month',
-      shadow: 'selector_month'
+      shadow: 'selector_months'
     }],
   ],
 

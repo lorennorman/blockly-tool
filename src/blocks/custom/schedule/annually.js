@@ -21,43 +21,37 @@ export default {
   lines: [
     [ "Annually", "LEFT" ],
 
-    // TODO: extract lines/month, { monthOptions? }
-    [ "...on month:", {
-      field: 'MONTH',
-      options: [
-        [ 'Jan', 'JAN' ],
-        [ 'Feb', 'FEB' ],
-        [ 'Mar', 'MAR' ],
-        [ 'Apr', 'APR' ],
-        [ 'May', 'MAY' ],
-        [ 'Jun', 'JUN' ],
-        [ 'Jul', 'JUL' ],
-        [ 'Aug', 'AUG' ],
-        [ 'Sep', 'SEP' ],
-        [ 'Oct', 'OCT' ],
-        [ 'Nov', 'NOV' ],
-        [ 'Dec', 'DEC' ]
-      ]
+    [ "...in:", {
+      inputValue: 'MONTH',
+      check: 'cron_month',
+      shadow: 'selector_month'
     }],
 
-    ...timeLines,
-
-    // TODO: extract lines/days, { dayOfMonth }
-    [ "...on day:", {
-      field: "DAY_OF_MONTH",
-      options: map(range(1, 29), date => [ date.toString(), date.toString() ])
+    [ "...on:", {
+      inputValue: 'DAY_OF_MONTH',
+      check: 'cron_day_of_month',
+      shadow: 'selector_day_of_month'
     }],
 
+    [ "...at:", {
+      inputValue: 'TIME',
+      check: 'cron_minute_hour',
+      shadow: 'selector_time'
+    }]
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
-        months = block.getFieldValue('MONTH').toLowerCase(),
-        timeCrontab = cronTime(block),
-        day = parseInt(block.getFieldValue('DAY_OF_MONTH'), 10)
+        time = generator.valueToCode(block, 'TIME', 0),
+        day = generator.valueToCode(block, 'DAY_OF_MONTH', 0),
+        month = generator.valueToCode(block, 'MONTH', 0)
 
-      return [ `${timeCrontab} ${months} ${day} *` , 0 ]
+    // TODO: validations
+    // must select a day
+    // if(!days.length) { }
+
+    return [ `${time} ${month} ${day} *` , 0 ]
     }
   }
 }
