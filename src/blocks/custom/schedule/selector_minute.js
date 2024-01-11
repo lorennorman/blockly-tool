@@ -19,14 +19,14 @@ export default {
 
   lines: [
     [ "Minute of Hour:", {
-      field: "AT_MINUTE",
+      field: "MINUTE",
       options: map(map(range(60), String), idx => ([ idx, idx ]))
     }]
   ],
 
   generators: {
     json: block => {
-      const minute = parseInt(block.getFieldValue('AT_MINUTE'), 10)
+      const minute = block.getFieldValue('MINUTE')
 
       return [ minute , 0 ]
     }

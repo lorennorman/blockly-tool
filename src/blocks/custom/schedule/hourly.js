@@ -36,7 +36,7 @@ export default {
     json: (block, generator) => {
       const
         frequency = block.getFieldValue('FREQUENCY'),
-        minutes = generator.valueToCode(block, 'MINUTE', 0),
+        minutes = parseInt(generator.valueToCode(block, 'MINUTE', 0), 10),
         crontab = frequency === 'once'
           ? `${minutes} * * * *`
           : `${minutes%30}/30 * * * *`
