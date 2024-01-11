@@ -48,13 +48,17 @@ export default {
 
   generators: {
     json: block => {
-      const months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]
-        .reduce((months, month) => (
-          block.getFieldValue(month) === "TRUE"
-            ? months.concat(month)
-            : months
-        ), [])
-        .join(',').toLowerCase()
+      const
+        MONTHS = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ],
+        selectedMonths = MONTHS.reduce((months, month, idx) => (
+            block.getFieldValue(month) === "TRUE"
+              ? months.concat(idx+1)
+              : months
+          ), []),
+        // use * if every month is selected
+        months = (selectedMonths.length === MONTHS.length)
+          ? "*"
+          : selectedMonths.join(',').toLowerCase()
 
       return [ months, 0 ]
     }

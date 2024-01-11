@@ -36,13 +36,17 @@ export default {
 
   generators: {
     json: block => {
-      const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-        .reduce((days, day) => (
-          block.getFieldValue(day) === "TRUE"
-            ? days.concat(day)
-            : days
-        ), [])
-        .join(',').toLowerCase()
+      const
+        selectedDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+          .reduce((days, day) => (
+            block.getFieldValue(day) === "TRUE"
+              ? days.concat(day)
+              : days
+          ), []),
+        // use * if it's everyday
+        days = (selectedDays.length === 7)
+          ? '*'
+          : selectedDays.join(',').toLowerCase()
 
       return [ days , 0 ]
     }
