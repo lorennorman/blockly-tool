@@ -47,7 +47,7 @@ export default {
     // must select a day
     // if(!days.length) { }
 
-    return [ `${time} ${months} ${day} *` , 0 ]
+    return [ `${time} ${day} ${months} *` , 0 ]
     }
   }
 }

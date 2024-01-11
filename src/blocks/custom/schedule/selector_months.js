@@ -50,9 +50,9 @@ export default {
     json: block => {
       const
         MONTHS = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ],
-        selectedMonths = MONTHS.reduce((months, month, idx) => (
+        selectedMonths = MONTHS.reduce((months, month) => (
             block.getFieldValue(month) === "TRUE"
-              ? months.concat(idx+1)
+              ? months.concat(month)
               : months
           ), []),
         // use * if every month is selected
