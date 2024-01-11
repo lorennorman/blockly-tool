@@ -9,7 +9,7 @@ export default {
   },
 
   visualization: {
-    colour: 232,
+    colour: 208,
   },
 
   connections: {
