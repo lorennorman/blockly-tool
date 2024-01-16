@@ -18,7 +18,7 @@ export default {
   },
 
   lines: [
-    [ "%HOUR_STEP hours from %HOUR_START to %HOUR_END", {
+    [ "%HOUR_STEP hour(s) from %HOUR_START to %HOUR_END", {
       fields: {
         HOUR_STEP: {
           options: [

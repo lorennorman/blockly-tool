@@ -21,6 +21,12 @@ export default {
       inputValue: 'TIME',
       check: 'cron_minute_hour',
       shadow: 'selector_time'
+    }],
+
+    [ "...every:", {
+      inputValue: 'DAYS',
+      check: 'cron_days_range',
+      shadow: 'selector_days'
     }]
   ],
 
@@ -28,7 +34,8 @@ export default {
     json: (block, generator) => {
       const
         time = generator.valueToCode(block, 'TIME', 0),
-        crontab = `${time} * * *`
+        days = generator.valueToCode(block, 'DAYS', 0),
+        crontab = `${time} ${days} * *`
 
       return [ crontab , 0 ]
     }
