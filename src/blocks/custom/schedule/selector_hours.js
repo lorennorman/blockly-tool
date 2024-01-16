@@ -35,8 +35,7 @@ export default {
           options: map(range(24), hour => ([ hour.toString(), (hour).toString() ]))
         },
         HOUR_END: {
-          options: map(range(24), hour => ([ hour.toString(), (hour).toString() ])),
-          value: "23"
+          options: map(range(23, -1), hour => ([ hour.toString(), (hour).toString() ])),
         },
       }
     }]
@@ -49,7 +48,7 @@ export default {
         hourEnd = block.getFieldValue('HOUR_END'),
         hourStep = block.getFieldValue('HOUR_STEP'),
 
-        hourRange = ([ hourStart, hourEnd ] == [ "0", "23" ])
+        hourRange = (hourStart === "0" && hourEnd === "23")
           ? "*"
           : `${hourStart}-${hourEnd}`,
 

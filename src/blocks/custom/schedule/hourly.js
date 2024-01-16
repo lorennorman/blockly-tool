@@ -34,12 +34,7 @@ export default {
     [ "...every:", {
       inputValue: 'HOURS',
       check: 'cron_hours_range',
-      shadow: {
-        type: 'selector_hours',
-        fields: {
-          HOUR_END: "23"
-        }
-      }
+      shadow: 'selector_hours'
     }]
   ],
 
@@ -48,12 +43,12 @@ export default {
       const
         frequency = block.getFieldValue('FREQUENCY'),
         minutes = parseInt(generator.valueToCode(block, 'MINUTE', 0), 10),
-        hours = generator.valueToCode(block, 'HOURS', 0),
-        crontab = frequency === 'once'
-          ? `${minutes} ${hours} * * *`
-          : `${minutes%30}/30 ${hours} * * *`
+        cronMinutes = frequency === 'once'
+          ? minutes
+          : `${minutes%30}/30`,
+        cronHours = generator.valueToCode(block, 'HOURS', 0)
 
-      return [ crontab , 0 ]
+      return [ `${cronMinutes} ${cronHours} * * *` , 0 ]
     }
   }
 }
