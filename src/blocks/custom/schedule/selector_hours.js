@@ -35,7 +35,7 @@ export default {
           options: map(range(24), hour => ([ hour.toString(), (hour).toString() ]))
         },
         HOUR_END: {
-          options: map(range(23, -1), hour => ([ hour.toString(), (hour).toString() ])),
+          options: map(range(23, -1), hour => ([ hour.toString(), (hour).toString() ]))
         },
       }
     }]

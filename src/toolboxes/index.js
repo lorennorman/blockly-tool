@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { chain, forEach, includes, isString, keys, map, filter, values } from 'lodash-es'
+import { chain, forEach, includes, isEmpty, isString, keys, map, filter, values } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 
@@ -50,9 +50,7 @@ const
         .mapValues(shadowPropertyToInput)
       .value()
 
-    return keys(inputs).length
-      ? inputs
-      : undefined
+    return isEmpty(inputs) ? undefined : inputs
   },
 
   blockToFields = (block) => {
@@ -77,7 +75,7 @@ const
     //   FIELD_NAME: field_value,
     //   ...
     // }
-    return fields
+    return isEmpty(fields) ? undefined : fields
   },
 
   shadowPropertyToInput = ({ shadow }) =>
