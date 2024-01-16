@@ -13,6 +13,7 @@ import schedule_weekly from './custom/schedule/weekly.js'
 import schedule_monthly from './custom/schedule/monthly.js'
 import schedule_annually from './custom/schedule/annually.js'
 import selector_minute from './custom/schedule/selector_minute.js'
+import selector_hours from './custom/schedule/selector_hours.js'
 import selector_time from './custom/schedule/selector_time.js'
 import selector_day_of_week from './custom/schedule/selector_day_of_week.js'
 import selector_day_of_month from './custom/schedule/selector_day_of_month.js'
@@ -64,6 +65,7 @@ export default {
   schedule_annually,
   // Schedule selectors
   selector_minute,
+  selector_hours,
   selector_time,
   selector_day_of_week,
   selector_day_of_month,
