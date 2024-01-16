@@ -129,6 +129,7 @@ const processLine = (line) => {
       options: lineData.options,
       text: lineData.text,
       spellcheck: lineData.spellcheck,
+      value: lineData.value,
     })
 
   // append multiple fields to args
@@ -142,6 +143,7 @@ const processLine = (line) => {
       options: fieldData.options,
       text: fieldData.text,
       spellcheck: fieldData.spellcheck,
+      value: fieldData.value,
     })))
   }
 
