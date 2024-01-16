@@ -27,7 +27,7 @@ export default {
           options: map(range(1, 32), day => ([ day.toString(), (day).toString() ]))
         },
         DAY_END: {
-          options: map(range(31, -1), day => ([ day.toString(), (day).toString() ]))
+          options: map(range(31, 0), day => ([ day.toString(), (day).toString() ]))
         },
       }
     }]
