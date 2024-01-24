@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { chain, forEach, includes, isEmpty, isString, keys, map, filter, values, flatMap } from 'lodash-es'
+import { forEach, includes, isEmpty, isString, keyBy, map, mapValues, filter, flatMap, reduce } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 
@@ -59,23 +59,31 @@ const
   ],
 
   blockToInputs = ({ lines }) => {
-    const inputs = chain(lines)
-        .map('[1]')
-        .filter("inputValue")
-        .keyBy("inputValue")
-        .mapValues(shadowPropertyToInput)
-      .value()
+    if(!lines) { return }
+
+    const inputs =
+      mapValues(
+        keyBy(
+          filter(
+            map(lines, '[1]'),
+            "inputValue"),
+          "inputValue"),
+        shadowPropertyToInput)
 
     return isEmpty(inputs) ? undefined : inputs
   },
 
-  blockToFields = (block) => {
+  blockToFields = ({ lines }) => {
+    if(!lines) { return }
     // get every field that contains a "value" property
-    const fields = chain(block.lines)
-        .map('[1]')
-        .filter("fields") // TODO: also support "field" keys
-        .map("fields")
-        .reduce((acc, fields) => {
+    const fields =
+      reduce(
+        map(
+          filter(
+            map(lines, '[1]'),
+            "fields"),
+          "fields"),
+        (acc, fields) => {
           forEach(fields, (field, fieldKey) => {
             if(field.value){
               acc[fieldKey] = field.value
@@ -84,7 +92,6 @@ const
 
           return acc
         }, {})
-      .value()
 
     // produces:
     // {
