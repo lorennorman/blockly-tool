@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { chain, forEach, includes, isEmpty, isString, keys, map, filter, values } from 'lodash-es'
+import { chain, forEach, includes, isEmpty, isString, keys, map, filter, values, flatMap } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 
@@ -14,12 +14,20 @@ const
     { name: 'Schedules', colour: 232 },
     { name: 'Values', colour: 156 },
     { name: 'Comparisons', colour: 208 },
+    SEP,
+    {
+      kind: 'search',
+      name: 'Search',
+      contents: [],
+    }
   ],
 
   generateToolboxContents = () => map(TOOLBOX_CONFIG, category =>
     // inject other kinds of toolbox objects here
     category === SEP
       ? { kind: 'sep' }
+      : category.kind === 'search'
+      ? category
       : {
           kind: 'category',
           name: category.name,
@@ -30,17 +38,25 @@ const
   ),
 
   generateCategoryContents = ({ name }) =>
-    map(selectBlocksByCategoryName(name), block => ({
-      kind: 'block',
-      type: block.type,
-      inputs: blockToInputs(block),
-      fields: blockToFields(block)
-    })),
+    flatMap(selectBlocksByCategoryName(name), blockToLabelAndBlock),
 
   selectBlocksByCategoryName = name =>
     filter(allBlockDefinitions, def =>
       def.toolbox.category === name || includes(def.toolbox.categories, name)
     ),
+
+  blockToLabelAndBlock = block => [
+    {
+      kind: 'block',
+      type: block.type,
+      text: block.toolbox.helpText,
+      inputs: blockToInputs(block),
+      fields: blockToFields(block)
+    },
+    { kind: 'label',
+      text: block.toolbox.helpText
+    }
+  ],
 
   blockToInputs = ({ lines }) => {
     const inputs = chain(lines)
