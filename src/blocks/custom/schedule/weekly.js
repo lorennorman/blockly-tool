@@ -6,6 +6,7 @@ export default {
 
   toolbox: {
     category: 'Schedules',
+    helpText: 'On days of the week W, at time T'
   },
 
   visualization: {

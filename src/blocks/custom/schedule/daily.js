@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Schedules',
+    helpText: "Every S days, between days B and E, at time T"
   },
 
   visualization: {

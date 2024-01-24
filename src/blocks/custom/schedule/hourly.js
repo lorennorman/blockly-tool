@@ -3,10 +3,16 @@ export default {
 
   toolbox: {
     category: 'Schedules',
+    helpText: "Once or twice hourly, every S hours between B and E, at minute M."
   },
 
   visualization: {
     colour: 208,
+    tooltip: [
+      "Trigger the action once or twice an hour.",
+      "- once: the action will fire on the minute specified.",
+      "- twice: the action will fire on the minute specified, as well as at +/-30 minutes.",
+    ].join('\n')
   },
 
   connections: {

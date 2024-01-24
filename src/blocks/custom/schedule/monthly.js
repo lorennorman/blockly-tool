@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Schedules',
+    helpText: "On specified months M, on specified day D, at time T"
   },
 
   visualization: {
