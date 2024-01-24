@@ -5,7 +5,7 @@ export default {
   type: 'selector_days',
 
   toolbox: {
-    category: 'Schedules',
+    // category: 'Schedules',
   },
 
   visualization: {

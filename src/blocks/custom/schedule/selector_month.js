@@ -2,7 +2,7 @@ export default {
   type: 'selector_month',
 
   toolbox: {
-    category: 'Schedules',
+    // category: 'Schedules',
   },
 
   visualization: {

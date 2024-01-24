@@ -5,7 +5,7 @@ export default {
   type: 'selector_day_of_month',
 
   toolbox: {
-    category: 'Schedules',
+    // category: 'Schedules',
   },
 
   visualization: {
