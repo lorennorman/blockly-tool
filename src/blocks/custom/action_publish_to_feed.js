@@ -20,7 +20,7 @@ export default {
 
     [ "...value:", {
       inputValue: "VALUE",
-      check: [ "Boolean", "String", "Number" ],
+      check: [ "String", "Number" ],
       shadow: 'text'
     }],
 
@@ -37,7 +37,7 @@ export default {
         payload = {
           action: 'feed',
           action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
-          action_value: generator.valueToCode(block, 'VALUE', 0) || null,
+          action_value: generator.valueToCode(block, 'VALUE', 0)?.toString() || null,
         }
 
       return [ payload, 0 ]

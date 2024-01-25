@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Values',
+    label: 'A string of text'
   },
 
   generators: {

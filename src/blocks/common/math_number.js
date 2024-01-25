@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Values',
+    label: "An integer"
   },
 
   generators: {

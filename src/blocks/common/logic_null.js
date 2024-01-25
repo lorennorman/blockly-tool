@@ -2,7 +2,7 @@ export default {
   type: 'logic_null',
 
   toolbox: {
-    category: 'Values',
+    // category: 'Values',
   },
 
   generators: {
