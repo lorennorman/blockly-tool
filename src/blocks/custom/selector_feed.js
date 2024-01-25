@@ -2,13 +2,15 @@ export default {
   type: "selector_feed",
 
   toolbox: {
-    category: 'Feeds',
+    category: 'Values',
+    label: "A string of the last value sent to a given feed or component."
   },
 
   visualization: {
-    colour: 30,
+    colour: 240,
     // TODO: proper extension handling
     extensions: [ "populate_feeds_dropdown" ],
+    tooltip: "The last value of this feed or component, always a String"
   },
 
   connections: {

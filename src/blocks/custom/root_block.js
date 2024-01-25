@@ -5,7 +5,7 @@ export default {
   toolbox: { },
 
   visualization: {
-    colour: 120,
+    colour: 60,
     extensions: [ 'require_trigger_and_action' ],
   },
 

@@ -7,7 +7,7 @@ export default {
   },
 
   visualization: {
-    colour: 208,
+    colour: 160,
     tooltip: [
       "Fires ONCE or TWICE, at MINUTE, every STEP hours, from START hour to END hour",
       "---------------",

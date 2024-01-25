@@ -7,7 +7,7 @@ export default {
   },
 
   visualization: {
-    colour: 208,
+    colour: 160,
     tooltip: [
       "Fires at TIME, every STEP days, from START day to END day.",
       "---------------",

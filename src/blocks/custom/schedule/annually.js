@@ -7,7 +7,7 @@ export default {
   },
 
   visualization: {
-    colour: 208,
+    colour: 160,
     tooltip: [
       "Fires in given MONTH, on DAY, at TIME.",
       "---------------",

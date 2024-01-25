@@ -10,7 +10,7 @@ export default {
   },
 
   visualization: {
-    colour: 208,
+    colour: 160,
     tooltip: [
       "Fires at TIME, on DAYS of the week.",
       "---------------",

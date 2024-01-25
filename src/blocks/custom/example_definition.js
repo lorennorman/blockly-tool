@@ -18,7 +18,7 @@ export default {
   // same as Blockly JSON
   visualization: {
     inputsInline: false,
-    colour: 230
+    colour: 100
   },
 
   // TODO: consider something simpler, maybe leftOutput, topOutput, and bottomCheck?

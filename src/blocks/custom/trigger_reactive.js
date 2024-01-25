@@ -8,7 +8,7 @@ export default {
   },
 
   visualization: {
-    "colour": 230,
+    "colour": 120,
   },
 
   connections: {
