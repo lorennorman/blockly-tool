@@ -3,15 +3,21 @@ export default {
 
   toolbox: {
     category: 'Schedules',
-    helpText: "Once or twice hourly, every S hours between B and E, at minute M."
+    label: "Fires once or twice on given hours, at a given minute."
   },
 
   visualization: {
     colour: 208,
     tooltip: [
-      "Trigger the action once or twice an hour.",
-      "- once: the action will fire on the minute specified.",
-      "- twice: the action will fire on the minute specified, as well as at +/-30 minutes.",
+      "Fires ONCE or TWICE, at MINUTE, every STEP hours, from START hour to END hour",
+      "---------------",
+      "Parameters:",
+      "ONCE - fires at MINUTE.",
+      "TWICE - fires at MINUTE, and at MINUTE +/- 30 minutes.",
+      "MINUTE - minute-of-the-hour to fire",
+      "STEP - fires every STEP hours. Default: 1, 'Every hour'. (Factors of 24 only)",
+      "START - the first hour to run. Default: 0, 'Midnight'",
+      "END - the last hour to run. Default: 23, '11pm'",
     ].join('\n')
   },
 

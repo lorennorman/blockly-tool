@@ -10,6 +10,11 @@ export default {
 
   visualization: {
     colour: 184,
+    tooltip: [
+      "Remember:",
+      "- days start at 0 (12am, midnight)",
+      "- days end at 23 (11pm)",
+    ].join('\n')
   },
 
   connections: {

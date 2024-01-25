@@ -10,6 +10,7 @@ export default {
 
   visualization: {
     colour: 184,
+    tooltip: "Remember: some months are missing dates above 28."
   },
 
   connections: {

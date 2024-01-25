@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Actions',
+    label: "Send yourself an SMS, or text message, with body templated from a given feed."
   },
 
   visualization: {
@@ -15,15 +16,10 @@ export default {
   },
 
   lines: [
-    [ "📲 Send an SMS", "CENTER" ],
+    [ "📲 SMS", "CENTER" ],
+    [ "(IO+ only)", "CENTER" ],
 
-    [ "Select a Feed:", {
-      inputValue: "FEED",
-      check: "feed",
-      shadow: 'selector_feed'
-    }],
-
-    [ "Body:", {
+    [ "...body:", {
       inputValue: "BODY",
       check: "String",
       shadow: {
@@ -32,6 +28,12 @@ export default {
           TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}'
         }
       }
+    }],
+
+    [ "...using:", {
+      inputValue: "FEED",
+      check: "feed",
+      shadow: 'selector_feed'
     }],
   ],
 

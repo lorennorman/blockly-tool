@@ -1,5 +1,5 @@
 // build toolbox from a config and blocks that reference it
-import { forEach, includes, isEmpty, isString, keyBy, map, mapValues, filter, flatMap, reduce } from 'lodash-es'
+import { compact, forEach, includes, isEmpty, isString, keyBy, map, mapValues, filter, flatMap, reduce } from 'lodash-es'
 
 import { allBlockDefinitions } from '../blocks/index.js'
 
@@ -10,10 +10,10 @@ const
     { name: 'Triggers', colour: 52 },
     { name: 'Actions', colour: 104 },
     SEP,
-    { name: 'Feeds', colour: 0 },
+    // { name: 'Feeds', colour: 0 },
     { name: 'Schedules', colour: 232 },
     { name: 'Values', colour: 156 },
-    { name: 'Comparisons', colour: 208 },
+    // { name: 'Comparisons', colour: 208 },
     SEP,
     {
       kind: 'search',
@@ -45,18 +45,18 @@ const
       def.toolbox.category === name || includes(def.toolbox.categories, name)
     ),
 
-  blockToLabelAndBlock = block => [
+  blockToLabelAndBlock = block => compact([
     {
       kind: 'block',
       type: block.type,
-      text: block.toolbox.helpText,
       inputs: blockToInputs(block),
       fields: blockToFields(block)
-    },
-    { kind: 'label',
-      text: block.toolbox.helpText
-    }
-  ],
+    }, block.toolbox.label
+      ? { kind: 'label',
+          text: block.toolbox.label
+        }
+      : null
+  ]),
 
   blockToInputs = ({ lines }) => {
     if(!lines) { return }

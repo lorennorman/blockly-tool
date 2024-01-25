@@ -10,6 +10,7 @@ export default {
 
   visualization: {
     colour: 184,
+    tooltip: "Remember: days start at 12am and end at 11pm",
   },
 
   connections: {
@@ -18,10 +19,15 @@ export default {
   },
 
   lines: [
-    [ "Time of Day: %HOUR : %MINUTE %AM_PM", {
+    [ "Time %HOUR : %MINUTE %AM_PM", {
       fields: {
         HOUR: {
-          options: map(range(1, 13), hour => ([ hour.toString(), (hour%12).toString() ]))
+          options: [
+            // put 12 before 1, which is technically proper and helps default to midnight
+            [ "12", "0"],
+            // 1 through 12 (12 appears twice, good/bad idea?)
+            ...map(range(1, 13), hour => ([ hour.toString(), (hour%12).toString() ]))
+          ]
         },
         MINUTE: {
           options: map(map(range(60), String), idx => ([ idx, idx ]))

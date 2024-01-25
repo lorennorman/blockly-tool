@@ -2,7 +2,8 @@ export default {
   type: "trigger_schedule",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: "Fire on a set schedule, from hourly up to once a year."
   },
 
   visualization: {

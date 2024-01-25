@@ -3,11 +3,19 @@ export default {
 
   toolbox: {
     category: 'Schedules',
-    helpText: 'Once a year, on day D of month M at time T'
+    label: 'Fires once a year, at a given date and time'
   },
 
   visualization: {
     colour: 208,
+    tooltip: [
+      "Fires in given MONTH, on DAY, at TIME.",
+      "---------------",
+      "Parameters:",
+      "MONTH - month of the year to fire",
+      "DAY - the date of the month to fire",
+      "TIME - the time-of-day to fire",
+    ].join('\n')
   },
 
   connections: {

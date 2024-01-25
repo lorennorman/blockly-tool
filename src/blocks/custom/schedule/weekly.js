@@ -6,11 +6,18 @@ export default {
 
   toolbox: {
     category: 'Schedules',
-    helpText: 'On days of the week W, at time T'
+    label: "Fires at a given time, on given days of the week."
   },
 
   visualization: {
     colour: 208,
+    tooltip: [
+      "Fires at TIME, on DAYS of the week.",
+      "---------------",
+      "Parameters:",
+      "TIME - the time-of-day to fire",
+      "DAYS - the days of the week to fire",
+    ].join('\n')
   },
 
   connections: {

@@ -10,6 +10,7 @@ export default {
 
   visualization: {
     colour: 184,
+    tooltip: "Remember: some months are missing dates above 28."
   },
 
   connections: {
@@ -18,7 +19,7 @@ export default {
   },
 
   lines: [
-    [ "Day of Month:", {
+    [ "Date", {
       field: "DAY_OF_MONTH",
       options: map(range(1, 29), date => [ date.toString(), date.toString() ])
     }],

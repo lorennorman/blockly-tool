@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Actions',
+    label: "Send yourself an email with a given subject and body, templated from a given feed."
   },
 
   visualization: {
@@ -15,15 +16,9 @@ export default {
   },
 
   lines: [
-    [ "📧 Send an Email", 'CENTER'],
+    [ "📧 Email", 'CENTER'],
 
-    [ "Select a Feed:", {
-      inputValue: "FEED",
-      check: 'feed',
-      shadow: 'selector_feed',
-    }],
-
-    [ "Subject:", {
+    [ "...subject:", {
       inputValue: "SUBJECT",
       check: 'String',
       shadow: {
@@ -32,13 +27,19 @@ export default {
       }
     }],
 
-    [ "Body:", {
+    [ "...body:", {
       inputValue: "BODY",
       check: 'String',
       shadow: {
         type: 'text_multiline',
         fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
       }
+    }],
+
+    [ "...using:", {
+      inputValue: "FEED",
+      check: 'feed',
+      shadow: 'selector_feed',
     }],
   ],
 

@@ -18,7 +18,7 @@ export default {
   },
 
   lines: [
-    [ "Minute of Hour:", {
+    [ "Minute", {
       field: "MINUTE",
       options: map(map(range(60), String), idx => ([ idx, idx ]))
     }]

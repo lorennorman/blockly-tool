@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Actions',
+    label: "Publish a given value to a given feed."
   },
 
   visualization: {
@@ -15,18 +16,18 @@ export default {
   },
 
   lines: [
-    [ "Publish to Feed", "CENTER" ],
+    [ "📈 Publish", "CENTER" ],
 
-    [ "Feed:", {
-      inputValue: "FEED",
-      check: "feed",
-      shadow: 'selector_feed'
-    }],
-
-    [ "Value:", {
+    [ "...value:", {
       inputValue: "VALUE",
       check: [ "Boolean", "String", "Number" ],
       shadow: 'text'
+    }],
+
+    [ "...to:", {
+      inputValue: "FEED",
+      check: "feed",
+      shadow: 'selector_feed'
     }]
   ],
 

@@ -3,11 +3,19 @@ export default {
 
   toolbox: {
     category: 'Schedules',
-    helpText: "On specified months M, on specified day D, at time T"
+    label: "Fires on given months, on a given date, at a given time."
   },
 
   visualization: {
     colour: 208,
+    tooltip: [
+      "Fires at TIME, on DAY, of MONTHS.",
+      "---------------",
+      "Parameters:",
+      "TIME - the time-of-day to fire",
+      "DAY - the day of the month to fire",
+      "MONTHS - the months to fire during"
+    ].join('\n')
   },
 
   connections: {

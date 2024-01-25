@@ -3,11 +3,20 @@ export default {
 
   toolbox: {
     category: 'Schedules',
-    helpText: "Every S days, between days B and E, at time T"
+    label: "Fires at a given time, on given days of the month."
   },
 
   visualization: {
     colour: 208,
+    tooltip: [
+      "Fires at TIME, every STEP days, from START day to END day.",
+      "---------------",
+      "Parameters:",
+      "TIME - the time-of-day to fire",
+      "STEP - fires every STEP days. Default: 1, 'Every day'",
+      "START -  the first day to run. Default: 1, 'First of the Month'",
+      "END - the last day to run. Default: 31, 'Last of the month'",
+    ].join('\n')
   },
 
   connections: {

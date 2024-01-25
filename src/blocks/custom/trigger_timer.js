@@ -2,7 +2,8 @@ export default {
   type: "trigger_timer",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: "Fire a given amount of time after activity passing a given condition on a given feed."
   },
 
   visualization: {

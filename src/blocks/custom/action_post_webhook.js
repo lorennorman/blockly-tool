@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Actions',
+    label: "POST a given body payload, templated from a given feed, to a given web URL."
   },
 
   visualization: {
@@ -15,9 +16,9 @@ export default {
   },
 
   lines: [
-    [ "🔗 POST a Webhook", "CENTER" ],
+    [ "🔗 Webhook", "CENTER" ],
 
-    [ "Web URL:", {
+    [ "...to URL:", {
       inputValue: "URL",
       check: "String",
       shadow: {
@@ -26,13 +27,7 @@ export default {
       }
     }],
 
-    [ "Select a Feed:", {
-      inputValue: "FEED",
-      check: "feed",
-      shadow: 'selector_feed'
-    }],
-
-    [ "Body:", {
+    [ "...POST body:", {
       inputValue: "BODY",
       check: "String",
       shadow: {
@@ -63,6 +58,12 @@ export default {
     [ "Form Encode?", {
       field: "FORM_ENCODE",
       checked: false
+    }],
+
+    [ "...using:", {
+      inputValue: "FEED",
+      check: "feed",
+      shadow: 'selector_feed'
     }],
   ],
 

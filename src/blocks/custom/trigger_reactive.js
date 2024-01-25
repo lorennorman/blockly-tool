@@ -3,7 +3,8 @@ export default {
   type: "trigger_reactive",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: 'Fire when there is activity passing a given condition on a given feed.'
   },
 
   visualization: {
