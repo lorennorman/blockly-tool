@@ -7,6 +7,13 @@ export default {
   visualization: {
     colour: 60,
     extensions: [ 'require_trigger_and_action' ],
+    tooltip: [
+      "Runs a given ACTION when a given TRIGGER fires.",
+      "---------------",
+      "Parameters:",
+      "TRIGGER - says when to act. Choose one from the 'Triggers' category.",
+      "ACTION - says what to do. Choose one from the 'Action' category."
+    ].join('\n')
   },
 
   lines: [

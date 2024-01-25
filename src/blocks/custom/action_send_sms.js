@@ -7,7 +7,14 @@ export default {
   },
 
   visualization: {
-    colour: "0"
+    colour: "0",
+    tooltip: [
+      "Sends a text message with a given BODY template using a given FEED",
+      "---------------",
+      "Parameters:",
+      "BODY - a template for generating the SMS body",
+      "FEED - the feed to pull template data from",
+    ].join('\n')
   },
 
   connections: {

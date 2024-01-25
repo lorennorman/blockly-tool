@@ -8,6 +8,14 @@ export default {
 
   visualization: {
     colour: "0",
+    tooltip: [
+      "Sends an email with given SUBJECT and BODY, each templated with a given FEED",
+      "---------------",
+      "Parameters:",
+      "SUBJECT - a template for generating the email subject",
+      "BODY - a template for generating the email body",
+      "FEED - the feed to pull template data from",
+    ].join('\n'),
   },
 
   connections: {

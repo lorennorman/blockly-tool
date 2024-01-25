@@ -8,6 +8,13 @@ export default {
 
   visualization: {
     colour: "0",
+    tooltip: [
+      "Sends a given VALUE to a given FEED.",
+      "---------------",
+      "Parameters:",
+      "VALUE - the value to write",
+      "FEED - the feed to write to",
+    ].join('\n'),
   },
 
   connections: {

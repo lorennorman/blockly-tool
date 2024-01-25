@@ -8,6 +8,15 @@ export default {
 
   visualization: {
     colour: "0",
+    tooltip: [
+      "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.",
+      "---------------",
+      "Parameters:",
+      "URL - a valid web location to send a request to",
+      "BODY - a JSON template to render and POST",
+      "FORM_ENCODE - optionally encode as form input",
+      "FEED - the feed to use for the BODY template data",
+    ].join('\n')
   },
 
   connections: {
