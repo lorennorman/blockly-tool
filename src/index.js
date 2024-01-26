@@ -15,7 +15,16 @@ Blockly.defineBlocksWithJsonArray(customBlocksJson)
 
 // inject blockly with our toolbox
 const blocklyDiv = document.getElementById('blocklyDiv')
-const workspace = Blockly.inject(blocklyDiv, {toolbox})
+const workspace = Blockly.inject(blocklyDiv, {
+  toolbox,
+  zoom: {
+    controls: true,
+    wheel: true
+  }
+})
+
+// hard-code toolbox scale so it ignores zoom
+Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
 
 // inject workspace blocks
 Blockly.serialization.workspaces.load(initialWorkspace, workspace)
