@@ -20,7 +20,6 @@ const
 
   CUSTOM_KEYS = COMMON_KEYS.concat([
     "toolbox",
-    "help",
     "visualization",
     "connections",
     "lines"

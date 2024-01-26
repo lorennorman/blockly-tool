@@ -9,6 +9,16 @@ export default {
 
   visualization: {
     "colour": 120,
+    tooltip: [
+      "Fires when there is activity on FEED that passes the COMPARISON with FEED_OR_VALUE and the NOTIFY_* settings.",
+      "---------------",
+      "Parameters:",
+      "FEED - the feed to monitor for activity",
+      "COMPARISON - the comparison operator to use. \"any\" fires on all data.",
+      "FEED_OR_VALUE - the thing to compare with. If set to a feed, compares with that feed's last value.",
+      "NOTIFY_LIMIT - sets a maximum frequency it will fire",
+      "NOTIFY_ON_RESET - if set, the action will also fire (ignoring limits) when the condition becomes false",
+    ].join('\n')
   },
 
   connections: {

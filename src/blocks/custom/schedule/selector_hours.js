@@ -11,9 +11,8 @@ export default {
   visualization: {
     colour: 190,
     tooltip: [
-      "Remember:",
-      "- days start at 0 (12am, midnight)",
-      "- days end at 23 (11pm)",
+      "Days start at 0 (12am, midnight)",
+      "Days end at 23 (11pm)",
     ].join('\n')
   },
 

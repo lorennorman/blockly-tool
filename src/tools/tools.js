@@ -5,7 +5,6 @@ import { defaultAlignment } from '../blocks/defaults.js'
 export const toBlockJSON = block => {
   const json = {
     type: block.type,
-    ...block.help,
     ...block.visualization,
     ...processConnections(block),
     ...processLines(block),

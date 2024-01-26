@@ -3,11 +3,21 @@ export default {
 
   toolbox: {
     category: 'Triggers',
-    label: "Fire a given amount of time after activity passing a given condition on a given feed."
+    label: "Fire a given period of time after activity passing a given condition on a given feed."
   },
 
   visualization: {
-    colour: 120
+    colour: 120,
+    tooltip: [
+      "Fires when RUN_AFTER time has passed after activity on FEED that passes the COMPARISON with FEED_OR_VALUE.",
+      "---------------",
+      "Parameters:",
+      "FEED - the feed to monitor for activity",
+      "COMPARISON - the comparison operator to use. \"any\" fires on all data.",
+      "FEED_OR_VALUE - the thing to compare with. Value: compared directly. Feed: compare with given feed's last value.",
+      "RUN_AFTER - how long to wait after a qualifying update",
+      "EXTEND_TIMER - whether to extend a pre-existing timer when new qualifying data comes in",
+    ].join('\n')
   },
 
   connections: {

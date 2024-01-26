@@ -3,11 +3,17 @@ export default {
 
   toolbox: {
     category: 'Triggers',
-    label: "Fire on a set schedule, from hourly up to once a year."
+    label: "Fire on a given schedule, from hourly up to once a year."
   },
 
   visualization: {
-    "colour": 120,
+    colour: 120,
+    tooltip: [
+      "Fires the action on a SCHEDULE. Select an appropriate block from the 'Schedules' category to configure.",
+      "---------------",
+      "Parameters:",
+      "SCHEDULE - a Schedule block for hourly, daily, weekly, monthly, or annually"
+    ].join('\n')
   },
 
   connections: {

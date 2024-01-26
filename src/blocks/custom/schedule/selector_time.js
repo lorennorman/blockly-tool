@@ -10,7 +10,7 @@ export default {
 
   visualization: {
     colour: 190,
-    tooltip: "Remember: days start at 12am and end at 11pm",
+    tooltip: "Days start at 12am and end at 11pm",
   },
 
   connections: {

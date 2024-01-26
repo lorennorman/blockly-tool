@@ -6,19 +6,17 @@ export default {
   // determines where the block shows up in the toolbox
   toolbox: {
     // category must match a category in the toolbox config
-    category: 'Category Name'
-  },
-
-  // same as Blockly JSON
-  help: {
-    tooltip: "",
-    helpUrl: ""
+    category: 'Category Name',
+    // shorthand that adds an extra toolbox label
+    label: 'Helpful text that appears alongside the block in the toolbox'
   },
 
   // same as Blockly JSON
   visualization: {
     inputsInline: false,
-    colour: 100
+    colour: 100,
+    tooltip: "",
+    helpUrl: ""
   },
 
   // TODO: consider something simpler, maybe leftOutput, topOutput, and bottomCheck?
@@ -45,7 +43,7 @@ export default {
     [ "line contents", "alignment" ],
 
     // [ string, object ]: [ text, { inputValue, inputStatement, field, fields } ]
-    [ "line contents", {
+    [ "line $FIELD_NAME contents", { // template string: field gets embedded where its name is referenced
       // for a single block input
       inputValue: 'INPUT_VALUE_NAME',
       check: 'input_block_output',
@@ -69,7 +67,21 @@ export default {
         // ...
       ],
 
-      // TODO: for multiple field inputs: {}
+      // for multiple field inputs
+      // hint: use template strings (see above comment) to choose where inline fields go
+      fields: {
+        // each field name is a key
+        FIELD_NAME: {
+          // same options as above for singular field
+          text: 'whatever', // makes a text field
+          spellcheck: true, // text field option
+          checked: true, // makes a checkbox field
+          options: [ // makes a dropdown field
+            ['user text', 'computer id'],
+            // ...
+          ],
+        }
+      }
     }],
   ],
 
@@ -77,9 +89,9 @@ export default {
   // these get aggregated and registered together
   generators: {
     json: (block, generator) => {
-      // fetch connected block: block.getInputTargetBlock('INPUT_A')?.type,
-      // generate connected block: generator.valueToCode(block, 'INPUT_B', 0)
-      // field value: block.getFieldValue('FIELD_A')
+      // fetch connected block: block.getInputTargetBlock('INPUT_VALUE_NAME')?.type,
+      // generate connected block: generator.valueToCode(block, 'INPUT_VALUE_NAME', 0)
+      // field value: block.getFieldValue('FIELD_NAME')
 
       return [ {}, 0 ]
     }
