@@ -29,25 +29,23 @@ export default {
     [ "⏲️ Timer", "center" ], // alignment shorthand
     [ "Compare Feeds", "center" ],
 
-    [ 'Feed:', {
-      inputValue: "FEED_A", // input value
-      check: 'feed',
+    [ "Feed:", {
+      inputValue: "FEED_A",
+      check: "feed",
       shadow: 'selector_feed'
-    }],
+  }],
 
-    [ "Compare Feeds:", {
+  [ "Operator:", {
       inputValue: "COMPARATOR",
-      check: 'comparison_operator',
-      shadow: {
-        type: 'selector_comparison'
-      }
-    }],
+      check: "comparison_operator",
+      shadow: 'selector_comparison'
+  }],
 
-    [ "Feed or Value:", {
+  [ "Feed or Value:", {
       inputValue: "FEED_B",
-      check: 'feed',
+      check: [ "feed", "Number", "String" ],
       shadow: 'selector_feed'
-    }],
+  }],
 
     [ "Run After:", {
       field: "RUN_AFTER", // field
