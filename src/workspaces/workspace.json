@@ -3,7 +3,7 @@
     "languageVersion": 0,
     "blocks": [
       {
-        "type": "root_block",
+        "type": "action_root",
         "deletable": false,
         "movable": false,
         "x": 20,
