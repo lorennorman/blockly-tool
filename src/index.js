@@ -74,6 +74,14 @@ clearButton.addEventListener('click', () => {
   Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 })
 
+const jsonButton = document.getElementById('button-json')
+const jsonOutputContainer = document.getElementById('json-output-container')
+jsonButton.addEventListener('click', () => {
+  jsonOutputContainer.style.visibility = (jsonOutputContainer.style.visibility !== "visible")
+    ? "visible"
+    : "hidden"
+})
+
 // load last sketch from storage
 load(workspace)
 // run the generators
