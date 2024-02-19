@@ -40,6 +40,9 @@ const
   generateCategoryContents = ({ name }) =>
     flatMap(selectBlocksByCategoryName(name), blockToLabelAndBlock),
 
+  generateAllBlocks = () =>
+    flatMap(allBlockDefinitions, blockToLabelAndBlock),
+
   selectBlocksByCategoryName = name =>
     filter(allBlockDefinitions, def =>
       def.toolbox.category === name || includes(def.toolbox.categories, name)
@@ -106,9 +109,16 @@ const
       ? { shadow: { type: shadow }} // expand to full object
       : { shadow } // set as shadow value
 
+// Use given categories, fill them with blocks that declare those categories
+// export const toolbox = {
+//   kind: 'categoryToolbox',
+//   contents: generateToolboxContents()
+// }
+
+// // No categories, just a gutter full of blocks
 export const toolbox = {
-  kind: 'categoryToolbox',
-  contents: generateToolboxContents()
+  kind: 'flyoutToolbox',
+  contents: generateAllBlocks()
 }
 
 export default toolbox
