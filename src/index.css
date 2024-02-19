@@ -7,7 +7,7 @@ pre, code {
     overflow: auto;
 }
 
-#pageContainer {
+#page-container {
     display: flex;
     width: 100%;
     max-width: 100vw;
@@ -20,16 +20,17 @@ pre, code {
     min-width: 600px;
 }
 
-#outputPane {
+#menu-pane {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    flex: 0 0 400px;
+    width: 100px;
+    flex: 0 0 100px;
     overflow: auto;
     margin: 1rem;
 }
 
 #json-output-container {
-    /* height: 50%; */
+    visibility: hidden;
     background-color: rgb(247, 240, 228);
+    width: 400px;
 }
