@@ -33,7 +33,7 @@ export const load = function(workspace) {
   try {
     Blockly.serialization.workspaces.load(JSON.parse(data), workspace, false)
   } catch(e) {
-    console.error("Failed to load Blockly from browser store.")
+    console.error("Failed to load a stored Blockly state, Blockly system may have changed incompatibly.")
     console.error(e)
     return
   } finally {
