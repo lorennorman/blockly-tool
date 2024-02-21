@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import ModernTheme from '@blockly/theme-modern'
 
 import "./extensions"
 import { customBlocksJson } from './blocks'
@@ -20,7 +21,8 @@ const workspace = Blockly.inject(blocklyDiv, {
   zoom: {
     controls: true,
     wheel: true
-  }
+  },
+  theme: ModernTheme
 })
 
 // hard-code toolbox scale so it ignores zoom
@@ -44,6 +46,8 @@ const regenerate = () => {
     }
     const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
     jsonOutputDiv.innerText = `${validation}\n\n${json}`
+    console.log(validation)
+    console.log(json)
   } catch(e) {
     jsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
     console.error(e)
