@@ -117,7 +117,15 @@ const processLine = (line) => {
       check: lineData.check
     })
 
-  // append a field to args
+  // append inputStatement
+  } else if(lineData.inputStatement) {
+    args.push({
+      type: "input_statement",
+      name: lineData.inputStatement,
+      check: lineData.check
+    })
+
+    // append a field to args
   } else if(lineData.field) {
     args.push({
       name: lineData.field,
