@@ -30,6 +30,14 @@ export const load = function(workspace) {
 
   // Don't emit events during loading.
   Blockly.Events.disable()
-  Blockly.serialization.workspaces.load(JSON.parse(data), workspace, false)
-  Blockly.Events.enable()
+  try {
+    Blockly.serialization.workspaces.load(JSON.parse(data), workspace, false)
+  } catch(e) {
+    console.error("Failed to load Blockly from browser store.")
+    console.error(e)
+    return
+  } finally {
+    Blockly.Events.enable()
+  }
+  return true
 }

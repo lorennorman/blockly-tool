@@ -74,11 +74,13 @@ workspace.addChangeListener((e) => {
 })
 
 // provide a way to clear the workspace and persistent memory
-const clearButton = document.getElementById('button-clear')
-clearButton.addEventListener('click', () => {
-  clear(workspace)
-  Blockly.serialization.workspaces.load(initialWorkspace, workspace)
-})
+const
+  clearButton = document.getElementById('button-clear'),
+  clearAndInitialize = () => {
+    clear(workspace)
+    Blockly.serialization.workspaces.load(initialWorkspace, workspace)
+  }
+clearButton.addEventListener('click', clearAndInitialize)
 
 const jsonButton = document.getElementById('button-json')
 const jsonOutputContainer = document.getElementById('json-output-container')
@@ -89,6 +91,8 @@ jsonButton.addEventListener('click', () => {
 })
 
 // load last sketch from storage
-load(workspace)
+if(!load(workspace)) {
+  clearAndInitialize()
+}
 // run the generators
 regenerate()
