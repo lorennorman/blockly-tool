@@ -1,5 +1,5 @@
 export default {
-  type: "action_post_webhook",
+  type: "action_webhook",
 
   toolbox: {
     category: 'Actions',
@@ -20,8 +20,9 @@ export default {
   },
 
   connections: {
-    mode: "value",
-    output: "action",
+    mode: "statement",
+    output: "expression",
+    next: 'expression'
   },
 
   lines: [
@@ -72,21 +73,22 @@ export default {
     [ "...using:", {
       inputValue: "FEED",
       check: "feed",
-      shadow: 'selector_feed'
+      shadow: 'feed_selector'
     }],
   ],
 
   generators: {
     json: (block, generator) => {
       const payload = {
-        action: 'webhook',
-        action_value: generator.valueToCode(block, 'URL', 0) || null,
-        action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
-        body_template: generator.valueToCode(block, 'BODY', 0) || "",
-        form_encoded: block.getFieldValue('FORM_ENCODE') === 'TRUE'
+        webhookAction: {
+          url: JSON.parse(generator.valueToCode(block, 'URL', 0)),
+          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0)),
+          formEncoded: block.getFieldValue('FORM_ENCODE') === 'TRUE'
+        }
       }
 
-      return [ payload, 0 ]
+      return JSON.stringify(payload)
     }
   }
 }

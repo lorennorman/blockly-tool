@@ -1,5 +1,5 @@
 export default {
-  type: "action_send_email",
+  type: "action_email",
 
   toolbox: {
     category: 'Actions',
@@ -19,8 +19,9 @@ export default {
   },
 
   connections: {
-    mode: "value",
-    output: "action",
+    mode: "statement",
+    output: "expression",
+    next: 'expression'
   },
 
   lines: [
@@ -47,20 +48,21 @@ export default {
     [ "...using:", {
       inputValue: "FEED",
       check: 'feed',
-      shadow: 'selector_feed',
+      shadow: 'feed_selector',
     }],
   ],
 
   generators: {
     json: (block, generator) => {
       const payload = {
-        action: 'email',
-        action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
-        subject_template: generator.valueToCode(block, 'SUBJECT', 0) || "",
-        body_template: generator.valueToCode(block, 'BODY', 0) || ""
+        emailAction: {
+          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)), // || null,
+          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0)), // || "",
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0)) // || ""
+        }
       }
 
-      return [ payload, 0 ]
+      return JSON.stringify(payload)
     }
   }
 }

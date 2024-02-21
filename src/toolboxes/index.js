@@ -12,6 +12,7 @@ const
     { name: 'Text', colour: 180 },
     { name: 'Variables', colour: 240 },
     { name: 'Feeds', colour: 300 },
+    { name: 'Actions', colour: 360 },
     SEP,
     {
       kind: 'search',

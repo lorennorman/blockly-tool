@@ -1,5 +1,5 @@
 export default {
-  type: "action_publish_to_feed",
+  type: "action_publish",
 
   toolbox: {
     category: 'Actions',
@@ -18,8 +18,9 @@ export default {
   },
 
   connections: {
-    mode: "value",
-    output: "action",
+    mode: "statement",
+    output: "expression",
+    next: 'expression'
   },
 
   lines: [
@@ -34,20 +35,20 @@ export default {
     [ "...to:", {
       inputValue: "FEED",
       check: "feed",
-      shadow: 'selector_feed'
+      shadow: 'feed_selector'
     }]
   ],
 
   generators: {
     json: (block, generator) => {
-      const
-        payload = {
-          action: 'feed',
-          action_feed_id: generator.valueToCode(block, 'FEED', 0) || null,
-          action_value: generator.valueToCode(block, 'VALUE', 0)?.toString() || null,
+      const payload = {
+        publishAction: {
+          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
+          value: JSON.parse(generator.valueToCode(block, 'VALUE', 0))
         }
+      }
 
-      return [ payload, 0 ]
+      return JSON.stringify(payload)
     }
   }
 }
