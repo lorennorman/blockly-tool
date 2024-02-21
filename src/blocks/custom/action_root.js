@@ -5,60 +5,43 @@ export default {
   toolbox: { },
 
   visualization: {
-    colour: 60,
+    colour: "0",
     extensions: [  ],
-    tooltip: [
-
-    ].join('\n')
+    tooltip: "Drag some statement blocks into the \"Do\" list to build a custom Action"
   },
 
   lines: [
-    [ "Actions", "CENTER" ],
+    [ "Action Commands", "CENTER" ],
 
-    "Settings",
-
-    "Expressions",
-
-    [ "", {
-      inputValue: "EXPRESSION_1",
-      check: "expression",
-    }],
-
-    [ "", {
-      inputValue: "EXPRESSION_2",
-      check: "expression",
-    }],
-
-    [ "", {
-      inputValue: "EXPRESSION_3",
-      check: "expression",
-    }],
-
-    [ "", {
-      inputValue: "EXPRESSION_4",
-      check: "expression",
+    [ "Do:", {
+      inputStatement: "EXPRESSIONS",
+      check: "expression"
     }],
   ],
 
   generators: {
     json: (block, generator) => {
-      const expressions = []
-      for(let i = 1; i <= 4; i++) {
-        expressions.push(generator.valueToCode(block, `EXPRESSION_${i}`, 0))
+      let expressionsJson, expressions = []
+
+      try {
+        expressionsJson = generator.statementToCode(block, `EXPRESSIONS`)
+
+        try {
+          expressions = JSON.parse(`[${expressionsJson}]`)
+        } catch(e) {
+          console.error("Error parsing JSON:", expressionsJson)
+          console.error(e)
+        }
+      } catch(e) {
+        console.error("Error calling statementToCode on expression statements:")
+        console.error(e)
       }
 
       return JSON.stringify({
         version: "1.0.0-beta.1",
         settings: {},
-        actions: expressions,
+        expressions,
       }, null, 2)
     }
   }
 }
-
-
-
-
-
-
-
