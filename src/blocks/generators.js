@@ -3,7 +3,7 @@ import Blockly from 'blockly'
 import { allBlockDefinitions } from './index.js'
 
 
-const SCRUB_FUNCTIONS = {
+const SCRUB_FUNCTIONS = generator => ({
   json: (block, previousJSON, thisOnly) => {
     const nextBlock = block.nextConnection?.targetBlock()
 
@@ -11,12 +11,12 @@ const SCRUB_FUNCTIONS = {
       ? `${ previousJSON },\n${ generator.blockToCode(nextBlock) }`
       : previousJSON
   }
-}
+})
 
 const makeGenerator = generatorType => {
   const
     generator = new Blockly.Generator(generatorType),
-    scrubFunction = SCRUB_FUNCTIONS[generatorType]
+    scrubFunction = SCRUB_FUNCTIONS(generator)[generatorType]
 
   if(scrubFunction) { generator.scrub_ = scrubFunction }
 

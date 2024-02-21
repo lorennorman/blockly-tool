@@ -32,8 +32,9 @@ Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 // prepare generators and their dom targets
 const jsonOutputDiv = document.getElementById('json-output')
 const regenerate = () => {
+  const json = allGenerators.json.workspaceToCode(workspace)
+
   try {
-    const json = allGenerators.json.workspaceToCode(workspace)
     let valid = true
     try { JSON.parse(json) }
     catch(e) {
@@ -45,6 +46,7 @@ const regenerate = () => {
     jsonOutputDiv.innerText = `${validation}\n\n${json}`
   } catch(e) {
     jsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
+    console.error(e)
   }
 }
 

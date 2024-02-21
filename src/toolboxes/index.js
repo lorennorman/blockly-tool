@@ -7,13 +7,11 @@ import { allBlockDefinitions } from '../blocks/index.js'
 const
   SEP = '---',
   TOOLBOX_CONFIG = [
-    { name: 'Triggers', colour: 120 },
-    { name: 'Schedules', colour: 160 },
-    { name: 'Actions', colour: "0" },
-    SEP,
-    // { name: 'Feeds', colour: "0" },
-    { name: 'Values', colour: 240 },
-    // { name: 'Comparisons', colour: 208 },
+    { name: 'Logic', colour: 60 },
+    { name: 'Math', colour: 120 },
+    { name: 'Text', colour: 180 },
+    { name: 'Variables', colour: 240 },
+    { name: 'Feeds', colour: 300 },
     SEP,
     {
       kind: 'search',
@@ -109,16 +107,15 @@ const
       ? { shadow: { type: shadow }} // expand to full object
       : { shadow } // set as shadow value
 
-// Use given categories, fill them with blocks that declare those categories
-// export const toolbox = {
-//   kind: 'categoryToolbox',
-//   contents: generateToolboxContents()
-// }
-
-// // No categories, just a gutter full of blocks
 export const toolbox = {
-  kind: 'flyoutToolbox',
-  contents: generateAllBlocks()
+  // Use given categories, fill them with blocks that declare those categories
+  kind: 'categoryToolbox',
+  contents: generateToolboxContents()
+
+  // No categories, just a gutter full of blocks
+  // kind: 'flyoutToolbox',
+  // contents: generateAllBlocks()
 }
+
 
 export default toolbox

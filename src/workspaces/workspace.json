@@ -4,10 +4,8 @@
     "blocks": [
       {
         "type": "action_root",
-        "deletable": false,
-        "movable": false,
-        "x": 20,
-        "y": 20
+        "x": 50,
+        "y": 50
       }
     ]
   }
