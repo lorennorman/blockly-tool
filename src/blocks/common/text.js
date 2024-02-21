@@ -2,15 +2,14 @@ export default {
   type: 'text',
 
   toolbox: {
-    category: 'Values',
-    label: 'A string of text'
+    category: 'Text'
   },
 
   generators: {
     json: (block, generator) => {
       const text = block.getFieldValue('TEXT')
 
-      return [ text, 0 ]
+      return [ JSON.stringify(text), 0 ]
     }
   }
 }

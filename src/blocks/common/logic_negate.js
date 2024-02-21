@@ -9,9 +9,12 @@ export default {
     json: (block, generator) => {
       const
         booleanLogic = generator.valueToCode(block, 'BOOL', 0),
-        negatedLogic = generator.prefixLines(`"not": ${booleanLogic}`, generator.INDENT)
+        negatedLogic = generator.prefixLines(`"not": ${booleanLogic}`, generator.INDENT),
+        blockPayload = booleanLogic
+          ? `{\n${negatedLogic}\n}`
+          : '{ "not": null }'
 
-      return [`{\n${negatedLogic}\n}`, 0]
+      return [blockPayload, 0]
     }
   }
 }

@@ -1,9 +1,8 @@
 export default {
-  type: "selector_feed",
+  type: "feed_selector",
 
   toolbox: {
-    category: 'Values',
-    label: "A string of the last value sent to a given feed or component."
+    category: 'Feeds'
   },
 
   visualization: {
@@ -30,6 +29,14 @@ export default {
   ],
 
   generators: {
-    json: block => [ block.getFieldValue('FEED_ID'), 0 ]
+    json: block => {
+      const
+        feedId = block.getFieldValue('FEED_ID'),
+        blockPayload = JSON.stringify({
+          feed: { feed: feedId }
+        })
+
+      return [ blockPayload, 0 ]
+    }
   }
 }

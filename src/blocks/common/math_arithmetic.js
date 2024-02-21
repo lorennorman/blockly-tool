@@ -8,20 +8,28 @@ export default {
   generators: {
     json: (block, generator) => {
       const
+        operatorMap = {
+          ADD: '+',
+          MINUS: '-',
+          MULTIPLY: '*',
+          DIVIDE: '/',
+          POWER: '^'
+        },
         operator = block.getFieldValue('OP'),
-        argument0 = generator.valueToCode(block, 'A', 0) || '0',
-        argument1 = generator.valueToCode(block, 'B', 0) || '0',
+        leftExp = generator.valueToCode(block, 'A', 0) || '0',
+        rightExp = generator.valueToCode(block, 'B', 0) || '0',
 
-        lines = [
-          `"math": "arithmetic"`,
-          `"a": ${argument0}`,
-          `"op": "${operator}"`,
-          `"b": ${argument1}`,
-        ],
+        blockPayload = JSON.stringify({
+          arithmetic: {
+            left: JSON.parse(leftExp),
+            operator: operator
+              ? operatorMap[operator]
+              : null,
+            right: JSON.parse(rightExp)
+          }
+        })
 
-        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
-
-      return [`{\n${indentedLines}\n}`, 0]
+      return [ blockPayload, 0 ]
     }
   }
 }

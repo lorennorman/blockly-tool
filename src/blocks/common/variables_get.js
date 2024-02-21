@@ -1,12 +1,14 @@
 export default {
   type: 'variables_get',
 
-  toolbox: { },
+  toolbox: {
+    category: "Variables"
+  },
 
   generators: {
     json: (block, generator) => {
       const variableName = block.getField('VAR').getText()
-      return [`{ "variable": "${variableName}" }`, 0]
+      return [`{ "getVariable": "${variableName}" }`, 0]
     }
   }
 }

@@ -2,8 +2,7 @@ export default {
   type: 'logic_boolean',
 
   toolbox: {
-    category: 'Values',
-    label: 'A boolean'
+    category: 'Logic'
   },
 
   generators: {

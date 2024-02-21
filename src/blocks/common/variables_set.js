@@ -1,17 +1,28 @@
 export default {
   type: 'variables_set',
 
-  toolbox: { },
+  toolbox: {
+    category: "Variables"
+  },
 
   generators: {
     json: (block, generator) => {
       const
         variableName = block.getField('VAR').getText(),
-        value = generator.valueToCode(block, 'VALUE', 0),
-        defaultedValue = value || (value !== 0 && value !== null) && 'false'
+        value = generator.valueToCode(block, 'VALUE', 0)
 
-      return `{ "set_variable": "${variableName}", "value": ${defaultedValue} }`
+      const
+        defaultedValue = value
+          ? JSON.parse(value)
+          : (value !== 0 && value !== null) && 'false',
+        blockPayload = JSON.stringify({
+          setVariable: {
+            name: variableName,
+            value: defaultedValue
+          }
+        })
+
+      return blockPayload
     }
   }
 }
-

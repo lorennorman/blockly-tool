@@ -2,8 +2,7 @@ export default {
   type: 'math_number',
 
   toolbox: {
-    category: 'Values',
-    label: "An integer"
+    category: 'Math'
   },
 
   generators: {

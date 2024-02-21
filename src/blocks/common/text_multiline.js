@@ -2,8 +2,7 @@ export default {
   type: 'text_multiline',
 
   toolbox: {
-    category: 'Values',
-    label: "A multi-line string of text"
+    category: 'Text'
   },
 
   generators: {
