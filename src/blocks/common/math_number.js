@@ -3,7 +3,7 @@ export default {
 
   toolbox: {
     category: 'Values',
-    label: "An integer"
+    label: "A number, whole or decimal"
   },
 
   generators: {

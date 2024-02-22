@@ -3,7 +3,7 @@ export default {
 
   toolbox: {
     category: 'Values',
-    label: "A string of the last value sent to a given feed or component."
+    label: "A Feed/Component or its value"
   },
 
   visualization: {
