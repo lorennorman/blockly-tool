@@ -9,20 +9,18 @@ export default {
     json: (block, generator) => {
       const
         operator = block.getFieldValue('OP'),
-        argument0 = generator.valueToCode(block, 'A', 0) || 'false',
-        argument1 = generator.valueToCode(block, 'B', 0) || 'false',
+        leftExp = generator.valueToCode(block, 'A', 0) || null,
+        rightExp = generator.valueToCode(block, 'B', 0) || null,
 
-        lines = [
-          `"logic": "operation"`,
-          `"a": ${argument0}`,
-          `"op": "${operator}"`,
-          `"b": ${argument1}`,
-        ],
+        blockPayload = JSON.stringify({
+          logic: {
+            left: JSON.parse(leftExp),
+            comparator: operator?.toLowerCase() || null,
+            right: JSON.parse(rightExp),
+          },
+        })
 
-        indentedLines = generator.prefixLines(lines.join(',\n'), generator.INDENT)
-
-      return [`{\n${indentedLines}\n}`, 0]
-
+      return [ blockPayload, 0 ]
     }
   }
 }

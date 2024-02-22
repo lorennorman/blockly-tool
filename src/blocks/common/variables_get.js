@@ -7,8 +7,15 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      const variableName = block.getField('VAR').getText()
-      return [`{ "getVariable": "${variableName}" }`, 0]
+      const
+        name = block.getField('VAR').getText(),
+        blockPayload = JSON.stringify({
+          getVariable: {
+            name
+          }
+        })
+
+      return [ blockPayload, 0 ]
     }
   }
 }
