@@ -22,6 +22,7 @@ import action_webhook from "./custom/action_webhook.js"
 import action_email from "./custom/action_email.js"
 import action_sms from "./custom/action_sms.js"
 import action_publish from "./custom/action_publish.js"
+import action_log from "./custom/action_log.js"
 
 
 export default {
@@ -56,4 +57,5 @@ export default {
   action_email,
   action_sms,
   action_publish,
+  action_log,
 }
