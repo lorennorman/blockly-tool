@@ -33,7 +33,7 @@ export default {
       const
         feedId = block.getFieldValue('FEED_ID'),
         blockPayload = JSON.stringify({
-          feed: { feed: feedId }
+          feed: { id: parseInt(feedId, 10) }
         })
 
       return [ blockPayload, 0 ]
