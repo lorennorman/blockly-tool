@@ -14,7 +14,8 @@ export default {
 
   connections: {
     mode: "value",
-    output: "feed"
+    // output: "feed"
+    output: null
   },
 
   lines: [
