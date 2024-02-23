@@ -25,7 +25,7 @@ export default {
   lines: [
     ["Log:", {
       inputValue: 'EXPRESSION',
-      check: ['expression', 'String'],
+       // check: ['expression', 'String'],
       shadow: 'text'
     }]
   ],

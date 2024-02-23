@@ -29,7 +29,7 @@ export default {
 
     [ "...body:", {
       inputValue: "BODY",
-      check: "String",
+      // check: "String",
       shadow: {
         type: 'text_multiline',
         fields: {
@@ -40,7 +40,7 @@ export default {
 
     [ "...using:", {
       inputValue: "FEED",
-      check: "feed",
+      // check: "feed",
       shadow: 'feed_selector'
     }],
   ],

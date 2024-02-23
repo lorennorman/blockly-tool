@@ -46,7 +46,7 @@ export default {
     [ "line $FIELD_NAME contents", { // template string: field gets embedded where its name is referenced
       // for a single block input
       inputValue: 'INPUT_VALUE_NAME',
-      check: 'input_block_output',
+      // check: 'input_block_output',
       shadow: 'block_type_to_shadow', // -> { shadow: { type: 'block_type_to_shadow' }}
       shadow: {
         type: 'block_type_to_shadow',

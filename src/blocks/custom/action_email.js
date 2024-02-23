@@ -29,7 +29,7 @@ export default {
 
     [ "...subject:", {
       inputValue: "SUBJECT",
-      check: 'String',
+      // check: 'String',
       shadow: {
         type: 'text',
         fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
@@ -38,7 +38,7 @@ export default {
 
     [ "...body:", {
       inputValue: "BODY",
-      check: 'String',
+      // check: 'String',
       shadow: {
         type: 'text_multiline',
         fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
@@ -47,7 +47,7 @@ export default {
 
     [ "...using:", {
       inputValue: "FEED",
-      check: 'feed',
+      // check: 'feed',
       shadow: 'feed_selector',
     }],
   ],

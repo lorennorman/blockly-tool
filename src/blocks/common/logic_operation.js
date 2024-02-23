@@ -9,8 +9,8 @@ export default {
     json: (block, generator) => {
       const
         operator = block.getFieldValue('OP'),
-        leftExp = generator.valueToCode(block, 'A', 0) || null,
-        rightExp = generator.valueToCode(block, 'B', 0) || null,
+        leftExp = generator.valueToCode(block, 'A', 0) || false,
+        rightExp = generator.valueToCode(block, 'B', 0) || false,
 
         blockPayload = JSON.stringify({
           logic: {

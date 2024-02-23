@@ -28,13 +28,13 @@ export default {
 
     [ "...value:", {
       inputValue: "VALUE",
-      check: [ "String", "Number" ],
+      // check: [ "String", "Number" ],
       shadow: 'text'
     }],
 
     [ "...to:", {
       inputValue: "FEED",
-      check: "feed",
+      // check: "feed",
       shadow: 'feed_selector'
     }]
   ],

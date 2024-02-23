@@ -15,7 +15,7 @@ export default {
 
     [ "Do:", {
       inputStatement: "EXPRESSIONS",
-      check: "expression"
+      // check: "expression"
     }],
   ],
 
