@@ -48,7 +48,7 @@ export default {
   generators: {
     json: (block, generator) => {
       const payload = {
-        actionSms: {
+        smsAction: {
           feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
           bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0))
         }
