@@ -8,13 +8,12 @@ export default {
   generators: {
     json: (block, generator) => {
       const
-        booleanLogic = generator.valueToCode(block, 'BOOL', 0),
-        negatedLogic = generator.prefixLines(`"not": ${booleanLogic}`, generator.INDENT),
-        blockPayload = booleanLogic
-          ? `{\n${negatedLogic}\n}`
-          : '{ "not": null }'
+        operand = generator.valueToCode(block, 'BOOL', 0) || 'null',
+        blockPayload = {
+          negate: JSON.parse(operand)
+        }
 
-      return [blockPayload, 0]
+      return [ JSON.stringify(blockPayload), 0 ]
     }
   }
 }

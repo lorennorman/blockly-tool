@@ -8,7 +8,8 @@ export default {
   generators: {
     json: (block, generator) => {
       const bool = block.getFieldValue('BOOL') === 'TRUE'
-      return [bool, 0]
+
+      return [ JSON.stringify(bool), 0 ]
     }
   }
 }
