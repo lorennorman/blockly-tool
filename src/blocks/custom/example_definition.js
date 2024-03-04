@@ -19,6 +19,16 @@ export default {
     helpUrl: ""
   },
 
+  // list of extension names registered from extensions directory, or...
+  extensions: [ 'populateFeedDropdown' ],
+
+  // object naming and defining extensions inline here
+  extensions: {
+    populateFeedDropdown: ({ block, data, Blockly }) => {
+      /* do extension stuff */
+    }
+  },
+
   // TODO: consider something simpler, maybe leftOutput, topOutput, and bottomCheck?
   // Block connections
   connections: {

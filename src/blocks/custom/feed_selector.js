@@ -7,9 +7,22 @@ export default {
 
   visualization: {
     colour: 240,
-    // TODO: proper extension handling
-    extensions: [ "populate_feeds_dropdown" ],
     tooltip: "The last value of this feed or component, always a String"
+  },
+
+  extensions: {
+    populateFeedDropdown: ({ block, data, Blockly }) => {
+      const { feedOptions } = data
+
+      if(!feedOptions) {
+        console.error(`No feedOptions in extension data to populate dropdowns!`)
+        return
+      }
+
+      const input = block.getInput('')
+      input.removeField("FEED_ID")
+      input.appendField(new Blockly.FieldDropdown(feedOptions), "FEED_ID")
+    }
   },
 
   connections: {

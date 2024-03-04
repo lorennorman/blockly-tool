@@ -1,7 +1,7 @@
 import Blockly from 'blockly'
 import ModernTheme from '@blockly/theme-modern'
 
-import "./extensions"
+import extensions from "./extensions"
 import { customBlocksJson } from './blocks'
 import allGenerators from './blocks/generators'
 import toolbox from './toolboxes'
@@ -10,6 +10,13 @@ import initialWorkspace from './workspaces/workspace.json'
 
 import './index.css'
 
+
+extensions.injectData('feedOptions', [
+  ["Feeder 1", "1"],
+  ["Feed Z", "Z"],
+  ["Feedinsky &", "&"],
+])
+extensions.ready()
 
 // import block library json
 Blockly.defineBlocksWithJsonArray(customBlocksJson)
