@@ -20,7 +20,11 @@ fs.writeFileSync('export/toolbox.json', JSON.stringify(toolbox, null, 2))
 
 // export/generators.js
 // writing an executable file is nasty business
+//
+// read in the file
 const generatorsFile = fs.readFileSync('src/blocks/generators.js').toString()
+// replace the import with an inlined collection of block definitions
 const generators = 'const allBlockDefinitions = {\n' + map(allGenerators.json.forBlock, (func, block) => `  ${block}: { generators: { json: ${func} } }`).join(',\n\n') + '\n}\n'
 const generatorOutput = generatorsFile.replace("import { allBlockDefinitions } from './index.js'", generators).replaceAll('\n    ', '\n  ')
+// write the file back
 fs.writeFileSync('export/generators.js', generatorOutput)

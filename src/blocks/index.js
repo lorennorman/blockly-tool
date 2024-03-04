@@ -3,7 +3,7 @@ import Blockly from 'blockly'
 
 import blockDefaults from './defaults.js'
 import ALL_BLOCKS from './all.js'
-import { toBlockJSON } from '../tools/tools.js'
+import { toBlockJSON } from '../tools/index.js'
 
 
 export const
@@ -21,6 +21,7 @@ const
   CUSTOM_KEYS = COMMON_KEYS.concat([
     "toolbox",
     "visualization",
+    "extensions",
     "connections",
     "lines"
   ]),
