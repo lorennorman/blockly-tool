@@ -1,7 +1,17 @@
 import Blockly from 'blockly'
 
-import { allBlockDefinitions } from './index.js'
+/* LOCAL->> */
+import { map, mapValues } from 'lodash-es'
+import { allBlockGenerators as blockGenerators } from './index.js'
 
+export const renderedBlockGenerators = `
+const blockGenerators = { ${map(blockGenerators, (generators, blockName) => `
+  ${blockName}: { ${map(generators, (func, name) => `
+    ${name}: ${func}`).join(',\n')}
+  }`).join(',\n')}
+}
+`
+/* <<-LOCAL */
 
 const SCRUB_FUNCTIONS = generator => ({
   json: (block, previousJSON, thisOnly) => {
@@ -16,18 +26,18 @@ const SCRUB_FUNCTIONS = generator => ({
 const makeGenerator = generatorType => {
   const
     generator = new Blockly.Generator(generatorType),
-    scrubFunction = SCRUB_FUNCTIONS(generator)[generatorType]
+    scrubFunction = SCRUB_FUNCTIONS(generator)[generatorType],
+    generatorsOfType = mapValues(blockGenerators, generatorType)
 
   if(scrubFunction) { generator.scrub_ = scrubFunction }
 
-  for (const blockName in allBlockDefinitions) {
-    const block = allBlockDefinitions[blockName]
-    const blockGenerator = block.generators[generatorType]
-    if(blockGenerator) {
-      generator.forBlock[blockName] = blockGenerator
-    } else {
-      console.warn(`Block ${block.type} doesn't have a "${generatorType}" generator`)
+  for (const [blockName, blockGenerator] of Object.entries(generatorsOfType)) {
+    if(!blockGenerator) {
+      console.warn(`Block ${blockName} doesn't have a "${generatorType}" generator`)
+      return
     }
+
+    generator.forBlock[blockName] = blockGenerator
   }
 
   return generator

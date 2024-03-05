@@ -1,4 +1,4 @@
-import { keys, map, without } from 'lodash-es'
+import { assign, chain, isArray, map, mapValues, keys, without } from 'lodash-es'
 import Blockly from 'blockly'
 
 import blockDefaults from './defaults.js'
@@ -9,7 +9,15 @@ import { toBlockJSON } from '../tools/index.js'
 export const
   allBlockDefinitions = ALL_BLOCKS,
   customBlocksJson = [],
-  allBlocksByCategory = {}
+  allBlocksByCategory = {},
+  allBlockGenerators = mapValues(allBlockDefinitions, "generators"),
+  allBlockExtensions =
+    chain(allBlockDefinitions)
+      .map("extensions")  // just the extensions key
+      .compact()          // remove null
+      .reject(isArray)    // remove arrays
+      .reduce(assign, {}) // merge all together
+    .value()
 
 const
   COMMON_KEYS = [

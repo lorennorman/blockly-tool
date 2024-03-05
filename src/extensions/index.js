@@ -1,8 +1,26 @@
-import { compact, forEach, isArray, map } from 'lodash'
 import Blockly from 'blockly'
 
-import { allBlockDefinitions } from '/src/blocks/index.js'
+/* LOCAL->> */
+import { map } from 'lodash-es'
+import { allBlockExtensions } from '../blocks/index.js'
 
+// load file extensions from src/extensions/*.js
+// import exampleExtension from './example_extension.js'
+// const fileExtensions = { exampleExtension }
+const fileExtensions = { }
+
+const allExtensions = {
+  ...allBlockExtensions,
+  ...fileExtensions,
+}
+
+// replaces this entire block with this source
+export const renderedExtensions = `
+const allExtensions = {
+  ${map(allExtensions, (func, key) => `${key}: ${func}`).join(',\n\n  ')}
+}
+`
+/* <<-LOCAL */
 
 let status = 'loading'
 export const ready = () => { status = 'ready' }
@@ -30,21 +48,7 @@ const wrapExtension = extensionFunc => {
   }
 }
 
-// pull in all the block-defined extensions and write them here
-const blockExtensions = compact(map(allBlockDefinitions, "extensions"))
-blockExtensions.forEach(extensions => {
-  if(isArray(extensions)) { return } // just named, not defined in block
-
-  forEach(extensions, (func, name) => { // defined inline, must register
-    Blockly.Extensions.register(name, wrapExtension(func))
-  })
-})
-
-
-// pull in all the globally defined extensions and write them here
-// import populateFeedDropdown from './populate_feed_dropdown.js'
-// const globalExtensions = { populateFeedDropdown }
-const globalExtensions = {  }
-forEach(globalExtensions, (func, name) => {
-  Blockly.Extensions.register(name, wrapExtension(func))
-})
+// register all extnesions to Blockly, wrap them in a variable injector
+for (const [extensionName, extensionFunc] of Object.entries(allExtensions)) {
+  Blockly.Extensions.register(extensionName, wrapExtension(extensionFunc))
+}
