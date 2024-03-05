@@ -23,15 +23,29 @@ const allExtensions = {
 /* <<-LOCAL */
 
 let status = 'loading'
-export const ready = () => { status = 'ready' }
-
-export const injectData = (key, value) => {
-  extensionData[key] = value
-}
-
-export default { ready, injectData }
-
 const extensionData = {}
+
+export const
+  ready = () => status = 'ready',
+
+  injectDatum = (key, value) => extensionData[key] = value,
+
+  injectData = dataObject => {
+    for (const [key, value] of Object.entries(dataObject)) {
+      injectDatum(key, value)
+    }
+  },
+
+  dispose = () => {
+    // delete all extension data keys
+    for (const key in extensionData) {
+      delete extensionData[key];
+    }
+    // remove ready status
+    status = 'loading'
+  }
+
+export default { ready, injectData, injectDatum, dispose }
 
 // helper to get late-bound data into blockly
 const wrapExtension = extensionFunc => {

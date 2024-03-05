@@ -11,11 +11,11 @@ import initialWorkspace from './workspaces/workspace.json'
 import './index.css'
 
 
-extensions.injectData('feedOptions', [
+extensions.injectData({feedOptions: [
   ["Feeder 1", "1"],
   ["Feed Z", "Z"],
   ["Feedinsky &", "&"],
-])
+]})
 extensions.ready()
 
 // import block library json

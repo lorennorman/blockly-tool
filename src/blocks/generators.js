@@ -27,7 +27,10 @@ const makeGenerator = generatorType => {
   const
     generator = new Blockly.Generator(generatorType),
     scrubFunction = SCRUB_FUNCTIONS(generator)[generatorType],
-    generatorsOfType = mapValues(blockGenerators, generatorType)
+    generatorsOfType = Object.keys(blockGenerators).reduce((acc, blockName) => {
+      acc[blockName] = blockGenerators[blockName][generatorType]
+      return acc
+    }, {})
 
   if(scrubFunction) { generator.scrub_ = scrubFunction }
 
