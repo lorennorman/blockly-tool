@@ -5,8 +5,8 @@ import { map, mapValues } from 'lodash-es'
 import { allBlockGenerators as blockGenerators } from './index.js'
 
 export const renderedBlockGenerators = `
-const blockGenerators = { ${map(blockGenerators, (generators, blockName) => `
-  ${blockName}: { ${map(generators, (func, name) => `
+const blockGenerators = {${map(blockGenerators, (generators, blockName) => `
+  ${blockName}: {${map(generators, (func, name) => `
     ${name}: ${func}`).join(',\n')}
   }`).join(',\n')}
 }
