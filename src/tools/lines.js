@@ -80,14 +80,14 @@ const processLine = (line) => {
   }
 
   // if an input exists, append alignment to it
-  if(args[0]?.type === "input_value") {
+  if(includes(['input_value', 'input_statement'], args[0]?.type)) {
     args[0].align = alignment
 
   // otherwise make an input for alignment
   } else {
     args.push({
-      "type": "input_dummy",
-      "align": alignment
+      type: "input_dummy",
+      align: alignment
     })
   }
 
