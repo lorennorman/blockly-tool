@@ -35,7 +35,15 @@ const processLine = (line) => {
   const args = []
 
   // append inputValues to args
-  if(lineData.inputValue) {
+  if(lineData.inputDummy) {
+    args.push({
+      type: "input_dummy",
+      name: lineData.inputDummy,
+      check: lineData.check
+    })
+
+  // append inputStatement
+  } else if(lineData.inputValue) {
     args.push({
       type: "input_value",
       name: lineData.inputValue,
@@ -80,7 +88,7 @@ const processLine = (line) => {
   }
 
   // if an input exists, append alignment to it
-  if(includes(['input_value', 'input_statement'], args[0]?.type)) {
+  if(includes(['input_value', 'input_statement', 'input_dummy'], args[0]?.type)) {
     args[0].align = alignment
 
   // otherwise make an input for alignment
@@ -137,6 +145,10 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
+    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "options", "shadow", "checked")
+    if(extraKeys.length) {
+      throw new Error(`Unrecognized keys (${extraKeys.join(', ')}) for block line with text: "${text}"`)
+    }
     const alignment = parseAlignment(second.align)
     return { alignment, lineValue: { text }, lineData: second }
   }
