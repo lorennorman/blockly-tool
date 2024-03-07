@@ -2,6 +2,7 @@ import Blockly from 'blockly'
 import ModernTheme from '@blockly/theme-modern'
 
 import extensions from "./extensions"
+import mutators from "./mutators"
 import { customBlocksJson } from './blocks'
 import allGenerators from './blocks/generators'
 import toolbox from './toolboxes'

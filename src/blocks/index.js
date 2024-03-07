@@ -1,4 +1,4 @@
-import { assign, chain, isArray, map, mapValues, keys, without } from 'lodash-es'
+import { assign, chain, isArray, map, mapValues, keys, pickBy, without } from 'lodash-es'
 import Blockly from 'blockly'
 
 import blockDefaults from './defaults.js'
@@ -11,6 +11,7 @@ export const
   customBlocksJson = [],
   allBlocksByCategory = {},
   allBlockGenerators = mapValues(allBlockDefinitions, "generators"),
+  allBlockMutators = pickBy(mapValues(allBlockDefinitions, "mutator")),
   allBlockExtensions =
     chain(allBlockDefinitions)
       .map("extensions")  // just the extensions key
@@ -30,6 +31,7 @@ const
     "toolbox",
     "visualization",
     "extensions",
+    "mutator",
     "connections",
     "lines"
   ]),
