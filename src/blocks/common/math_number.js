@@ -6,7 +6,7 @@ export default {
   },
 
   generators: {
-    json: (block, generator) => {
+    json: block => {
       return [Number(block.getFieldValue('NUM')) || '0', 0]
     }
   }

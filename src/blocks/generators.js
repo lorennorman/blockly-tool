@@ -1,7 +1,7 @@
 import Blockly from 'blockly'
 
 /* LOCAL->> */
-import { map, mapValues } from 'lodash-es'
+import { map } from 'lodash-es'
 import { allBlockGenerators as blockGenerators } from './index.js'
 
 export const renderedBlockGenerators = `

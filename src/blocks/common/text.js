@@ -6,7 +6,7 @@ export default {
   },
 
   generators: {
-    json: (block, generator) => {
+    json: block => {
       const text = block.getFieldValue('TEXT')
 
       return [ JSON.stringify(text), 0 ]

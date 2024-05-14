@@ -6,7 +6,7 @@ export default {
   },
 
   generators: {
-    json: (block, generator) => {
+    json: block => {
       const bool = block.getFieldValue('BOOL') === 'TRUE'
 
       return [ JSON.stringify(bool), 0 ]
