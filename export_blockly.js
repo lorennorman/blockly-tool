@@ -38,3 +38,12 @@ const extensionsFile = fs.readFileSync('src/extensions/index.js').toString()
 const extensionOutput = extensionsFile.replace(/\/\* LOCAL->>[\s\S]*?<<-LOCAL \*\//, renderedExtensions)
 // write
 fs.writeFileSync('export/extensions.js', extensionOutput)
+
+// export/mutators.js
+import { renderedMutators } from './src/mutators/index.js'
+// read
+const mutatorsFile = fs.readFileSync('src/mutators/index.js').toString()
+// transform
+const mutatorOutput = mutatorsFile.replace(/\/\* LOCAL->>[\s\S]*?<<-LOCAL \*\//, renderedMutators)
+// write
+fs.writeFileSync('export/mutators.js', mutatorOutput)
