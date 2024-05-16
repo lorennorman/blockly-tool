@@ -43,5 +43,22 @@ export default {
         expressions,
       }, null, 2)
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const { expressions } = blockObject
+
+      return {
+        "type": "action_root",
+        "movable": false,
+        "deletable": false,
+        "x": 50,
+        "y": 50,
+        "inputs": {
+          "EXPRESSIONS": helpers.arrayToStatements(expressions)
+        }
+      }
+    }
   }
 }

@@ -11,6 +11,7 @@ export const
   customBlocksJson = [],
   allBlocksByCategory = {},
   allBlockGenerators = mapValues(allBlockDefinitions, "generators"),
+  allBlockRegenerators = mapValues(allBlockDefinitions, "regenerators"),
   allBlockMutators = pickBy(mapValues(allBlockDefinitions, "mutator")),
   allBlockExtensions =
     chain(allBlockDefinitions)
@@ -24,7 +25,8 @@ const
   COMMON_KEYS = [
     "type",
     "toolbox",
-    "generators"
+    "generators",
+    "regenerators"
   ],
 
   CUSTOM_KEYS = COMMON_KEYS.concat([

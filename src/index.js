@@ -2,11 +2,12 @@ import Blockly from 'blockly'
 import ModernTheme from '@blockly/theme-modern'
 
 import extensions from "./extensions"
-import mutators from "./mutators"
+import "./mutators"
 import { customBlocksJson } from './blocks'
 import allGenerators from './blocks/generators'
 import toolbox from './toolboxes'
-import { clear, load, save } from './serialization'
+// import { clear, load, save } from './serialization'
+import { clear, load, save } from './bytecode_serialization'
 import initialWorkspace from './workspaces/workspace.json'
 
 import './index.css'
@@ -54,6 +55,7 @@ const regenerate = () => {
     }
     const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
     jsonOutputDiv.innerText = `${validation}\n\n${json}`
+    if(valid) { return }
     console.log(validation)
     console.log(json)
   } catch(e) {
