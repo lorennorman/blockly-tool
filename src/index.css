@@ -23,8 +23,8 @@ pre, code {
 #menu-pane {
     display: flex;
     flex-direction: column;
-    width: 100px;
-    flex: 0 0 100px;
+    width: 400px;
+    flex: 0 0 400px;
     overflow: auto;
     margin: 1rem;
 }
