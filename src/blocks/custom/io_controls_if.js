@@ -1,3 +1,4 @@
+import regenerators from '../regenerators.js'
 import mutator from './io_controls_if/mutator.js'
 
 
@@ -38,7 +39,7 @@ export default {
       let index = 0
       while(block.getInput(`IF${index}`)) {
         const
-          ifClause = generator.valueToCode(block, `IF${index}`, 0) || 'false',
+          ifClause = generator.valueToCode(block, `IF${index}`, 0) || 'null',
           thenClause = generator.statementToCode(block, `THEN${index}`) || ''
 
         payload.conditional.ifThens.push({
@@ -56,6 +57,38 @@ export default {
       }
 
       return JSON.stringify(payload)
+    }
+  },
+
+  regenerators: {
+    json: (bytecode, helpers) => {
+      const payload = bytecode.conditional
+
+      if(!payload) {
+        throw new Error("No data for io_controls_if regenerator")
+      }
+
+      const
+        { ifThens } = payload,
+        inputs = {}
+
+      ifThens.forEach((item, index) => {
+        if(item.if) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if) }
+        if(item.then) { inputs[`THEN${index}`] = helpers.arrayToStatements(item.then) }
+      })
+
+      if(payload.else) {
+        inputs.ELSE = helpers.arrayToStatements(payload.else)
+      }
+
+      return {
+        type: "io_controls_if",
+        inputs,
+        extraState: {
+          elseIfCount: ifThens.length-1,
+          elsePresent: !!payload.else
+        }
+      }
     }
   }
 }

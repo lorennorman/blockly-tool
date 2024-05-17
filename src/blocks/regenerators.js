@@ -2,7 +2,8 @@ import { allBlockRegenerators } from './index.js'
 
 // console.log('regeneartors:', allBlockRegenerators)
 const BYTECODE_BLOCK_TYPE_MAP = {
-  logAction: 'action_log'
+  logAction: 'action_log',
+  conditional: 'io_controls_if'
 }
 
 const lookupRegenerator = expressionName => {
@@ -11,10 +12,7 @@ const lookupRegenerator = expressionName => {
 }
 
 const makeBlockType = (type, attrs={}) => {
-  return { block: {
-    type,
-    ...attrs
-  }}
+  return { block: { type, ...attrs }}
 }
 
 const helpers = {
@@ -37,6 +35,8 @@ const helpers = {
   },
 
   expressionToBlock: expressionBytecode => {
+    if(expressionBytecode === null || expressionBytecode === undefined) { return null }
+
     const expressionType = typeof expressionBytecode
 
     switch(expressionType) {

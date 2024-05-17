@@ -2,61 +2,60 @@ import Blockly from 'blockly'
 
 /** Dynamic else-if and else support */
 export default {
-  elsePresent: false,
   elseIfCount: 0,
+  elsePresent: false,
+
+  // helper to touch the above state and automatically fire events on change
+  setProperty: function(propertyName, propertyValue, element, name) {
+    const old = this[propertyName]
+    if(old == propertyValue) { return }
+
+    this[propertyName] = propertyValue
+
+    Blockly.Events.fire(new Blockly.Events.BlockChange(this, element, name,
+      { [propertyName]: old }, { [propertyName]: this[propertyName] }
+    ))
+  },
 
   saveExtraState: function() {
-    return { elsePresent: this.elsePresent, elseIfCount: this.elseIfCount }
+    return { elseIfCount: this.elseIfCount, elsePresent: this.elsePresent }
   },
 
-  loadExtraState: function({ elsePresent, elseIfCount }) {
-    this.setElseIfCount(elseIfCount)
-    this.setElsePresent(elsePresent)
+  loadExtraState: function(state) {
+    this.initializeElseIfs(state.elseIfCount)
+    this.initializeElse(state.elsePresent)
   },
 
-  setElseIfCount: function(newElseIfCount) {
-    const oldElseIfCount = this.elseIfCount
+  // dynamic else-if-then support
+  initializeElseIfs: function(elseIfCount) {
+    this.addElseIf(elseIfCount)
+    this.insertPlusElseIfButton()
+  },
 
+  insertPlusElseIfButton: function() {
     const elseIfLabel = this.getInput('ELSE_IF_LABEL')
     elseIfLabel.removeField('PLUS_ELSE_IF', true)
-    elseIfLabel.insertFieldAt(0, this.plusField(() => this.setElseIfCount(this.elseIfCount+1)), 'PLUS_ELSE_IF')
-
-    while (this.elseIfCount < newElseIfCount) {
-      this.addElseIf();
-    }
-
-    if (this.elseIfCount > newElseIfCount) {
-      this.elseIfCount = newElseIfCount
-    }
-
-    if(oldElseIfCount !== newElseIfCount) {
-      Blockly.Events.fire(new Blockly.Events.BlockChange(this, undefined, undefined,
-        { elseIfCount: oldElseIfCount }, { elseIfCount: newElseIfCount }
-      ))
-    }
+    elseIfLabel.insertFieldAt(0, this.plusField(() => this.addElseIf()), 'PLUS_ELSE_IF')
   },
 
-  addElseIf: function() {
-    const nextIndex = this.elseIfCount+1
-    // create new numbered if/then inputs with a minus control
+  addElseIf: function(howMany=1) {
+    for(let i = 1; i <= howMany; i++) {
+      this.addElseIfAt(this.elseIfCount + i)
+    }
+    this.setProperty('elseIfCount', this.elseIfCount+howMany)
+  },
+
+  addElseIfAt: function(index) {
     this
-      .appendValueInput(`IF${nextIndex}`)
-      .appendField(this.minusField(() => this.removeElseIfAt(nextIndex)))
+      .appendValueInput(`IF${index}`)
+      .appendField(this.minusField(() => this.removeElseIfAt(index)))
       .appendField(new Blockly.FieldLabel("else if"))
     this
-      .appendStatementInput(`THEN${nextIndex}`)
+      .appendStatementInput(`THEN${index}`)
       .appendField(new Blockly.FieldLabel("do"))
-
-    // last 2-3 items should always be:
-    // + else-if control
-    // +/- else control
-    // (optional) else input
-    this.moveInputBefore('ELSE_IF_LABEL', null)
-    this.moveInputBefore('ELSE_LABEL', null)
-    if (this.getInput('ELSE')) {
-      this.moveInputBefore('ELSE', null)
-    }
-    this.elseIfCount += 1
+    // move them up above the last items
+    this.moveInputBefore(`IF${index}`, 'ELSE_IF_LABEL')
+    this.moveInputBefore(`THEN${index}`, 'ELSE_IF_LABEL')
   },
 
   removeElseIfAt: function(targetIndex) {
@@ -88,29 +87,18 @@ export default {
       }
     }
 
+    // remove the last/highest index ifThen
     const indexToRemove = Math.floor((i-2)/2)
     this.removeInput(`IF${indexToRemove}`)
     this.removeInput(`THEN${indexToRemove}`)
     this.bumpNeighbours()
 
-    this.elseIfCount -= 1
-    Blockly.Events.fire(new Blockly.Events.BlockChange(this, undefined, undefined,
-      { elseIfCount: this.elseIfCount+1 }, { elseIfCount: this.elseIfCount }
-    ))
+    this.setProperty('elseIfCount', this.elseIfCount-1)
   },
 
-  setElsePresent: function(newElsePresent) {
-    const oldElsePresent = this.elsePresent
-    this.elsePresent = newElsePresent
-
-    this.elsePresent ? this.addElse() : this.removeElse()
-
-    if(oldElsePresent !== newElsePresent) {
-      // notify observers
-      Blockly.Events.fire(new Blockly.Events.BlockChange(this, 'input', 'ELSE',
-        { elsePresent: oldElsePresent }, { elsePresent: newElsePresent }
-      ))
-    }
+  // dynamic else support
+  initializeElse: function(elsePresent) {
+    elsePresent ? this.addElse() : this.removeElse()
   },
 
   addElse: function() {
@@ -119,7 +107,7 @@ export default {
     // swap the plus to minus
     elseLabel.removeField('PLUS_ELSE', true)
     elseLabel.removeField('MINUS_ELSE', true)
-    elseLabel.insertFieldAt(0, this.minusField(() => this.setElsePresent(false)), 'MINUS_ELSE')
+    elseLabel.insertFieldAt(0, this.minusField(() => this.removeElse()), 'MINUS_ELSE')
 
     // add the input, write its label
     if(!this.getInput('ELSE')) {
@@ -127,6 +115,8 @@ export default {
         .appendStatementInput('ELSE')
         .appendField(new Blockly.FieldLabel("do"))
     }
+
+    this.setProperty('elsePresent', true, 'input', 'ELSE')
   },
 
   removeElse: function() {
@@ -134,7 +124,7 @@ export default {
     // swap the minus to plus
     elseLabel.removeField('MINUS_ELSE', true)
     elseLabel.removeField('PLUS_ELSE', true)
-    elseLabel.insertFieldAt(0, this.plusField(() => this.setElsePresent(true)), 'PLUS_ELSE')
+    elseLabel.insertFieldAt(0, this.plusField(() => this.addElse()), 'PLUS_ELSE')
 
     const elseInput = this.getInput('ELSE')
 
@@ -145,6 +135,8 @@ export default {
       // remove the input
       this.removeInput('ELSE')
     }
+
+    this.setProperty('elsePresent', false)
   },
 
   plusImage:
