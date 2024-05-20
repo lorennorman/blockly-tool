@@ -55,7 +55,10 @@ export default {
       return {
         type: "action_log",
         inputs: {
-          EXPRESSION: helpers.expressionToBlock(payload.line)
+          EXPRESSION: {
+            ...helpers.expressionToBlock(payload.line),
+            shadow: { type: 'text' }
+          }
         }
       }
     }
