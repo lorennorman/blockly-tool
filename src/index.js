@@ -97,8 +97,8 @@ const
   }
 clearButton.addEventListener('click', clearAndInitialize)
 
-const reloadButton = document.getElementById('button-reload')
-reloadButton.addEventListener('click', () => {
+const reloadBytecodeButton = document.getElementById('button-reload-bytecode')
+reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
   const bytecodeJson = allGenerators.json.workspaceToCode(workspace)
   // convert bytecode to workspace json
@@ -112,14 +112,22 @@ reloadButton.addEventListener('click', () => {
     // load workspace json
     Blockly.serialization.workspaces.load(workspaceJson, workspace)
 
+    console.log("Reloaded diagram from bytecode.")
+
   } catch(e) {
+    console.log('Failed diagram reload. Reloading stored workspace...')
     console.error(e)
-    console.log('reloading stored workspace...')
 
     load(workspace)
+
   } finally {
     Blockly.Events.enable()
   }
+})
+
+const reloadSerializedButton = document.getElementById('button-reload-serialized')
+reloadSerializedButton.addEventListener('click', () => {
+  load(workspace)
 })
 
 // load last sketch from storage
