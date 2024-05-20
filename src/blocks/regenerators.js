@@ -7,6 +7,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   compare: 'logic_compare',
   arithmetic: 'math_arithmetic',
   logic: 'logic_operation',
+  negate: 'logic_negate',
 }
 
 const lookupRegenerator = expressionName => {
