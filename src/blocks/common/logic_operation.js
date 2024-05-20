@@ -9,8 +9,8 @@ export default {
     json: (block, generator) => {
       const
         operator = block.getFieldValue('OP'),
-        leftExp = generator.valueToCode(block, 'A', 0) || false,
-        rightExp = generator.valueToCode(block, 'B', 0) || false,
+        leftExp = generator.valueToCode(block, 'A', 0) || null,
+        rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
           logic: {
@@ -21,6 +21,22 @@ export default {
         })
 
       return [ blockPayload, 0 ]
+    }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const
+        { comparator, left, right } = blockObject.logic,
+        fields = {
+          OP: comparator?.toUpperCase()
+        },
+        inputs = {
+          A: helpers.expressionToBlock(left),
+          B: helpers.expressionToBlock(right),
+        }
+
+      return { type: 'logic_operation', fields, inputs }
     }
   }
 }
