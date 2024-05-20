@@ -10,6 +10,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   negate: 'logic_negate',
   setVariable: 'variables_set',
   getVariable: 'variables_get',
+  feed: 'feed_selector',
 }
 
 const lookupRegenerator = expressionName => {

@@ -52,5 +52,18 @@ export default {
 
       return [ blockPayload, 0 ]
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.feed
+
+      return {
+        type: "feed_selector",
+        fields: {
+          FEED_ID: payload.id?.toString()
+        }
+      }
+    }
   }
 }

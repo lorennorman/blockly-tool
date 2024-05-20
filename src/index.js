@@ -15,8 +15,8 @@ import './index.css'
 
 extensions.injectData({feedOptions: [
   ["Feeder 1", "1"],
-  ["Feed Z", "Z"],
-  ["Feedinsky &", "&"],
+  ["Feed Z", "2"],
+  ["Feedinsky &", "3"],
 ]})
 extensions.ready()
 
