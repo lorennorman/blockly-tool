@@ -3,7 +3,9 @@ import { allBlockRegenerators } from './index.js'
 // console.log('regeneartors:', allBlockRegenerators)
 const BYTECODE_BLOCK_TYPE_MAP = {
   logAction: 'action_log',
-  conditional: 'io_controls_if'
+  conditional: 'io_controls_if',
+  compare: 'logic_compare',
+  arithmetic: 'math_arithmetic'
 }
 
 const lookupRegenerator = expressionName => {

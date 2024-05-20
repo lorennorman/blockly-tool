@@ -16,8 +16,8 @@ export default {
           POWER: '^'
         },
         operator = block.getFieldValue('OP'),
-        leftExp = generator.valueToCode(block, 'A', 0) || '0',
-        rightExp = generator.valueToCode(block, 'B', 0) || '0',
+        leftExp = generator.valueToCode(block, 'A', 0) || 'null',
+        rightExp = generator.valueToCode(block, 'B', 0) || 'null',
 
         blockPayload = JSON.stringify({
           arithmetic: {
@@ -30,6 +30,29 @@ export default {
         })
 
       return [ blockPayload, 0 ]
+    }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const
+        payload = blockObject.arithmetic,
+        operatorMap = {
+          '+': 'ADD',
+          '-': 'MINUS',
+          '*': 'MULTIPLY',
+          '/': 'DIVIDE',
+          '^': 'POWER',
+        },
+        fields = {
+          OP: operatorMap[payload.operator]
+        },
+        inputs = {
+          A: helpers.expressionToBlock(payload.left),
+          B: helpers.expressionToBlock(payload.right),
+        }
+
+      return { type: 'math_arithmetic', fields, inputs }
     }
   }
 }
