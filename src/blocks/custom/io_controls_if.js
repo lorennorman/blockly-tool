@@ -73,7 +73,7 @@ export default {
         inputs = {}
 
       ifThens.forEach((item, index) => {
-        if(item.if) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if) }
+        if(item.if !== null) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if) }
         if(item.then) { inputs[`THEN${index}`] = helpers.arrayToStatements(item.then) }
       })
 

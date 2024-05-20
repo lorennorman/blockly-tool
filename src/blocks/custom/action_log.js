@@ -34,7 +34,9 @@ export default {
     json: (block, generator) => {
       const payload = {
         logAction: {
-          line: JSON.parse(generator.valueToCode(block, 'EXPRESSION', 0))
+          line: block.getInputTargetBlock('EXPRESSION')
+            ? JSON.parse(generator.valueToCode(block, 'EXPRESSION', 0))
+            : null
         }
       }
 
@@ -50,11 +52,13 @@ export default {
         throw new Error("No data for action_log regenerator")
       }
 
+      const inputsClause = payload.line !== null
+        ? { inputs: { EXPRESSION: helpers.expressionToBlock(payload.line)}}
+        : {}
+
       return {
         "type": "action_log",
-        "inputs": {
-          "EXPRESSION": helpers.expressionToBlock(payload.line)
-        }
+        ...inputsClause
       }
     }
   }
