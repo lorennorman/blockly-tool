@@ -8,6 +8,8 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   arithmetic: 'math_arithmetic',
   logic: 'logic_operation',
   negate: 'logic_negate',
+  setVariable: 'variables_set',
+  getVariable: 'variables_get',
 }
 
 const lookupRegenerator = expressionName => {
@@ -61,7 +63,9 @@ const helpers = {
 
     switch(expressionType) {
       case 'string':
-        return makeBlockType("text", { fields: { "TEXT": expressionBytecode }})
+        return expressionBytecode.includes("\n")
+          ? makeBlockType("text_multiline", { fields: { "TEXT": expressionBytecode }})
+          : makeBlockType("text", { fields: { "TEXT": expressionBytecode }})
 
       case 'number':
         return makeBlockType("math_number", { fields: { "NUM": expressionBytecode }})

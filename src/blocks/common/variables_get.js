@@ -17,5 +17,18 @@ export default {
 
       return [ blockPayload, 0 ]
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.getVariable
+
+      return {
+        type: "variables_get",
+        fields: {
+          VAR: helpers.expressionToBlock(payload.name)
+        }
+      }
+    }
   }
 }

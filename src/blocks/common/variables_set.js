@@ -14,7 +14,7 @@ export default {
       const
         defaultedValue = value
           ? JSON.parse(value)
-          : (value !== 0 && value !== null) && 'false',
+          : (value !== 0 && value !== null) && null,
         blockPayload = JSON.stringify({
           setVariable: {
             name: variableName,
@@ -23,6 +23,22 @@ export default {
         })
 
       return blockPayload
+    }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.setVariable
+
+      return {
+        type: "variables_set",
+        fields: {
+          VAR: payload.name
+        },
+        inputs: {
+          VALUE: helpers.expressionToBlock(payload.value)
+        }
+      }
     }
   }
 }
