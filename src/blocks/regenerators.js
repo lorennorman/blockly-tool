@@ -31,7 +31,23 @@ const helpers = {
       throw new Error(`No regenerator defined for block type: ${expType}`)
     }
 
-    return { block: blockRegenerator.json(expressionBytecode, helpers) }
+    const
+      blockJson = blockRegenerator.json(expressionBytecode, helpers),
+      collectionNames = ['inputs', 'fields']
+
+    // remove any fields or inputs with null or undefined values
+    collectionNames.forEach(collectionName => {
+      const collection = blockJson[collectionName]
+      if(!collection) { return }
+      for (const [name, value] of Object.entries(collection)) {
+        if(value === null || value === undefined) {
+          console.warn(`Block type "${blockJson.type}" has null ${collectionName}: "${name}"`)
+          delete collection[name]
+        }
+      }
+    })
+
+    return { block: blockJson }
   },
 
   expressionToBlock: expressionBytecode => {

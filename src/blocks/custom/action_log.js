@@ -52,13 +52,11 @@ export default {
         throw new Error("No data for action_log regenerator")
       }
 
-      const inputsClause = payload.line !== null
-        ? { inputs: { EXPRESSION: helpers.expressionToBlock(payload.line)}}
-        : {}
-
       return {
-        "type": "action_log",
-        ...inputsClause
+        type: "action_log",
+        inputs: {
+          EXPRESSION: helpers.expressionToBlock(payload.line)
+        }
       }
     }
   }
