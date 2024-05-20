@@ -28,10 +28,7 @@ export const clear = function(workspace) {
  * @param {Blockly.Workspace} workspace Blockly workspace to save.
  */
 export const save = function(workspace) {
-  const workspaceObject = Blockly.serialization.workspaces.save(workspace)
   const workspaceBytecode = workspaceToBytecode(workspace)
-  console.log("Saving Workspace:\n", JSON.stringify(workspaceObject, null, 2))
-  // console.log("Workspace-to-Bytecode:\n", workspaceBytecode)
   window.localStorage?.setItem(storageKey, workspaceBytecode)
 }
 
@@ -41,17 +38,13 @@ export const save = function(workspace) {
  */
 export const load = function(workspace) {
   const bytecodeString = window.localStorage?.getItem(storageKey)
-  // console.log("Loaded Bytecode String:", bytecodeString)
   const bytecode = JSON.parse(bytecodeString)
-  // console.log("Loaded Bytecode:", bytecode)
   if (!bytecode) return
 
   // Don't emit events during loading.
   Blockly.Events.disable()
   try {
-    // TODO: reverse generator, bytecode-to-workspace object
     const workspaceData = bytecodeToWorkspace(bytecode)
-    console.log("Bytecode-to-Workspace:", JSON.stringify(workspaceData, null, 2))
     Blockly.serialization.workspaces.load(workspaceData, workspace, false)
   } catch(e) {
     console.error("Failed to load a stored Blockly state, Blockly system may have changed incompatibly.")

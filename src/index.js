@@ -5,9 +5,9 @@ import extensions from "./extensions"
 import "./mutators"
 import { customBlocksJson } from './blocks'
 import allGenerators from './blocks/generators'
+import allRegenerators from './blocks/regenerators'
 import toolbox from './toolboxes'
-// import { clear, load, save } from './serialization'
-import { clear, load, save } from './bytecode_serialization'
+import { clear, load, save } from './serialization'
 import initialWorkspace from './workspaces/workspace.json'
 
 import './index.css'
@@ -41,7 +41,8 @@ Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
 Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 
 // prepare generators and their dom targets
-const jsonOutputDiv = document.getElementById('json-output')
+const blocklyJsonOutputDiv = document.getElementById('blockly-json')
+const bytecodeJsonOutputDiv = document.getElementById('bytecode-json')
 const regenerate = () => {
   const json = allGenerators.json.workspaceToCode(workspace)
 
@@ -53,15 +54,19 @@ const regenerate = () => {
       console.error('Failed to JSON.parse:', json)
       console.error(e)
     }
-    const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
-    jsonOutputDiv.innerText = `${validation}\n\n${json}`
-    if(valid) { return }
-    console.log(validation)
-    console.log(json)
+    const validation = `Bytecode JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
+    bytecodeJsonOutputDiv.innerText = `${validation}\n\n${json}`
+    // if(valid) { return }
+    // console.log(validation)
+    // console.log(json)
   } catch(e) {
-    jsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
+    blocklyJsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
     console.error(e)
+    return
   }
+
+  const bytecode = allRegenerators.json.codeToWorkspace(JSON.parse(json))
+  blocklyJsonOutputDiv.innerText = JSON.stringify(bytecode, null, 2)
 }
 
 // register listeners
@@ -92,12 +97,29 @@ const
   }
 clearButton.addEventListener('click', clearAndInitialize)
 
-const jsonButton = document.getElementById('button-json')
-const jsonOutputContainer = document.getElementById('json-output-container')
-jsonButton.addEventListener('click', () => {
-  jsonOutputContainer.style.visibility = (jsonOutputContainer.style.visibility !== "visible")
-    ? "visible"
-    : "hidden"
+const reloadButton = document.getElementById('button-reload')
+reloadButton.addEventListener('click', () => {
+  // export bytecode
+  const bytecodeJson = allGenerators.json.workspaceToCode(workspace)
+  // convert bytecode to workspace json
+  const workspaceJson = allRegenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
+
+  // disable events while we're working
+  Blockly.Events.disable()
+  try {
+    // clear workspace
+    workspace.clear()
+    // load workspace json
+    Blockly.serialization.workspaces.load(workspaceJson, workspace)
+
+  } catch(e) {
+    console.error(e)
+    console.log('reloading stored workspace...')
+
+    load(workspace)
+  } finally {
+    Blockly.Events.enable()
+  }
 })
 
 // load last sketch from storage

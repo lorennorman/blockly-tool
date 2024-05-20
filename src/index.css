@@ -29,7 +29,7 @@ pre, code {
     margin: 1rem;
 }
 
-#json-output-container {
+#blockly-json-container, #bytecode-json-container {
     background-color: rgb(247, 240, 228);
     width: 400px;
 }
