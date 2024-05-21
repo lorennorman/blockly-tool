@@ -50,5 +50,19 @@ export default {
 
       return JSON.stringify(payload)
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.publishAction
+
+      return {
+        type: "action_publish",
+        inputs: {
+          FEED: helpers.expressionToBlock(payload.feed),
+          VALUE: helpers.expressionToBlock(payload.value),
+        }
+      }
+    }
   }
 }

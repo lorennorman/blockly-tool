@@ -1,6 +1,5 @@
 import { allBlockRegenerators } from './index.js'
 
-// console.log('regeneartors:', allBlockRegenerators)
 const BYTECODE_BLOCK_TYPE_MAP = {
   logAction: 'action_log',
   conditional: 'io_controls_if',
@@ -11,6 +10,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   setVariable: 'variables_set',
   getVariable: 'variables_get',
   feed: 'feed_selector',
+  publishAction: 'action_publish',
 }
 
 const lookupRegenerator = expressionName => {
