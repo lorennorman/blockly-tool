@@ -57,28 +57,37 @@ const helpers = {
     return { block: blockJson }
   },
 
-  expressionToBlock: expressionBytecode => {
+  expressionToBlock: (expressionBytecode, options={}) => {
     if(expressionBytecode === null || expressionBytecode === undefined) { return null }
 
     const expressionType = typeof expressionBytecode
 
+    let expressionBlock
     switch(expressionType) {
       case 'string':
-        return expressionBytecode.includes("\n")
+        expressionBlock = expressionBytecode.includes("\n")
           ? makeBlockType("text_multiline", { fields: { "TEXT": expressionBytecode }})
           : makeBlockType("text", { fields: { "TEXT": expressionBytecode }})
+        break
 
       case 'number':
-        return makeBlockType("math_number", { fields: { "NUM": expressionBytecode }})
+        expressionBlock = makeBlockType("math_number", { fields: { "NUM": expressionBytecode }})
+        break
 
       case 'boolean':
-        return makeBlockType("logic_boolean", { fields: { "BOOL": expressionBytecode ? 'TRUE' : 'FALSE' }})
+        expressionBlock = makeBlockType("logic_boolean", { fields: { "BOOL": expressionBytecode ? 'TRUE' : 'FALSE' }})
+        break
 
       case 'object':
-        return helpers.objectExpressionToBlock(expressionBytecode)
+        expressionBlock = helpers.objectExpressionToBlock(expressionBytecode)
+        break
 
       default: throw new Error(`Unrecognized expression type: ${expressionType}`)
     }
+
+    return options.shadow
+      ? { ...expressionBlock, shadow: { type: options.shadow }}
+      : expressionBlock
   },
 
   arrayToStatements: array => {

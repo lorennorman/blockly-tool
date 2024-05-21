@@ -59,8 +59,8 @@ export default {
       return {
         type: "action_publish",
         inputs: {
-          FEED: helpers.expressionToBlock(payload.feed),
-          VALUE: helpers.expressionToBlock(payload.value),
+          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
+          VALUE: helpers.expressionToBlock(payload.value, { shadow: 'text' }),
         }
       }
     }
