@@ -58,7 +58,11 @@ const helpers = {
   },
 
   expressionToBlock: (expressionBytecode, options={}) => {
-    if(expressionBytecode === null || expressionBytecode === undefined) { return null }
+    if(expressionBytecode === null || expressionBytecode === undefined) {
+      return options.shadow
+        ? { shadow: { type: options.shadow }}
+        : null
+    }
 
     const expressionType = typeof expressionBytecode
 
