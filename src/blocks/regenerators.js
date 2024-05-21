@@ -69,7 +69,7 @@ const helpers = {
     let expressionBlock
     switch(expressionType) {
       case 'string':
-        expressionBlock = expressionBytecode.includes("\n")
+        expressionBlock = (expressionBytecode.includes("\n") || options.shadow === 'text_multiline')
           ? makeBlockType("text_multiline", { fields: { "TEXT": expressionBytecode }})
           : makeBlockType("text", { fields: { "TEXT": expressionBytecode }})
         break
