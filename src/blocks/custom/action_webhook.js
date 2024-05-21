@@ -90,5 +90,23 @@ export default {
 
       return JSON.stringify(payload)
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.webhookAction
+
+      return {
+        type: "action_webhook",
+        inputs: {
+          URL: helpers.expressionToBlock(payload.url, { shadow: 'text' }),
+          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+        },
+        fields: {
+          FORM_ENCODE: payload.formEncoded ? 'TRUE' : 'FALSE'
+        }
+      }
+    }
   }
 }

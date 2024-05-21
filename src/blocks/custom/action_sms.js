@@ -56,5 +56,19 @@ export default {
 
       return JSON.stringify(payload)
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.smsAction
+
+      return {
+        type: "action_sms",
+        inputs: {
+          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+        }
+      }
+    }
   }
 }

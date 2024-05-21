@@ -11,6 +11,9 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   getVariable: 'variables_get',
   feed: 'feed_selector',
   publishAction: 'action_publish',
+  webhookAction: 'action_webhook',
+  emailAction: 'action_email',
+  smsAction: 'action_sms',
 }
 
 const lookupRegenerator = expressionName => {

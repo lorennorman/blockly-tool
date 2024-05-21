@@ -64,5 +64,20 @@ export default {
 
       return JSON.stringify(payload)
     }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.emailAction
+
+      return {
+        type: "action_email",
+        inputs: {
+          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
+          SUBJECT: helpers.expressionToBlock(payload.subjectTemplate, { shadow: 'text' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+        }
+      }
+    }
   }
 }
