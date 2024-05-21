@@ -22,7 +22,7 @@ export default {
   mutator,
 
   lines: [
-    [ "if", { inputValue: 'IF0' }],
+    [ "if", { inputValue: 'IF0', shadow: 'logic_boolean' }],
     [ "do", { inputStatement: 'THEN0' }],
     [ "else if", { inputDummy: 'ELSE_IF_LABEL' }],
     [ "else", { inputDummy: 'ELSE_LABEL' }]
@@ -73,7 +73,7 @@ export default {
         inputs = {}
 
       ifThens.forEach((item, index) => {
-        if(item.if !== null) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if) }
+        if(item.if !== null) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if, { shadow: 'logic_boolean' }) }
         if(item.then) { inputs[`THEN${index}`] = helpers.arrayToStatements(item.then) }
       })
 

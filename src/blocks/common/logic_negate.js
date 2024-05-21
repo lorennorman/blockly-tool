@@ -24,7 +24,7 @@ export default {
       return {
         type: 'logic_negate',
         inputs: {
-          BOOL: helpers.expressionToBlock(payload)
+          BOOL: helpers.expressionToBlock(payload, { shadow: 'logic_boolean' })
         }
       }
     }

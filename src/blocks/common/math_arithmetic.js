@@ -48,8 +48,8 @@ export default {
           OP: operatorMap[payload.operator]
         },
         inputs = {
-          A: helpers.expressionToBlock(payload.left),
-          B: helpers.expressionToBlock(payload.right),
+          A: helpers.expressionToBlock(payload.left, { shadow: 'math_number' }),
+          B: helpers.expressionToBlock(payload.right, { shadow: 'math_number' }),
         }
 
       return { type: 'math_arithmetic', fields, inputs }

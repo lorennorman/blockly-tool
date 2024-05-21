@@ -32,8 +32,8 @@ export default {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left),
-          B: helpers.expressionToBlock(right),
+          A: helpers.expressionToBlock(left, { shadow: 'logic_boolean' }),
+          B: helpers.expressionToBlock(right, { shadow: 'logic_boolean' }),
         }
 
       return { type: 'logic_operation', fields, inputs }

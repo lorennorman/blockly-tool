@@ -36,7 +36,7 @@ export default {
           VAR: payload.name
         },
         inputs: {
-          VALUE: helpers.expressionToBlock(payload.value)
+          VALUE: helpers.expressionToBlock(payload.value, { shadow: 'text' })
         }
       }
     }

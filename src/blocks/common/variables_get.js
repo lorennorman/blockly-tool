@@ -26,7 +26,7 @@ export default {
       return {
         type: "variables_get",
         fields: {
-          VAR: helpers.expressionToBlock(payload.name)
+          VAR: payload.name
         }
       }
     }
