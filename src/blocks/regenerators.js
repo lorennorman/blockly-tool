@@ -1,4 +1,17 @@
-import { allBlockRegenerators } from './index.js'
+import Blockly from 'blockly'
+
+/* LOCAL->> */
+import { map } from 'lodash-es'
+import { allBlockRegenerators as blockRegenerators } from './index.js'
+
+export const renderRegenerators = () => `
+const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) => `
+  ${blockName}: {${map(regenerators, (func, name) => `
+    ${name}: ${func}`).join(',\n')}
+  }`).join(',\n')}
+}
+`
+/* <<-LOCAL */
 
 const BYTECODE_BLOCK_TYPE_MAP = {
   logAction: 'action_log',
@@ -17,8 +30,8 @@ const BYTECODE_BLOCK_TYPE_MAP = {
 }
 
 const lookupRegenerator = expressionName => {
-  return allBlockRegenerators[expressionName] ||
-    allBlockRegenerators[BYTECODE_BLOCK_TYPE_MAP[expressionName]]
+  return blockRegenerators[expressionName] ||
+    blockRegenerators[BYTECODE_BLOCK_TYPE_MAP[expressionName]]
 }
 
 const makeBlockType = (type, attrs={}) => {
@@ -125,7 +138,7 @@ export default {
       // build workspace wrapper
 
       // hand subtree to root block's regenerate method
-      const rootRegenerator = allBlockRegenerators.action_root.json
+      const rootRegenerator = blockRegenerators.action_root.json
 
       return {
         "blocks": {
