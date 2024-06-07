@@ -13,21 +13,23 @@ export default {
 
   connections: {
     mode: "value",
-    // output: "feed"
     output: null
   },
 
   lines: [
-    ["", { inputValue: 'A' }],
+    ["", { inputValue: 'A', shadow: 'math_number' }],
     [ "", {
       field: "OP",
       options: [
-        [ ">", "1001" ],
-        [ "<", "1002" ],
-        [ "=", "1003" ],
+        ['=', 'EQ'],
+        ['\u2260', 'NEQ'],
+        ['\u200F<', 'LT'],
+        ['\u200F\u2264', 'LTE'],
+        ['\u200F>', 'GT'],
+        ['\u200F\u2265', 'GTE'],
       ]
     }],
-    ["", { inputValue: 'B' }]
+    ["", { inputValue: 'B', shadow: 'math_number' }]
   ],
 
   generators: {
@@ -52,13 +54,13 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        payload = blockObject.compare,
+        { comparator, left, right } = blockObject.compare,
         fields = {
-          OP: payload.comparator?.toUpperCase()
+          OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(payload.left, { shadow: 'logic_boolean' }),
-          B: helpers.expressionToBlock(payload.right, { shadow: 'logic_boolean' }),
+          A: helpers.expressionToBlock(left, { shadow: 'math_number' }),
+          B: helpers.expressionToBlock(right, { shadow: 'math_number' }),
         }
 
       return { type: 'io_logic_compare', fields, inputs }

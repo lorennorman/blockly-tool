@@ -1,7 +1,7 @@
 import action_root from "./custom/action_root.js"
 
 import io_controls_if from "./custom/io_controls_if.js"
-import logic_compare from "./common/logic_compare.js"
+import io_logic_compare from "./custom/io_logic_compare.js"
 import logic_operation from "./common/logic_operation.js"
 import logic_negate from "./common/logic_negate.js"
 import logic_boolean from "./common/logic_boolean.js"
@@ -32,7 +32,7 @@ export default {
   // Logic
   io_controls_if,
   logic_ternary,
-  logic_compare,
+  io_logic_compare,
   logic_operation,
   logic_negate,
   logic_boolean,

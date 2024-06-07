@@ -64,8 +64,8 @@ export default {
         fields: {}, // fill in the fields on the shadowed block
       },
 
-      // TODO: for multiple block inputs
-      // inputStatement: 'INPUT_STATEMENT_NAME', ...
+      // for multiple block inputs
+      inputStatement: 'INPUT_STATEMENT_NAME',
 
       // for a single field input
       field: 'FIELD_NAME',

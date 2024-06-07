@@ -16,7 +16,7 @@ const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) =>
 const BYTECODE_BLOCK_TYPE_MAP = {
   logAction: 'action_log',
   conditional: 'io_controls_if',
-  compare: 'logic_compare',
+  compare: 'io_logic_compare',
   arithmetic: 'math_arithmetic',
   logic: 'logic_operation',
   negate: 'logic_negate',
