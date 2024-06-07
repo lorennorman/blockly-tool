@@ -46,16 +46,16 @@ export default {
   text_multiline,
 
   // Variables
-  variables_set,
-  variables_get,
+  // variables_set,
+  // variables_get,
 
   // Feeds
   feed_selector,
 
   // Actions
-  action_webhook,
-  action_email,
-  action_sms,
+  // action_webhook,
+  // action_email,
+  // action_sms,
   action_publish,
   action_log,
 }
