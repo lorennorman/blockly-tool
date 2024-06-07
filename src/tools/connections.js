@@ -1,6 +1,11 @@
 // mode: "none" || "value" || "statement:first" || "statement:last" || "statement",
 // output: "type" || ["list", "of", "types"],
 // next: "type" || ["list", "of", "types"]
+const DEFAULT_CONNECTIONS = {
+  mode: "value",
+  output: null
+}
+
 export default block => {
   const processEmpty = () => {
     if(output) {
@@ -42,7 +47,7 @@ export default block => {
     return object
   }
 
-  const { mode, output, next } = block.connections || {}
+  const { mode, output, next } = block.connections || DEFAULT_CONNECTIONS
 
   switch(mode) {
     case null:

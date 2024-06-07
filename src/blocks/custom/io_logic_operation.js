@@ -1,9 +1,26 @@
 export default {
-  type: 'logic_operation',
+  type: 'io_logic_operation',
 
   toolbox: {
     category: 'Logic',
   },
+
+  visualization: {
+    inputsInline: true,
+    colour: 60,
+  },
+
+  lines: [
+    ["", { inputValue: 'A', shadow: 'logic_boolean' }],
+    ["", {
+      field: 'OP',
+      options: [
+        ['and', 'AND'],
+        ['or', 'OR'],
+      ]
+    }],
+    ["", { inputValue: 'B', shadow: 'logic_boolean' }],
+  ],
 
   generators: {
     json: (block, generator) => {
@@ -36,7 +53,7 @@ export default {
           B: helpers.expressionToBlock(right, { shadow: 'logic_boolean' }),
         }
 
-      return { type: 'logic_operation', fields, inputs }
+      return { type: 'io_logic_operation', fields, inputs }
     }
   }
 }

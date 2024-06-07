@@ -1,9 +1,17 @@
 export default {
-  type: 'logic_negate',
+  type: 'io_logic_negate',
 
   toolbox: {
     category: 'Logic',
   },
+
+  visualization: {
+    colour: 60,
+  },
+
+  lines: [
+    ["not", { inputValue: 'BOOL', shadow: 'logic_boolean' }]
+  ],
 
   generators: {
     json: (block, generator) => {
@@ -22,7 +30,7 @@ export default {
       const payload = blockObject.negate
 
       return {
-        type: 'logic_negate',
+        type: 'io_logic_negate',
         inputs: {
           BOOL: helpers.expressionToBlock(payload, { shadow: 'logic_boolean' })
         }

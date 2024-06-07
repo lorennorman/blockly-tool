@@ -2,13 +2,13 @@ import action_root from "./custom/action_root.js"
 
 import io_controls_if from "./custom/io_controls_if.js"
 import io_logic_compare from "./custom/io_logic_compare.js"
-import logic_operation from "./common/logic_operation.js"
-import logic_negate from "./common/logic_negate.js"
+import io_logic_operation from "./custom/io_logic_operation.js"
+import io_logic_negate from "./custom/io_logic_negate.js"
 import logic_boolean from "./common/logic_boolean.js"
-import logic_ternary from "./common/logic_ternary.js"
+import io_logic_ternary from "./custom/io_logic_ternary.js"
 
 import math_number from "./common/math_number.js"
-import math_arithmetic from "./common/math_arithmetic.js"
+import io_math_arithmetic from "./custom/io_math_arithmetic.js"
 
 import text from "./common/text.js"
 import text_multiline from "./common/text_multiline.js"
@@ -31,15 +31,15 @@ export default {
 
   // Logic
   io_controls_if,
-  logic_ternary,
+  // io_logic_ternary,
   io_logic_compare,
-  logic_operation,
-  logic_negate,
+  io_logic_operation,
+  io_logic_negate,
   logic_boolean,
 
   // Math
   math_number,
-  math_arithmetic,
+  io_math_arithmetic,
 
   // Text
   text,

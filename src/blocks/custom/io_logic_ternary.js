@@ -1,9 +1,19 @@
 export default {
-  type: 'logic_ternary',
+  type: 'io_logic_ternary',
 
   toolbox: {
     category: 'Logic',
   },
+
+  visualization: {
+    colour: 60,
+  },
+
+  lines: [
+    ["if", { inputValue: 'IF', shadow: 'logic_boolean' }],
+    ["then", { inputValue: 'THEN', shadow: 'logic_boolean' }],
+    ["else", { inputValue: 'ELSE', shadow: 'logic_boolean' }],
+  ],
 
   generators: {
     json: (block, generator) => {

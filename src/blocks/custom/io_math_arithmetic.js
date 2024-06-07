@@ -1,9 +1,29 @@
 export default {
-  type: 'math_arithmetic',
+  type: 'io_math_arithmetic',
 
   toolbox: {
     category: 'Math',
   },
+
+  visualization: {
+    inputsInline: true,
+    colour: 230,
+  },
+
+  lines: [
+    [ "", { inputValue: 'A', shadow: 'math_number'}],
+    [ "", {
+      field: 'OP',
+      options: [
+        ['+', 'ADD'],
+        ['-', 'MINUS'],
+        ['x', 'MULTIPLY'],
+        ['/', 'DIVIDE'],
+        ['^', 'POWER'],
+      ]
+    }],
+    [ "", { inputValue: 'B', shadow: 'math_number'}],
+  ],
 
   generators: {
     json: (block, generator) => {
@@ -52,7 +72,7 @@ export default {
           B: helpers.expressionToBlock(payload.right, { shadow: 'math_number' }),
         }
 
-      return { type: 'math_arithmetic', fields, inputs }
+      return { type: 'io_math_arithmetic', fields, inputs }
     }
   }
 }

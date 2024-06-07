@@ -2,7 +2,8 @@
 export default {
   type: "action_root",
 
-  toolbox: { },
+  toolbox: {},
+  connections: {},
 
   visualization: {
     colour: "0",

@@ -6,7 +6,7 @@ export default {
   },
 
   visualization: {
-    colour: 240,
+    colour: 300,
     tooltip: "The last value of this feed or component, always a String"
   },
 
@@ -23,12 +23,6 @@ export default {
       input.removeField("FEED_ID")
       input.appendField(new Blockly.FieldDropdown(feedOptions), "FEED_ID")
     }
-  },
-
-  connections: {
-    mode: "value",
-    // output: "feed"
-    output: null
   },
 
   lines: [

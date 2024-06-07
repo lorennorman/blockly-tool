@@ -7,13 +7,8 @@ export default {
 
   visualization: {
     inputsInline: true,
-    colour: 240,
+    colour: 60,
     tooltip: "Compare two values."
-  },
-
-  connections: {
-    mode: "value",
-    output: null
   },
 
   lines: [
