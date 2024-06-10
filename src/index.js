@@ -14,9 +14,9 @@ import './index.css'
 
 
 extensions.injectData({feedOptions: [
-  ["Feeder 1", "1"],
-  ["Feed Z", "2"],
-  ["Feedinsky &", "3"],
+  ["Feeder 1", "abc123"],
+  ["A Feed Z", "qrstuv"],
+  ["Feedinsky &", "oneforyou-oneforme"],
 ]})
 extensions.ready()
 

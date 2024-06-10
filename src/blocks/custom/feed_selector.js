@@ -20,18 +20,16 @@ export default {
       }
 
       const input = block.getInput('')
-      input.removeField("FEED_ID")
-      input.appendField(new Blockly.FieldDropdown(feedOptions), "FEED_ID")
+      input.removeField("FEED_KEY")
+      input.appendField(new Blockly.FieldDropdown(feedOptions), "FEED_KEY")
     }
   },
 
   lines: [
     [ "Feed:", {
-      field: "FEED_ID",
+      field: "FEED_KEY",
       options: [
-        [ "Feed_A", "1001" ],
-        [ "Feed_B", "1002" ],
-        [ "Feed_C", "1003" ],
+        [ "Loading Feeds...", "" ],
       ]
     }],
   ],
@@ -39,23 +37,23 @@ export default {
   generators: {
     json: block => {
       const
-        feedId = block.getFieldValue('FEED_ID'),
-        blockPayload = JSON.stringify({
-          feed: { id: parseInt(feedId, 10) }
+        key = block.getFieldValue('FEED_KEY'),
+        payload = JSON.stringify({
+          feed: { key }
         })
 
-      return [ blockPayload, 0 ]
+      return [ payload, 0 ]
     }
   },
 
   regenerators: {
-    json: (blockObject, helpers) => {
+    json: blockObject => {
       const payload = blockObject.feed
 
       return {
         type: "feed_selector",
         fields: {
-          FEED_ID: payload.id?.toString()
+          FEED_KEY: payload.key
         }
       }
     }
