@@ -10,18 +10,20 @@ export default {
   },
 
   lines: [
-    ["not", { inputValue: 'BOOL', shadow: 'logic_boolean' }]
+    ["not", { inputValue: 'EXPRESSION', shadow: 'logic_boolean' }]
   ],
 
   generators: {
     json: (block, generator) => {
       const
-        operand = generator.valueToCode(block, 'BOOL', 0) || null,
-        blockPayload = {
-          negate: JSON.parse(operand)
+        operand = generator.valueToCode(block, 'EXPRESSION', 0) || null,
+        payload = {
+          negate: {
+            target: JSON.parse(operand)
+          }
         }
 
-      return [ JSON.stringify(blockPayload), 0 ]
+      return [ JSON.stringify(payload), 0 ]
     }
   },
 
@@ -32,7 +34,7 @@ export default {
       return {
         type: 'io_logic_negate',
         inputs: {
-          BOOL: helpers.expressionToBlock(payload, { shadow: 'logic_boolean' })
+          EXPRESSION: helpers.expressionToBlock(payload.target, { shadow: 'logic_boolean' })
         }
       }
     }

@@ -34,9 +34,7 @@ export default {
     json: (block, generator) => {
       const payload = {
         logAction: {
-          line: block.getInputTargetBlock('EXPRESSION')
-            ? JSON.parse(generator.valueToCode(block, 'EXPRESSION', 0))
-            : null
+          line: JSON.parse(generator.valueToCode(block, 'EXPRESSION', 0) || null)
         }
       }
 
