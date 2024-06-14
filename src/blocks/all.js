@@ -12,6 +12,7 @@ import io_math_arithmetic from "./custom/io_math_arithmetic.js"
 
 import text from "./common/text.js"
 import text_multiline from "./common/text_multiline.js"
+import text_compare from "./custom/text_compare.js"
 
 import variables_set from "./common/variables_set.js"
 import variables_get from "./common/variables_get.js"
@@ -44,6 +45,7 @@ export default {
   // Text
   text,
   text_multiline,
+  text_compare,
 
   // Variables
   // variables_set,

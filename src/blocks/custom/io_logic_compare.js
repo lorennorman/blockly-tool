@@ -8,7 +8,19 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 60,
-    tooltip: "Compare two values."
+    tooltip: [
+      "Compare two numeric values in various ways.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Comparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?",
+      "Number A - the first number",
+      "Number B - the second number",
+      "-",
+      "Casting:",
+      "---------------",
+      "both inputs are coerced to floating point numbers",
+    ].join('\n'),
   },
 
   lines: [

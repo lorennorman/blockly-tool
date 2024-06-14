@@ -17,6 +17,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   logAction: 'action_log',
   conditional: 'io_controls_if',
   compare: 'io_logic_compare',
+  textCompare: 'text_compare',
   arithmetic: 'io_math_arithmetic',
   logic: 'io_logic_operation',
   negate: 'io_logic_negate',
