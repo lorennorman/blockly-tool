@@ -2,12 +2,12 @@ export default {
   type: 'io_logic_compare',
 
   toolbox: {
-    category: 'Logic',
+    category: 'Math',
   },
 
   visualization: {
     inputsInline: true,
-    colour: 60,
+    colour: 224,
     tooltip: [
       "Compare two numeric values in various ways.",
       "-",

@@ -33,13 +33,13 @@ export default {
   // Logic
   io_controls_if,
   // io_logic_ternary,
-  io_logic_compare,
   io_logic_operation,
   io_logic_negate,
   logic_boolean,
 
   // Math
   math_number,
+  io_logic_compare,
   io_math_arithmetic,
 
   // Text
@@ -48,8 +48,8 @@ export default {
   text_compare,
 
   // Variables
-  // variables_set,
   // variables_get,
+  // variables_set,
 
   // Feeds
   feed_selector,
