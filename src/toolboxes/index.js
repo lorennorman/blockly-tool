@@ -36,7 +36,7 @@ const
 
   selectBlocksByCategoryName = name =>
     filter(allBlockDefinitions, def =>
-      def.toolbox.category === name || includes(def.toolbox.categories, name)
+      def.toolbox?.category === name || includes(def.toolbox?.categories, name)
     ),
 
   blockToLabelAndBlock = block => compact([

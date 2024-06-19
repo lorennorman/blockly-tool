@@ -1,9 +1,9 @@
 export default {
   type: 'variables_set',
 
-  toolbox: {
-    category: "Variables"
-  },
+  // toolbox: {
+  //   category: "Variables"
+  // },
 
   generators: {
     json: (block, generator) => {
