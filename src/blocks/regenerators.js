@@ -39,6 +39,7 @@ const makeBlockType = (type, attrs={}) => {
   return { block: { type, ...attrs }}
 }
 
+let variableRegistry = []
 const helpers = {
   objectExpressionToBlock: expressionBytecode => {
     const expKeys = Object.keys(expressionBytecode)
@@ -129,6 +130,28 @@ const helpers = {
 
       return blocksDef
     }, {})
+  },
+
+  registerVariable: variableName => {
+    // make a namespace for our variables, use name as uid
+    const variableId = `io_variables:${variableName}`
+
+    // detect id collisions
+    if(!variableRegistry.find(variable => variable.id === variableId)) {
+      // this is the final format used by Blockly variables deserializer
+      variableRegistry.push({ name: variableName, id: variableId})
+    }
+
+    return variableId
+  },
+
+  dumpVariables: () => {
+    // make a copy
+    const variables = [ ...variableRegistry ]
+    // clear the variables
+    variableRegistry = []
+    // return the copy
+    return variables
   }
 }
 
