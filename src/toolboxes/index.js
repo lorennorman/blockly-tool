@@ -13,20 +13,12 @@ const
     // { name: 'Variables', colour: 240 },
     { name: 'Feeds', colour: 300 },
     { name: 'Actions', colour: 360 },
-    SEP,
-    {
-      kind: 'search',
-      name: 'Search',
-      contents: [],
-    }
   ],
 
   generateToolboxContents = () => map(TOOLBOX_CONFIG, category =>
     // inject other kinds of toolbox objects here
     category === SEP
       ? { kind: 'sep' }
-      : category.kind === 'search'
-      ? category
       : {
           kind: 'category',
           name: category.name,
