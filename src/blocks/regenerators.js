@@ -35,6 +35,8 @@ const lookupRegenerator = expressionName => {
     blockRegenerators[BYTECODE_BLOCK_TYPE_MAP[expressionName]]
 }
 
+const lookupRootRegenerator = () => blockRegenerators.action_root.json
+
 const makeBlockType = (type, attrs={}) => {
   return { block: { type, ...attrs }}
 }
@@ -158,17 +160,28 @@ const helpers = {
 export default {
   json: {
     codeToWorkspace: (bytecode) => {
-      // check bytecode version
-      // build workspace wrapper
+      // TODO:
+      // - check bytecode version
+      // - build workspace wrapper
 
-      // hand subtree to root block's regenerate method
-      const rootRegenerator = blockRegenerators.action_root.json
+      const
+        // find the root block's regenerator
+        rootRegenerator = lookupRootRegenerator(),
+        // generate the block diagram from the bytecode
+        generatedBlocks = rootRegenerator(bytecode, helpers),
+        // dump the variables that were registered during block generation
+        generatedVariables = helpers.dumpVariables(),
+        // TODO: generate procedures (functions, meta-blocks)
+        generatedProcedures = []
 
+      // output the Blockly JSON serialization format
       return {
-        "blocks": {
-          "languageVersion": 0,
-          "blocks": [ rootRegenerator(bytecode, helpers) ]
-        }
+        blocks: {
+          languageVersion: 0,
+          blocks: [ generatedBlocks ]
+        },
+        variables: generatedVariables,
+        procedures: generatedProcedures
       }
     }
   }

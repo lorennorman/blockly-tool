@@ -21,13 +21,15 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const payload = blockObject.getVariable
+      const
+        { name } = blockObject.getVariable,
+        id = helpers.registerVariable(name)
 
       return {
         type: "variables_get",
         fields: {
-          VAR: payload.name
-        }
+          VAR: { id }
+        },
       }
     }
   }

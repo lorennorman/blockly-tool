@@ -28,15 +28,17 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const payload = blockObject.setVariable
+      const
+        { name, value } = blockObject.setVariable,
+        id = helpers.registerVariable(name)
 
       return {
         type: "variables_set",
         fields: {
-          VAR: payload.name
+          VAR: { id }
         },
         inputs: {
-          VALUE: helpers.expressionToBlock(payload.value, { shadow: 'text' })
+          VALUE: helpers.expressionToBlock(value, { shadow: 'text' })
         }
       }
     }

@@ -48,8 +48,8 @@ export default {
   text_compare,
 
   // Variables
-  // variables_get,
-  // variables_set,
+  variables_get,
+  variables_set,
 
   // Feeds
   feed_selector,
