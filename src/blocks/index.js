@@ -1,4 +1,4 @@
-import { assign, chain, isArray, map, mapValues, keys, pickBy, without } from 'lodash-es'
+import { assign, isArray, map, mapValues, keys, pickBy, without } from 'lodash-es'
 import Blockly from 'blockly'
 
 import blockDefaults from './defaults.js'
@@ -13,13 +13,10 @@ export const
   allBlockGenerators = mapValues(allBlockDefinitions, "generators"),
   allBlockRegenerators = mapValues(allBlockDefinitions, "regenerators"),
   allBlockMutators = pickBy(mapValues(allBlockDefinitions, "mutator")),
-  allBlockExtensions =
-    chain(allBlockDefinitions)
-      .map("extensions")  // just the extensions key
-      .compact()          // remove null
-      .reject(isArray)    // remove arrays
-      .reduce(assign, {}) // merge all together
-    .value()
+  allBlockExtensions = Object.values(allBlockDefinitions)
+    .map(def => def.extensions)
+    .filter(ext => ext && !isArray(ext))
+    .reduce(assign, {})
 
 const
   COMMON_KEYS = [
