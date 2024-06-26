@@ -3,18 +3,17 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "Send yourself an email with a given subject and body, templated from a given feed."
+    label: "Send yourself an email with custom subject and body templates."
   },
 
   visualization: {
     colour: "0",
     tooltip: [
-      "Sends an email with given SUBJECT and BODY, each templated with a given FEED",
+      "Sends an email with given SUBJECT and BODY",
       "---------------",
       "Parameters:",
       "SUBJECT - a template for generating the email subject",
       "BODY - a template for generating the email body",
-      "FEED - the feed to pull template data from",
     ].join('\n'),
   },
 
@@ -27,38 +26,44 @@ export default {
   lines: [
     [ "📧 Email", 'CENTER'],
 
-    [ "...subject:", {
+    [ "Subject:", {
       inputValue: "SUBJECT",
-      // check: 'String',
       shadow: {
-        type: 'text',
-        fields: { TEXT: '{{feed_name}} feed has a new value: {{value}}' }
+        type: 'text_template',
+        inputs: { TEMPLATE: {
+          shadow: {
+            type: 'text',
+            fields: {
+              TEXT: '{{ vars.feed_name }} feed has a new value: {{ vars.feed_value }}'
+            }
+          }
+        }}
       }
     }],
 
-    [ "...body:", {
+    [ "Body:", {
       inputValue: "BODY",
       // check: 'String',
       shadow: {
-        type: 'text_multiline',
-        fields: { TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}' }
+        type: 'text_template',
+        inputs: { TEMPLATE: {
+          shadow: {
+            type: 'text_multiline',
+            fields: {
+              TEXT: 'Hello!\nThe {{ vars.feed_name }} feed has a new value: {{ vars.value }}\nProcessed at: {{ vars.now }}'
+            }
+          }
+        }}
       }
-    }],
-
-    [ "...using:", {
-      inputValue: "FEED",
-      // check: 'feed',
-      shadow: 'feed_selector',
-    }],
+    }]
   ],
 
   generators: {
     json: (block, generator) => {
       const payload = {
         emailAction: {
-          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)), // || null,
-          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0)), // || "",
-          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0)) // || ""
+          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0)),
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0))
         }
       }
 
@@ -73,7 +78,6 @@ export default {
       return {
         type: "action_email",
         inputs: {
-          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
           SUBJECT: helpers.expressionToBlock(payload.subjectTemplate, { shadow: 'text' }),
           BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
         }
