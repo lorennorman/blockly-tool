@@ -78,8 +78,9 @@ export default {
       return {
         type: "action_email",
         inputs: {
-          SUBJECT: helpers.expressionToBlock(payload.subjectTemplate, { shadow: 'text' }),
-          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+          // TODO: regenerators need to support nested shadow blocks
+          SUBJECT: helpers.expressionToBlock(payload.subjectTemplate, { shadow: 'text_template' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_template' })
         }
       }
     }

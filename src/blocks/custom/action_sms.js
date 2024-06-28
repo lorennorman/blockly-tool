@@ -3,17 +3,17 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "Send yourself an SMS, or text message, with body templated from a given feed."
+    label: "Send yourself a templated SMS, or text message."
   },
 
   visualization: {
     colour: "0",
     tooltip: [
-      "Sends a text message with a given BODY template using a given FEED",
+      "(IO+ only)",
+      "Sends a text message with a given BODY template.",
       "---------------",
       "Parameters:",
       "BODY - a template for generating the SMS body",
-      "FEED - the feed to pull template data from",
     ].join('\n')
   },
 
@@ -25,23 +25,24 @@ export default {
 
   lines: [
     [ "📲 SMS", "CENTER" ],
-    [ "(IO+ only)", "CENTER" ],
 
-    [ "...body:", {
+    [ "Message:", {
       inputValue: "BODY",
       // check: "String",
       shadow: {
-        type: 'text_multiline',
-        fields: {
-          TEXT: 'The {{feed_name}} feed has a new value: {{value}} at {{created_at}}'
-        }
+        type: 'text_template',
+        inputs: { TEMPLATE: {
+          shadow: {
+            type: 'text_multiline',
+            fields: {
+              TEXT: [
+                'The {{ vars.feed_name }} feed has a new',
+                'value: {{ vars.feed_value }} at {{ vars.now }}'
+              ].join('\n')
+            }
+          }
+        }}
       }
-    }],
-
-    [ "...using:", {
-      inputValue: "FEED",
-      // check: "feed",
-      shadow: 'feed_selector'
     }],
   ],
 
@@ -49,7 +50,6 @@ export default {
     json: (block, generator) => {
       const payload = {
         smsAction: {
-          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
           bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0))
         }
       }
@@ -65,8 +65,8 @@ export default {
       return {
         type: "action_sms",
         inputs: {
-          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
-          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+          // TODO: regenerators need to support nested shadow blocks
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_template' })
         }
       }
     }

@@ -112,6 +112,7 @@ const helpers = {
       default: throw new Error(`Unrecognized expression type: ${expressionType}`)
     }
 
+    // TODO: regenerators need to support nested shadow blocks
     return options.shadow
       ? { ...expressionBlock, shadow: { type: options.shadow }}
       : expressionBlock

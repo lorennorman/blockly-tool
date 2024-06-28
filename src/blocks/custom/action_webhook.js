@@ -3,7 +3,7 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "POST a given body payload, templated from a given feed, to a given web URL."
+    label: "POST a given body template to a given web URL."
   },
 
   visualization: {
@@ -15,7 +15,6 @@ export default {
       "URL - a valid web location to send a request to",
       "BODY - a JSON template to render and POST",
       "FORM_ENCODE - optionally encode as form input",
-      "FEED - the feed to use for the BODY template data",
     ].join('\n')
   },
 
@@ -28,7 +27,7 @@ export default {
   lines: [
     [ "🔗 Webhook", "CENTER" ],
 
-    [ "...to URL:", {
+    [ "URL:", {
       inputValue: "URL",
       // check: "String",
       shadow: {
@@ -37,30 +36,26 @@ export default {
       }
     }],
 
-    [ "...POST body:", {
+    [ "POST Body:", {
       inputValue: "BODY",
       // check: "String",
       shadow: {
-        type: 'text_multiline',
-        fields: {
-          TEXT:
+        type: 'text_template',
+        inputs: {
+          TEMPLATE: {
+            shadow: {
+              type: 'text_multiline',
+              fields: {
+                TEXT:
 `[
   {
-    "id": "{{id}}",
-    "value": "{{value}}",
-    "feed_id": {{feed_id}},
-    "feed_name": "{{feed_name}}",
-    "feed_key": "{{feed_key}}",
-    "location": {
-      "lat": {{lat}},
-      "lon": {{lon}},
-      "ele": {{ele}}
-    },
-    "created_at": "{{created_at}}",
-    "updated_at": "{{updated_at}}",
-    "expiration": {{expiration}}
+    "id": "{{ vars.feed_id }}",
+    "value": "{{ vars.feed_value }}",
   }
 ]`
+              }
+            }
+          }
         }
       }
     }],
@@ -69,12 +64,6 @@ export default {
       field: "FORM_ENCODE",
       checked: false
     }],
-
-    [ "...using:", {
-      inputValue: "FEED",
-      // check: "feed",
-      shadow: 'feed_selector'
-    }],
   ],
 
   generators: {
@@ -82,7 +71,6 @@ export default {
       const payload = {
         webhookAction: {
           url: JSON.parse(generator.valueToCode(block, 'URL', 0)),
-          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
           bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0)),
           formEncoded: block.getFieldValue('FORM_ENCODE') === 'TRUE'
         }
@@ -100,7 +88,6 @@ export default {
         type: "action_webhook",
         inputs: {
           URL: helpers.expressionToBlock(payload.url, { shadow: 'text' }),
-          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
           BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
         },
         fields: {

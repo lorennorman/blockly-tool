@@ -22,9 +22,9 @@ import variables_get from "./common/variables_get.js"
 
 import feed_selector from "./custom/feed_selector.js"
 
-// import action_webhook from "./custom/action_webhook.js"
+import action_webhook from "./custom/action_webhook.js"
 import action_email from "./custom/action_email.js"
-// import action_sms from "./custom/action_sms.js"
+import action_sms from "./custom/action_sms.js"
 import action_publish from "./custom/action_publish.js"
 import action_log from "./custom/action_log.js"
 
@@ -61,9 +61,9 @@ export default {
   feed_selector,
 
   // Actions
-  // action_webhook,
+  action_webhook,
   action_email,
-  // action_sms,
+  action_sms,
   action_publish,
   action_log,
 }
