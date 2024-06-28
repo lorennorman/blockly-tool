@@ -36,6 +36,11 @@ export default {
       }
     }],
 
+    [ "Form Encode?", {
+      field: "FORM_ENCODE",
+      checked: false
+    }],
+
     [ "POST Body:", {
       inputValue: "BODY",
       // check: "String",
@@ -47,22 +52,15 @@ export default {
               type: 'text_multiline',
               fields: {
                 TEXT:
-`[
-  {
-    "id": "{{ vars.feed_id }}",
-    "value": "{{ vars.feed_value }}",
-  }
-]`
+`[{
+  "id": "{{ vars.feed_id }}",
+  "value": "{{ vars.feed_value }}",
+}]`
               }
             }
           }
         }
       }
-    }],
-
-    [ "Form Encode?", {
-      field: "FORM_ENCODE",
-      checked: false
     }],
   ],
 
