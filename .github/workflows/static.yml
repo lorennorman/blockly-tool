@@ -34,7 +34,7 @@ jobs:
       - name: Vite Build
         run: |
           npm ci
-          npm run build -- --base=/blockly-tool/
+          npm run build-all-branches -- --base=/blockly-tool/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
