@@ -32,4 +32,5 @@ pre, code {
 #blockly-json-container, #bytecode-json-container {
     background-color: rgb(247, 240, 228);
     width: 400px;
+    min-height: 200px;
 }

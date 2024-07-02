@@ -40,11 +40,22 @@ Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
 // inject workspace blocks
 Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 
+const workspaceToBytecode = workspace => {
+  const generated = allGenerators.json.workspaceToCode(workspace) || ""
+
+  return `{
+  "version": "1.0.0-beta.1",
+  "settings": {},
+  "expressions": [
+    ${ generated.replace("}\n", "},\n    ") }
+  ]
+}`
+}
 // prepare generators and their dom targets
 const blocklyJsonOutputDiv = document.getElementById('blockly-json')
 const bytecodeJsonOutputDiv = document.getElementById('bytecode-json')
 const regenerate = () => {
-  const json = allGenerators.json.workspaceToCode(workspace)
+  const json = workspaceToBytecode(workspace)
 
   try {
     let valid = true
@@ -100,7 +111,10 @@ clearButton.addEventListener('click', clearAndInitialize)
 const reloadBytecodeButton = document.getElementById('button-reload-bytecode')
 reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
-  const bytecodeJson = allGenerators.json.workspaceToCode(workspace)
+  // const bytecodeJson = allGenerators.json.workspaceToCode(workspace)
+  const bytecodeJson = workspaceToBytecode(workspace)
+  console.log('bytecode:', bytecodeJson)
+  console.log('parsed:', JSON.parse(bytecodeJson))
   // convert bytecode to workspace json
   const workspaceJson = allRegenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
 
@@ -114,11 +128,11 @@ reloadBytecodeButton.addEventListener('click', () => {
 
     console.log("Reloaded diagram from bytecode.")
 
-  } catch(e) {
-    console.log('Failed diagram reload. Reloading stored workspace...')
-    console.error(e)
+  // } catch(e) {
+  //   console.log('Failed diagram reload. Reloading stored workspace...')
+  //   console.error(e)
 
-    load(workspace)
+  //   load(workspace)
 
   } finally {
     Blockly.Events.enable()

@@ -14,6 +14,7 @@ const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) =>
 /* <<-LOCAL */
 
 const BYTECODE_BLOCK_TYPE_MAP = {
+  whenFeedsChange: 'when_feeds_change',
   logAction: 'action_log',
   conditional: 'io_controls_if',
   compare: 'io_logic_compare',
@@ -118,7 +119,7 @@ const helpers = {
       : expressionBlock
   },
 
-  arrayToStatements: array => {
+  arrayToStatements: (array=[]) => {
     return array.reduce((blocksDef, exp) => {
       const blockDef = helpers.objectExpressionToBlock(exp)
 
@@ -168,11 +169,21 @@ export default {
       // - check bytecode version
       // - build workspace wrapper
 
+      console.log('bytecode:', bytecode)
+
       const
         // find the root block's regenerator
-        rootRegenerator = lookupRootRegenerator(),
+        // rootRegenerator = lookupRootRegenerator(),
         // generate the block diagram from the bytecode
-        generatedBlocks = rootRegenerator(bytecode, helpers),
+        // generatedBlocks = rootRegenerator(bytecode, helpers),
+        generatedBlocks = bytecode.expressions?.map(helpers.objectExpressionToBlock)?.map(block => block.block),
+        // generatedBlocks = bytecode.expressions?.map(exp => {
+        //   console.log(exp)
+        //   console.log(Object.keys(exp))
+        //   console.log(Object.keys(exp)[0])
+        //   const blockKey = Object.keys(exp)[0]
+        //   return blockRegenerators[blockKey].json(bytecode, helpers)
+        // }),
         // dump the variables that were registered during block generation
         generatedVariables = helpers.dumpVariables(),
         // TODO: generate procedures (functions, meta-blocks)
@@ -182,7 +193,7 @@ export default {
       return {
         blocks: {
           languageVersion: 0,
-          blocks: [ generatedBlocks ]
+          blocks: generatedBlocks
         },
         variables: generatedVariables,
         procedures: generatedProcedures
