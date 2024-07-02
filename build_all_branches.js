@@ -21,16 +21,20 @@ const build_all_branches = async () => {
   // build main
   await pexec("vite build")
 
-  // for each other branch:
-  for(let i = 0; i < branches.length; i++) {
-    const branch = branches[i]
-    //   check out branch
-    await pexec(`git checkout ${branch}`)
-    //   build with outDir=dist/{branch_name}
-    await pexec("vite build --outDir=dist/${branch}")
-  }
+  try {
+    // for each other branch:
+    for(let i = 0; i < branches.length; i++) {
+      const branch = branches[i]
+      console.log(`Building branch: ${branch}`)
+      //   check out branch
+      await pexec(`git checkout ${branch}`)
+      //   build with outDir=dist/{branch_name} and no clean
+      await pexec("vite build --outDir=dist/${branch} --emptyOutDir=false")
+    }
 
-  await pexec(`git checkout main`)
+  } finally {
+    await pexec(`git checkout main`)
+  }
 }
 
 build_all_branches()
