@@ -39,7 +39,7 @@ jobs:
             })
 
             const branchNames = branches.data.map(branch => branch.name)
-            console.log(branchnames)
+            console.log(branchNames)
 
             return branchNames
 
