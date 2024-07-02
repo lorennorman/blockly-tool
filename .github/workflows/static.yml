@@ -33,10 +33,17 @@ jobs:
         id: list-all-branches
         with:
           script: |
-            return github.rest.repos.listBranches({
+            const branches = await github.rest.repos.listBranches({
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
+
+            console.log(branches)
+            console.log(branches.data)
+            console.log(branches.data[0].name)
+
+            return ["a", "b", "c"]
+
       - name: Get result
         run: echo "${{fromJson(steps.list-all-branches.outputs.result)}}"
       - name: Checkout
