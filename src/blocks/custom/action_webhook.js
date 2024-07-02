@@ -52,10 +52,10 @@ export default {
               type: 'text_multiline',
               fields: {
                 TEXT:
-`[{
+`{
   "id": "{{ vars.feed_id }}",
-  "value": "{{ vars.feed_value }}",
-}]`
+  "value": "{{ vars.feed_value }}"
+}`
               }
             }
           }
