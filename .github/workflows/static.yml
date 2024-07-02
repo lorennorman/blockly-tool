@@ -38,7 +38,7 @@ jobs:
               repo: context.repo.repo,
             })
 
-            const branchNames = branches.data.map(branch => branch.name
+            const branchNames = branches.data.map(branch => branch.name)
             console.log(branchnames)
 
             return branchNames
