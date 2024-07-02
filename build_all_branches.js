@@ -29,7 +29,7 @@ const build_all_branches = async () => {
       //   check out branch
       await pexec(`git checkout ${branch}`)
       //   build with outDir=dist/{branch_name} and no clean
-      await pexec(`vite build --outDir dist/${branch}`)
+      await pexec(`vite build --outDir dist/${branch} --base /${branch}/`)
     }
 
   } finally {
