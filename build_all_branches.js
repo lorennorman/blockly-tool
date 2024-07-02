@@ -9,6 +9,8 @@ const build_all_branches = async () => {
   // check we're on main
   const { stdout } = await pexec("git branch")
 
+  console.log("git branch:", stdout)
+
   if(!stdout.match(/^\* main$/m)) {
     console.error("Oops, not on main branch. Switch to main and try again?")
   }
