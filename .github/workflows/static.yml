@@ -36,7 +36,7 @@ jobs:
             return github.rest.repos.listBranches({
               owner: context.repo.owner,
               repo: context.repo.repo,
-            }).data.map(branchEntry => branchEntry.name)
+            })
       - name: Get result
         run: echo "${{fromJson(steps.list-all-branches.outputs.result)}}"
       - name: Checkout
