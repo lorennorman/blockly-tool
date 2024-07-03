@@ -1,5 +1,5 @@
 export default {
-  type: "when_feeds_change",
+  type: "when_feeds_update",
 
   toolbox: {
     category: "When..."
@@ -21,11 +21,36 @@ export default {
       // check: "expression"
     }],
 
-    [ "...when a referenced feed changes", "CENTER" ],
+    [ "%DELAY_SECONDS after any", {
+      align: "CENTER",
+      field: "DELAY_SECONDS",
+      options: [
+        [ "immediately", "0" ],
+        [ "ten seconds", "10" ],
+        [ "one minute", "60" ],
+        [ "15 minutes", "900" ],
+        [ "thirty minutes", "1800" ],
+        [ "one hour", "3600" ],
+        [ "6 hours", "21600" ],
+        [ "one day", "86400" ],
+      ]
+    }],
+
+    [ "referenced feed updates, and", "CENTER" ],
+
+    [ "%EXTEND_TIMER timers.", {
+      align: "CENTER",
+      field: "EXTEND_TIMER",
+      options: [
+        [ "replace existing", "true" ],
+        [ "allow multiple", "false" ],
+      ]
+    }],
   ],
 
   generators: {
     json: (block, generator) => {
+      const { x, y } = block.relativeCoords
       let expressionsJson, expressions = []
 
       try {
@@ -43,17 +68,18 @@ export default {
       }
 
       return JSON.stringify({
-        whenFeedsChange: { expressions }
-      })
+        whenFeedsUpdate: { expressions, x, y }
+      }, null, 2)
     }
   },
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { expressions } = blockObject.whenFeedsChange
+      const { expressions, x, y } = blockObject.whenFeedsUpdate
 
       return {
-        type: "when_feeds_change",
+        type: "when_feeds_update",
+        x, y,
         inputs: {
           EXPRESSIONS: helpers.arrayToStatements(expressions)
         }
