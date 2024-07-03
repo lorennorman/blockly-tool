@@ -50,6 +50,7 @@ jobs:
     needs:
       list-branches
     strategy:
+      max-parallel: 1 # run sequentially to share disk?
       matrix:
         branch: ${{ fromJSON( needs.list-branches.outputs.branches ) }}
     steps:
