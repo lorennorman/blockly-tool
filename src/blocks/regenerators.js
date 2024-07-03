@@ -181,7 +181,8 @@ export default {
         // rootRegenerator = lookupRootRegenerator(),
         // generate the block diagram from the bytecode
         // generatedBlocks = rootRegenerator(bytecode, helpers),
-        generatedBlocks = bytecode.expressions?.map(helpers.objectExpressionToBlock)?.map(block => block.block),
+        onlyExpressions = bytecode.expressions?.filter(item => typeof item === 'object' && !Array.isArray(item) && item !== null),
+        generatedBlocks = onlyExpressions.map(helpers.objectExpressionToBlock)?.map(block => block.block),
         // generatedBlocks = bytecode.expressions?.map(exp => {
         //   console.log(exp)
         //   console.log(Object.keys(exp))

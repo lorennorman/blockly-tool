@@ -47,7 +47,7 @@ const workspaceToBytecode = workspace => {
   "version": "1.0.0-beta.1",
   "settings": {},
   "expressions": [
-    ${ generated.replace("}\n", "},\n    ") }
+    ${ generated.replace(/}\s*{/gm, "},\n    {") }
   ]
 }`
 }
