@@ -22,10 +22,10 @@ export default {
       fields: {
         FEED_KEY: {
           options: [
-            [ "Feed A", "a" ],
-            [ "Feed B", "b" ],
-            [ "Feed C", "c" ],
-            [ "My Feed", "d" ],
+            ["🫀 heartbeat", "abc123"],
+            ["🌡️ temperature", "qrstuv"],
+            ["😶‍🌫️ humidity", "oneforyou-oneforme"],
+            ["💦🌿 humidity", "oneforyou-oneforme"],
           ]
         },
         CHANGE: {
