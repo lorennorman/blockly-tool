@@ -46,6 +46,12 @@ const bytecodeJsonOutputDiv = document.getElementById('bytecode-json')
 const regenerate = () => {
   const json = allGenerators.json.workspaceToCode(workspace)
 
+  if(!json) {
+    bytecodeJsonOutputDiv.innerText = "workspaceToCode(workspace) created nothing"
+    blocklyJsonOutputDiv.innerText = "workspaceToCode(workspace) created nothing"
+    return
+  }
+
   try {
     let valid = true
     try { JSON.parse(json) }
