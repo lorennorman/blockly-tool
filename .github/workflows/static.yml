@@ -58,7 +58,7 @@ jobs:
           ref: ${{ matrix.branch }}
       - name: Vite Build
         env:
-          branchPrefix: ${{ matrix.branch == 'main' && '' || matrix.branch }}
+          branchPrefix: ${{ matrix.branch != 'main' && matrix.branch || '' }}
         run: |
           npm ci
           npm run build -- --base /blockly-tool/${branchPrefix}
