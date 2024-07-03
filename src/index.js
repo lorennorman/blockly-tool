@@ -17,7 +17,7 @@ extensions.injectData({feedOptions: [
   ["🫀 heartbeat", "abc123"],
   ["🌡️ temperature", "qrstuv"],
   ["😶‍🌫️ humidity", "oneforyou-oneforme"],
-  ["💦🌿 humidity", "oneforyou-oneforme"],
+  ["💦🌿 dewpoint", "oneforyou-oneforme"],
 ]})
 extensions.ready()
 
