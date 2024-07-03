@@ -169,8 +169,6 @@ export default {
       // - check bytecode version
       // - build workspace wrapper
 
-      console.log('bytecode:', bytecode)
-
       const
         // find the root block's regenerator
         // rootRegenerator = lookupRootRegenerator(),

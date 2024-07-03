@@ -55,32 +55,37 @@ const workspaceToBytecode = workspace => {
 const blocklyJsonOutputDiv = document.getElementById('blockly-json')
 const bytecodeJsonOutputDiv = document.getElementById('bytecode-json')
 const regenerate = () => {
-  const json = workspaceToBytecode(workspace)
+  bytecodeJsonOutputDiv.innerText = ``
+  blocklyJsonOutputDiv.innerText = ``
 
-  try {
-    let valid = true
-    try { JSON.parse(json) }
-    catch(e) {
-      valid = false
-      console.error('Failed to JSON.parse:', json)
-      console.error(e)
-    }
-    const validation = `Bytecode JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
-    bytecodeJsonOutputDiv.innerText = `${validation}\n\n${json}`
-    // if(valid) { return }
-    // console.log(validation)
-    // console.log(json)
-  } catch(e) {
-    blocklyJsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
-    console.error(e)
-    return
-  }
+  const
+    bytecodeJson = workspaceToBytecode(workspace),
+    bytecode = JSON.parse(bytecodeJson)
+  bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
 
-  const bytecode = allRegenerators.json.codeToWorkspace(JSON.parse(json))
-  blocklyJsonOutputDiv.innerText = JSON.stringify(bytecode, null, 2)
+  const
+    workspaceObject = allRegenerators.json.codeToWorkspace(bytecode),
+    workspaceJson = JSON.stringify(workspaceObject, null, 2)
+  blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
 }
 
-// register listeners
+const safeRegenerate = () => {
+  try{
+    regenerate()
+  } catch(error) {
+    console.error(e)
+    console.log("safeRegenerate() caught the above")
+
+    if(!bytecodeJsonOutputDiv.innerText) {
+      bytecodeJsonOutputDiv.innerText = `Bytecode generation failed ❌`
+      blocklyJsonOutputDiv.innerText = `Workspace JSON not generated.`
+    } else {
+      blocklyJsonOutputDiv.innerText = `Workspace JSON generation failed ❌`
+    }
+  }
+}
+
+// LISTENERS
 
 // enforce one top-level block
 workspace.addChangeListener(Blockly.Events.disableOrphans)
@@ -96,7 +101,7 @@ workspace.addChangeListener((e) => {
   { return }
 
   // generate next cycle so orphans get disabled first
-  setTimeout(regenerate)
+  setTimeout(safeRegenerate)
 })
 
 // provide a way to clear the workspace and persistent memory
@@ -111,10 +116,7 @@ clearButton.addEventListener('click', clearAndInitialize)
 const reloadBytecodeButton = document.getElementById('button-reload-bytecode')
 reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
-  // const bytecodeJson = allGenerators.json.workspaceToCode(workspace)
   const bytecodeJson = workspaceToBytecode(workspace)
-  console.log('bytecode:', bytecodeJson)
-  console.log('parsed:', JSON.parse(bytecodeJson))
   // convert bytecode to workspace json
   const workspaceJson = allRegenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
 
@@ -144,9 +146,22 @@ reloadSerializedButton.addEventListener('click', () => {
   load(workspace)
 })
 
-// load last sketch from storage
-if(!load(workspace)) {
+
+// INITIALIZE ON LOAD
+
+// try to refresh and regenerate last workspace
+try {
+  // load last sketch from storage
+  if(!load(workspace)) {
+    throw "Load from cache failed."
+  }
+  // run the generators
+  regenerate()
+
+} catch(e) {
+  console.error(e)
+  console.log("Refresh and regenerate from browser cache failed with the above error, clearing cache and reinitializing...")
   clearAndInitialize()
+  regenerate()
+  console.log("Done.")
 }
-// run the generators
-regenerate()
