@@ -65,7 +65,7 @@ jobs:
           branchPrefix: ${{ matrix.branch == 'main' && '' || matrix.branch }}
         run: |
           npm ci
-          npm run build -- --base=/blockly-tool/${branchPrefix}
+          npm run build -- --base /blockly-tool/${branchPrefix}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -85,8 +85,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: './dist'
-      - name: sanity
-        run: ls -la dist
+      - name: Move main into primary spot and verify
+        run: |
+          cp -R dist/main/ dist
+          rm -rf dist/main
+          ls -la dist
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
