@@ -32,19 +32,18 @@ Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 // prepare generators and their dom targets
 const jsonOutputDiv = document.getElementById('json-output')
 const regenerate = () => {
-  try {
-    const json = allGenerators.json.workspaceToCode(workspace)
-    let valid = true
-    try { JSON.parse(json) }
-    catch(e) {
-      valid = false
-      console.error('Failed to JSON.parse:', json)
-      console.error(e)
-    }
-    const validation = `JSON is ${valid ? 'valid ✅' : 'invalid ❌'}`
-    jsonOutputDiv.innerText = `${validation}\n\n${json}`
-  } catch(e) {
-    jsonOutputDiv.innerText = `JSON Generation Failed for:\n${json}\n\n Failed with ${e}`
+  const json = allGenerators.json.workspaceToCode(workspace)
+
+  JSON.parse(json)
+
+  jsonOutputDiv.innerText = `JSON is valid ✅\n\n${json}`
+}
+const safeRegenerate = () => {
+  try{
+    regenerate()
+  } catch(error) {
+    console.error(error)
+    jsonOutputDiv.innerText = `JSON generation failed ❌.`
   }
 }
 
@@ -64,17 +63,27 @@ workspace.addChangeListener((e) => {
   { return }
 
   // generate next cycle so orphans get disabled first
-  setTimeout(regenerate)
+  setTimeout(safeRegenerate)
 })
 
 // provide a way to clear the workspace and persistent memory
-const clearButton = document.getElementById('button-clear')
-clearButton.addEventListener('click', () => {
-  clear(workspace)
-  Blockly.serialization.workspaces.load(initialWorkspace, workspace)
-})
+const
+  clearButton = document.getElementById('button-clear'),
+  clearAndInitialize = () => {
+    clear(workspace)
+    Blockly.serialization.workspaces.load(initialWorkspace, workspace)
+  }
+clearButton.addEventListener('click', clearAndInitialize)
 
-// load last sketch from storage
-load(workspace)
-// run the generators
-regenerate()
+try {
+  // load last sketch from storage
+  load(workspace)
+  // run the generators
+  regenerate()
+} catch(e) {
+  console.error(e)
+  console.log("Refresh and regenerate from browser cache failed with the above error, clearing cache and reinitializing...")
+  clearAndInitialize()
+  regenerate()
+  console.log("Done.")
+}
