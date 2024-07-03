@@ -68,6 +68,11 @@ jobs:
           npm ci
           npm run build -- --base=/blockly-tool/${branchPrefix}
 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
   deploy:
     environment:
       name: github-pages
@@ -76,14 +81,18 @@ jobs:
     needs:
       build
     steps:
+      - name: Merge Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: './dist'
       - name: sanity
-        run: ls -la
+        run: ls -la dist
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
