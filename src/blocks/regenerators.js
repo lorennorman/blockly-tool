@@ -14,8 +14,14 @@ const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) =>
 /* <<-LOCAL */
 
 const BYTECODE_BLOCK_TYPE_MAP = {
-  whenFeedsChange: 'when_feeds_change',
+  whenFeedsUpdate: 'when_feeds_update',
+  whenFeedChanges: 'when_feed_changes',
   whenScheduled: 'when_scheduled',
+  hourlySchedule: 'schedule_hourly',
+  dailySchedule: 'schedule_daily',
+  hoursSelector: 'selector_hours',
+  daysSelector: 'selector_days',
+  timeSelector: 'selector_time',
   logAction: 'action_log',
   conditional: 'io_controls_if',
   compare: 'io_logic_compare',

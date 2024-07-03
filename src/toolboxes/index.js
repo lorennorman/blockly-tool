@@ -7,7 +7,8 @@ import { allBlockDefinitions } from '../blocks/index.js'
 const
   SEP = '---',
   TOOLBOX_CONFIG = [
-    { name: 'When...', colour: 30 },
+    { name: 'When...', colour: 20 },
+    { name: 'Schedules', colour: 40 },
     { name: 'Logic', colour: 60 },
     { name: 'Math', colour: 120 },
     { name: 'Text', colour: 180 },
