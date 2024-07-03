@@ -145,7 +145,7 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
-    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "options", "shadow", "checked")
+    const extraKeys = without(keys(second), "align", "inputDummy", "inputValue", "check", "inputStatement", "field", "fields", "options", "shadow", "checked")
     if(extraKeys.length) {
       throw new Error(`Unrecognized keys (${extraKeys.join(', ')}) for block line with text: "${text}"`)
     }
