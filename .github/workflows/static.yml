@@ -44,11 +44,8 @@ jobs:
       #   run: echo 'branches=["red", "green", "blue"]' >> "$GITHUB_OUTPUT"
       #   run: echo "${{fromJson(steps.list-all-branches.outputs.result)}}"
 
-  # deploy each branch
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # build each branch into dist/branch
+  build:
     runs-on: ubuntu-latest
     needs:
       list-branches
@@ -69,12 +66,22 @@ jobs:
         run: |
           npm ci
           npm run build -- --base=/blockly-tool/${branchPrefix}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      build
+    steps:
+      - name: sanity
+        run: ls -la ./dist
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
