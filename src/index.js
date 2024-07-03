@@ -73,7 +73,7 @@ const safeRegenerate = () => {
   try{
     regenerate()
   } catch(error) {
-    console.error(e)
+    console.error(error)
     console.log("safeRegenerate() caught the above")
 
     if(!bytecodeJsonOutputDiv.innerText) {
