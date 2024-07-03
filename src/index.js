@@ -14,10 +14,10 @@ import './index.css'
 
 
 extensions.injectData({feedOptions: [
-  ["🫀 heartbeat", "abc123"],
-  ["🌡️ temperature", "qrstuv"],
-  ["😶‍🌫️ humidity", "oneforyou-oneforme"],
-  ["💦🌿 dewpoint", "oneforyou-oneforme"],
+  ["🫀 heartbeat", "heartbeat"],
+  ["🌡️ temperature", "temp"],
+  ["😶‍🌫️ humidity", "humidity"],
+  ["💦🌿 dewpoint", "dewpoint"],
 ]})
 extensions.ready()
 

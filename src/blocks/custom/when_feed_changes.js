@@ -22,10 +22,10 @@ export default {
       fields: {
         FEED_KEY: {
           options: [
-            ["🫀 heartbeat", "abc123"],
-            ["🌡️ temperature", "qrstuv"],
-            ["😶‍🌫️ humidity", "oneforyou-oneforme"],
-            ["💦🌿 dewpoint", "oneforyou-oneforme"],
+            ["🫀 heartbeat", "heartbeat"],
+            ["🌡️ temperature", "temp"],
+            ["😶‍🌫️ humidity", "humidity"],
+            ["💦🌿 dewpoint", "dewpoint"],
           ]
         },
         CHANGE: {
