@@ -1,5 +1,5 @@
 export default {
-  type: "when_feeds_change",
+  type: "when_scheduled",
 
   toolbox: {
     category: "When..."
@@ -10,23 +10,25 @@ export default {
   visualization: {
     colour: 30,
     tooltip: [
-      "Drag statement blocks into the \"Do\" list to build a custom Action",
-      "They will execute any time a feed they reference gets a new data point."
+      "Add a Schedule block to configure when this action executes.",
+      "Add statement blocks to \"Do:\" to configure what this action does."
       ].join("\n")
   },
 
   lines: [
+    [ "Scheduled:", {
+      inputValue: 'SCHEDULE'
+    } ],
+
     [ "Do:", {
       inputStatement: "EXPRESSIONS",
       // check: "expression"
     }],
-
-    [ "...when a referenced feed changes", "CENTER" ],
   ],
 
   generators: {
     json: (block, generator) => {
-      let expressionsJson, expressions = []
+      let schedule = '', expressionsJson, expressions = []
 
       try {
         expressionsJson = generator.statementToCode(block, `EXPRESSIONS`)
@@ -43,17 +45,20 @@ export default {
       }
 
       return JSON.stringify({
-        whenFeedsChange: { expressions }
+        whenScheduled: {
+          schedule,
+          expressions
+        }
       })
     }
   },
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { expressions } = blockObject.whenFeedsChange
+      const { schedule, expressions } = blockObject.whenScheduled
 
       return {
-        type: "when_feeds_change",
+        type: "when_scheduled",
         inputs: {
           EXPRESSIONS: helpers.arrayToStatements(expressions)
         }

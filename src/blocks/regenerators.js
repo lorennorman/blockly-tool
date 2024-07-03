@@ -15,6 +15,7 @@ const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) =>
 
 const BYTECODE_BLOCK_TYPE_MAP = {
   whenFeedsChange: 'when_feeds_change',
+  whenScheduled: 'when_scheduled',
   logAction: 'action_log',
   conditional: 'io_controls_if',
   compare: 'io_logic_compare',

@@ -28,12 +28,14 @@ import action_sms from "./custom/action_sms.js"
 import action_publish from "./custom/action_publish.js"
 import action_log from "./custom/action_log.js"
 import when_feeds_change from "./custom/when_feeds_change.js"
+import when_scheduled from "./custom/when_scheduled.js"
 
 
 export default {
   // root block
   action_root,
   when_feeds_change,
+  when_scheduled,
 
   // Logic
   io_controls_if,
