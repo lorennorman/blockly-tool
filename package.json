@@ -12,7 +12,7 @@
     "build": "vite build",
     "build-all-branches": "node build_all_branches.js",
     "preview": "vite preview",
-    "export": "node export_blockly.js"
+    "export": "node export.js"
   },
   "keywords": [
     "blockly"
