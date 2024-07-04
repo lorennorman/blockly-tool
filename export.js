@@ -1,43 +1,76 @@
 import fs from 'fs'
 
 
-// CLEAN
-// export/
-if(fs.existsSync('export')) { fs.rmSync('export', { recursive: true, force: true }) }
-fs.mkdirSync('export')
+// export script helper function
+const withCleanDir = (dirName, writeFunction) => {
+  if(fs.existsSync(dirName)) {
+    fs.rmSync(dirName, { recursive: true, force: true })
+  }
+  fs.mkdirSync(dirName)
+  console.log(`/${dirName}: clean`)
 
-// JSON FILES
-// export/workspace.json
-fs.copyFileSync('./src/workspaces/workspace.json', 'export/workspace.json')
+  let totalBytesWritten = 0
+  const write = (filename, fileContents) => {
+    const
+      exportFilename = `${dirName}/${filename}`,
+      bytesToWrite = fileContents.length
 
-// export/blocks.json
-import { customBlocksJson } from './src/blocks/index.js'
-fs.writeFileSync('export/blocks.json', JSON.stringify(customBlocksJson, null, 2))
+    fs.writeFileSync(exportFilename, fileContents)
 
-// export/toolbox.json
-import toolbox from './src/toolboxes/index.js'
-fs.writeFileSync('export/toolbox.json', JSON.stringify(toolbox, null, 2))
+    console.log(`/${exportFilename}: ${bytesToWrite} bytes`)
+    totalBytesWritten += bytesToWrite
+  }
 
-// JS FILES
-// quick/dirty js template/inline replacement
+  writeFunction(write)
 
-const renderTemplate = (renderedContent, sourceFilename, exportFilename) => {
-  // read
-  const existingFileContent = fs.readFileSync(`src/${sourceFilename}`).toString()
-  // transform
-  const newFileContent = existingFileContent.replace(/\/\* LOCAL->>[\s\S]*?<<-LOCAL \*\//, renderedContent)
-  // write
-  fs.writeFileSync(`export/${exportFilename}`, newFileContent)
+  console.log(`${totalBytesWritten} bytes written.`)
 }
 
+// export helper for quick & dirty js template/inline replacement
+const renderTemplate = (renderedContent, sourceFilename) => {
+  // read in file contents
+  const existingFileContent = fs.readFileSync(sourceFilename).toString()
+  // return transformed contents
+  return existingFileContent.replace(/\/\* LOCAL->>[\s\S]*?<<-LOCAL \*\//, renderedContent)
+}
+
+
+import { customBlocksJson } from './src/blocks/index.js'
+import toolbox from './src/toolboxes/index.js'
 import { renderedExtensions } from './src/extensions/index.js'
-renderTemplate(renderedExtensions, "extensions/index.js", "extensions.js")
-
 import { renderedMutators } from './src/mutators/index.js'
-renderTemplate(renderedMutators, "mutators/index.js", "mutators.js")
-
 import { renderedBlockGenerators } from './src/blocks/generators.js'
-renderTemplate(renderedBlockGenerators, "blocks/generators.js", "generators.js")
-
 import { renderRegenerators } from './src/blocks/regenerators.js'
-renderTemplate(renderRegenerators, "blocks/regenerators.js", "regenerators.js")
+
+const
+  processBlocks = () => JSON.stringify(customBlocksJson, null, 2),
+  processToolbox = () => JSON.stringify(toolbox, null, 2),
+  processWorkspace = () => fs.readFileSync('src/workspaces/workspace.json').toString(),
+  processExtensions = () => renderTemplate(renderedExtensions, "src/extensions/index.js"),
+  processMutators = () => renderTemplate(renderedMutators, "src/mutators/index.js"),
+  processGenerators = () => renderTemplate(renderedBlockGenerators, "src/blocks/generators.js"),
+  processRegenerators = () => renderTemplate(renderRegenerators, "src/blocks/regenerators.js")
+
+const startTime = Date.now()
+console.log("Starting Blockly Export")
+console.log("=======================")
+
+withCleanDir("export", write => {
+  // JSON
+  write("blocks.json", processBlocks())
+  write("toolbox.json", processToolbox())
+  write("workspace.json", processWorkspace())
+
+  // JS
+  // write("plugins.js", processPlugins())
+  // write("mixins.js", processMixins())
+  // write("validators.js", processValidators())
+  write("extensions.js", processExtensions())
+  write("mutators.js", processMutators())
+  write("generators.js", processGenerators())
+  write("regenerators.js", processRegenerators())
+})
+
+const elapsed = Date.now() - startTime
+console.log("=======================")
+console.log(`🏁 Done (${elapsed}ms) 🏁`)
