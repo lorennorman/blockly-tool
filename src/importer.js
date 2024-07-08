@@ -21,9 +21,9 @@ const JSON_WRAPPERS = {
 }
 
 const JS_WRAPPERS = {
-  "/generators.js": importGenerators,
   "/extensions.js": importExtensions,
   "/mutators.js": importMutators,
+  "/generators.js": importGenerators,
   "/regenerators.js": importRegenerators,
 }
 

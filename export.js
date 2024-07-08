@@ -1,8 +1,7 @@
 import fs from 'fs'
 
-
 // export script helper function
-const withCleanDir = (dirName, writeFunction) => {
+const withCleanDir = async (dirName, writeFunction) => {
   if(fs.existsSync(dirName)) {
     fs.rmSync(dirName, { recursive: true, force: true })
   }
@@ -21,56 +20,47 @@ const withCleanDir = (dirName, writeFunction) => {
     totalBytesWritten += bytesToWrite
   }
 
-  writeFunction(write)
+  await writeFunction(write)
 
   console.log(`${totalBytesWritten} bytes written.`)
 }
 
-// export helper for quick & dirty js template/inline replacement
-const renderTemplate = (renderedContent, sourceFilename) => {
-  // read in file contents
-  const existingFileContent = fs.readFileSync(sourceFilename).toString()
-  // return transformed contents
-  return existingFileContent.replace(/\/\* LOCAL->>[\s\S]*?<<-LOCAL \*\//, renderedContent)
-}
+import importBlockJson from './src/importer/block_importer.js'
+import toolbox from './src/importer/toolbox_importer.js'
+import workspace from './src/importer/workspace_importer.js'
 
+import importExtensions from './src/importer/extension_importer.js'
+import importMutators from './src/importer/mutator_importer.js'
+import importGenerators from './src/importer/generator_importer.js'
+import importRegenerators from './src/importer/regenerator_importer.js'
 
-import { customBlocksJson } from './src/blocks/index.js'
-import toolbox from './src/toolboxes/index.js'
-import { renderedExtensions } from './src/extensions/index.js'
-import { renderedMutators } from './src/mutators/index.js'
-import { renderedBlockGenerators } from './src/blocks/generators.js'
-import { renderRegenerators } from './src/blocks/regenerators.js'
 
 const
-  processBlocks = () => JSON.stringify(customBlocksJson, null, 2),
+  processBlocks = async () => JSON.stringify(await importBlockJson(), null, 2),
   processToolbox = () => JSON.stringify(toolbox, null, 2),
-  processWorkspace = () => fs.readFileSync('src/workspaces/workspace.json').toString(),
-  processExtensions = () => renderTemplate(renderedExtensions, "src/extensions/index.js"),
-  processMutators = () => renderTemplate(renderedMutators, "src/mutators/index.js"),
-  processGenerators = () => renderTemplate(renderedBlockGenerators, "src/blocks/generators.js"),
-  processRegenerators = () => renderTemplate(renderRegenerators, "src/blocks/regenerators.js")
+  processWorkspace = () => JSON.stringify(workspace, null, 2),
+  processExtensions = async () => await importExtensions(),
+  processMutators = async () => await importMutators(),
+  processGenerators = async () => await importGenerators(),
+  processRegenerators = async () => await importRegenerators()
 
 const startTime = Date.now()
 console.log("Starting Blockly Export")
 console.log("=======================")
 
-withCleanDir("export", write => {
+withCleanDir("export", async write => {
   // JSON
-  write("blocks.json", processBlocks())
+  write("blocks.json", await processBlocks())
   write("toolbox.json", processToolbox())
   write("workspace.json", processWorkspace())
 
   // JS
-  // write("plugins.js", processPlugins())
-  // write("mixins.js", processMixins())
-  // write("validators.js", processValidators())
-  write("extensions.js", processExtensions())
-  write("mutators.js", processMutators())
-  write("generators.js", processGenerators())
-  write("regenerators.js", processRegenerators())
-})
+  write("extensions.js", await processExtensions())
+  write("mutators.js", await processMutators())
+  write("generators.js", await processGenerators())
+  write("regenerators.js", await processRegenerators())
 
-const elapsed = Date.now() - startTime
-console.log("=======================")
-console.log(`🏁 Done (${elapsed}ms) 🏁`)
+  const elapsed = Date.now() - startTime
+  console.log("=======================")
+  console.log(`🏁 Done (${elapsed}ms) 🏁`)
+})
