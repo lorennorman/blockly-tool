@@ -1,3 +1,8 @@
 import { defineConfig } from 'vite'
 
-export default defineConfig({ })
+import ImportUserAppPlugin from './src/importer.js'
+
+
+export default defineConfig({
+  plugins: [ ImportUserAppPlugin() ]
+})
