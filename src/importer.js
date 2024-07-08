@@ -10,27 +10,21 @@ import importGenerators from './importer/generator_importer.js'
 import importRegenerators from './importer/regenerator_importer.js'
 
 
-const compileBlockJSON = async () => {
-  return `export default ${JSON.stringify(await importBlockJson(), null, 2)}`
-}
+const blockJson = await importBlockJson()
 
-const JSON_WRAPPERS = {
-  "/blocks.json": compileBlockJSON,
-  "/toolbox.json": async () => `export default ${JSON.stringify(toolboxJson, null, 2)}`,
-  "/workspace.json": async () => `export default ${JSON.stringify(workspaceJson, null, 2)}`,
-}
-
-const JS_WRAPPERS = {
+const PROCESSORS = {
+  "/blocks.json": () => JSON.stringify(blockJson, null, 2),
+  "/toolbox.json": () => JSON.stringify(toolboxJson, null, 2),
+  "/workspace.json": () => JSON.stringify(workspaceJson, null, 2),
   "/extensions.js": importExtensions,
   "/mutators.js": importMutators,
   "/generators.js": importGenerators,
   "/regenerators.js": importRegenerators,
 }
 
-const findJsonProcessor = id => find(JSON_WRAPPERS, (_, fileEnding) => id.endsWith(fileEnding))
+const findAnyProcessor = id => find(PROCESSORS, (_, fileEnding) => id.endsWith(fileEnding))
 
-const findJsProcessor = id => find(JS_WRAPPERS, (_, fileEnding) => id.endsWith(fileEnding))
-const prependVirtual = id => findJsProcessor(id) && `\0${id}`
+const prependVirtual = id => findAnyProcessor(id) && `\0${id}`
 
 export default function ImportUserAppPlugin() {
   return {
@@ -39,26 +33,12 @@ export default function ImportUserAppPlugin() {
     resolveId(id) { return prependVirtual(id) },
 
     load(id) {
-      const processor = findJsProcessor(id)
+      const processor = findAnyProcessor(id)
 
-      if (processor) {
-        console.log('processing:', id.split('/').at(-1))
+      if(!processor) { return }
 
-        return processor()
-      }
-    },
-
-    async transform(src, id) {
-      const processor = findJsonProcessor(id)
-
-      if (processor) {
-        console.log('processing:', id.split('/').at(-1))
-
-        return {
-          code: await processor(src),
-          map: null, // sourcemap
-        }
-      }
+      console.log('Generating:', id.split('/').at(-1))
+      return processor()
     },
   }
 }

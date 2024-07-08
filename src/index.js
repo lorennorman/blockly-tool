@@ -1,14 +1,14 @@
 import Blockly from 'blockly'
 import ModernTheme from '@blockly/theme-modern'
 
-import extensions from "./extensions"
-import "./mutators"
-import { customBlocksJson } from './blocks'
-import allGenerators from './blocks/generators'
-import allRegenerators from './blocks/regenerators'
-import toolbox from './toolboxes'
+import appBlocks from './blocks.json'
+import toolbox from './toolbox.json'
+import initialWorkspace from './workspace.json'
+import extensions from "./extensions.js"
+import "./mutators.js"
+import generators from './generators.js'
+import regenerators from './regenerators.js'
 import { clear, load, save } from './serialization'
-import initialWorkspace from './workspaces/workspace.json'
 
 import './index.css'
 
@@ -21,7 +21,7 @@ extensions.injectData({feedOptions: [
 extensions.ready()
 
 // import block library json
-Blockly.defineBlocksWithJsonArray(customBlocksJson)
+Blockly.defineBlocksWithJsonArray(appBlocks)
 
 // inject blockly with our toolbox
 const blocklyDiv = document.getElementById('blocklyDiv')
@@ -41,7 +41,7 @@ Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
 Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 
 const workspaceToBytecode = workspace => {
-  return allGenerators.json.workspaceToCode(workspace) || ""
+  return generators.json.workspaceToCode(workspace) || ""
 }
 
 // prepare generators and their dom targets
@@ -57,7 +57,7 @@ const regenerate = () => {
   bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
 
   const
-    workspaceObject = allRegenerators.json.codeToWorkspace(bytecode),
+    workspaceObject = regenerators.json.codeToWorkspace(bytecode),
     workspaceJson = JSON.stringify(workspaceObject, null, 2)
   blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
 }
@@ -110,7 +110,7 @@ reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
   const bytecodeJson = workspaceToBytecode(workspace)
   // convert bytecode to workspace json
-  const workspaceJson = allRegenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
+  const workspaceJson = regenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
 
   // disable events while we're working
   Blockly.Events.disable()
