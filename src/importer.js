@@ -5,13 +5,12 @@ import toolboxJson from './importer/toolbox_importer.js'
 import workspaceJson from './importer/workspace_importer.js'
 
 import importExtensions from './importer/extension_importer.js'
+import importMutators from './importer/mutator_importer.js'
 import importGenerators from './importer/generator_importer.js'
 import importRegenerators from './importer/regenerator_importer.js'
 
 
 const compileBlockJSON = async () => {
-  console.log("Compiling blocks...")
-
   return `export default ${JSON.stringify(await importBlockJson(), null, 2)}`
 }
 
@@ -24,7 +23,7 @@ const JSON_WRAPPERS = {
 const JS_WRAPPERS = {
   "/generators.js": importGenerators,
   "/extensions.js": importExtensions,
-  // "/mutators.js": importMutators,
+  "/mutators.js": importMutators,
   "/regenerators.js": importRegenerators,
 }
 
