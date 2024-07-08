@@ -1,7 +1,7 @@
 import { includes, isArray, isObject, isString, keys, map, range, reduce, without } from 'lodash-es'
 
-import { defaultAlignment } from '../blocks/defaults.js'
 
+const defaultAlignment = "RIGHT"
 
 const processLines = block => {
   // grab block settings
