@@ -1,4 +1,3 @@
-import regenerators from '../regenerators.js'
 import mutator from './io_controls_if/mutator.js'
 
 
