@@ -14,10 +14,9 @@ export default async () => {
   const allExtensions = await importExtensions()
 
   const renderedExtensions = `
-  const allExtensions = {
-    ${map(allExtensions, (func, key) => `${key}: ${func}`).join(',\n\n  ')}
-  }
-  `
+const allExtensions = {
+  ${map(allExtensions, (func, key) => `${key}: ${func}`).join(',\n\n  ')}
+}`
 
   // render the extensions template and return the output
   return renderTemplate(renderedExtensions, './src/importer/extensions.template.js')
