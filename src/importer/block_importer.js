@@ -1,5 +1,5 @@
 import { glob } from 'glob'
-import { compact, keyBy, keys, map, without } from 'lodash-es'
+import { compact, keyBy, keys, map, omitBy, without } from 'lodash-es'
 
 import { toBlockJSON } from '../tools/index.js'
 
@@ -65,7 +65,10 @@ const
   }
 
 export const
-  blockDefinitions = keyBy(map(allBlockDefinitionsAndPaths, "definition"), "type"),
+  // all definitions
+  allBlockDefinitions = keyBy(map(allBlockDefinitionsAndPaths, "definition"), "type"),
+  // without disabled definitions
+  blockDefinitions = omitBy(allBlockDefinitions, def => def.disabled),
   blockJson = compact(map(allBlockDefinitionsAndPaths, processBlock))
 
 export default blockJson

@@ -1,4 +1,4 @@
-import mutator from './io_controls_if/mutator.js'
+import mutator from './if/mutator.js'
 
 
 export default {
