@@ -1,4 +1,6 @@
 export default {
+  disabled: true,
+
   type: 'io_logic_ternary',
 
   toolbox: {

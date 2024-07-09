@@ -1,4 +1,6 @@
 export default {
+  disabled: true,
+
   type: 'text_regex',
 
   toolbox: {
