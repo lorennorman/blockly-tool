@@ -1,25 +1,23 @@
 import { find } from 'lodash-es'
 
-import importBlockJson from './importer/block_importer.js'
+import blockJson from './importer/block_importer.js'
 import toolboxJson from './importer/toolbox_importer.js'
 import workspaceJson from './importer/workspace_importer.js'
 
-import importExtensions from './importer/extension_importer.js'
-import importMutators from './importer/mutator_importer.js'
-import importGenerators from './importer/generator_importer.js'
-import importRegenerators from './importer/regenerator_importer.js'
+import extensions_js from './importer/extension_importer.js'
+import mutators_js from './importer/mutator_importer.js'
+import generators_js from './importer/generator_importer.js'
+import regenerators_js from './importer/regenerator_importer.js'
 
-
-const blockJson = await importBlockJson()
 
 const PROCESSORS = {
   "/blocks.json": () => JSON.stringify(blockJson, null, 2),
   "/toolbox.json": () => JSON.stringify(toolboxJson, null, 2),
   "/workspace.json": () => JSON.stringify(workspaceJson, null, 2),
-  "/extensions.js": importExtensions,
-  "/mutators.js": importMutators,
-  "/generators.js": importGenerators,
-  "/regenerators.js": importRegenerators,
+  "/extensions.js": extensions_js,
+  "/mutators.js": mutators_js,
+  "/generators.js": generators_js,
+  "/regenerators.js": regenerators_js,
 }
 
 const findAnyProcessor = id => find(PROCESSORS, (_, fileEnding) => id.endsWith(fileEnding))

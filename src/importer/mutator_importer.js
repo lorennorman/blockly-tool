@@ -1,9 +1,7 @@
 import { isString, isFunction, map, mapValues, pickBy } from 'lodash-es'
-import { importBlockDefinitions } from './block_importer.js'
+import { blockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
-
-export const importMutators = async () => pickBy(mapValues(await importBlockDefinitions(), "mutator"))
 
 const renderValue = value => {
   if(isString(value)) {
@@ -19,8 +17,8 @@ const renderMutator = mutator => {
   return `{\n    ${map(mutator, (value, key) => `${key}: ${renderValue(value)}`).join(',\n\n    ')}\n  }`
 }
 
-export default async () => {
-  const mutators = await importMutators()
+export default () => {
+  const mutators = pickBy(mapValues(blockDefinitions, "mutator"))
 
   const renderedMutators = `
 const allBlockMutators = {

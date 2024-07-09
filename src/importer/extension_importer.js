@@ -1,17 +1,13 @@
 import { assign, isArray, map } from 'lodash-es'
-import { importBlockDefinitions } from './block_importer.js'
+import { blockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
 
-export const importExtensions = async () => {
-  return Object.values(await importBlockDefinitions())
+export default () => {
+  const allExtensions = Object.values(blockDefinitions)
     .map(def => def.extensions)
     .filter(ext => ext && !isArray(ext))
     .reduce(assign, {})
-}
-
-export default async () => {
-  const allExtensions = await importExtensions()
 
   const renderedExtensions = `
 const allExtensions = {
