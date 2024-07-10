@@ -1,10 +1,10 @@
 import { map, mapValues } from 'lodash-es'
-import { blockDefinitions } from './block_importer.js'
+import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
 
-export default () => {
-  const blockRegenerators = mapValues(blockDefinitions, "regenerators")
+export default async () => {
+  const blockRegenerators = mapValues(await importBlockDefinitions(), "regenerators")
 
   const renderRegenerators = () => `
   const blockRegenerators = {${map(blockRegenerators, (regenerators, blockName) => `

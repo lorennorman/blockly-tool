@@ -4,20 +4,20 @@ import { importBlockJson } from './importer/block_importer.js'
 import importToolboxJson from './importer/toolbox_importer.js'
 import importWorkspaceJson from './importer/workspace_importer.js'
 
-import extensions_js from './importer/extension_importer.js'
-import mutators_js from './importer/mutator_importer.js'
-import generators_js from './importer/generator_importer.js'
-import regenerators_js from './importer/regenerator_importer.js'
+import importExtensionsJs from './importer/extension_importer.js'
+import importMutatorsJs from './importer/mutator_importer.js'
+import importGeneratorsJs from './importer/generator_importer.js'
+import importRegeneratorsJs from './importer/regenerator_importer.js'
 
 
 const PROCESSORS = {
   "/blocks.json": async () => JSON.stringify(await importBlockJson(), null, 2),
   "/toolbox.json": async () => JSON.stringify(await importToolboxJson(), null, 2),
   "/workspace.json": async () => JSON.stringify(await importWorkspaceJson(), null, 2),
-  "/extensions.js": extensions_js,
-  "/mutators.js": mutators_js,
-  "/generators.js": generators_js,
-  "/regenerators.js": regenerators_js,
+  "/extensions.js": importExtensionsJs,
+  "/mutators.js": importMutatorsJs,
+  "/generators.js": importGeneratorsJs,
+  "/regenerators.js": importRegeneratorsJs,
 }
 const PROCESSED_FILES = keys(PROCESSORS)
 

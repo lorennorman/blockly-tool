@@ -1,5 +1,5 @@
 import { isString, isFunction, map, mapValues, pickBy } from 'lodash-es'
-import { blockDefinitions } from './block_importer.js'
+import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
 
@@ -17,8 +17,8 @@ const renderMutator = mutator => {
   return `{\n    ${map(mutator, (value, key) => `${key}: ${renderValue(value)}`).join(',\n\n    ')}\n  }`
 }
 
-export default () => {
-  const mutators = pickBy(mapValues(blockDefinitions, "mutator"))
+export default async () => {
+  const mutators = pickBy(mapValues(await importBlockDefinitions(), "mutator"))
 
   const renderedMutators = `
 const allBlockMutators = {
