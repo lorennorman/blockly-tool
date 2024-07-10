@@ -7,11 +7,11 @@ export default {
 
   visualization: {
     inputsInline: true,
-    colour: 230,
+    colour: 120,
   },
 
   lines: [
-    [ "", { inputValue: 'A', shadow: 'math_number'}],
+    [ "", { inputValue: 'A', shadow: 'io_math_number'}],
     [ "", {
       field: 'OP',
       options: [
@@ -22,7 +22,7 @@ export default {
         ['^', 'POWER'],
       ]
     }],
-    [ "", { inputValue: 'B', shadow: 'math_number'}],
+    [ "", { inputValue: 'B', shadow: 'io_math_number'}],
   ],
 
   generators: {
@@ -68,8 +68,8 @@ export default {
           OP: operatorMap[payload.operator]
         },
         inputs = {
-          A: helpers.expressionToBlock(payload.left, { shadow: 'math_number' }),
-          B: helpers.expressionToBlock(payload.right, { shadow: 'math_number' }),
+          A: helpers.expressionToBlock(payload.left, { shadow: 'io_math_number' }),
+          B: helpers.expressionToBlock(payload.right, { shadow: 'io_math_number' }),
         }
 
       return { type: 'io_math_arithmetic', fields, inputs }

@@ -64,10 +64,11 @@ const processLine = (line) => {
       name: lineData.field,
       type: (lineData.options && "field_dropdown")
         || (includes(keys(lineData), "checked") && "field_checkbox")
-        || (includes(keys(lineData), "text") && "field_input"),
+        || (includes(keys(lineData), "text") && "field_input")
+        || (includes(keys(lineData), "multiline_text") && "field_multilinetext"),
       checked: lineData.checked,
       options: lineData.options,
-      text: lineData.text,
+      text: lineData.text || lineData.multiline_text || "",
       spellcheck: lineData.spellcheck,
       value: lineData.value,
     })
@@ -145,7 +146,7 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
-    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "text", "options", "shadow", "checked")
+    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "text", "multiline_text", "options", "shadow", "checked")
     if(extraKeys.length) {
       throw new Error(`Unrecognized keys (${extraKeys.join(', ')}) for block line with text: "${text}"`)
     }

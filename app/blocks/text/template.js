@@ -36,7 +36,7 @@ export default {
   },
 
   lines: [
-    ["{{ %1", { inputValue: 'TEMPLATE', shadow: 'text_multiline' }],
+    ["{{ %1", { inputValue: 'TEMPLATE', shadow: 'io_text_multiline' }],
   ],
 
   generators: {

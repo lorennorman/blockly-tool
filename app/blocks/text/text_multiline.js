@@ -1,7 +1,9 @@
 export default {
-  type: "io_text",
+  type: 'io_text_multiline',
 
-  toolbox: { category: 'Text' },
+  toolbox: {
+    category: 'Text'
+  },
 
   visualization: {
     colour: 180,
@@ -14,14 +16,12 @@ export default {
   },
 
   lines: [
-    ["\"", {
+    ["P", {
       field: 'TEXT',
-      text: ''
+      multiline_text: ''
     }]
   ],
 
-  // generators for this block type
-  // these get aggregated and registered together
   generators: {
     json: block => {
       const text = block.getFieldValue('TEXT')

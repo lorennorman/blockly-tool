@@ -83,13 +83,13 @@ const helpers = {
     let expressionBlock
     switch(expressionType) {
       case 'string':
-        expressionBlock = (expressionBytecode.includes("\n") || options.shadow === 'text_multiline')
-          ? makeBlockType("text_multiline", { fields: { "TEXT": expressionBytecode }})
+        expressionBlock = (expressionBytecode.includes("\n") || options.shadow === 'io_text_multiline')
+          ? makeBlockType("io_text_multiline", { fields: { "TEXT": expressionBytecode }})
           : makeBlockType("io_text", { fields: { "TEXT": expressionBytecode }})
         break
 
       case 'number':
-        expressionBlock = makeBlockType("math_number", { fields: { "NUM": expressionBytecode }})
+        expressionBlock = makeBlockType("io_math_number", { fields: { "NUM": expressionBytecode }})
         break
 
       case 'boolean':

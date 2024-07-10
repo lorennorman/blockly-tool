@@ -48,7 +48,7 @@ export default {
         type: 'text_template',
         inputs: { TEMPLATE: {
           shadow: {
-            type: 'text_multiline',
+            type: 'io_text_multiline',
             fields: {
               TEXT: 'Hello!\nThe {{ vars.feed_name }} feed has a new value: {{ vars.value }}\nProcessed at: {{ vars.now }}'
             }

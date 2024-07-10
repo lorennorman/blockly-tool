@@ -24,7 +24,7 @@ export default {
   },
 
   lines: [
-    ["", { inputValue: 'A', shadow: 'math_number' }],
+    ["", { inputValue: 'A', shadow: 'io_math_number' }],
     [ "", {
       field: "OP",
       options: [
@@ -36,7 +36,7 @@ export default {
         ['\u200F\u2265', 'GTE'],
       ]
     }],
-    ["", { inputValue: 'B', shadow: 'math_number' }]
+    ["", { inputValue: 'B', shadow: 'io_math_number' }]
   ],
 
   generators: {
@@ -66,8 +66,8 @@ export default {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: 'math_number' }),
-          B: helpers.expressionToBlock(right, { shadow: 'math_number' }),
+          A: helpers.expressionToBlock(left, { shadow: 'io_math_number' }),
+          B: helpers.expressionToBlock(right, { shadow: 'io_math_number' }),
         }
 
       return { type: 'io_logic_compare', fields, inputs }

@@ -49,7 +49,7 @@ export default {
         inputs: {
           TEMPLATE: {
             shadow: {
-              type: 'text_multiline',
+              type: 'io_text_multiline',
               fields: {
                 TEXT:
 `{
@@ -86,7 +86,7 @@ export default {
         type: "action_webhook",
         inputs: {
           URL: helpers.expressionToBlock(payload.url, { shadow: 'io_text' }),
-          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'io_text_multiline' }),
         },
         fields: {
           FORM_ENCODE: payload.formEncoded ? 'TRUE' : 'FALSE'
