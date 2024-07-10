@@ -1,5 +1,6 @@
-import mutator from './if/mutator.js'
-
+const
+  random = Math.random()*100000000,
+  mutator = (await import(`./if/mutator.js?key=${random}`)).default
 
 export default {
   type: 'io_controls_if',
