@@ -93,7 +93,7 @@ const helpers = {
         break
 
       case 'boolean':
-        expressionBlock = makeBlockType("logic_boolean", { fields: { "BOOL": expressionBytecode ? 'TRUE' : 'FALSE' }})
+        expressionBlock = makeBlockType("io_logic_boolean", { fields: { "BOOL": expressionBytecode ? 'TRUE' : 'FALSE' }})
         break
 
       case 'object':

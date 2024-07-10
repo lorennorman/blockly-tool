@@ -11,7 +11,7 @@ export default {
   },
 
   lines: [
-    ["", { inputValue: 'A', shadow: 'logic_boolean' }],
+    ["", { inputValue: 'A', shadow: 'io_logic_boolean' }],
     ["", {
       field: 'OP',
       options: [
@@ -19,7 +19,7 @@ export default {
         ['or', 'OR'],
       ]
     }],
-    ["", { inputValue: 'B', shadow: 'logic_boolean' }],
+    ["", { inputValue: 'B', shadow: 'io_logic_boolean' }],
   ],
 
   generators: {
@@ -49,8 +49,8 @@ export default {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: 'logic_boolean' }),
-          B: helpers.expressionToBlock(right, { shadow: 'logic_boolean' }),
+          A: helpers.expressionToBlock(left, { shadow: 'io_logic_boolean' }),
+          B: helpers.expressionToBlock(right, { shadow: 'io_logic_boolean' }),
         }
 
       return { type: 'io_logic_operation', fields, inputs }

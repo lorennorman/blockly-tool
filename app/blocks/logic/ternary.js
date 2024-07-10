@@ -12,9 +12,9 @@ export default {
   },
 
   lines: [
-    ["if", { inputValue: 'IF', shadow: 'logic_boolean' }],
-    ["then", { inputValue: 'THEN', shadow: 'logic_boolean' }],
-    ["else", { inputValue: 'ELSE', shadow: 'logic_boolean' }],
+    ["if", { inputValue: 'IF', shadow: 'io_logic_boolean' }],
+    ["then", { inputValue: 'THEN', shadow: 'io_logic_boolean' }],
+    ["else", { inputValue: 'ELSE', shadow: 'io_logic_boolean' }],
   ],
 
   generators: {

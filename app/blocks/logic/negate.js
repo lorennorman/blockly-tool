@@ -10,7 +10,7 @@ export default {
   },
 
   lines: [
-    ["not", { inputValue: 'EXPRESSION', shadow: 'logic_boolean' }]
+    ["not", { inputValue: 'EXPRESSION', shadow: 'io_logic_boolean' }]
   ],
 
   generators: {
@@ -34,7 +34,7 @@ export default {
       return {
         type: 'io_logic_negate',
         inputs: {
-          EXPRESSION: helpers.expressionToBlock(payload.target, { shadow: 'logic_boolean' })
+          EXPRESSION: helpers.expressionToBlock(payload.target, { shadow: 'io_logic_boolean' })
         }
       }
     }
