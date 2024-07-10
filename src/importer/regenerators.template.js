@@ -85,7 +85,7 @@ const helpers = {
       case 'string':
         expressionBlock = (expressionBytecode.includes("\n") || options.shadow === 'text_multiline')
           ? makeBlockType("text_multiline", { fields: { "TEXT": expressionBytecode }})
-          : makeBlockType("text", { fields: { "TEXT": expressionBytecode }})
+          : makeBlockType("io_text", { fields: { "TEXT": expressionBytecode }})
         break
 
       case 'number':

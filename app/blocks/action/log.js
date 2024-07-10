@@ -26,7 +26,7 @@ export default {
     ["Log:", {
       inputValue: 'EXPRESSION',
        // check: ['expression', 'String'],
-      shadow: 'text'
+      shadow: 'io_text'
     }]
   ],
 
@@ -53,7 +53,7 @@ export default {
       return {
         type: "action_log",
         inputs: {
-          EXPRESSION: helpers.expressionToBlock(payload.line, { shadow: 'text' })
+          EXPRESSION: helpers.expressionToBlock(payload.line, { shadow: 'io_text' })
         }
       }
     }

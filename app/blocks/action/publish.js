@@ -29,7 +29,7 @@ export default {
     [ "...value:", {
       inputValue: "VALUE",
       // check: [ "String", "Number" ],
-      shadow: 'text'
+      shadow: 'io_text'
     }],
 
     [ "...to:", {
@@ -60,7 +60,7 @@ export default {
         type: "action_publish",
         inputs: {
           FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
-          VALUE: helpers.expressionToBlock(payload.value, { shadow: 'text' }),
+          VALUE: helpers.expressionToBlock(payload.value, { shadow: 'io_text' }),
         }
       }
     }

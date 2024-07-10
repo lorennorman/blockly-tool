@@ -31,7 +31,7 @@ export default {
       inputValue: "URL",
       // check: "String",
       shadow: {
-        type: 'text',
+        type: 'io_text',
         fields: { TEXT: 'https://...' }
       }
     }],
@@ -85,7 +85,7 @@ export default {
       return {
         type: "action_webhook",
         inputs: {
-          URL: helpers.expressionToBlock(payload.url, { shadow: 'text' }),
+          URL: helpers.expressionToBlock(payload.url, { shadow: 'io_text' }),
           BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_multiline' }),
         },
         fields: {

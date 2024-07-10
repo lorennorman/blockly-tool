@@ -32,7 +32,7 @@ export default {
         type: 'text_template',
         inputs: { TEMPLATE: {
           shadow: {
-            type: 'text',
+            type: 'io_text',
             fields: {
               TEXT: '{{ vars.feed_name }} feed has a new value: {{ vars.feed_value }}'
             }

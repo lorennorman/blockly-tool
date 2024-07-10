@@ -26,8 +26,8 @@ export default {
   },
 
   lines: [
-    ["Regex:", { inputValue: 'REGEX', shadow: 'text' }],
-    ["Matches?", { inputValue: 'TARGET', shadow: 'text' }]
+    ["Regex:", { inputValue: 'REGEX', shadow: "io_text" }],
+    ["Matches?", { inputValue: 'TARGET', shadow: "io_text" }]
   ],
 
   generators: {
@@ -52,8 +52,8 @@ export default {
       const
         { regex, target } = blockObject.textRegex,
         inputs = {
-          REGEX: helpers.expressionToBlock(regex, { shadow: 'text' }),
-          TARGET: helpers.expressionToBlock(target, { shadow: 'text' }),
+          REGEX: helpers.expressionToBlock(regex, { shadow: "io_text" }),
+          TARGET: helpers.expressionToBlock(target, { shadow: "io_text" }),
         }
 
       return { type: 'text_regex', inputs }

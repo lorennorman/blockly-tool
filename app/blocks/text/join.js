@@ -23,9 +23,9 @@ export default {
   },
 
   lines: [
-    ["", { inputValue: 'A', shadow: 'text' }],
+    ["", { inputValue: 'A', shadow: "io_text" }],
     ["+", ""],
-    ["", { inputValue: 'B', shadow: 'text' }]
+    ["", { inputValue: 'B', shadow: "io_text" }]
   ],
 
   generators: {
@@ -50,8 +50,8 @@ export default {
       const
         { left, right } = blockObject.textJoin,
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: 'text' }),
-          B: helpers.expressionToBlock(right, { shadow: 'text' }),
+          A: helpers.expressionToBlock(left, { shadow: "io_text" }),
+          B: helpers.expressionToBlock(right, { shadow: "io_text" }),
         }
 
       return { type: 'io_text_join', inputs }

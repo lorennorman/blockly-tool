@@ -38,7 +38,7 @@ export default {
           VAR: { id }
         },
         inputs: {
-          VALUE: helpers.expressionToBlock(value, { shadow: 'text' })
+          VALUE: helpers.expressionToBlock(value, { shadow: "io_text" })
         }
       }
     }

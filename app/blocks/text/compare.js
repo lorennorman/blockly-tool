@@ -30,7 +30,7 @@ export default {
   },
 
   lines: [
-    ["", { inputValue: 'A', shadow: 'text' }],
+    ["", { inputValue: 'A', shadow: "io_text" }],
     [ "", {
       field: "OP",
       options: [
@@ -38,7 +38,7 @@ export default {
         ['\u2260', 'NEQ'],
       ]
     }],
-    ["", { inputValue: 'B', shadow: 'text' }]
+    ["", { inputValue: 'B', shadow: "io_text" }]
   ],
 
   generators: {
@@ -68,8 +68,8 @@ export default {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: 'text' }),
-          B: helpers.expressionToBlock(right, { shadow: 'text' }),
+          A: helpers.expressionToBlock(left, { shadow: "io_text" }),
+          B: helpers.expressionToBlock(right, { shadow: "io_text" }),
         }
 
       return { type: 'text_compare', fields, inputs }

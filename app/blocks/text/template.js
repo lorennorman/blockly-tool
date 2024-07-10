@@ -59,7 +59,7 @@ export default {
       const
         { template } = blockObject.textTemplate,
         inputs = {
-          TEMPLATE: helpers.expressionToBlock(template, { shadow: 'text' })
+          TEMPLATE: helpers.expressionToBlock(template, { shadow: "io_text" })
         }
 
       return { type: 'text_template', inputs }
