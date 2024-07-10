@@ -14,12 +14,14 @@ const
   PROJECT_ROOT = process.cwd(),
   BLOCK_LOCATION = `app/blocks/`,
   gatherBlockFiles = async () => {
-    const jsfiles = await glob(`./${BLOCK_LOCATION}**/*.js`, { ignore: [ '**/*mutator.js', '**/*example*.js' ] })
+    const
+      jsfiles = await glob(`./${BLOCK_LOCATION}**/*.js`, { ignore: [ '**/*mutator.js', '**/*example*.js' ] }),
+      random = Math.random()*100000000 // break the import cache
 
     return Promise.all(
       jsfiles.map(
         async filePath => ({
-          definition: (await import(`${PROJECT_ROOT}/${filePath}`)).default,
+          definition: (await import(`${PROJECT_ROOT}/${filePath}?key=${random}`)).default,
           path: filePath.slice(BLOCK_LOCATION.length)
         })
       )
@@ -65,6 +67,12 @@ const
   }
 
 export const
+  importBlockDefinitions = async () =>
+    keyBy(map(await gatherBlockFiles(), "definition"), "type"),
+
+  importBlockJson = async () =>
+    compact(map(await gatherBlockFiles(), processBlock)),
+
   // all definitions
   allBlockDefinitions = keyBy(map(allBlockDefinitionsAndPaths, "definition"), "type"),
   // without disabled definitions

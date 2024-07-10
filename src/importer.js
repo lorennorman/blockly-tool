@@ -1,6 +1,6 @@
-import { find } from 'lodash-es'
+import { find, keys, map } from 'lodash-es'
 
-import blockJson from './importer/block_importer.js'
+import { importBlockJson } from './importer/block_importer.js'
 import toolboxJson from './importer/toolbox_importer.js'
 import workspaceJson from './importer/workspace_importer.js'
 
@@ -11,7 +11,7 @@ import regenerators_js from './importer/regenerator_importer.js'
 
 
 const PROCESSORS = {
-  "/blocks.json": () => JSON.stringify(blockJson, null, 2),
+  "/blocks.json": async () => JSON.stringify(await importBlockJson(), null, 2),
   "/toolbox.json": () => JSON.stringify(toolboxJson, null, 2),
   "/workspace.json": () => JSON.stringify(workspaceJson, null, 2),
   "/extensions.js": extensions_js,
@@ -19,6 +19,7 @@ const PROCESSORS = {
   "/generators.js": generators_js,
   "/regenerators.js": regenerators_js,
 }
+const PROCESSED_FILES = keys(PROCESSORS)
 
 const findAnyProcessor = id => find(PROCESSORS, (_, fileEnding) => id.endsWith(fileEnding))
 
@@ -35,8 +36,16 @@ export default function ImportUserAppPlugin() {
 
       if(!processor) { return }
 
-      console.log('Generating:', id.split('/').at(-1))
       return processor()
     },
+
+    handleHotUpdate(ctx) {
+      if (!ctx.file.includes('/app/')) { return }
+
+      const mods = map(PROCESSED_FILES, file =>
+        ctx.server.moduleGraph.getModuleById(`\0.${file}`))
+
+      return ctx.modules.concat(mods)
+    }
   }
 }
