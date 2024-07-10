@@ -68,7 +68,7 @@ const
 
 export const
   importBlockDefinitions = async () =>
-    keyBy(map(await gatherBlockFiles(), "definition"), "type"),
+    omitBy(keyBy(map(await gatherBlockFiles(), "definition"), "type"), def => def.disabled),
 
   importBlockJson = async () =>
     compact(map(await gatherBlockFiles(), processBlock)),

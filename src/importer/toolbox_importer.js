@@ -1,11 +1,30 @@
 import { compact, forEach, includes, isEmpty, isString, keyBy, map, mapValues, filter, flatMap, reduce } from 'lodash-es'
 
 import toolboxConfig from '../../app/toolbox/index.js'
-import { blockDefinitions } from './block_importer.js'
+import { importBlockDefinitions } from './block_importer.js'
 
+
+let blocksByCategory = {}
 
 const
   SEP = '---',
+
+  importToolbox = async () => {
+    const blockDefinitions = await importBlockDefinitions()
+    blocksByCategory = reduce(filter(blockDefinitions, "toolbox"), (collection, definition) => {
+        const category = definition.toolbox.category
+
+        if(!collection[category]) {
+          collection[category] = []
+        }
+
+        collection[category].push(definition)
+
+        return collection
+      }, {})
+
+    return buildToolbox()
+  },
 
   buildToolbox = () => ({
     kind: 'categoryToolbox',
@@ -27,18 +46,6 @@ const
 
   generateCategoryContents = ({ name }) =>
     flatMap(blocksByCategory[name] || [], blockToLabelAndBlock),
-
-  blocksByCategory = reduce(filter(blockDefinitions, "toolbox"), (collection, definition) => {
-      const category = definition.toolbox.category
-
-      if(!collection[category]) {
-        collection[category] = []
-      }
-
-      collection[category].push(definition)
-
-      return collection
-    }, {}),
 
   blockToLabelAndBlock = block => compact([
     {
@@ -101,4 +108,4 @@ const
       ? { shadow: { type: shadow }} // expand to full object
       : { shadow } // set as shadow value
 
-export default buildToolbox()
+export default importToolbox
