@@ -1,31 +1,13 @@
-import Blockly from 'blockly'
+// Extensions
 
 /* LOCAL->> */
-import { map } from 'lodash-es'
-import { allBlockExtensions } from '../blocks/index.js'
-
-// load file extensions from src/extensions/*.js
-// import exampleExtension from './example_extension.js'
-// const fileExtensions = { exampleExtension }
-const fileExtensions = { }
-
-const allExtensions = {
-  ...allBlockExtensions,
-  ...fileExtensions,
-}
-
-// replaces this entire block with this source
-export const renderedExtensions = `
-const allExtensions = {
-  ${map(allExtensions, (func, key) => `${key}: ${func}`).join(',\n\n  ')}
-}
-`
+const allExtensions = {}
 /* <<-LOCAL */
 
 let status = 'loading'
 const extensionData = {}
 
-export const
+const
   ready = () => status = 'ready',
 
   injectDatum = (key, value) => extensionData[key] = value,
@@ -45,7 +27,7 @@ export const
     status = 'loading'
   }
 
-export default { ready, injectData, injectDatum, dispose }
+export const extensions = { ready, injectData, injectDatum, dispose }
 
 // helper to get late-bound data into blockly
 const wrapExtension = extensionFunc => {

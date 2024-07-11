@@ -29,20 +29,8 @@ import { importBlockJson } from './src/importer/block_importer.js'
 import importToolboxJson from './src/importer/toolbox_importer.js'
 import importWorkspaceJson from './src/importer/workspace_importer.js'
 
-import importExtensionsJs from './src/importer/extension_importer.js'
-import importMutatorsJs from './src/importer/mutator_importer.js'
-import importGeneratorsJs from './src/importer/generator_importer.js'
-import importRegeneratorsJs from './src/importer/regenerator_importer.js'
+import importBlocklyJs from './src/importer/blockly_importer.js'
 
-
-const
-  processBlocks = async () => JSON.stringify(await importBlockJson(), null, 2),
-  processToolbox = async () => JSON.stringify(await importToolboxJson(), null, 2),
-  processWorkspace = async () => JSON.stringify(await importWorkspaceJson(), null, 2),
-  processExtensions = () => importExtensionsJs(),
-  processMutators = () => importMutatorsJs(),
-  processGenerators = () => importGeneratorsJs(),
-  processRegenerators = () => importRegeneratorsJs()
 
 const startTime = Date.now()
 console.log("Starting Blockly Export")
@@ -50,15 +38,12 @@ console.log("=======================")
 
 withCleanDir("export", async write => {
   // JSON
-  write("blocks.json", await processBlocks())
-  write("toolbox.json", await processToolbox())
-  write("workspace.json", await processWorkspace())
+  write("blocks.json", JSON.stringify(await importBlockJson(), null, 2))
+  write("toolbox.json", JSON.stringify(await importToolboxJson(), null, 2))
+  write("workspace.json", JSON.stringify(await importWorkspaceJson(), null, 2))
 
   // JS
-  write("extensions.js", await processExtensions())
-  write("mutators.js", await processMutators())
-  write("generators.js", await processGenerators())
-  write("regenerators.js", await processRegenerators())
+  write("blockly.js", await importBlocklyJs())
 
   const elapsed = Date.now() - startTime
   console.log("=======================")

@@ -1,4 +1,4 @@
-import Blockly from 'blockly'
+// Generators
 
 /* LOCAL->> */
 const blockGenerators = {}
@@ -37,6 +37,6 @@ const makeGenerator = generatorType => {
   return generator
 }
 
-export default {
+export const generators = {
   json: makeGenerator('json')
 }

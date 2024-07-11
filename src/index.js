@@ -1,13 +1,9 @@
 import Blockly from 'blockly'
-import ModernTheme from '@blockly/theme-modern'
 
 import appBlocks from './blocks.json'
 import toolbox from './toolbox.json'
 import initialWorkspace from './workspace.json'
-import extensions from "./extensions.js"
-import "./mutators.js"
-import generators from './generators.js'
-import regenerators from './regenerators.js'
+import { extensions, generators, regenerators } from './blockly.js'
 import { clear, load, save } from './serialization'
 
 import './index.css'
@@ -30,8 +26,7 @@ const workspace = Blockly.inject(blocklyDiv, {
   zoom: {
     controls: true,
     wheel: true
-  },
-  theme: ModernTheme
+  }
 })
 
 // hard-code toolbox scale so it ignores zoom

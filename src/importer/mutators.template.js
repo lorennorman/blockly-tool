@@ -1,4 +1,4 @@
-import Blockly from 'blockly'
+// Mutators
 
 /* LOCAL->> */
 const allBlockMutators = {}
@@ -11,5 +11,3 @@ for (const [blockName, mutatorObject] of Object.entries(allBlockMutators)) {
     Blockly.Extensions.registerMutator(blockName, mutatorObject)
   }
 }
-
-export default {}

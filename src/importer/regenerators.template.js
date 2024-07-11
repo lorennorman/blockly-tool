@@ -1,4 +1,4 @@
-import Blockly from 'blockly'
+// Regenerators
 
 /* LOCAL->> */
 const blockRegenerators = {}
@@ -152,7 +152,7 @@ const helpers = {
   }
 }
 
-export default {
+export const regenerators = {
   json: {
     codeToWorkspace: (bytecode) => {
       // TODO:
