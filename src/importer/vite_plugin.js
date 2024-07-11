@@ -1,13 +1,13 @@
 import { find, keys, map } from 'lodash-es'
 
-import { importBlockJson } from './importer/block_importer.js'
-import importToolboxJson from './importer/toolbox_importer.js'
-import importWorkspaceJson from './importer/workspace_importer.js'
+import { importBlockJson } from './block_importer.js'
+import importToolboxJson from './toolbox_importer.js'
+import importWorkspaceJson from './workspace_importer.js'
 
-import importExtensionsJs from './importer/extension_importer.js'
-import importMutatorsJs from './importer/mutator_importer.js'
-import importGeneratorsJs from './importer/generator_importer.js'
-import importRegeneratorsJs from './importer/regenerator_importer.js'
+import importExtensionsJs from './extension_importer.js'
+import importMutatorsJs from './mutator_importer.js'
+import importGeneratorsJs from './generator_importer.js'
+import importRegeneratorsJs from './regenerator_importer.js'
 
 
 const PROCESSORS = {

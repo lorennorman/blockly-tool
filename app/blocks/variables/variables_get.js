@@ -1,9 +1,10 @@
 export default {
+  disabled: true,
   type: 'variables_get',
 
-  // toolbox: {
-  //   category: "Variables"
-  // },
+  toolbox: {
+    category: "Variables"
+  },
 
   generators: {
     json: block => {

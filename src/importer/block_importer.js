@@ -1,7 +1,7 @@
 import { glob } from 'glob'
 import { compact, keyBy, keys, map, omitBy, without } from 'lodash-es'
 
-import { toBlockJSON } from '../tools/index.js'
+import { toBlockJSON } from './block_processor/index.js'
 
 
 // server-side

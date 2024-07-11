@@ -7,8 +7,6 @@ import { importBlockDefinitions } from './block_importer.js'
 let blocksByCategory = {}
 
 const
-  SEP = '---',
-
   importToolbox = async () => {
     const blockDefinitions = await importBlockDefinitions()
     blocksByCategory = reduce(filter(blockDefinitions, "toolbox"), (collection, definition) => {
@@ -31,18 +29,16 @@ const
     contents: generateToolboxContents()
   }),
 
-  generateToolboxContents = () => map(toolboxConfig, category =>
+  generateToolboxContents = () => map(toolboxConfig, category => {
     // inject other kinds of toolbox objects here
-    category === SEP
-      ? { kind: 'sep' }
-      : {
-          kind: 'category',
-          name: category.name,
-          colour: (category.colour === 0) ? "0" : category.colour,
-          ...category.extras,
-          contents: generateCategoryContents(category)
-        }
-  ),
+    return {
+      kind: 'category',
+      name: category.name,
+      colour: (category.colour === 0) ? "0" : category.colour,
+      ...category.extras,
+      contents: generateCategoryContents(category)
+    }
+  }),
 
   generateCategoryContents = ({ name }) =>
     flatMap(blocksByCategory[name] || [], blockToLabelAndBlock),

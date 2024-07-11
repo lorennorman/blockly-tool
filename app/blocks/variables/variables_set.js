@@ -1,4 +1,5 @@
 export default {
+  disabled: true,
   type: 'variables_set',
 
   // toolbox: {
