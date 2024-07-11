@@ -25,36 +25,40 @@ const withCleanDir = async (dirName, writeFunction) => {
   console.log(`${totalBytesWritten} bytes written.`)
 }
 
-import blockJson from './src/importer/block_importer.js'
-import toolbox from './src/importer/toolbox_importer.js'
-import workspace from './src/importer/workspace_importer.js'
+import { importBlockJson } from './src/importer/block_importer.js'
+import importToolboxJson from './src/importer/toolbox_importer.js'
+import importWorkspaceJson from './src/importer/workspace_importer.js'
 
-import processExtensions from './src/importer/extension_importer.js'
-import processMutators from './src/importer/mutator_importer.js'
-import processGenerators from './src/importer/generator_importer.js'
-import processRegenerators from './src/importer/regenerator_importer.js'
+import importExtensionsJs from './src/importer/extension_importer.js'
+import importMutatorsJs from './src/importer/mutator_importer.js'
+import importGeneratorsJs from './src/importer/generator_importer.js'
+import importRegeneratorsJs from './src/importer/regenerator_importer.js'
 
 
 const
-  processBlocks = () => JSON.stringify(blockJson, null, 2),
-  processToolbox = () => JSON.stringify(toolbox, null, 2),
-  processWorkspace = () => JSON.stringify(workspace, null, 2)
+  processBlocks = async () => JSON.stringify(await importBlockJson(), null, 2),
+  processToolbox = async () => JSON.stringify(await importToolboxJson(), null, 2),
+  processWorkspace = async () => JSON.stringify(await importWorkspaceJson(), null, 2),
+  processExtensions = () => importExtensionsJs(),
+  processMutators = () => importMutatorsJs(),
+  processGenerators = () => importGeneratorsJs(),
+  processRegenerators = () => importRegeneratorsJs()
 
 const startTime = Date.now()
 console.log("Starting Blockly Export")
 console.log("=======================")
 
-withCleanDir("export", write => {
+withCleanDir("export", async write => {
   // JSON
-  write("blocks.json", processBlocks())
-  write("toolbox.json", processToolbox())
-  write("workspace.json", processWorkspace())
+  write("blocks.json", await processBlocks())
+  write("toolbox.json", await processToolbox())
+  write("workspace.json", await processWorkspace())
 
   // JS
-  write("extensions.js", processExtensions())
-  write("mutators.js", processMutators())
-  write("generators.js", processGenerators())
-  write("regenerators.js", processRegenerators())
+  write("extensions.js", await processExtensions())
+  write("mutators.js", await processMutators())
+  write("generators.js", await processGenerators())
+  write("regenerators.js", await processRegenerators())
 
   const elapsed = Date.now() - startTime
   console.log("=======================")
