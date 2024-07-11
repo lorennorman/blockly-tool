@@ -1,7 +1,11 @@
 import fs from 'fs'
 
-// export script helper function
+// make a tiny DSL
 const withCleanDir = async (dirName, writeFunction) => {
+  const startTime = Date.now()
+  console.log("Starting Blockly Export")
+  console.log("=======================")
+
   if(fs.existsSync(dirName)) {
     fs.rmSync(dirName, { recursive: true, force: true })
   }
@@ -12,17 +16,19 @@ const withCleanDir = async (dirName, writeFunction) => {
   const write = (filename, fileContents) => {
     const
       exportFilename = `${dirName}/${filename}`,
-      bytesToWrite = fileContents.length
+      bytesToWrite = fileContents.length/1000
 
     fs.writeFileSync(exportFilename, fileContents)
 
-    console.log(`/${exportFilename}: ${bytesToWrite} bytes`)
+    console.log(`/${exportFilename} (${bytesToWrite}k)`)
     totalBytesWritten += bytesToWrite
   }
 
   await writeFunction(write)
 
-  console.log(`${totalBytesWritten} bytes written.`)
+  const elapsed = Date.now() - startTime
+  console.log("=======================")
+  console.log(`🏁 Done (${totalBytesWritten}k/${elapsed}ms) 🏁`)
 }
 
 import { importBlockJson } from './src/importer/block_importer.js'
@@ -30,11 +36,6 @@ import importToolboxJson from './src/importer/toolbox_importer.js'
 import importWorkspaceJson from './src/importer/workspace_importer.js'
 
 import importBlocklyJs from './src/importer/blockly_importer.js'
-
-
-const startTime = Date.now()
-console.log("Starting Blockly Export")
-console.log("=======================")
 
 withCleanDir("export", async write => {
   // JSON
@@ -44,8 +45,4 @@ withCleanDir("export", async write => {
 
   // JS
   write("blockly.js", await importBlocklyJs())
-
-  const elapsed = Date.now() - startTime
-  console.log("=======================")
-  console.log(`🏁 Done (${elapsed}ms) 🏁`)
 })
