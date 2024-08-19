@@ -1,5 +1,3 @@
-// Regenerators
-
 /* LOCAL->> */
 const blockRegenerators = {}
 /* <<-LOCAL */

@@ -1,5 +1,3 @@
-// Mutators
-
 /* LOCAL->> */
 const allBlockMutators = {}
 /* <<-LOCAL */

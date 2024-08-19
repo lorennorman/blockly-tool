@@ -1,5 +1,3 @@
-// Extensions
-
 /* LOCAL->> */
 const allExtensions = {}
 /* <<-LOCAL */

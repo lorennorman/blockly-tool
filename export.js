@@ -34,15 +34,17 @@ const withCleanDir = async (dirName, writeFunction) => {
 import { importBlockJson } from './src/importer/block_importer.js'
 import importToolboxJson from './src/importer/toolbox_importer.js'
 import importWorkspaceJson from './src/importer/workspace_importer.js'
-
 import importBlocklyJs from './src/importer/blockly_importer.js'
+
+
+const pretty = jsObject => JSON.stringify(jsObject, null, 2) + "\n"
 
 withCleanDir("export", async write => {
   // JSON
-  write("blocks.json", JSON.stringify(await importBlockJson(), null, 2))
-  write("toolbox.json", JSON.stringify(await importToolboxJson(), null, 2))
-  write("workspace.json", JSON.stringify(await importWorkspaceJson(), null, 2))
+  write("blocks.json", pretty(await importBlockJson()))
+  write("toolbox.json", pretty(await importToolboxJson()))
+  write("workspace.json", pretty(await importWorkspaceJson()))
 
   // JS
-  write("blockly.js", await importBlocklyJs())
+  write("custom_blockly.js", await importBlocklyJs())
 })

@@ -1,5 +1,3 @@
-// Generators
-
 /* LOCAL->> */
 const blockGenerators = {}
 /* <<-LOCAL */

@@ -5,13 +5,20 @@ import importGeneratorsJs from './generator_importer.js'
 import importRegeneratorsJs from './regenerator_importer.js'
 
 
+const section = (title, contents) => `
+///////////
+// ${title}
+///////////
+${contents}
+`
+
 export default async () => (
   [
-    "import Blockly from 'blockly'",
-    await importToolboxJs(),
-    await importExtensionsJs(),
-    await importMutatorsJs(),
-    await importGeneratorsJs(),
-    await importRegeneratorsJs(),
-  ].join("\n//----------\n\n")
+    "import Blockly from 'blockly'\n\n",
+    section("Toolbox", importToolboxJs()),
+    section("Extensions", await importExtensionsJs()),
+    section("Mutators", await importMutatorsJs()),
+    section("Generators", await importGeneratorsJs()),
+    section("Regenerators", await importRegeneratorsJs()),
+  ].join("")
 )
