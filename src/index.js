@@ -3,7 +3,7 @@ import Blockly from 'blockly'
 import appBlocks from './blocks.json'
 import toolbox from './toolbox.json'
 import initialWorkspace from './workspace.json'
-import { extensions, generators, regenerators } from './blockly.js'
+import { registerToolboxCallbacks, extensions, generators, regenerators } from './blockly.js'
 import { clear, load, save } from './serialization'
 
 import './index.css'
@@ -28,6 +28,8 @@ const workspace = Blockly.inject(blocklyDiv, {
     wheel: true
   }
 })
+
+registerToolboxCallbacks(workspace)
 
 // hard-code toolbox scale so it ignores zoom
 Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1

@@ -2,6 +2,7 @@ import { compact, forEach, includes, isEmpty, isString, keyBy, map, mapValues, f
 
 import toolboxConfig from '../../app/toolbox/index.js'
 import { importBlockDefinitions } from './block_importer.js'
+import renderTemplate from './template_renderer.js'
 
 
 let blocksByCategory = {}
@@ -35,7 +36,9 @@ const
       kind: 'category',
       name: category.name,
       colour: (category.colour === 0) ? "0" : category.colour,
-      ...category.extras,
+      ...{
+        custom: category.callback ? category.name : undefined
+      },
       contents: generateCategoryContents(category)
     }
   }),
@@ -105,3 +108,14 @@ const
       : { shadow } // set as shadow value
 
 export default importToolbox
+
+export const importToolboxJs = () => {
+  const
+    categoriesWithCallbacks = filter(toolboxConfig, "callback"),
+    renderedCategoryCallbacks = `
+const categoryCallbacks = {
+  ${map(categoriesWithCallbacks, ({name, callback}) => `${name}: ${callback}`).join(',\n\n  ')}
+}
+  `
+  return renderTemplate(renderedCategoryCallbacks, './src/importer/toolbox.template.js')
+}
