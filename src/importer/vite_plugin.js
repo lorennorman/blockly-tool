@@ -34,7 +34,9 @@ export default function ImportUserAppPlugin() {
     },
 
     handleHotUpdate(ctx) {
-      if (!ctx.file.includes('/app/')) { return }
+      if (!ctx.file.includes('/app/') && !ctx.file.includes('/blockly_api.js')) {
+        return
+      }
 
       const mods = map(PROCESSED_FILES, file =>
         ctx.server.moduleGraph.getModuleById(`\0.${file}`))

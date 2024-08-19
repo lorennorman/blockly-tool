@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 import { importToolboxJs } from './toolbox_importer.js'
 import importExtensionsJs from './extension_importer.js'
 import importMutatorsJs from './mutator_importer.js'
@@ -20,5 +22,8 @@ export default async () => (
     section("Mutators", await importMutatorsJs()),
     section("Generators", await importGeneratorsJs()),
     section("Regenerators", await importRegeneratorsJs()),
+    section("Blockly API Wrapper", (() => {
+      return fs.readFileSync(`./src/importer/blockly_api.js`)
+    })())
   ].join("")
 )

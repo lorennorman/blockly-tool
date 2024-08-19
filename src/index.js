@@ -1,45 +1,26 @@
 import Blockly from 'blockly'
 
-import appBlocks from './blocks.json'
-import toolbox from './toolbox.json'
 import initialWorkspace from './workspace.json'
-import { registerToolboxCallbacks, extensions, generators, regenerators } from './blockly.js'
+import { inject, jsonToWorkspace, workspaceToJson } from './blockly.js'
 import { clear, load, save } from './serialization'
 
 import './index.css'
 
 
-extensions.injectData({feedOptions: [
-  ["Feeder 1", "abc123"],
-  ["A Feed Z", "qrstuv"],
-  ["Feedinsky &", "oneforyou-oneforme"],
-]})
-extensions.ready()
-
-// import block library json
-Blockly.defineBlocksWithJsonArray(appBlocks)
-
-// inject blockly with our toolbox
-const blocklyDiv = document.getElementById('blocklyDiv')
-const workspace = Blockly.inject(blocklyDiv, {
-  toolbox,
-  zoom: {
-    controls: true,
-    wheel: true
+const workspace = inject('blocklyDiv', {
+  disableOrphans: true,
+  disableToolboxZoom: true,
+  extensionData: {
+    feedOptions: [
+      ["Feeder 1", "abc123"],
+      ["A Feed Z", "qrstuv"],
+      ["Feedinsky &", "oneforyou-oneforme"],
+    ]
+  },
+  injectOptions: {
+    zoom: { controls: true, wheel: true }
   }
 })
-
-registerToolboxCallbacks(workspace)
-
-// hard-code toolbox scale so it ignores zoom
-Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
-
-// inject workspace blocks
-Blockly.serialization.workspaces.load(initialWorkspace, workspace)
-
-const workspaceToBytecode = workspace => {
-  return generators.json.workspaceToCode(workspace) || ""
-}
 
 // prepare generators and their dom targets
 const blocklyJsonOutputDiv = document.getElementById('blockly-json')
@@ -48,14 +29,14 @@ const regenerate = () => {
   bytecodeJsonOutputDiv.innerText = ``
   blocklyJsonOutputDiv.innerText = ``
 
-  const
-    bytecodeJson = workspaceToBytecode(workspace),
-    bytecode = JSON.parse(bytecodeJson)
+  const bytecodeJson = workspaceToJson(workspace)
+
   bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
 
   const
-    workspaceObject = regenerators.json.codeToWorkspace(bytecode),
+    workspaceObject = jsonToWorkspace(bytecodeJson),
     workspaceJson = JSON.stringify(workspaceObject, null, 2)
+
   blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
 }
 
@@ -76,8 +57,6 @@ const safeRegenerate = () => {
 }
 // register listeners
 
-// enforce one top-level block
-workspace.addChangeListener(Blockly.Events.disableOrphans)
 
 // auto-save on non-UI changes
 workspace.addChangeListener((e) => e.isUiEvent || save(workspace))
@@ -105,9 +84,9 @@ clearButton.addEventListener('click', clearAndInitialize)
 const reloadBytecodeButton = document.getElementById('button-reload-bytecode')
 reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
-  const bytecodeJson = workspaceToBytecode(workspace)
+  const bytecodeJson = workspaceToJson(workspace)
   // convert bytecode to workspace json
-  const workspaceJson = regenerators.json.codeToWorkspace(JSON.parse(bytecodeJson))
+  const workspaceJson = jsonToWorkspace(bytecodeJson)
 
   // disable events while we're working
   Blockly.Events.disable()
