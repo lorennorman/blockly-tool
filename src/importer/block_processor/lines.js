@@ -65,7 +65,8 @@ const processLine = (line) => {
       type: (lineData.options && "field_dropdown")
         || (includes(keys(lineData), "checked") && "field_checkbox")
         || (includes(keys(lineData), "text") && "field_input")
-        || (includes(keys(lineData), "multiline_text") && "field_multilinetext"),
+        || (includes(keys(lineData), "multiline_text") && "field_multilinetext")
+        || lineData.type,
       checked: lineData.checked,
       options: lineData.options,
       text: lineData.text || lineData.multiline_text || "",
@@ -79,7 +80,9 @@ const processLine = (line) => {
       name: fieldName,
       type: (fieldData.options && "field_dropdown")
         || (includes(keys(fieldData), "checked") && "field_checkbox")
-        || (includes(keys(fieldData), "text") && "field_input"),
+        || (includes(keys(fieldData), "text") && "field_input")
+        || (includes(keys(fieldData), "multiline_text") && "field_multilinetext")
+        || fieldData.type,
       checked: fieldData.checked,
       options: fieldData.options,
       text: fieldData.text,
@@ -146,7 +149,7 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
-    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "text", "multiline_text", "options", "shadow", "checked")
+    const extraKeys = without(keys(second), "inputDummy", "inputValue", "inputStatement", "field", "fields", "type", "text", "multiline_text", "options", "shadow", "checked")
     if(extraKeys.length) {
       throw new Error(`Unrecognized keys (${extraKeys.join(', ')}) for block line with text: "${text}"`)
     }
