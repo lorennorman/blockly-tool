@@ -7,9 +7,33 @@ import { clear, load, save } from './serialization'
 import './index.css'
 
 
+// wire up the internal json to the dom
+const
+  blocklyJsonOutputDiv = document.getElementById('blockly-json'),
+  bytecodeJsonOutputDiv = document.getElementById('bytecode-json'),
+
+  onJsonUpdated = bytecodeJson => {
+    blocklyJsonOutputDiv.innerText = ``
+    bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
+
+    try {
+      const workspaceJson = JSON.stringify(jsonToWorkspace(bytecodeJson), null, 2)
+      blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
+    } catch(error) {
+      blocklyJsonOutputDiv.innerText = `Workspace JSON generation failed ❌\nYou may need the "Clear" button above.`
+    }
+  },
+
+  onJsonError = error => {
+    bytecodeJsonOutputDiv.innerText = `Bytecode generation failed ❌\nYou may need the "Clear" button above.`
+    blocklyJsonOutputDiv.innerText = `Workspace JSON not generated.`
+  }
+
 const workspace = inject('blocklyDiv', {
   disableOrphans: true,
   disableToolboxZoom: true,
+  onJsonUpdated,
+  onJsonError,
   extensionData: {
     feedOptions: [
       ["Feeder 1", "abc123"],
@@ -22,55 +46,10 @@ const workspace = inject('blocklyDiv', {
   }
 })
 
-// prepare generators and their dom targets
-const blocklyJsonOutputDiv = document.getElementById('blockly-json')
-const bytecodeJsonOutputDiv = document.getElementById('bytecode-json')
-const regenerate = () => {
-  bytecodeJsonOutputDiv.innerText = ``
-  blocklyJsonOutputDiv.innerText = ``
-
-  const bytecodeJson = workspaceToJson(workspace)
-
-  bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
-
-  const
-    workspaceObject = jsonToWorkspace(bytecodeJson),
-    workspaceJson = JSON.stringify(workspaceObject, null, 2)
-
-  blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
-}
-
-const safeRegenerate = () => {
-  try{
-    regenerate()
-  } catch(error) {
-    console.error(error)
-    console.log("safeRegenerate() caught the above")
-
-    if(!bytecodeJsonOutputDiv.innerText) {
-      bytecodeJsonOutputDiv.innerText = `Bytecode generation failed ❌\nYou may need the "Clear" button above.`
-      blocklyJsonOutputDiv.innerText = `Workspace JSON not generated.`
-    } else {
-      blocklyJsonOutputDiv.innerText = `Workspace JSON generation failed ❌\nYou may need the "Clear" button above.`
-    }
-  }
-}
 // register listeners
-
 
 // auto-save on non-UI changes
 workspace.addChangeListener((e) => e.isUiEvent || save(workspace))
-
-// auto-regenerate code
-workspace.addChangeListener((e) => {
-  if(e.isUiEvent || // no UI events
-     e.type == Blockly.Events.FINISHED_LOADING || // no on-load
-     workspace.isDragging()) // not while dragging
-  { return }
-
-  // generate next cycle so orphans get disabled first
-  setTimeout(safeRegenerate)
-})
 
 // provide a way to clear the workspace and persistent memory
 const
@@ -115,20 +94,4 @@ reloadSerializedButton.addEventListener('click', () => {
 })
 
 // INITIALIZE ON LOAD
-
-// try to refresh and regenerate last workspace
-try {
-  // load last sketch from storage
-  if(!load(workspace)) {
-    throw "Load from cache failed."
-  }
-  // run the generators
-  regenerate()
-
-} catch(e) {
-  console.error(e)
-  console.log("Refresh and regenerate from browser cache failed with the above error, clearing cache and reinitializing...")
-  clearAndInitialize()
-  regenerate()
-  console.log("Done.")
-}
+load(workspace)

@@ -29,6 +29,26 @@ export const
 
     Blockly.serialization.workspaces.load(initialWorkspace, workspace)
 
+    if(options.onJsonUpdated || options.onJsonError) {
+      // auto-regenerate code
+      workspace.addChangeListener(e => {
+        if(e.isUiEvent || // no UI events
+           e.type == Blockly.Events.FINISHED_LOADING || // no on-load
+           workspace.isDragging()) // not while dragging
+        { return }
+
+        // generate next cycle so orphans get disabled first
+        setTimeout(() => {
+          try {
+            const json = workspaceToJson(workspace)
+            options.onJsonUpdated?.(json)
+          } catch(error) {
+            options.onJsonError?.(error)
+          }
+        })
+      })
+    }
+
     return workspace
   },
 
