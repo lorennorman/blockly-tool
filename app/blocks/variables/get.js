@@ -1,10 +1,25 @@
 export default {
-  disabled: true,
-  type: 'variables_get',
+  type: 'io_variables_get',
 
   toolbox: {
     category: "Variables"
   },
+
+  visualization: {
+    colour: 240
+  },
+
+  connections: {
+    mode: 'value',
+    output: "String",
+  },
+
+  lines: [
+    ['', {
+      field: 'VAR',
+      type: 'field_variable'
+    }]
+  ],
 
   generators: {
     json: block => {
@@ -27,7 +42,7 @@ export default {
         id = helpers.registerVariable(name)
 
       return {
-        type: "variables_get",
+        type: "io_variables_get",
         fields: {
           VAR: { id }
         },
