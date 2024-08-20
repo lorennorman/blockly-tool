@@ -5,9 +5,13 @@ import initialWorkspace from './workspace.json'
 
 Blockly.defineBlocksWithJsonArray(blocks)
 
+let currentWorkspace
 
 export const
-  inject = (blocklyDivId, options = {}) => {
+  inject = function(blocklyDivId, options = {}) {
+    if(currentWorkspace) {
+      throw new Error('Already have a workspace, dispose of it before injecting a new one.')
+    }
 
     // inject extension data
     options.extensionData && extensions.injectData(options.extensionData)
@@ -17,30 +21,35 @@ export const
       Blockly.VerticalFlyout.prototype.getFlyoutScale = () => 1
     }
 
-    const
-      blocklyInjectOptions = buildInjectOptions(options),
-      workspace = Blockly.inject(blocklyDivId, blocklyInjectOptions)
+    const blocklyInjectOptions = buildInjectOptions(options)
 
-    registerToolboxCallbacks(workspace)
+    currentWorkspace = Blockly.inject(blocklyDivId, blocklyInjectOptions)
+
+    registerToolboxCallbacks(currentWorkspace)
 
     if(options.disableOrphans) {
-      workspace.addChangeListener(Blockly.Events.disableOrphans)
+      currentWorkspace.addChangeListener(Blockly.Events.disableOrphans)
     }
 
-    Blockly.serialization.workspaces.load(initialWorkspace, workspace)
+    if(options.workspaceData) {
+      const workspaceJson = jsonToWorkspace(options.workspaceData)
+      Blockly.serialization.workspaces.load(workspaceJson, currentWorkspace)
+    } else {
+      Blockly.serialization.workspaces.load(initialWorkspace, currentWorkspace)
+    }
 
     if(options.onJsonUpdated || options.onJsonError) {
       // auto-regenerate code
-      workspace.addChangeListener(e => {
+      currentWorkspace.addChangeListener(e => {
         if(e.isUiEvent || // no UI events
            e.type == Blockly.Events.FINISHED_LOADING || // no on-load
-           workspace.isDragging()) // not while dragging
+           currentWorkspace.isDragging()) // not while dragging
         { return }
 
         // generate next cycle so orphans get disabled first
         setTimeout(() => {
           try {
-            const json = workspaceToJson(workspace)
+            const json = workspaceToJson(currentWorkspace)
             options.onJsonUpdated?.(json)
           } catch(error) {
             options.onJsonError?.(error)
@@ -49,7 +58,15 @@ export const
       })
     }
 
-    return workspace
+    return currentWorkspace
+  },
+
+  dispose = () => {
+    extensions.dispose()
+    if(!currentWorkspace) { throw new Error("Tried to dispose a non-existent workspace.") }
+
+    currentWorkspace.dispose()
+    currentWorkspace = null
   },
 
   // takes a workspace, returns a json string
@@ -57,9 +74,13 @@ export const
     return generators.json.workspaceToCode(workspace) || ""
   },
 
-  // takes a json string, returns a workspace
+  // takes a json string or object, returns a workspace
   jsonToWorkspace = json => {
-    return regenerators.json.codeToWorkspace(JSON.parse(json))
+    const parsedJson = typeof json === 'string'
+      ? JSON.parse(json)
+      : json
+
+    return regenerators.json.codeToWorkspace(parsedJson)
   }
 
 const buildInjectOptions = options => {
@@ -67,7 +88,6 @@ const buildInjectOptions = options => {
     toolbox,
     ...options.injectOptions
   }
-
 
   return injectOptions
 }
