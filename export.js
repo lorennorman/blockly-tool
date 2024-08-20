@@ -46,5 +46,5 @@ withCleanDir("export", async write => {
   write("workspace.json", pretty(await importWorkspaceJson()))
 
   // JS
-  write("custom_blockly.js", await importBlocklyJs())
+  write("blockly.js", await importBlocklyJs())
 })

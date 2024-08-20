@@ -22,8 +22,6 @@ export default async () => (
     section("Mutators", await importMutatorsJs()),
     section("Generators", await importGeneratorsJs()),
     section("Regenerators", await importRegeneratorsJs()),
-    section("Blockly API Wrapper", (() => {
-      return fs.readFileSync(`./src/importer/blockly_api.js`)
-    })())
+    section("Blockly API Wrapper", fs.readFileSync(`./src/importer/blockly_api.js`))
   ].join("")
 )
