@@ -1,5 +1,5 @@
 const
-  random = Math.random()*100000000,
+  random = Math.random()*100000000, // busts the NodeJS file cache
   mutator = (await import(`./if/mutator.js?key=${random}`)).default
 
 export default {
