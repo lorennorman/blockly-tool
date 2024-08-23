@@ -26,7 +26,8 @@ export default [
         { // setter block for this variable
           kind: 'block',
           type: 'io_variables_set',
-          fields: { VAR: { id }}
+          fields: { VAR: { id }},
+          inputs: { VALUE: { shadow: { type: 'io_text' } } }
         }, { // getter block for this variable
           kind: 'block',
           type: 'io_variables_get',
