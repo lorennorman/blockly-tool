@@ -9,9 +9,9 @@
     "lint": "eslint src/",
     "lint-export": "eslint export/",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build",
+    "build": "npm run export && vite build",
     "build-all-branches": "node build_all_branches.js",
-    "preview": "vite preview",
+    "preview": "npm run build && vite preview",
     "export": "node export.js"
   },
   "keywords": [
