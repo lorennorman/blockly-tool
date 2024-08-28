@@ -17,13 +17,14 @@ export default {
     next: "trigger"
   },
 
+  extensions: ['populateFeedDropdown'],
+
   lines: [
     [ "...when %FEED_KEY gets data", {
       align: 'LEFT',
       field: "FEED_KEY",
       options: [
-        // TODO: share feed extension
-        ["Temp: F", "temp-f"]
+        [ "Loading Feeds...", ""]
       ]
     }],
   ],
