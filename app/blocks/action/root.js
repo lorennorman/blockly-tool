@@ -8,16 +8,25 @@ export default {
   visualization: {
     colour: "0",
     extensions: [  ],
-    tooltip: "Drag some statement blocks into the \"Do\" list to build a custom Action"
+    tooltip: "Add Triggers to determine when this Action runs.\nAdd Actions to determine what this Action does."
   },
 
   lines: [
-    [ "Action Commands", "CENTER" ],
+    [ "", "LEFT" ],
+    [ "Triggers:", "LEFT" ],
+    [ "", {
+      inputStatement: "TRIGGERS",
+      check: 'trigger'
+    }],
 
-    [ "Do:", {
+    [ "", "LEFT" ],
+    [ "Actions:", "LEFT" ],
+    [ "", {
       inputStatement: "EXPRESSIONS",
       // check: "expression"
     }],
+
+    [ "", "LEFT" ],
   ],
 
   generators: {
