@@ -31,9 +31,8 @@ export default {
     [ "gets data matching %CONDITION", {
       inputValue: "CONDITION",
       shadow: {
-        type: 'io_logic_compare',
+        type: 'matcher_compare',
         inputs: {
-          // A: { shadow: { type: 'feed_selector' } },
           B: { shadow: { type: 'io_math_number' } },
         }
       }

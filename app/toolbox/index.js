@@ -1,5 +1,6 @@
 export default [
-  { name: 'Triggers', colour: 30 },
+  { name: 'Triggers', colour: 20 },
+  { name: 'Matchers', colour: 40 },
   { name: 'Logic', colour: 60 },
   { name: 'Math', colour: 120 },
   { name: 'Text', colour: 180 },

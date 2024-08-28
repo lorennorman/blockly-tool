@@ -20,10 +20,19 @@ export default {
   },
 
   lines: [
-    [ "...every hour at minute %MINUTE", {
+    [ "...%OCCURRENCES an hour, at minute %MINUTE", {
       align: 'LEFT',
-      field: "MINUTE",
-      options: map(map(range(60), String), idx => ([ idx, idx ]))
+      fields: {
+        OCCURRENCES: {
+          options: [
+            ["once", "once"],
+            ["twice", "twice"],
+          ]
+        },
+        MINUTE: {
+          options: map(map(range(60), String), idx => ([ idx, idx ]))
+        }
+      }
     }],
   ],
 
