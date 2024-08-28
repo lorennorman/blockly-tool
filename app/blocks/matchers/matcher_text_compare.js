@@ -1,5 +1,5 @@
 export default {
-  type: 'matcher_compare',
+  type: 'matcher_text_compare',
 
   toolbox: {
     category: 'Matchers',
@@ -7,19 +7,25 @@ export default {
 
   visualization: {
     inputsInline: true,
-    colour: 224,
+    colour: 180,
     tooltip: [
-      "Compare two numeric values in various ways.",
+      "Compare two chunks of text for equality or inequality.",
       "-",
       "Inputs:",
       "---------------",
-      "Comparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?",
-      "Number A - the first number",
-      "Number B - the second number",
+      "Comparator - check for equality or inequality?",
+      "Text A - the first string of text",
+      "Text B - the second string of text",
       "-",
       "Casting:",
       "---------------",
-      "both inputs are coerced to floating point numbers",
+      "both inputs are coerced to strings",
+      "-",
+      "Options: (not implemented)",
+      "---------------",
+      "Trim? - trim whitespace from the front and back of the input strings",
+      "Trim front? - trim whitespace from the front of the input strings",
+      "Trim back? - trim whitespace from the back of the input strings",
     ].join('\n'),
   },
 
@@ -31,23 +37,19 @@ export default {
       options: [
         ['=', 'EQ'],
         ['\u2260', 'NEQ'],
-        ['\u200F<', 'LT'],
-        ['\u200F\u2264', 'LTE'],
-        ['\u200F>', 'GT'],
-        ['\u200F\u2265', 'GTE'],
       ]
     }],
-    ["", { inputValue: 'B', shadow: 'io_math_number' }]
+    ["", { inputValue: 'B', shadow: "io_text" }]
   ],
 
   generators: {
     json: (block, generator) => {
       const
         comparator = block.getFieldValue('OP'),
-        rightExp = generator.valueToCode(block, 'B', 0) || 'null',
+        rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
-          compare: {
+          textCompare: {
             comparator: comparator?.toLowerCase() || null,
             right: JSON.parse(rightExp),
           },
@@ -60,15 +62,15 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { comparator, left, right } = blockObject.compare,
+        { comparator, right } = blockObject.textCompare,
         fields = {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          B: helpers.expressionToBlock(right, { shadow: 'io_math_number' }),
+          B: helpers.expressionToBlock(right, { shadow: "io_text" }),
         }
 
-      return { type: 'matcher_compare', fields, inputs }
+      return { type: 'matcher_text_compare', fields, inputs }
     }
   }
 }

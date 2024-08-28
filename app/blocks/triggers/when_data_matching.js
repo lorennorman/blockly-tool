@@ -6,7 +6,7 @@ export default {
   },
 
   visualization: {
-    // inputsInline: true,
+    inputsInline: true,
     colour: 30,
     tooltip: "Run this action when a feed receives data."
   },
@@ -28,8 +28,9 @@ export default {
       ]
     }],
 
-    [ "gets data matching %CONDITION", {
+    [ "gets data matching: %CONDITION", {
       inputValue: "CONDITION",
+      check: 'matcher',
       shadow: {
         type: 'matcher_compare',
         inputs: {

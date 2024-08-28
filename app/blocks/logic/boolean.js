@@ -10,6 +10,11 @@ export default {
     tooltip: "A true or false value!"
   },
 
+  connections: {
+    mode: "value",
+    output: "boolean",
+  },
+
   lines: [
     ["", {
       field: "BOOL",
