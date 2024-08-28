@@ -41,7 +41,7 @@ const extensions = (() => {
     }
   }
 
-  // register all extnesions to Blockly, wrap them in a variable injector
+  // register all extensions to Blockly, wrap them in a variable injector
   for (const [extensionName, extensionFunc] of Object.entries(allExtensions)) {
     Blockly.Extensions.register(extensionName, wrapExtension(extensionFunc))
   }
