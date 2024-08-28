@@ -10,20 +10,7 @@ export default {
     tooltip: "The last value of this feed or component, always a String"
   },
 
-  extensions: {
-    populateFeedDropdown: ({ block, data, Blockly }) => {
-      const { feedOptions } = data
-
-      if(!feedOptions) {
-        console.error(`No feedOptions in extension data to populate dropdowns!`)
-        return
-      }
-
-      const input = block.getInput('')
-      input.removeField("FEED_KEY")
-      input.appendField(new Blockly.FieldDropdown(feedOptions), "FEED_KEY")
-    }
-  },
+  extensions: ['populateFeedDropdown'],
 
   lines: [
     [ "Feed:", {
