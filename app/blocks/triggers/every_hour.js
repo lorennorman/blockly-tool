@@ -20,10 +20,10 @@ export default {
   },
 
   lines: [
-    [ "...%OCCURRENCES an hour, at minute %MINUTE", {
+    [ "...%FREQUENCY an hour, at minute %MINUTE", {
       align: 'LEFT',
       fields: {
-        OCCURRENCES: {
+        FREQUENCY: {
           options: [
             ["once", "once"],
             ["twice", "twice"],
@@ -40,22 +40,24 @@ export default {
     json: block => {
       const
         minute = block.getFieldValue('MINUTE'),
+        frequency = block.getFieldValue('FREQUENCY'),
         payload = JSON.stringify({
-          minute
+          everyHour: { minute, frequency }
         })
 
-      return [ payload, 0 ]
+      return payload
     }
   },
 
   regenerators: {
     json: blockObject => {
-      const payload = blockObject.minute
+      const { minute, frequency } = blockObject.everyHour
 
       return {
         type: "every_hour",
         fields: {
-          MINUTE: payload.minute
+          MINUTE: minute,
+          FREQUENCY: frequency,
         }
       }
     }

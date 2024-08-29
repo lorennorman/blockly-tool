@@ -3,6 +3,8 @@ const blockRegenerators = {}
 /* <<-LOCAL */
 
 const BYTECODE_BLOCK_TYPE_MAP = {
+  everyHour: 'every_hour',
+  everyDay: 'every_day',
   whenData: 'when_data',
   whenDataMatching: 'when_data_matching',
   matcherCompare: 'matcher_compare',

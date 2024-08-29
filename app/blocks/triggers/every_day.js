@@ -59,16 +59,16 @@ export default {
       const
         hour = block.getFieldValue('HOUR'),
         payload = JSON.stringify({
-          hour
+          everyDay: { hour }
         })
 
-      return [ payload, 0 ]
+      return payload
     }
   },
 
   regenerators: {
     json: blockObject => {
-      const payload = blockObject.hour
+      const payload = blockObject.everyDay
 
       return {
         type: "every_day",
