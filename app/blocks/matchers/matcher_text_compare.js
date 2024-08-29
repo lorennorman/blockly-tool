@@ -49,7 +49,7 @@ export default {
         rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
-          textCompare: {
+          matcherTextCompare: {
             comparator: comparator?.toLowerCase() || null,
             right: JSON.parse(rightExp),
           },
@@ -62,7 +62,7 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { comparator, right } = blockObject.textCompare,
+        { comparator, right } = blockObject.matcherTextCompare,
         fields = {
           OP: comparator?.toUpperCase()
         },

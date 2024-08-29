@@ -30,7 +30,7 @@ export default {
         rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
-          logic: {
+          matcherBooleanOperation: {
             comparator: operator?.toLowerCase() || null,
             right: JSON.parse(rightExp),
           },
@@ -43,7 +43,7 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { comparator, right } = blockObject.logic,
+        { comparator, right } = blockObject.matcherBooleanOperation,
         fields = {
           OP: comparator?.toUpperCase()
         },
