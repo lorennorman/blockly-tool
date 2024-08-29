@@ -19,6 +19,25 @@ export default {
       check: 'trigger'
     }],
 
+    [ "...delay this Action by %DELAY", {
+      align: "LEFT",
+      field: 'DELAY',
+      options: [
+        ["no delay", "0"],
+        ["5s", "5"],
+        ["5m", "300"],
+        ["5h", "1800"],
+      ]
+    }],
+
+    [ "...repeat Actions %ON_EXISTING_DELAY", {
+      field: 'ON_EXISTING_DELAY',
+      options: [
+        ["reset existing delays", "reset"],
+        ["start new delays", "duplicate"],
+      ]
+    }],
+
     [ "", "LEFT" ],
     [ "Actions:", "LEFT" ],
     [ "", {
