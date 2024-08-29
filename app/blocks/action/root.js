@@ -50,33 +50,38 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      let expressionsJson, expressions = []
-
-      try {
-        expressionsJson = generator.statementToCode(block, `EXPRESSIONS`)
+      const parseStatementToCodeAsJson = statementInputName => {
+        let expressions = []
 
         try {
-          expressions = JSON.parse(`[${expressionsJson}]`)
+          let expressionsJson = generator.statementToCode(block, statementInputName)
+
+          try {
+            expressions = JSON.parse(`[${expressionsJson}]`)
+          } catch(e) {
+            console.error("Error parsing JSON:", expressionsJson)
+            console.error(e)
+          }
         } catch(e) {
-          console.error("Error parsing JSON:", expressionsJson)
+          console.error(`Error calling statementToCode on root input ${statementInputName}:`)
           console.error(e)
         }
-      } catch(e) {
-        console.error("Error calling statementToCode on expression statements:")
-        console.error(e)
+
+        return expressions
       }
 
       return JSON.stringify({
         version: "1.0.0-beta.1",
         settings: {},
-        expressions,
+        triggers: parseStatementToCodeAsJson('TRIGGERS'),
+        expressions: parseStatementToCodeAsJson('EXPRESSIONS'),
       }, null, 2)
     }
   },
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { expressions } = blockObject
+      const { triggers, expressions } = blockObject
 
       return {
         "type": "action_root",
@@ -85,7 +90,8 @@ export default {
         "x": 50,
         "y": 50,
         "inputs": {
-          "EXPRESSIONS": helpers.arrayToStatements(expressions)
+          "TRIGGERS": helpers.arrayToStatements(triggers),
+          "EXPRESSIONS": helpers.arrayToStatements(expressions),
         }
       }
     }

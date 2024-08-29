@@ -28,8 +28,8 @@ export default {
       ]
     }],
 
-    [ "gets data matching: %CONDITION", {
-      inputValue: "CONDITION",
+    [ "gets data matching: %MATCHER", {
+      inputValue: "MATCHER",
       check: 'matcher',
       shadow: {
         type: 'matcher_compare',
@@ -41,25 +41,31 @@ export default {
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
-        key = block.getFieldValue('FEED_KEY'),
+        feed = block.getFieldValue('FEED_KEY'),
+        matcher = JSON.parse(generator.valueToCode(block, 'MATCHER', 0) || null),
         payload = JSON.stringify({
-          feed: { key }
+          whenDataMatching: {
+            feed, matcher
+          }
         })
 
-      return [ payload, 0 ]
+      return payload
     }
   },
 
   regenerators: {
-    json: blockObject => {
-      const payload = blockObject.feed
+    json: (blockObject, helpers) => {
+      const payload = blockObject.whenDataMatching
 
       return {
         type: "when_data_matching",
         fields: {
-          FEED_KEY: payload.key
+          FEED_KEY: payload.feed
+        },
+        inputs: {
+          MATCHER: helpers.expressionToBlock(payload.matcher)
         }
       }
     }

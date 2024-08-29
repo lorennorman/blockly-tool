@@ -3,6 +3,9 @@ const blockRegenerators = {}
 /* <<-LOCAL */
 
 const BYTECODE_BLOCK_TYPE_MAP = {
+  whenData: 'when_data',
+  whenDataMatching: 'when_data_matching',
+  matcherCompare: 'matcher_compare',
   logAction: 'action_log',
   conditional: 'io_controls_if',
   compare: 'io_logic_compare',

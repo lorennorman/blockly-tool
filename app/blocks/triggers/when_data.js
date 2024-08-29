@@ -32,23 +32,23 @@ export default {
   generators: {
     json: block => {
       const
-        key = block.getFieldValue('FEED_KEY'),
+        feed = block.getFieldValue('FEED_KEY'),
         payload = JSON.stringify({
-          feed: { key }
+          whenData: { feed }
         })
 
-      return [ payload, 0 ]
+      return payload
     }
   },
 
   regenerators: {
     json: blockObject => {
-      const payload = blockObject.feed
+      const payload = blockObject.whenData
 
       return {
         type: "when_data",
         fields: {
-          FEED_KEY: payload.key
+          FEED_KEY: payload.feed
         }
       }
     }
