@@ -28,7 +28,7 @@ const withCleanDir = async (dirName, writeFunction) => {
 
   const elapsed = Date.now() - startTime
   console.log("=======================")
-  console.log(`🏁 Done (${totalBytesWritten}k/${elapsed}ms) 🏁`)
+  console.log(`🏁 Done. Wrote ${totalBytesWritten.toString().slice(0,5)}k in ${elapsed}ms 🏁`)
 }
 
 import { importBlockJson } from './src/importer/block_importer.js'

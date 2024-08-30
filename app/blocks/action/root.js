@@ -30,11 +30,11 @@ export default {
       ]
     }],
 
-    [ "...repeat Actions %ON_EXISTING_DELAY", {
-      field: 'ON_EXISTING_DELAY',
+    [ "...repeat Actions %DELAY_MODE", {
+      field: 'DELAY_MODE',
       options: [
-        ["reset existing delays", "reset"],
-        ["start new delays", "duplicate"],
+        ["reset existing delays", "update"],
+        ["start new delays", "create"],
       ]
     }],
 
@@ -70,26 +70,38 @@ export default {
         return expressions
       }
 
+      const
+        seconds = parseInt(block.getFieldValue('DELAY'), 10),
+        mode = block.getFieldValue('DELAY_MODE'),
+        delay = (seconds > 0)
+          ? { seconds, mode }
+          : {}
+
       return JSON.stringify({
         version: "1.0.0-beta.1",
         settings: {},
         triggers: parseStatementToCodeAsJson('TRIGGERS'),
         expressions: parseStatementToCodeAsJson('EXPRESSIONS'),
+        delay
       }, null, 2)
     }
   },
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { triggers, expressions } = blockObject
+      const { triggers, expressions, delay } = blockObject
 
       return {
-        "type": "action_root",
-        "movable": false,
-        "deletable": false,
-        "x": 50,
-        "y": 50,
-        "inputs": {
+        type: "action_root",
+        movable: false,
+        deletable: false,
+        x: 50,
+        y: 50,
+        fields: {
+          DELAY: (delay?.seconds || 0).toString(),
+          DELAY_MODE: delay?.mode || 'update'
+        },
+        inputs: {
           "TRIGGERS": helpers.arrayToStatements(triggers),
           "EXPRESSIONS": helpers.arrayToStatements(expressions),
         }

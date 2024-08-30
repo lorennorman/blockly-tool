@@ -114,7 +114,7 @@ const helpers = {
       : expressionBlock
   },
 
-  arrayToStatements: array => {
+  arrayToStatements: (array=[]) => {
     return array.reduce((blocksDef, exp) => {
       const blockDef = helpers.objectExpressionToBlock(exp)
 
