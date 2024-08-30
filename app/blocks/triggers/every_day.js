@@ -56,24 +56,26 @@ export default {
 
   generators: {
     json: block => {
-      const
-        hour = block.getFieldValue('HOUR'),
-        payload = JSON.stringify({
-          everyDay: { hour }
-        })
+      const hour = block.getFieldValue('HOUR')
 
-      return payload
+      return JSON.stringify({
+        everyDay: {
+          schedule: `* ${hour} * * *`
+        }
+      })
     }
   },
 
   regenerators: {
     json: blockObject => {
-      const payload = blockObject.everyDay
+      const
+        { schedule } = blockObject.everyDay,
+        hour = schedule.split(' ')[1]
 
       return {
         type: "every_day",
         fields: {
-          HOUR: payload.hour
+          HOUR: hour
         }
       }
     }

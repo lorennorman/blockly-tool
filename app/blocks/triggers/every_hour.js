@@ -39,19 +39,29 @@ export default {
   generators: {
     json: block => {
       const
-        minute = block.getFieldValue('MINUTE'),
         frequency = block.getFieldValue('FREQUENCY'),
-        payload = JSON.stringify({
-          everyHour: { minute, frequency }
-        })
+        minute = block.getFieldValue('MINUTE'),
+        cronMinutes = frequency === 'once'
+          ? minute
+          : `${minute%30}/30`
 
-      return payload
+      return JSON.stringify({
+        everyHour: {
+          schedule: `${cronMinutes} * * * *`
+        }
+      })
     }
   },
 
   regenerators: {
     json: blockObject => {
-      const { minute, frequency } = blockObject.everyHour
+      const
+        { schedule } = blockObject.everyHour,
+        cronMinutes = schedule.split(" ")[0],
+        minute = cronMinutes.split('/')[0],
+        frequency = cronMinutes.includes('/')
+          ? 'twice'
+          : 'once'
 
       return {
         type: "every_hour",

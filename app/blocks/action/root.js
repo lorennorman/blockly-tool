@@ -75,21 +75,20 @@ export default {
         mode = block.getFieldValue('DELAY_MODE'),
         delay = (seconds > 0)
           ? { seconds, mode }
-          : {}
+          : undefined
 
       return JSON.stringify({
         version: "1.0.0-beta.1",
-        settings: {},
+        settings: { delay },
         triggers: parseStatementToCodeAsJson('TRIGGERS'),
         expressions: parseStatementToCodeAsJson('EXPRESSIONS'),
-        delay
       }, null, 2)
     }
   },
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { triggers, expressions, delay } = blockObject
+      const { triggers, expressions, settings } = blockObject
 
       return {
         type: "action_root",
@@ -98,8 +97,8 @@ export default {
         x: 50,
         y: 50,
         fields: {
-          DELAY: (delay?.seconds || 0).toString(),
-          DELAY_MODE: delay?.mode || 'update'
+          DELAY: (settings.delay?.seconds || 0).toString(),
+          DELAY_MODE: settings.delay?.mode || 'update'
         },
         inputs: {
           "TRIGGERS": helpers.arrayToStatements(triggers),
