@@ -33,8 +33,8 @@ export default {
     [ "...repeat Actions %DELAY_MODE", {
       field: 'DELAY_MODE',
       options: [
-        ["reset existing delays", "update"],
-        ["start new delays", "create"],
+        ["reset existing delays", "extend"],
+        ["are ignored", "static"],
       ]
     }],
 
@@ -98,7 +98,7 @@ export default {
         y: 50,
         fields: {
           DELAY: (settings.delay?.seconds || 0).toString(),
-          DELAY_MODE: settings.delay?.mode || 'update'
+          DELAY_MODE: settings.delay?.mode || 'extend'
         },
         inputs: {
           "TRIGGERS": helpers.arrayToStatements(triggers),
