@@ -7,6 +7,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   everyDay: 'every_day',
   whenData: 'when_data',
   whenDataMatching: 'when_data_matching',
+  whenDataMatchingState: 'when_data_matching_state',
   matcherCompare: 'matcher_compare',
   matcherTextCompare: 'matcher_text_compare',
   matcherBooleanOperation: 'matcher_boolean_operation',

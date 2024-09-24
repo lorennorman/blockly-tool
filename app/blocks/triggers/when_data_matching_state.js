@@ -2,12 +2,11 @@ export default {
   type: "when_data_matching_state",
 
   toolbox: {
-    // TODO: can't implement until dispatcher tracks from -> to values
-    // category: 'Triggers'
+    category: 'Triggers'
   },
 
   visualization: {
-    // inputsInline: true,
+    inputsInline: true,
     colour: 30,
     tooltip: "Run this action when a feed receives data."
   },
@@ -18,17 +17,14 @@ export default {
     next: "trigger"
   },
 
+  extensions: [ "populateFeedDropdown" ],
+
   lines: [
-    [ "...when %FEED", {
+    [ "...when %FEED_KEY", {
       align: "LEFT",
-      // inputValue: "FEED",
-      // shadow: 'feed_selector',
-      field: 'FEED',
+      field: 'FEED_KEY',
       options: [
-        ["Temp: F", "temp-f"],
-        ["Feeder 1", "abc123"],
-        ["A Feed Z", "qrstuv"],
-        ["Feedinsky &", "oneforyou-oneforme"],
+        [ "Loading Feeds...", ""]
       ]
     }],
 
@@ -42,12 +38,12 @@ export default {
       ]
     }],
 
-    [ "matching %CONDITION", {
-      inputValue: "CONDITION",
+    [ "matching %MATCHER", {
+      inputValue: "MATCHER",
+      check: 'matcher',
       shadow: {
-        type: 'io_logic_compare',
+        type: 'matcher_compare',
         inputs: {
-          // A: { shadow: { type: 'feed_selector' } },
           B: { shadow: { type: 'io_math_number' } },
         }
       }
@@ -55,25 +51,33 @@ export default {
   ],
 
   generators: {
-    json: block => {
+    json: (block, generator) => {
       const
-        key = block.getFieldValue('FEED_KEY'),
+        feed = block.getFieldValue('FEED_KEY'),
+        state = block.getFieldValue('MATCH_STATE'),
+        matcher = JSON.parse(generator.valueToCode(block, 'MATCHER', 0) || null),
         payload = JSON.stringify({
-          feed: { key }
+          whenDataMatchingState: {
+            feed, matcher, state
+          }
         })
 
-      return [ payload, 0 ]
+      return payload
     }
   },
 
   regenerators: {
-    json: blockObject => {
-      const payload = blockObject.feed
+    json: (blockObject, helpers) => {
+      const { feed, matcher, state } = blockObject.whenDataMatchingState
 
       return {
         type: "when_data_matching_state",
         fields: {
-          FEED_KEY: payload.key
+          FEED_KEY: feed,
+          MATCH_STATE: state,
+        },
+        inputs: {
+          MATCHER: helpers.expressionToBlock(matcher)
         }
       }
     }
