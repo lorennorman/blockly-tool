@@ -34,7 +34,7 @@ export default {
         ["starts", "starts"],
         ["stops", "stops"],
         ["keeps", "keeps"],
-        ["keeps not", "keeps-not"],
+        ["keeps not", "avoids"],
       ]
     }],
 
@@ -57,7 +57,7 @@ export default {
         state = block.getFieldValue('MATCH_STATE'),
         matcher = JSON.parse(generator.valueToCode(block, 'MATCHER', 0) || null),
         payload = JSON.stringify({
-          whenDataMatchingState: {
+          whenDataMatchStateChanged: {
             feed, matcher, state
           }
         })
@@ -68,7 +68,7 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const { feed, matcher, state } = blockObject.whenDataMatchingState
+      const { feed, matcher, state } = blockObject.whenDataMatchStateChanged
 
       return {
         type: "when_data_matching_state",
