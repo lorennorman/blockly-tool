@@ -60,7 +60,7 @@ export default {
 
       return JSON.stringify({
         everyDay: {
-          schedule: `* ${hour} * * *`
+          schedule: `0 ${hour} * * *`
         }
       })
     }
