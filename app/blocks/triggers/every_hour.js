@@ -4,7 +4,8 @@ export default {
   type: "every_hour",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: "Runs the Action every hour at the specified minute."
   },
 
   visualization: {

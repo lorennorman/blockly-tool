@@ -29,14 +29,15 @@ export default [
     name: 'Logic',
     colour: 60,
     label: [
-      "Boolean Logic: true, false, and, or, not",
-      "Conditional control flow: if/elseif/else"
+      "Basic logic: true, false, and, or, not, if-elseif-else"
     ],
     contents: [
       "io_logic_boolean",
       "io_logic_negate",
       "io_logic_operation",
       "io_controls_if",
+      "io_logic_compare",
+      "text_compare",
     ]
   }, {
     name: 'Math',
@@ -118,7 +119,8 @@ export default [
             type: 'io_variables_get',
             fields: { VAR: { id }}
           }
-        ]))
+        ])),
+        { kind: 'label', text: "Unused variables are removed when you save." },
       ]
 
       return contents

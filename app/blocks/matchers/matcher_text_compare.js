@@ -3,29 +3,23 @@ export default {
 
   toolbox: {
     category: 'Matchers',
+    label: 'Compare the new value with a String'
   },
 
   visualization: {
     inputsInline: true,
     colour: 180,
     tooltip: [
-      "Compare two chunks of text for equality or inequality.",
+      "Compare the new feed value with text for equality or inequality.",
       "-",
       "Inputs:",
       "---------------",
       "Comparator - check for equality or inequality?",
-      "Text A - the first string of text",
-      "Text B - the second string of text",
+      "Text B - the string of text to compare against the feed value",
       "-",
       "Casting:",
       "---------------",
-      "both inputs are coerced to strings",
-      "-",
-      "Options: (not implemented)",
-      "---------------",
-      "Trim? - trim whitespace from the front and back of the input strings",
-      "Trim front? - trim whitespace from the front of the input strings",
-      "Trim back? - trim whitespace from the back of the input strings",
+      "Both the Feed value and Text B input are coerced to strings",
     ].join('\n'),
   },
 

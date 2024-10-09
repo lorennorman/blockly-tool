@@ -2,12 +2,13 @@ export default {
   type: 'io_logic_boolean',
 
   toolbox: {
-    category: 'Logic'
+    category: 'Logic',
+    label: "True or False?"
   },
 
   visualization: {
     colour: 60,
-    tooltip: "A true or false value!"
+    tooltip: "A true or false value."
   },
 
   connections: {

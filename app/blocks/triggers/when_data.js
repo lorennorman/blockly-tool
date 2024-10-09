@@ -2,7 +2,8 @@ export default {
   type: "when_data",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: 'Runs the Action when a Feed gets ANY data.'
   },
 
   visualization: {

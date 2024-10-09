@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Logic',
+    label: "Apply boolean logic (and/or) to 2 values"
   },
 
   visualization: {

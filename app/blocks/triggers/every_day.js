@@ -4,7 +4,8 @@ export default {
   type: "every_day",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: "Runs the Action every day on the specified hour."
   },
 
   visualization: {

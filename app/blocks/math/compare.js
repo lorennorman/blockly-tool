@@ -3,11 +3,12 @@ export default {
 
   toolbox: {
     category: 'Math',
+    label: "Compare Numbers: equality, greater-than, less-than"
   },
 
   visualization: {
     inputsInline: true,
-    colour: 224,
+    colour: 120,
     tooltip: [
       "Compare two numeric values in various ways.",
       "-",
@@ -19,7 +20,7 @@ export default {
       "-",
       "Casting:",
       "---------------",
-      "both inputs are coerced to floating point numbers",
+      "both Number inputs are coerced to floating point numbers",
     ].join('\n'),
   },
 

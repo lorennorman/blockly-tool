@@ -6,9 +6,10 @@ import renderTemplate from './template_renderer.js'
 
 
 const
-  DEBUG = true,
+  DEBUG = false,
+  WARN = true,
   log = (...messages) => DEBUG && console.log(...messages),
-  warn = (...messages) => DEBUG && console.warn(...messages),
+  warn = (...messages) => (DEBUG || WARN) && console.warn(...messages),
   error = (...messages) => DEBUG && console.error(...messages)
 
 let
@@ -72,7 +73,7 @@ const
     }
   }),
 
-  EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "contents", "callback" ],
+  EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "label", "contents", "callback" ],
 
   validateCategoryDefinition = definition => {
     const

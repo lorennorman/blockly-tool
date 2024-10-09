@@ -2,12 +2,14 @@ export default {
   type: 'io_variables_set',
 
   toolbox: {
-    category: "Variables"
+    category: "Variables",
+    label: "Set a variable to a value"
   },
 
   visualization: {
     inputsInline: true,
-    colour: 240
+    colour: 240,
+    tooltip: "Set a variable to a value"
   },
 
   connections: {

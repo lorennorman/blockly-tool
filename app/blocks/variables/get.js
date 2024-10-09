@@ -2,11 +2,13 @@ export default {
   type: 'io_variables_get',
 
   toolbox: {
-    category: "Variables"
+    category: "Variables",
+    label: "Retrieve the value in a variable that was set earlier"
   },
 
   visualization: {
-    colour: 240
+    colour: 240,
+    tooltip: "Retrieve the value in a variable that was set earlier"
   },
 
   connections: {

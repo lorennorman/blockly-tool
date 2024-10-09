@@ -2,7 +2,8 @@ export default {
   type: "when_data_matching",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: 'Runs the Action when a Feed gets data that passes the Matcher.'
   },
 
   visualization: {

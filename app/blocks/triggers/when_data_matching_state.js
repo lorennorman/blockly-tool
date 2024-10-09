@@ -2,7 +2,8 @@ export default {
   type: "when_data_matching_state",
 
   toolbox: {
-    category: 'Triggers'
+    category: 'Triggers',
+    label: 'Runs the Action based on the desired change in Matcher state.'
   },
 
   visualization: {

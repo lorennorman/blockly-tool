@@ -6,7 +6,8 @@ export default {
   type: 'io_controls_if',
 
   toolbox: {
-    category: 'Logic'
+    category: 'Logic',
+    label: "Conditional evaluation: if-elseif-else"
   },
 
   visualization: {
