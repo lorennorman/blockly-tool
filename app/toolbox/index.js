@@ -1,11 +1,13 @@
-import Actions from './actions.js'
 import Feeds from './feeds.js'
 import Logic from './logic.js'
 import Matchers from './matchers.js'
 import Math from './math.js'
+import Notifications from './notifications.js'
 import Text from './text.js'
 import Triggers from './triggers.js'
+import Utility from './utility.js'
 import Variables from './variables.js'
+import Web from './web.js'
 
 // specify toolbox categories in the order we wish them to appear
 export default [
@@ -16,5 +18,7 @@ export default [
   Text,
   Variables,
   Feeds,
-  Actions,
+  Notifications,
+  Web,
+  Utility
 ]

@@ -26,7 +26,7 @@ export default {
       "{{ vars.var_name }} - shorthand for same as above",
       "{{ variables['var name'] }} - get the value of a variable you have",
       "  defined with name 'var name' (allows spaces in variable names",
-      "{{ vars.['var name'] }} - shorthand for same as above",
+      "{{ vars['var name'] }} - shorthand for same as above",
       "{{ user.name }} - your user's name",
       "{{ user.username }} - your user's username",
       "{{ feeds['group_key.feed_key'].name }} - access a feed with key",
