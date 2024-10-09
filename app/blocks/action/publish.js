@@ -56,10 +56,13 @@ export default {
     json: (blockObject, helpers) => {
       const payload = blockObject.publishAction
 
+      // migrating to a new block
       return {
-        type: "action_publish",
+        type: "feed_set_value",
+        fields: {
+          FEED_KEY: payload.feed.feed.key,
+        },
         inputs: {
-          FEED: helpers.expressionToBlock(payload.feed, { shadow: 'feed_selector' }),
           VALUE: helpers.expressionToBlock(payload.value, { shadow: 'io_text' }),
         }
       }

@@ -24,6 +24,8 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   setVariable: 'io_variables_set',
   getVariable: 'io_variables_get',
   feed: 'feed_selector',
+  getFeedValue: 'feed_get_value',
+  setFeedValue: 'feed_set_value',
   publishAction: 'action_publish',
   webhookAction: 'action_webhook',
   emailAction: 'action_email',

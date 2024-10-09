@@ -1,9 +1,9 @@
 export default {
-  type: "feed_selector",
+  type: "feed_get_value",
 
-  // toolbox: {
-  //   category: 'Feeds'
-  // },
+  toolbox: {
+    label: "Retrieve the Feed's last value before this action started"
+  },
 
   visualization: {
     colour: 300,
@@ -13,12 +13,12 @@ export default {
   extensions: ['populateFeedDropdown'],
 
   lines: [
-    [ "Feed:", {
+    [ "Get %FEED_KEY Feed's last value", {
       field: "FEED_KEY",
       options: [
         [ "Loading Feeds...", "" ],
       ]
-    }],
+    }]
   ],
 
   generators: {
@@ -26,7 +26,7 @@ export default {
       const
         key = block.getFieldValue('FEED_KEY'),
         payload = JSON.stringify({
-          feed: { key }
+          getFeedValue: { key }
         })
 
       return [ payload, 0 ]
@@ -35,9 +35,8 @@ export default {
 
   regenerators: {
     json: blockObject => {
-      const payload = blockObject.feed
+      const payload = blockObject.getFeedValue
 
-      // migrating to a new block
       return {
         type: "feed_get_value",
         fields: {

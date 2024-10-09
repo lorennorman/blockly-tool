@@ -45,6 +45,9 @@ const
   ],
 
   processBlock = ({ definition, path }) => {
+    if(!definition) {
+      throw new Error(`No Block definition found at path: ${BLOCK_LOCATION}${path}`)
+    }
     // console.log("Processing Block:", path)//, definition)
     // ensure only supported keys are present
     const extraKeys = without(keys(definition), ...BLOCK_KEYS)
@@ -74,7 +77,7 @@ export const
     sortBy(compact(map(await gatherBlockFiles(), processBlock)), "type"),
 
   // all definitions
-  allBlockDefinitions = keyBy(map(allBlockDefinitionsAndPaths, "definition"), "type"),
+  allBlockDefinitions = keyBy(compact(map(allBlockDefinitionsAndPaths, "definition")), "type"),
   // without disabled definitions
   blockDefinitions = omitBy(allBlockDefinitions, def => def.disabled),
   blockJson = compact(map(allBlockDefinitionsAndPaths, processBlock))
