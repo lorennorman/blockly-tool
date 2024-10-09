@@ -146,7 +146,7 @@ const
       : null
   ]),
 
-  makeLabel = text => ({ kind: 'label', text, "web-class": "my-label-style" }),
+  makeLabel = text => ({ kind: 'label', text }),
 
   blockToInputs = ({ lines }) => {
     if(!lines) { return }
