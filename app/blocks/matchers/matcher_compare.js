@@ -3,23 +3,23 @@ export default {
 
   toolbox: {
     category: 'Matchers',
+    label: "Compare the new feed value with a number"
   },
 
   visualization: {
     inputsInline: true,
     colour: 224,
     tooltip: [
-      "Compare two numeric values in various ways.",
+      "Compare the new feed value with a number in various ways.",
       "-",
       "Inputs:",
       "---------------",
       "Comparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?",
-      "Number A - the first number",
-      "Number B - the second number",
+      "Number B - the number to compare the feed value with",
       "-",
       "Casting:",
       "---------------",
-      "both inputs are coerced to floating point numbers",
+      "The feed value and Number B are coerced to floating point numbers",
     ].join('\n'),
   },
 

@@ -1,9 +1,7 @@
 export default {
   type: 'matcher_boolean_operation',
 
-  toolbox: {
-    category: 'Matchers',
-  },
+  toolbox: {},
 
   visualization: {
     inputsInline: true,

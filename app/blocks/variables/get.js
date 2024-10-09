@@ -15,7 +15,7 @@ export default {
   },
 
   lines: [
-    ['', {
+    ['Get variable %VAR', {
       field: 'VAR',
       type: 'field_variable'
     }]

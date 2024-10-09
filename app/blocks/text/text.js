@@ -1,7 +1,10 @@
 export default {
   type: "io_text",
 
-  toolbox: { category: 'Text' },
+  toolbox: {
+    category: 'Text',
+    label: "Single-line text string"
+  },
 
   visualization: {
     colour: 180,

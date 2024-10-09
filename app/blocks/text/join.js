@@ -3,13 +3,14 @@ export default {
 
   toolbox: {
     category: 'Text',
+    label: "Combine two pieces of text into one"
   },
 
   visualization: {
     inputsInline: true,
     colour: 180,
     tooltip: [
-      "Join two chunks of text into one.",
+      "Join two pieces of text into one.",
       "-",
       "Inputs:",
       "---------------",

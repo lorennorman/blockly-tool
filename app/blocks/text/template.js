@@ -3,6 +3,7 @@ export default {
 
   toolbox: {
     category: 'Text',
+    label: "Text template: use variables, feed values, etc in text"
   },
 
   visualization: {

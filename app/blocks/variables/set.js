@@ -6,6 +6,7 @@ export default {
   },
 
   visualization: {
+    inputsInline: true,
     colour: 240
   },
 
@@ -16,7 +17,7 @@ export default {
   },
 
   lines: [
-    ['%VAR =', {
+    ['Set variable %VAR =', {
       field: 'VAR',
       type: 'field_variable'
     }],
