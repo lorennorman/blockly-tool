@@ -84,9 +84,14 @@ const
       warn(`  - Warning: Unexpected toolbox definition keys: "${unexpectedKeys.join(", ")}"`)
     }
 
-    // contents and callback are mutually exclusive
-    if(categoryKeys.includes("contents") && categoryKeys.includes("callback")) {
-      warn(`  - Warning: Both "contents" and "callback" defined.`)
+    // callback precludes contents and label
+    if(categoryKeys.includes("callback")) {
+      if(categoryKeys.includes("contents")) {
+        warn(`  - Warning: "contents" defined on toolbox category with a "callback" defined.`)
+      }
+      if(categoryKeys.includes("label")) {
+        warn(`  - Warning: "contents" defined on toolbox category with a "label" defined.`)
+      }
     }
   },
 
