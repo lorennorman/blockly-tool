@@ -1,26 +1,36 @@
-import { compact, forEach, includes, isEmpty, isString, keyBy, map, mapValues, filter, flatMap, reduce } from 'lodash-es'
+import { compact, forEach, includes, isEmpty, isString, keyBy, keys, map, mapValues, filter, flatMap, reduce, without } from 'lodash-es'
 
 import toolboxConfig from '../../app/toolbox/index.js'
 import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
 
-let blocksByCategory = {}
+const
+  DEBUG = true,
+  log = (...messages) => DEBUG && console.log(...messages),
+  warn = (...messages) => DEBUG && console.warn(...messages),
+  error = (...messages) => DEBUG && console.error(...messages)
+
+let
+  blockDefinitionsByType = {},
+  blockDefinitionsByCategory = {}
 
 const
   importToolbox = async () => {
-    const blockDefinitions = await importBlockDefinitions()
-    blocksByCategory = reduce(filter(blockDefinitions, "toolbox"), (collection, definition) => {
-        const category = definition.toolbox.category
+    blockDefinitionsByType = await importBlockDefinitions()
+    blockDefinitionsByCategory = reduce(filter(blockDefinitionsByType, "toolbox"), (collection, definition) => {
+      const category = definition.toolbox.category
 
-        if(!collection[category]) {
-          collection[category] = []
-        }
+      if(!collection[category]) {
+        collection[category] = []
+      }
 
-        collection[category].push(definition)
+      collection[category].push(definition)
 
-        return collection
-      }, {})
+      return collection
+    }, {})
+
+    log(`Processing Toolbox (DEBUG=true)`)
 
     return buildToolbox()
   },
@@ -31,6 +41,25 @@ const
   }),
 
   generateToolboxContents = () => map(toolboxConfig, category => {
+    log(`- "${category.name}"`)
+
+    validateCategoryDefinition(category)
+
+    const
+      contents = generateCategoryContents(category),
+      contentKinds = map(contents, "kind"),
+      blockCount = filter(contentKinds, kind => kind == "block").length,
+      labelCount = filter(contentKinds, kind => kind == "label").length
+
+    log(`  - ${blockCount} blocks added`)
+    if(labelCount) {
+      log(`  - ${labelCount} labels added`)
+    }
+
+    if(!contents.length) {
+      warn(`  - Warning: generated no blocks!`)
+    }
+
     // inject other kinds of toolbox objects here
     return {
       kind: 'category',
@@ -39,12 +68,72 @@ const
       ...{
         custom: category.callback ? category.name : undefined
       },
-      contents: generateCategoryContents(category)
+      contents
     }
   }),
 
-  generateCategoryContents = ({ name }) =>
-    flatMap(blocksByCategory[name] || [], blockToLabelAndBlock),
+  EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "contents", "callback" ],
+
+  validateCategoryDefinition = definition => {
+    const
+      categoryKeys = keys(definition),
+      unexpectedKeys = without(categoryKeys, ...EXPECTED_TOOLBOX_KEYS)
+
+    if(unexpectedKeys.length) {
+      warn(`  - Warning: Unexpected toolbox definition keys: "${unexpectedKeys.join(", ")}"`)
+    }
+
+    // contents and callback are mutually exclusive
+    if(categoryKeys.includes("contents") && categoryKeys.includes("callback")) {
+      warn(`  - Warning: Both "contents" and "callback" defined.`)
+    }
+  },
+
+  generateCategoryContents = ({ name, label, contents }) => {
+    const toolboxContents = []
+
+    // prepend category label(s)
+    if(label) {
+      const labelArray = isString(label) ? [label] : label
+      toolboxContents.push(...map(labelArray, makeLabel))
+    }
+
+    // if a category has a contents array, use that
+    if(contents) {
+      log(`  - using toolbox def`)
+
+      const blockDefinitions = map(contents, findBlockByType)
+
+      toolboxContents.push(...flatMap(blockDefinitions, blockDefinition => blockToLabelAndBlock(blockDefinition)))
+
+      warnOnExtraBlocksSpecifyCategory(name, blockDefinitions)
+
+      // otherwise add blocks by their toolbox.category
+    } else {
+      log(`  - using block def`)
+      toolboxContents.push(...flatMap(blockDefinitionsByCategory[name] || [], blockToLabelAndBlock))
+    }
+
+    return toolboxContents
+  },
+
+  warnOnExtraBlocksSpecifyCategory = (categoryName, usedBlocks) => {
+    const blocksToWarn = without(blockDefinitionsByCategory[categoryName], ...usedBlocks)
+
+    if(blocksToWarn.length) {
+      warn(`  - Warning: toolbox specifications ignored for blocks: "${map(blocksToWarn, 'type').join('", "')}"`)
+    }
+  },
+
+  findBlockByType = type => {
+    const blockDefinition = blockDefinitionsByType[type]
+
+    if(!blockDefinition) {
+      throw new Error(`No block found with type "${type}".`)
+    }
+
+    return blockDefinition
+  },
 
   blockToLabelAndBlock = block => compact([
     {
@@ -53,11 +142,11 @@ const
       inputs: blockToInputs(block),
       fields: blockToFields(block)
     }, block.toolbox.label
-      ? { kind: 'label',
-          text: block.toolbox.label
-        }
+      ? makeLabel(block.toolbox.label)
       : null
   ]),
+
+  makeLabel = text => ({ kind: 'label', text, "web-class": "my-label-style" }),
 
   blockToInputs = ({ lines }) => {
     if(!lines) { return }
