@@ -3,10 +3,12 @@ export default {
 
   toolbox: {
     category: 'Logic',
+    label: "Make true false, or false true"
   },
 
   visualization: {
     colour: 60,
+    tooltip: "Negates a true or false value"
   },
 
   lines: [

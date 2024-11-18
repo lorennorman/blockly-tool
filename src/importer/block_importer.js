@@ -1,5 +1,5 @@
 import { glob } from 'glob'
-import { compact, keyBy, keys, map, omitBy, without } from 'lodash-es'
+import { compact, keyBy, keys, map, omitBy, sortBy, without } from 'lodash-es'
 
 import { toBlockJSON } from './block_processor/index.js'
 
@@ -45,6 +45,9 @@ const
   ],
 
   processBlock = ({ definition, path }) => {
+    if(!definition) {
+      throw new Error(`No Block definition found at path: ${BLOCK_LOCATION}${path}`)
+    }
     // console.log("Processing Block:", path)//, definition)
     // ensure only supported keys are present
     const extraKeys = without(keys(definition), ...BLOCK_KEYS)
@@ -71,10 +74,10 @@ export const
     omitBy(keyBy(map(await gatherBlockFiles(), "definition"), "type"), def => def.disabled),
 
   importBlockJson = async () =>
-    compact(map(await gatherBlockFiles(), processBlock)),
+    sortBy(compact(map(await gatherBlockFiles(), processBlock)), "type"),
 
   // all definitions
-  allBlockDefinitions = keyBy(map(allBlockDefinitionsAndPaths, "definition"), "type"),
+  allBlockDefinitions = keyBy(compact(map(allBlockDefinitionsAndPaths, "definition")), "type"),
   // without disabled definitions
   blockDefinitions = omitBy(allBlockDefinitions, def => def.disabled),
   blockJson = compact(map(allBlockDefinitionsAndPaths, processBlock))

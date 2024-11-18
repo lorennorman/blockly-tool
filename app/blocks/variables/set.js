@@ -2,11 +2,14 @@ export default {
   type: 'io_variables_set',
 
   toolbox: {
-    category: "Variables"
+    category: "Variables",
+    label: "Set a variable to a value"
   },
 
   visualization: {
-    colour: 240
+    inputsInline: true,
+    colour: 240,
+    tooltip: "Set a variable to a value"
   },
 
   connections: {
@@ -16,7 +19,7 @@ export default {
   },
 
   lines: [
-    ['%VAR =', {
+    ['Set variable %VAR =', {
       field: 'VAR',
       type: 'field_variable'
     }],

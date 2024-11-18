@@ -1,19 +1,17 @@
 export default {
-  type: 'io_logic_operation',
+  type: 'matcher_boolean_operation',
 
-  toolbox: {
-    category: 'Logic',
-    label: "Apply boolean logic (and/or) to 2 values"
-  },
+  toolbox: {},
 
   visualization: {
     inputsInline: true,
     colour: 60,
   },
 
+  connections: { mode: 'value', output: 'matcher' },
+
   lines: [
-    ["", { inputValue: 'A', shadow: 'io_logic_boolean' }],
-    ["", {
+    ["is true", {
       field: 'OP',
       options: [
         ['and', 'AND'],
@@ -27,12 +25,10 @@ export default {
     json: (block, generator) => {
       const
         operator = block.getFieldValue('OP'),
-        leftExp = generator.valueToCode(block, 'A', 0) || null,
         rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
-          logic: {
-            left: JSON.parse(leftExp),
+          matcherBooleanOperation: {
             comparator: operator?.toLowerCase() || null,
             right: JSON.parse(rightExp),
           },
@@ -45,16 +41,15 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { comparator, left, right } = blockObject.logic,
+        { comparator, right } = blockObject.matcherBooleanOperation,
         fields = {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: 'io_logic_boolean' }),
           B: helpers.expressionToBlock(right, { shadow: 'io_logic_boolean' }),
         }
 
-      return { type: 'io_logic_operation', fields, inputs }
+      return { type: 'matcher_boolean_operation', fields, inputs }
     }
   }
 }

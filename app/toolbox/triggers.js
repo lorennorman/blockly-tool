@@ -1,0 +1,16 @@
+export default {
+  name: 'Triggers',
+  colour: 20,
+  label: [
+    "Triggers determine when and whether an Action runs.",
+    "You can have more than one trigger, each triggers separately.",
+    "Actions cannot fire more than once in a 5 minute period."
+  ],
+  contents: [
+    'when_data',
+    'when_data_matching',
+    'when_data_matching_state',
+    'every_hour',
+    'every_day',
+  ]
+}

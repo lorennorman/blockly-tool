@@ -2,7 +2,8 @@ export default {
   type: 'io_text_multiline',
 
   toolbox: {
-    category: 'Text'
+    category: 'Text',
+    label: "Multi-line text string"
   },
 
   visualization: {

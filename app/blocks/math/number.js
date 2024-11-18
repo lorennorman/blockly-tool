@@ -2,7 +2,8 @@ export default {
   type: 'io_math_number',
 
   toolbox: {
-    category: 'Math'
+    category: 'Math',
+    label: "A Number, whole or decimal"
   },
 
   visualization: {

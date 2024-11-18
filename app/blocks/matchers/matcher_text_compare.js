@@ -1,37 +1,31 @@
 export default {
-  type: 'text_compare',
+  type: 'matcher_text_compare',
 
   toolbox: {
-    category: 'Text',
-    label: "Compare two pieces of text, do they match?"
+    category: 'Matchers',
+    label: 'Compare the new value with a String'
   },
 
   visualization: {
     inputsInline: true,
     colour: 180,
     tooltip: [
-      "Compare two chunks of text for equality or inequality.",
+      "Compare the new feed value with text for equality or inequality.",
       "-",
       "Inputs:",
       "---------------",
       "Comparator - check for equality or inequality?",
-      "Text A - the first string of text",
-      "Text B - the second string of text",
+      "Text B - the string of text to compare against the feed value",
       "-",
       "Casting:",
       "---------------",
-      "both inputs are coerced to strings",
-      "-",
-      "Options: (not implemented)",
-      "---------------",
-      "Trim? - trim whitespace from the front and back of the input strings",
-      "Trim front? - trim whitespace from the front of the input strings",
-      "Trim back? - trim whitespace from the back of the input strings",
+      "Both the Feed value and Text B input are coerced to strings",
     ].join('\n'),
   },
 
+  connections: { mode: 'value', output: 'matcher' },
+
   lines: [
-    ["", { inputValue: 'A', shadow: "io_text" }],
     [ "", {
       field: "OP",
       options: [
@@ -46,12 +40,10 @@ export default {
     json: (block, generator) => {
       const
         comparator = block.getFieldValue('OP'),
-        leftExp = generator.valueToCode(block, 'A', 0) || null,
         rightExp = generator.valueToCode(block, 'B', 0) || null,
 
         blockPayload = JSON.stringify({
-          textCompare: {
-            left: JSON.parse(leftExp),
+          matcherTextCompare: {
             comparator: comparator?.toLowerCase() || null,
             right: JSON.parse(rightExp),
           },
@@ -64,16 +56,15 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { comparator, left, right } = blockObject.textCompare,
+        { comparator, right } = blockObject.matcherTextCompare,
         fields = {
           OP: comparator?.toUpperCase()
         },
         inputs = {
-          A: helpers.expressionToBlock(left, { shadow: "io_text" }),
           B: helpers.expressionToBlock(right, { shadow: "io_text" }),
         }
 
-      return { type: 'text_compare', fields, inputs }
+      return { type: 'matcher_text_compare', fields, inputs }
     }
   }
 }

@@ -25,10 +25,8 @@ export default {
         elseLogic = generator.valueToCode(block, 'ELSE', 0),
         blockPayload = JSON.stringify({
           conditional: {
-            ifThens: [
-              { if: ifLogic ? JSON.parse(ifLogic) : null,
-                then: thenLogic ? JSON.parse(thenLogic) : null }
-            ],
+            if0: ifLogic ? JSON.parse(ifLogic) : null,
+            then0: thenLogic ? JSON.parse(thenLogic) : null,
             else: elseLogic ? JSON.parse(elseLogic) : null
           }
         })

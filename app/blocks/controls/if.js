@@ -6,7 +6,8 @@ export default {
   type: 'io_controls_if',
 
   toolbox: {
-    category: 'Logic'
+    category: 'Logic',
+    label: "Conditional evaluation: if-elseif-else"
   },
 
   visualization: {
@@ -31,9 +32,7 @@ export default {
   generators: {
     json: (block, generator) => {
       const payload = {
-        conditional: {
-          ifThens: []
-        }
+        conditional: {}
       }
 
       let index = 0
@@ -42,10 +41,8 @@ export default {
           ifClause = generator.valueToCode(block, `IF${index}`, 0) || 'null',
           thenClause = generator.statementToCode(block, `THEN${index}`) || ''
 
-        payload.conditional.ifThens.push({
-          if: JSON.parse(ifClause),
-          then: JSON.parse(`[ ${thenClause} ]`),
-        })
+        payload.conditional[`if${index}`] = JSON.parse(ifClause)
+        payload.conditional[`then${index}`] = JSON.parse(`[ ${thenClause} ]`)
 
         index += 1
       }
@@ -68,14 +65,15 @@ export default {
         throw new Error("No data for io_controls_if regenerator")
       }
 
-      const
-        { ifThens } = payload,
-        inputs = {}
+      const inputs = {}
 
-      ifThens.forEach((item, index) => {
-        if(item.if !== null) { inputs[`IF${index}`] = helpers.expressionToBlock(item.if, { shadow: 'io_logic_boolean' }) }
-        if(item.then) { inputs[`THEN${index}`] = helpers.arrayToStatements(item.then) }
-      })
+      let index = 0
+      while(payload[`if${index}`] || payload[`then${index}`]) {
+        inputs[`IF${index}`] = helpers.expressionToBlock(payload[`if${index}`], { shadow: 'io_logic_boolean' })
+        inputs[`THEN${index}`] = helpers.arrayToStatements(payload[`then${index}`])
+
+        index += 1
+      }
 
       if(payload.else) {
         inputs.ELSE = helpers.arrayToStatements(payload.else)
@@ -85,7 +83,7 @@ export default {
         type: "io_controls_if",
         inputs,
         extraState: {
-          elseIfCount: ifThens.length-1,
+          elseIfCount: index-1, // only count else-ifs, don't count initial if
           elsePresent: !!payload.else
         }
       }
