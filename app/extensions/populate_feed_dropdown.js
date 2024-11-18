@@ -1,5 +1,5 @@
-// name the file extensionName.to_snake_case
-// export an extensionName that identically matches the name blocks use
+// Populates Feed dropdowns with name FEED_KEY to contain the user's feeds
+// that are viable for Actions. Provided by the backend at runtime.
 export const populateFeedDropdown = ({ block, data, Blockly }) => {
   const
     { feedOptions } = data,
