@@ -1,9 +1,6 @@
+// deprecated: use feeds/get_value
 export default {
   type: "feed_selector",
-
-  // toolbox: {
-  //   category: 'Feeds'
-  // },
 
   visualization: {
     colour: 300,

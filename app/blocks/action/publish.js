@@ -1,10 +1,6 @@
+// deprecated: use feeds/set_value
 export default {
   type: "action_publish",
-
-  toolbox: {
-    category: 'Actions',
-    label: "Publish a given value to a given feed."
-  },
 
   visualization: {
     colour: "0",
