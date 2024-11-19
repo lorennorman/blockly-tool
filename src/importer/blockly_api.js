@@ -7,7 +7,6 @@ Blockly.defineBlocksWithJsonArray(blocks)
 
 Blockly.Blocks['action_root'].oldInit = Blockly.Blocks['action_root'].init
 Blockly.Blocks['action_root'].init = function() {
-  console.log('root init')
   this.oldInit()
   this.setMutator(new Blockly.icons.MutatorIcon([
     'delay_seconds',

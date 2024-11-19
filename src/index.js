@@ -20,11 +20,13 @@ const
       const workspaceJson = JSON.stringify(jsonToWorkspace(bytecodeJson), null, 2)
       blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
     } catch(error) {
+      console.error("Workspace JSON Error:\n", error)
       blocklyJsonOutputDiv.innerText = `Workspace JSON generation failed ❌\nYou may need the "Clear" button above.`
     }
   },
 
   onJsonError = error => {
+    console.error("Bytecode JSON Error:\n", error)
     bytecodeJsonOutputDiv.innerText = `Bytecode generation failed ❌\nYou may need the "Clear" button above.`
     blocklyJsonOutputDiv.innerText = `Workspace JSON not generated.`
   }
