@@ -4,7 +4,15 @@ export default {
   // same as Blockly JSON
   visualization: {
     colour: '0',
-    tooltip: "Delay this action for a period of time after its trigger fires?",
+    tooltip: [
+      "Causes a delay between this Action's trigger and its execution",
+      "---------------",
+      "Parameters:",
+      "Delay - how long to delay, from 1 second to 1 day",
+      "Mode - how to proceed if another action is already on delay.",
+      "...'keep' will keep the existing delay and ignore new triggers",
+      "...'reset' will delete the existing delay and start a new one",
+    ].join('\n'),
   },
 
   connections: { },

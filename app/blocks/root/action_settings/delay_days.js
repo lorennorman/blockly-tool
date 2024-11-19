@@ -3,6 +3,7 @@ export default {
 
   visualization: {
     colour: "0",
+    tooltip: "1 day is the maximum delay available"
   },
 
   connections: {

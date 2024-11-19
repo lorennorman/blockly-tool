@@ -6,6 +6,7 @@ export default {
 
   visualization: {
     colour: "0",
+    tooltip: "Set a delay between 1 and 59 seconds (or 0 for no delay)",
   },
 
   connections: {
