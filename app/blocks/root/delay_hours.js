@@ -1,3 +1,6 @@
+import { invokeMap, range } from 'lodash-es'
+
+
 export default {
   type: "delay_hours",
 
@@ -11,14 +14,18 @@ export default {
   },
 
   lines: [
-    [ "%HOURS hours", {
-      field: 'HOURS',
-      options: [
-        ['1', '1'],
-        ['5', '5'],
-        ['10', '10'],
-        ['24', '24'],
-      ]
+    [ "%SECONDS hours", {
+      field: 'SECONDS',
+      options: range(1, 24).map(seconds =>
+        invokeMap([ seconds, seconds*60*60 ], "toString")
+      )
+      // options: [
+      //   ['1', '3600'],
+      //   ['2', '3660'],
+      //   ...
+      //   ['58', '79200'],
+      //   ['59', '82800'],
+      // ]
     }]
   ],
 
