@@ -2,7 +2,7 @@ import Blockly from 'blockly'
 
 const
   random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./root_options_mutator.js?key=${random}`)).default
+  mutator = (await import(`./action_settings/mutator.js?key=${random}`)).default
 
 export default {
   type: "action_root",

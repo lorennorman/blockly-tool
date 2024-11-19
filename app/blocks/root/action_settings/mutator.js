@@ -1,6 +1,4 @@
 
-import Blockly from 'blockly'
-
 /** Action settings on the root block */
 export default {
   delaySeconds: 0,
@@ -19,9 +17,11 @@ export default {
   },
 
   decompose: function(workspace) {
+    // initialize the top-level block for the sub-diagram
     const delaySettingsBlock = workspace.newBlock('delay_settings')
     delaySettingsBlock.initSvg()
 
+    // set the appropriate delay block type by the seconds
     const delayBlockType = (this.delaySeconds < 60)
       ? "delay_seconds"
       : (this.delaySeconds < 3600)
@@ -47,6 +47,9 @@ export default {
 
     connection.connect(outputConnection)
 
+    // set the mode field
+    delaySettingsBlock.setFieldValue(this.delayMode, 'DELAY_MODE')
+
     return delaySettingsBlock
   },
 
@@ -58,5 +61,6 @@ export default {
         : periodInput?.getFieldValue("SECONDS") || 0
 
     this.delaySeconds = parseInt(value, 10)
+    this.delayMode = delayBlock.getFieldValue("DELAY_MODE")
   }
 }
