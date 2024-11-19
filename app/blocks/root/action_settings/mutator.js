@@ -16,6 +16,8 @@ export default {
     this.delayMode = delayMode || "extend"
   },
 
+  flyoutBlocks: [ 'delay_seconds', 'delay_minutes', 'delay_hours', 'delay_days' ],
+
   decompose: function(workspace) {
     // initialize the top-level block for the sub-diagram
     const delaySettingsBlock = workspace.newBlock('delay_settings')

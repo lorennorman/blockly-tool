@@ -1,13 +1,18 @@
-import { isString, isFunction, map, mapValues, pickBy } from 'lodash-es'
+import { isString, isFunction, isArray, map, mapValues, pickBy } from 'lodash-es'
 import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
 
 const renderValue = value => {
-  if(isString(value)) {
+  if (isString(value)) {
     return `"${value}"`
-  } else if(isFunction) {
+
+  } else if (isFunction(value)) {
     return value.toString().replaceAll("\n", "\n  ")
+
+  } else if (isArray(value)) {
+    return `[ ${value.map(renderValue).join(", ")} ]`
+
   } else {
     return value
   }

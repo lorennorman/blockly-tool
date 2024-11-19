@@ -5,17 +5,6 @@ import initialWorkspace from './workspace.json'
 
 Blockly.defineBlocksWithJsonArray(blocks)
 
-Blockly.Blocks['action_root'].oldInit = Blockly.Blocks['action_root'].init
-Blockly.Blocks['action_root'].init = function() {
-  this.oldInit()
-  this.setMutator(new Blockly.icons.MutatorIcon([
-    'delay_seconds',
-    'delay_minutes',
-    'delay_hours',
-    'delay_days',
-  ], this))
-}
-
 let currentWorkspace
 
 export const
