@@ -9,7 +9,13 @@ describe("Fields utils", () => {
     it("blows up with no valid options", () => {
       assert.throws(() => makeOptions())
     })
+  })
 
+  describe("makeOptions.upTo", () => {
+    assert.deepEqual(makeOptions({ upTo: 2 }), [["0", "0"], ["1", "1"]])
+  })
+
+  describe("makeOptions.factorsOf", () => {
     it("makes options with factors", () => {
       assert.deepEqual(makeOptions({ factorsOf: 2 }), [["1", "1"]])
       assert.deepEqual(makeOptions({ factorsOf: 24 }),
