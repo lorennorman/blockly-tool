@@ -34,7 +34,9 @@ export default function ImportUserAppPlugin() {
     },
 
     handleHotUpdate(ctx) {
-      if (!ctx.file.includes('/app/') && !ctx.file.includes('/blockly_api.js')) {
+      if(ctx.file.includes("/test/")) { return }
+
+      if(!ctx.file.includes('/app/') && !ctx.file.includes('/blockly_api.js')) {
         return
       }
 
