@@ -1,5 +1,3 @@
-import Blockly from 'blockly'
-
 const
   random = Math.random()*100000000, // busts the NodeJS file cache
   mutator = (await import(`./action_settings/mutator.js?key=${random}`)).default
@@ -17,7 +15,6 @@ export default {
   mutator,
 
   lines: [
-    [ "", "LEFT" ],
     [ "Triggers:", "LEFT" ],
     [ "", {
       inputStatement: "TRIGGERS",

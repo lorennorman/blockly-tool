@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "module": "nodenext",
+    "target": "es2022",
     "paths": {
       "#app/*.js": ["./app/*.js"],
       "#src/*.js": ["./src/*.js"],
