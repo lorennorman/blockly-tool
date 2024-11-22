@@ -1,4 +1,4 @@
-import { invokeMap, range } from 'lodash-es'
+import { makeOptions } from "#app/util/fields.js"
 
 
 export default {
@@ -17,12 +17,10 @@ export default {
   lines: [
     [ "%SECONDS hours", {
       field: 'SECONDS',
-      options: range(1, 24).map(seconds =>
-        invokeMap([ seconds, seconds*60*60 ], "toString")
-      )
+      options: makeOptions({ from: 1, upTo: 24, valueFunc: sec => sec*60*60 })
       // options: [
       //   ['1', '3600'],
-      //   ['2', '3660'],
+      //   ['2', '7200'],
       //   ...
       //   ['58', '79200'],
       //   ['59', '82800'],

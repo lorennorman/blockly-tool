@@ -1,12 +1,16 @@
-import { filter, map, range } from 'lodash-es'
+import { filter, identity, map, range } from 'lodash-es'
 
 
 const makeFactorsOf = target => {
-  return map(map(filter(range(target), idx => (target % idx) == 0), String), idx => ([ idx, idx ]))
+  return filter(range(target), idx => (target % idx) == 0)
 }
 
-const makeFactorsUpTo = target => {
-  return map(map(range(target), String), idx => ([ idx, idx ]))
+const makeUpTo = (from, target, step) => {
+  return range(from, target, step)
+}
+
+const stringifyOptions = (options) => {
+
 }
 
 /**
@@ -14,16 +18,34 @@ const makeFactorsUpTo = target => {
 * @param {Object} options
 * @param {number} [options.factorsOf]
 * @param {number} [options.upTo]
+* @param {number} [options.from]
+* @param {number} [options.step]
+* @param {Function} [options.valueFunc]
 * @returns {Array}
 */
 export const makeOptions = (options = {}) => {
+  let optionValues
+
   if(options.factorsOf) {
-    return makeFactorsOf(options.factorsOf)
+    optionValues = makeFactorsOf(options.factorsOf)
+
+  } else if(options.upTo) {
+    const
+      from = options.from || 0,
+      step = options.step || 1
+
+    optionValues = makeUpTo(from, options.upTo, step)
   }
 
-  if(options.upTo) {
-    return makeFactorsUpTo(options.upTo)
+  if(!optionValues) {
+    throw new Error(`No valid options sent to makeOptions: ${options}`)
   }
 
-  throw new Error(`No valid options sent to makeOptions: ${options}`)
+  const
+    valueFunc = options.valueFunc || identity,
+    mappedValues = map(optionValues, labelValue =>
+      map([ labelValue, valueFunc(labelValue) ], String)
+    )
+
+  return mappedValues
 }

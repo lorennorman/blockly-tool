@@ -12,7 +12,25 @@ describe("Fields utils", () => {
   })
 
   describe("makeOptions.upTo", () => {
-    assert.deepEqual(makeOptions({ upTo: 2 }), [["0", "0"], ["1", "1"]])
+    it("uses from: 0 and step: 1 if options not given", () => {
+      assert.deepEqual(makeOptions({ upTo: 2 }), [["0", "0"], ["1", "1"]])
+    })
+
+    it("uses 'from' option if given", () => {
+      assert.deepEqual(makeOptions({ from: 1, upTo: 2 }), [["1", "1"]])
+    })
+
+    it("uses 'step' option if given", () => {
+      assert.deepEqual(makeOptions({ upTo: 21, step: 10 }), [
+        ["0", "0"], ["10", "10"], ["20", "20"]
+      ])
+    })
+
+    it("uses 'valueFunc' option if given", () => {
+      assert.deepEqual(makeOptions({ upTo: 3, valueFunc: (v) => v*5 }),
+        [["0", "0"], ["1", "5"], ["2", "10"]]
+      )
+    })
   })
 
   describe("makeOptions.factorsOf", () => {

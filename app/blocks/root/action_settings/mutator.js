@@ -16,7 +16,7 @@ export default {
     this.delayMode = delayMode || "extend"
   },
 
-  flyoutBlocks: [ 'delay_seconds', 'delay_minutes', 'delay_hours', 'delay_days' ],
+  flyoutBlocks: [ 'delay_none', 'delay_seconds', 'delay_minutes', 'delay_hours', 'delay_days' ],
 
   decompose: function(workspace) {
     // initialize the top-level block for the sub-diagram
@@ -24,20 +24,17 @@ export default {
     delaySettingsBlock.initSvg()
 
     // set the appropriate delay block type by the seconds
-    const delayBlockType = (this.delaySeconds < 60)
-      ? "delay_seconds"
-      : (this.delaySeconds < 3600)
-      ? "delay_minutes"
-      : (this.delaySeconds < 86400)
-      ? "delay_hours"
-      : (this.delaySeconds == 86400)
-      ? "delay_days"
-      : "delay_seconds"
+    const delayBlockType = (this.delaySeconds <= 0) ? "delay_none"
+      : (this.delaySeconds < 60) ? "delay_seconds"
+      : (this.delaySeconds < 3600) ? "delay_minutes"
+      : (this.delaySeconds < 86400) ? "delay_hours"
+      : (this.delaySeconds >= 86400) ? "delay_days"
+      : "delay_none"
 
     const delayPeriodBlock = workspace.newBlock(delayBlockType)
     delayPeriodBlock.initSvg()
 
-    if(delayBlockType !== "delay_days") {
+    if(delayBlockType !== "delay_days" && delayBlockType !== "delay_none") {
       // set its seconds field (day doesn't have one)
       delayPeriodBlock.setFieldValue(this.delaySeconds.toString(), "SECONDS")
     }

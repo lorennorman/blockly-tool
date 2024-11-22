@@ -1,9 +1,9 @@
 export default {
-  type: "delay_days",
+  type: "delay_none",
 
   visualization: {
     colour: "0",
-    tooltip: "1 day is the maximum delay available"
+    tooltip: "No delay: Actions run immediately when triggered."
   },
 
   connections: {
@@ -11,7 +11,7 @@ export default {
     output: "delay_period",
   },
 
-  lines: [ "1 day" ],
+  lines: [ "No Delay" ],
 
   generators: {
     json: () => {
