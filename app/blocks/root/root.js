@@ -21,26 +21,8 @@ export default {
       check: 'trigger'
     }],
 
-    // [ "...delay this Action by %DELAY", {
-    //   align: "LEFT",
-    //   field: 'DELAY',
-    //   options: [
-    //     ["no delay", "0"],
-    //     ["5s", "5"],
-    //     ["5m", "300"],
-    //     ["5h", "1800"],
-    //   ]
-    // }],
-
-    // [ "...repeat Actions %DELAY_MODE", {
-    //   field: 'DELAY_MODE',
-    //   options: [
-    //     ["reset existing delays", "extend"],
-    //     ["are ignored", "static"],
-    //   ]
-    // }],
-
     [ "", "LEFT" ],
+
     [ "Actions:", "LEFT" ],
     [ "", {
       inputStatement: "EXPRESSIONS",
@@ -102,10 +84,6 @@ export default {
           delaySeconds: settings.delay?.seconds || 0,
           delayMode: settings.delay?.mode || 'extend'
         },
-        // fields: {
-        //   DELAY: (settings.delay?.seconds || 0).toString(),
-        //   DELAY_MODE: settings.delay?.mode || 'extend'
-        // },
         inputs: {
           "TRIGGERS": helpers.arrayToStatements(triggers),
           "EXPRESSIONS": helpers.arrayToStatements(expressions),
