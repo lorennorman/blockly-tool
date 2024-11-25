@@ -23,7 +23,7 @@ export default {
       // for a single block input
       inputValue: 'DELAY_PERIOD',
       check: 'delay_period',
-      shadow: { type: 'delay_seconds', fields: { SECONDS: '5' } },
+      shadow: 'delay_none',
     }],
 
     ["and", {

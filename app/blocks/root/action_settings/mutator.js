@@ -45,6 +45,7 @@ export default {
       { outputConnection } = delayPeriodBlock
 
     connection.connect(outputConnection)
+    connection.setShadowState({ type: 'delay_none' })
 
     // set the mode field
     delaySettingsBlock.setFieldValue(this.delayMode, 'DELAY_MODE')
