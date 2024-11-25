@@ -26,7 +26,7 @@ export default {
     [ "Actions:", "LEFT" ],
     [ "", {
       inputStatement: "EXPRESSIONS",
-      // check: "expression"
+      check: "expression"
     }],
 
     [ "", "LEFT" ],

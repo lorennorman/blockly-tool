@@ -59,10 +59,8 @@ const
     if(definition.disabled) { return }
 
     // TODO: mechanism for Definition JSON defaults
-    if(!definition.connections?.output) {
-      // console.warn(`block definition missing output: ${definition.type}`)
-      definition.connections = definition.connections || {}
-      definition.connections.mode = definition.connections.mode || 'value'
+    if(definition.connections?.mode === 'value') {
+      // default input values with no output to 'expression'
       definition.connections.output = definition.connections.output || 'expression'
     }
 
