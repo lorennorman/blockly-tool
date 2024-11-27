@@ -1,4 +1,4 @@
-import { isString, isFunction, isArray, map, mapValues, pickBy } from 'lodash-es'
+import { forOwn, isString, isFunction, isArray, isNumber, isNull, isObject, map, mapValues, pickBy, isRegExp } from 'lodash-es'
 import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
 
@@ -7,14 +7,24 @@ const renderValue = value => {
   if (isString(value)) {
     return `"${value}"`
 
+  } else if (isRegExp(value) || isNull(value) || isNumber(value) || value === false) {
+    return value
+
   } else if (isFunction(value)) {
     return value.toString().replaceAll("\n", "\n  ")
 
   } else if (isArray(value)) {
     return `[ ${value.map(renderValue).join(", ")} ]`
 
+  } else if (isObject(value)) {
+    const lines = []
+    forOwn(value, (val, key) => {
+      lines.push(`"${key}": ${renderValue(val)}`)
+    })
+    return `{ ${lines.join(",\n")} }`
+
   } else {
-    return value
+    throw new Error(`Unexpected value type: ${value}`)
   }
 }
 
