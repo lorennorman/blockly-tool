@@ -73,8 +73,20 @@ export default {
       const monthCronToBlock = monthCron => {
         if(monthCron === '*') {
           return { block: { type: 'all_months' } }
+
         } else if(/^\d*$/gm.test(monthCron)) {
           return { block: { type: 'one_month', fields: { MONTH: monthCron } } }
+
+        } else if(/^\w{3}(,\w{3})*$/gm.test(monthCron)) {
+          const
+            fieldNames = monthCron.toUpperCase().split(','),
+            fields = fieldNames.reduce((acc, month) => {
+              acc[month] = true
+              return acc
+            }, {})
+
+          return { block: { type: 'some_months', fields }}
+
         } else {
           console.warn(`Bad crontab for months: ${monthCron}`)
         }

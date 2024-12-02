@@ -7,7 +7,7 @@ export default {
 
   saveExtraState: function () { },
 
-  flyoutBlocks: [ 'all_months', 'one_month' ],
+  flyoutBlocks: [ 'all_months', 'one_month', 'some_months' ],
 
   decompose: function(workspace) {
     const scheduleSettings = workspace.newBlock('schedule_settings')
