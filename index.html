@@ -11,9 +11,14 @@
     <div id="page-container">
       <div id="menu-pane">
         <button id="button-clear">Clear</button>
-
         <button id="button-reload-bytecode">Reload via Bytecode</button>
         <button id="button-reload-serialized">Reload via LocalStorage</button>
+
+        <div id="stats-row">
+            <span>Top Blocks: <span id="top-blocks">0</span></span>
+            <span>Blocks: <span id="total-blocks">0</span></span>
+            <span title="Regular:Flyout:Mutator">Workspaces: <span id="total-workspaces">0:0:0</span></span>
+        </div>
         <pre id="bytecode-json-container"><code id="bytecode-json"></code></pre>
         <pre id="blockly-json-container"><code id="blockly-json"></code></pre>
       </div>
