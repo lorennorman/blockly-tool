@@ -29,13 +29,18 @@ export default {
     // walk outer block's inputs
     this.unitConfigs.forEach(([ inputName, defaultType]) => {
       const
-        outerUnitType = this.getInputTargetBlock(inputName)?.type || defaultType,
+        outerUnitBlock = this.getInputTargetBlock(inputName),
+        outerUnitType = outerUnitBlock?.type || defaultType,
         // create inner versions
         innerUnitInput = scheduleSettings.getInput(`${inputName}_BLOCK`),
         innerUnitConnection = innerUnitInput.connection,
         innerUnitBlock = workspace.newBlock(outerUnitType),
         { outputConnection } = innerUnitBlock
 
+      // copy fields from outer block to inner block
+      this.copyFields(outerUnitBlock, innerUnitBlock)
+
+      // initialize the block for interaction
       innerUnitBlock.initSvg()
       // attach to schedule settings
       innerUnitConnection.connect(outputConnection)
@@ -48,18 +53,33 @@ export default {
     // walk inner block's inputs
     this.unitConfigs.forEach(([ inputName ]) => {
       const
-        outerMonthlyInput = this.getInput(inputName),
-        outerMonthlyConnection = outerMonthlyInput.connection,
-        innerMonthBlock = settingsBlock.getInputTargetBlock(`${inputName}_BLOCK`),
-        innerMonthType = innerMonthBlock?.type,
+        outerUnitInput = this.getInput(inputName),
+        outerUnitConnection = outerUnitInput.connection,
+        innerUnitBlock = settingsBlock.getInputTargetBlock(`${inputName}_BLOCK`),
+        innerUnitType = innerUnitBlock?.type,
         // create outer versions
-        outerMonthBlock = this.workspace.newBlock(innerMonthType)
+        outerUnitBlock = this.workspace.newBlock(innerUnitType)
+
+      // copy inner block fields to outer block fields
+      this.copyFields(innerUnitBlock, outerUnitBlock)
 
       // attach to this's inputs
-      outerMonthlyConnection.targetBlock()?.dispose()
-      outerMonthlyConnection.connect(outerMonthBlock.outputConnection)
-      outerMonthBlock.initSvg()
-      outerMonthBlock.render()
+      outerUnitConnection.targetBlock()?.dispose()
+      outerUnitConnection.connect(outerUnitBlock.outputConnection)
+      outerUnitBlock.initSvg()
+      outerUnitBlock.render()
     })
   },
+
+  copyFields: function(fromBlock, toBlock) {
+    // block -> inputList -> fieldRow -> name
+    const fieldNames = fromBlock.inputList.reduce((names, input) =>
+      names.concat(input.fieldRow.map(field => field.name).filter(name => name))
+    , [])
+
+    // get from source, set on destination
+    fieldNames.forEach(fieldName => {
+      toBlock.setFieldValue(fromBlock.getFieldValue(fieldName), fieldName)
+    })
+  }
 }
