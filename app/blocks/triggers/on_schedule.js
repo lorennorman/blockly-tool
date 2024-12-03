@@ -34,19 +34,19 @@ export default {
     [ "Days:", {
       inputValue: "DAY",
       check: "cron_day",
-      shadow: "every_day"
+      shadow: "all_days"
     }],
 
     [ "Hours:", {
       inputValue: "HOUR",
       check: "cron_hour",
-      shadow: "every_hour"
+      shadow: "all_hours"
     }],
 
     [ "Minutes:", {
       inputValue: "MINUTE",
       check: "cron_minute",
-      shadow: "every_minute"
+      shadow: "all_minutes"
     }],
   ],
 
@@ -54,9 +54,9 @@ export default {
     json: (block, generator) => {
       // each schedule block generates a crontab for its unit
       const
-        minute = /*generator.valueToCode(block, 'MINUTE', 0)  ||*/ "*/1",
-        hour = /*generator.valueToCode(block, 'HOUR', 0)  ||*/ "*/1",
-        daysOfMonth = /*generator.valueToCode(block, 'DAY', 0)  ||*/ "*/1",
+        minute = generator.valueToCode(block, 'MINUTE', 0)  || "*/1",
+        hour = generator.valueToCode(block, 'HOUR', 0)  || "*/1",
+        daysOfMonth = generator.valueToCode(block, 'DAY', 0)  || "*/1",
         daysOfWeek = "*",
         month = generator.valueToCode(block, 'MONTH', 0)  || "*"
 
@@ -70,27 +70,52 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const monthCronToBlock = monthCron => {
-        if(monthCron === '*') {
-          return { block: { type: 'all_months' } }
+      const
+        monthCronToBlock = monthCron => {
+          if(monthCron === '*') {
+            return { block: { type: 'all_months' } }
 
-        } else if(/^\d*$/gm.test(monthCron)) {
-          return { block: { type: 'one_month', fields: { MONTH: monthCron } } }
+          } else if(/^\d*$/gm.test(monthCron)) {
+            return { block: { type: 'one_month', fields: { MONTH: monthCron } } }
 
-        } else if(/^\w{3}(,\w{3})*$/gm.test(monthCron)) {
-          const
-            fieldNames = monthCron.toUpperCase().split(','),
-            fields = fieldNames.reduce((acc, month) => {
-              acc[month] = true
-              return acc
-            }, {})
+          } else if(/^\w{3}(,\w{3})*$/gm.test(monthCron)) {
+            const
+              fieldNames = monthCron.toUpperCase().split(','),
+              fields = fieldNames.reduce((acc, month) => {
+                acc[month] = true
+                return acc
+              }, {})
 
-          return { block: { type: 'some_months', fields }}
+            return { block: { type: 'some_months', fields }}
 
-        } else {
-          console.warn(`Bad crontab for months: ${monthCron}`)
+          } else {
+            console.warn(`Bad crontab for months: ${monthCron}`)
+          }
+        },
+
+        dayCronToBlock = dayCron => {
+          if(dayCron === '*') {
+            return { block: { type: 'all_days' } }
+          } else {
+            throw new Error(`Bad cron string for days: ${dayCron}`)
+          }
+        },
+
+        hourCronToBlock = hourCron => {
+          if(hourCron === '*') {
+            return { block: { type: 'all_hours' } }
+          } else {
+            throw new Error(`Bad cron string for hours: ${hourCron}`)
+          }
+        },
+
+        minuteCronToBlock = minuteCron => {
+          if(minuteCron === '*') {
+            return { block: { type: 'all_minutes' } }
+          } else {
+            throw new Error(`Bad cron string for days: ${minuteCron}`)
+          }
         }
-      }
 
       const
         { schedule } = blockObject.onSchedule,
@@ -100,9 +125,9 @@ export default {
         type: "on_schedule",
         inputs: {
           MONTH: monthCronToBlock(month),
-          DAY: helpers.expressionToBlock({ 'everyDay': { frequency: daysOfMonth }}, { shadow: 'every_day' }),
-          HOUR: helpers.expressionToBlock({ 'everyHour': { frequency: hour }}, { shadow: 'every_hour' }),
-          MINUTE: helpers.expressionToBlock({ 'everyMinute': { frequency: minute }}, { shadow: 'every_minute' }),
+          DAY: dayCronToBlock(daysOfMonth),
+          HOUR: hourCronToBlock(hour),
+          MINUTE: minuteCronToBlock(minute),
         }
       }
     }
