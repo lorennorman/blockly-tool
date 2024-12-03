@@ -15,7 +15,7 @@ export default {
   },
 
   lines: [
-    ["", {
+    ["At minute:", {
       field: 'MINUTE',
       options: makeOptions({ upTo: 60 })
     }]

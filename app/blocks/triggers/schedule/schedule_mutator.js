@@ -9,8 +9,8 @@ export default {
 
   flyoutBlocks: [
     'all_months', 'one_month', 'some_months',
-    'all_days',
-    'all_hours',
+    'all_days', 'one_day',
+    'all_hours', 'one_hour',
     'all_minutes', 'one_minute',
   ],
 
