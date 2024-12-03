@@ -3,7 +3,7 @@ export default {
 
   visualization: {
     colour: 30,
-    tooltip: "Run during certain months."
+    tooltip: "Run during particular months."
   },
 
   connections: {
