@@ -101,6 +101,10 @@ export default {
         dayCronToBlock = dayCron => {
           if(dayCron === '*') {
             return { block: { type: 'all_days' } }
+
+          } else if(/^\d*$/gm.test(dayCron)) {
+              return { block: { type: 'one_day', fields: { DAY: dayCron } } }
+
           } else {
             throw new Error(`Bad cron string for days: ${dayCron}`)
           }
@@ -109,6 +113,10 @@ export default {
         hourCronToBlock = hourCron => {
           if(hourCron === '*') {
             return { block: { type: 'all_hours' } }
+
+          } else if(/^\d*$/gm.test(hourCron)) {
+            return { block: { type: 'one_hour', fields: { HOUR: hourCron } } }
+
           } else {
             throw new Error(`Bad cron string for hours: ${hourCron}`)
           }
