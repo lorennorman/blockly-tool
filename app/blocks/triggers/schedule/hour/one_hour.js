@@ -5,7 +5,7 @@ export default {
   type: "one_hour",
 
   visualization: {
-    colour: 30,
+    colour: 20,
     tooltip: "Runs during a particular hour of the day."
   },
 

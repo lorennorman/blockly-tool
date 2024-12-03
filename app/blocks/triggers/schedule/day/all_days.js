@@ -2,7 +2,7 @@ export default {
   type: "all_days",
 
   visualization: {
-    colour: 30,
+    colour: 40,
     tooltip: "Runs during every day of the month."
   },
 

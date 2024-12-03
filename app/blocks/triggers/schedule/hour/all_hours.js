@@ -2,7 +2,7 @@ export default {
   type: "all_hours",
 
   visualization: {
-    colour: 30,
+    colour: 20,
     tooltip: "Runs during all hours of the day."
   },
 

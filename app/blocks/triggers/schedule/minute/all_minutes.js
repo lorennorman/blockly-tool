@@ -2,7 +2,7 @@ export default {
   type: "all_minutes",
 
   visualization: {
-    colour: 30,
+    colour: 10,
     tooltip: "Runs every minute of the hour."
   },
 

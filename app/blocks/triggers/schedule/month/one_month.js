@@ -2,7 +2,7 @@ export default {
   type: "one_month",
 
   visualization: {
-    colour: 30,
+    colour: 50,
     tooltip: "Runs during a particular month."
   },
 
