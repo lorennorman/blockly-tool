@@ -11,7 +11,7 @@ export default {
     'all_months', 'one_month', 'some_months',
     'all_days',
     'all_hours',
-    'all_minutes',
+    'all_minutes', 'one_minute',
   ],
 
   unitConfigs: [

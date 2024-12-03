@@ -112,8 +112,12 @@ export default {
         minuteCronToBlock = minuteCron => {
           if(minuteCron === '*') {
             return { block: { type: 'all_minutes' } }
+
+          } else if(/^\d*$/gm.test(minuteCron)) {
+            return { block: { type: 'one_minute', fields: { MINUTE: minuteCron } } }
+
           } else {
-            throw new Error(`Bad cron string for days: ${minuteCron}`)
+            throw new Error(`Bad cron string for minutes: ${minuteCron}`)
           }
         }
 
