@@ -23,30 +23,35 @@ export default {
   mutator,
 
   lines: [
-    [ "On Schedule", "CENTER" ],
+    [ "Schedule", "CENTER" ],
 
     [ "Months:", {
       inputValue: "MONTH",
       check: "cron_month",
-      shadow: "all_months",
+      block: "all_months",
     }],
 
     [ "Days:", {
       inputValue: "DAY",
       check: "cron_day",
-      shadow: "all_days"
+      block: "all_days"
     }],
 
     [ "Hours:", {
       inputValue: "HOUR",
       check: "cron_hour",
-      shadow: "all_hours"
+      block: "all_hours"
     }],
 
     [ "Minutes:", {
       inputValue: "MINUTE",
       check: "cron_minute",
-      shadow: "all_minutes"
+      block: {
+        type: "one_minute",
+        fields: {
+          MINUTE: '15'
+        }
+      }
     }],
   ],
 
