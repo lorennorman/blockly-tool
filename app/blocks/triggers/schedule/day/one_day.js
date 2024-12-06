@@ -9,7 +9,7 @@ export default {
   type: "one_day",
 
   visualization: {
-    colour: 40,
+    colour: 30,
     tooltip: [
       "Runs during a particular day of the month.",
       "Remember: not all months have days after 28!"

@@ -8,7 +8,7 @@ export default {
   type: "one_minute",
 
   visualization: {
-    colour: 10,
+    colour: 30,
     tooltip: "Runs at a particular minute of the hour."
   },
 

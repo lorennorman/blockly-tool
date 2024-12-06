@@ -6,7 +6,7 @@ export default {
   type: 'some_months',
 
   visualization: {
-    colour: 50,
+    colour: 30,
     tooltip: "Run during particular months."
   },
 

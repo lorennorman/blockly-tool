@@ -6,7 +6,7 @@ export default {
   type: "all_months",
 
   visualization: {
-    colour: 50,
+    colour: 30,
     tooltip: "Runs during all months."
   },
 
