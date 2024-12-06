@@ -1,3 +1,8 @@
+const
+  random = Math.random()*100000000, // busts the NodeJS file cache
+  mutator = (await import(`./minute_mutator.js?key=${random}`)).default
+
+
 export default {
   type: "all_minutes",
 
@@ -10,6 +15,8 @@ export default {
     mode: 'value',
     output: 'cron_minute'
   },
+
+  mutator,
 
   lines: [ "Every minute" ],
 
