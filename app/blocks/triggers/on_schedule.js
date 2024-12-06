@@ -1,7 +1,3 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./schedule/schedule_mutator.js?key=${random}`)).default
-
 export default {
   type: "on_schedule",
 
@@ -19,8 +15,6 @@ export default {
     output: "trigger",
     next: "trigger"
   },
-
-  mutator,
 
   lines: [
     [ "Schedule", "CENTER" ],

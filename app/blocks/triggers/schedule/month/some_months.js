@@ -1,3 +1,7 @@
+const
+  random = Math.random()*100000000, // busts the NodeJS file cache
+  mutator = (await import(`./month_mutator.js?key=${random}`)).default
+
 export default {
   type: 'some_months',
 
@@ -10,6 +14,8 @@ export default {
     mode: 'value',
     output: 'cron_month'
   },
+
+  mutator,
 
   lines: [
     [ 'Jan: %JAN Feb: %FEB Mar: %MAR Apr: %APR', {
