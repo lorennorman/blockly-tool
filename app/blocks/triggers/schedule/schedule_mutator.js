@@ -3,15 +3,19 @@ const MUTATOR_BASE = {
 
   saveExtraState: function () { },
 
-  flyoutBlocks: [],
+  flyoutBlockTypes: [],
 
   decompose: function (workspace) {
     // prepare the mutator root block as usual in decompose
     const settingsBlock = workspace.newBlock(this.rootBlock) // here
     settingsBlock.initSvg()
 
+    this.innerInputName = settingsBlock.inputList[0]?.name
+    if(!this.innerInputName) {
+      throw new Error("No inner input detected for self-mutating block mutator.")
+    }
+
     const
-      inputName = this.outerInputName, // here
       defaultType = this.defaultType, // here
       outerUnitType = this.type || defaultType,
       // create inner versions
@@ -124,9 +128,9 @@ const MUTATOR_BASE = {
   }
 }
 
-export default (flyoutBlocks, rootBlock, defaultType, outerInputName, innerInputName) => {
+export default (flyoutBlockTypes, rootBlock, defaultType) => {
   return {
     ...MUTATOR_BASE,
-    flyoutBlocks, rootBlock, defaultType, outerInputName, innerInputName
+    flyoutBlockTypes, rootBlock, defaultType
   }
 }

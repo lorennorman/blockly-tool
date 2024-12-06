@@ -5,7 +5,5 @@ const
 export default makeScheduleMutator(
   [ 'all_days', 'one_day' ],
   'day_settings',
-  'all_days',
-  'DAY',
-  'DAY_BLOCK'
+  'all_days'
 )

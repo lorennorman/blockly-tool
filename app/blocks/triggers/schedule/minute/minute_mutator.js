@@ -5,7 +5,5 @@ const
 export default makeScheduleMutator(
   [ 'all_minutes', 'one_minute' ],
   'minute_settings',
-  'all_minutes',
-  'MINUTE',
-  'MINUTE_BLOCK'
+  'all_minutes'
 )
