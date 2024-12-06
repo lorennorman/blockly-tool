@@ -41,8 +41,11 @@ const MUTATOR_BASE = {
     const bubbleCloseCallback = e => {
       if(e.type !== Blockly.Events.BUBBLE_OPEN) { return }
 
+      // mutator is closing
       if(!e.isOpen) {
-        this.attachOuterBlock(settingsBlock)
+        // update outer block if inner present
+        if(this.newBlockType) { this.attachOuterBlock(settingsBlock) }
+        // remove ourself
         this.workspace.removeChangeListener(bubbleCloseCallback)
       }
     }
