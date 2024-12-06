@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import { filter } from 'lodash-es'
 
 import initialWorkspace from '../export/workspace.json'
 import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
@@ -9,10 +10,16 @@ import './index.css'
 
 // wire up the internal json to the dom
 const
+  topBlocksDiv = document.getElementById('top-blocks'),
+  totalBlocksDiv = document.getElementById('total-blocks'),
+  totalWorkspacesDiv = document.getElementById('total-workspaces'),
   blocklyJsonOutputDiv = document.getElementById('blockly-json'),
   bytecodeJsonOutputDiv = document.getElementById('bytecode-json'),
 
   onJsonUpdated = bytecodeJson => {
+    topBlocksDiv.innerText = workspace.getTopBlocks().length
+    totalBlocksDiv.innerText = workspace.getAllBlocks().length
+
     blocklyJsonOutputDiv.innerText = ``
     bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
 
@@ -20,11 +27,14 @@ const
       const workspaceJson = JSON.stringify(jsonToWorkspace(bytecodeJson), null, 2)
       blocklyJsonOutputDiv.innerText = `Workspace JSON\n\n${workspaceJson}`
     } catch(error) {
+      console.error("Workspace JSON Error:\n", error)
+      console.error("JSON:\n", bytecodeJson)
       blocklyJsonOutputDiv.innerText = `Workspace JSON generation failed ❌\nYou may need the "Clear" button above.`
     }
   },
 
   onJsonError = error => {
+    console.error("Bytecode JSON Error:\n", error)
     bytecodeJsonOutputDiv.innerText = `Bytecode generation failed ❌\nYou may need the "Clear" button above.`
     blocklyJsonOutputDiv.innerText = `Workspace JSON not generated.`
   }
@@ -48,6 +58,17 @@ const workspace = inject('blocklyDiv', {
 
 // register listeners
 
+setInterval(() => {
+  const
+    workspaces = Blockly.Workspace.getAll(),
+    total = workspaces.length,
+    mutators = filter(workspaces, 'isMutator').length,
+    flyouts = filter(workspaces, 'isFlyout').length,
+    rest = total - mutators - flyouts
+
+  totalWorkspacesDiv.innerText = `${rest}:${flyouts}:${mutators}`
+
+}, 1000)
 // auto-save on non-UI changes
 workspace.addChangeListener((e) => e.isUiEvent || save(workspace))
 
@@ -64,8 +85,15 @@ const reloadBytecodeButton = document.getElementById('button-reload-bytecode')
 reloadBytecodeButton.addEventListener('click', () => {
   // export bytecode
   const bytecodeJson = workspaceToJson(workspace)
-  // convert bytecode to workspace json
-  const workspaceJson = jsonToWorkspace(bytecodeJson)
+
+  let workspaceJson
+  try{
+    // convert bytecode to workspace json
+    workspaceJson = jsonToWorkspace(bytecodeJson)
+
+  } catch(e) {
+    console.error("Failed to parse bytecode:", bytecodeJson)
+  }
 
   // disable events while we're working
   Blockly.Events.disable()

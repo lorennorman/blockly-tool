@@ -42,7 +42,7 @@ const processLine = (line) => {
       check: lineData.check
     })
 
-  // append inputStatement
+  // append inputValue
   } else if(lineData.inputValue) {
     args.push({
       type: "input_value",
@@ -58,7 +58,7 @@ const processLine = (line) => {
       check: lineData.check
     })
 
-    // append a field to args
+  // append a field to args
   } else if(lineData.field) {
     args.push({
       name: lineData.field,
@@ -149,7 +149,7 @@ const parseArrayLine = line => {
   }
 
   if(isObject(second)) {
-    const extraKeys = without(keys(second), "align", "inputDummy", "inputValue", "inputStatement", "check", "field", "fields", "type", "text", "multiline_text", "options", "shadow", "checked")
+    const extraKeys = without(keys(second), "align", "inputDummy", "inputValue", "inputStatement", "check", "block", "field", "fields", "type", "text", "multiline_text", "options", "shadow", "checked")
     if(extraKeys.length) {
       throw new Error(`Unrecognized keys (${extraKeys.join(', ')}) for block line with text: "${text}"`)
     }
