@@ -69,6 +69,8 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
+      const EVERY_REGEX = /^(\d{1,2})-(\d{1,2})\/(\d{1,2})$/m
+
       const
         monthCronToBlock = monthCron => {
           if(monthCron === '*') {
@@ -123,6 +125,14 @@ export default {
           } else if(/^\d*$/gm.test(minuteCron)) {
             return { block: { type: 'one_minute', fields: { MINUTE: minuteCron } } }
 
+          } else if(EVERY_REGEX.test(minuteCron)) {
+            const [ skip, START, END, FREQUENCY ] = minuteCron.match(EVERY_REGEX)
+
+            return { block: {
+              type: 'every_minutes_between',
+              fields: { START, END, FREQUENCY }
+            }}
+
           } else {
             throw new Error(`Bad cron string for minutes: ${minuteCron}`)
           }
@@ -136,10 +146,22 @@ export default {
       return {
         type: "on_schedule",
         inputs: {
-          MONTH: monthCronToBlock(month),
-          DAY: dayCronToBlock(daysOfMonth),
-          HOUR: hourCronToBlock(hour),
-          MINUTE: minuteCronToBlock(minute),
+          MONTH: {
+            ...monthCronToBlock(month),
+            shadow: { type: "all_months" }
+          },
+          DAY: {
+            ...dayCronToBlock(daysOfMonth),
+            shadow: { type: "all_days" }
+          },
+          HOUR: {
+            ...hourCronToBlock(hour),
+            shadow: { type: "all_hours" }
+          },
+          MINUTE: {
+            ...minuteCronToBlock(minute),
+            shadow: { type: "one_minute", fields: { 'MINUTE': '15' }}
+          },
         }
       }
     }
