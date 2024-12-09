@@ -129,7 +129,8 @@ export default {
         }
 
       const
-        { schedule } = blockObject.onSchedule,
+        // { schedule } = blockObject.onSchedule,
+        { schedule } = Object.values(blockObject)[0],
         [ minute, hour, daysOfMonth, month, daysOfWeek ] = schedule.split(' ')
 
       return {

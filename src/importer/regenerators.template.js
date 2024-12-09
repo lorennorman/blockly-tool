@@ -4,10 +4,10 @@ const blockRegenerators = {}
 
 const BYTECODE_BLOCK_TYPE_MAP = {
   onSchedule: 'on_schedule',
-  everyMonth: 'every_month',
-  everyDay: 'every_day',
-  everyHour: 'every_hour',
-  everyMinute: 'every_minute',
+  everyMonth: 'on_schedule',
+  everyDay: 'on_schedule',
+  everyHour: 'on_schedule',
+  everyMinute: 'on_schedule',
   whenData: 'when_data',
   whenDataMatching: 'when_data_matching',
   whenDataMatchStateChanged: 'when_data_matching_state',
