@@ -26,10 +26,7 @@ export default {
 
         START: { options: makeOptions({ upTo: 60 }) },
 
-        END: {
-          options: makeOptions({ upTo: 60 }),
-          value: "59"
-        }
+        END: { options: makeOptions({ upTo: 60, reverse: true }) }
       }
     }]
   ],

@@ -1,4 +1,4 @@
-import { filter, identity, map, range } from 'lodash-es'
+import { filter, identity, map, range, reverse } from 'lodash-es'
 
 
 const makeFactorsOf = target => {
@@ -20,6 +20,7 @@ const stringifyOptions = (options) => {
 * @param {number} [options.upTo]
 * @param {number} [options.from]
 * @param {number} [options.step]
+* @param {boolean} [options.reverse]
 * @param {Function} [options.valueFunc]
 * @returns {Array}
 */
@@ -39,6 +40,10 @@ export const makeOptions = (options = {}) => {
 
   if(!optionValues) {
     throw new Error(`No valid options sent to makeOptions: ${options}`)
+  }
+
+  if(options.reverse) {
+    optionValues = reverse(optionValues)
   }
 
   const
