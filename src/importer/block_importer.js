@@ -48,7 +48,7 @@ const
     if(!definition) {
       throw new Error(`No Block definition found at path: ${BLOCK_LOCATION}${path}`)
     }
-    // console.log("Processing Block:", path)//, definition)
+
     // ensure only supported keys are present
     const extraKeys = without(keys(definition), ...BLOCK_KEYS)
 
@@ -58,7 +58,13 @@ const
 
     if(definition.disabled) { return }
 
-    // TODO: locate block defaults
+    // TODO: mechanism for Definition JSON defaults
+    if(definition.connections?.mode === 'value') {
+      // default input values with no output to 'expression'
+      definition.connections.output = definition.connections.output || 'expression'
+    }
+
+    // TODO: mechanism for Blockly JSON defaults
     const blockDefaults = {
       inputsInline: false
     }
