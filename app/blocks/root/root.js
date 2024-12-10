@@ -1,48 +1,32 @@
+const
+  random = Math.random()*100000000, // busts the NodeJS file cache
+  mutator = (await import(`./action_settings/mutator.js?key=${random}`)).default
 
 export default {
   type: "action_root",
 
-  toolbox: {},
   connections: {},
 
   visualization: {
     colour: "0",
-    extensions: [  ],
     tooltip: "Add Triggers to determine when this Action runs.\nAdd Actions to determine what this Action does."
   },
 
+  mutator,
+
   lines: [
-    [ "", "LEFT" ],
     [ "Triggers:", "LEFT" ],
     [ "", {
       inputStatement: "TRIGGERS",
       check: 'trigger'
     }],
 
-    [ "...delay this Action by %DELAY", {
-      align: "LEFT",
-      field: 'DELAY',
-      options: [
-        ["no delay", "0"],
-        ["5s", "5"],
-        ["5m", "300"],
-        ["5h", "1800"],
-      ]
-    }],
-
-    [ "...repeat Actions %DELAY_MODE", {
-      field: 'DELAY_MODE',
-      options: [
-        ["reset existing delays", "extend"],
-        ["are ignored", "static"],
-      ]
-    }],
-
     [ "", "LEFT" ],
+
     [ "Actions:", "LEFT" ],
     [ "", {
       inputStatement: "EXPRESSIONS",
-      // check: "expression"
+      check: "expression"
     }],
 
     [ "", "LEFT" ],
@@ -71,8 +55,8 @@ export default {
       }
 
       const
-        seconds = parseInt(block.getFieldValue('DELAY'), 10),
-        mode = block.getFieldValue('DELAY_MODE'),
+        seconds = block.delaySeconds,
+        mode = block.delayMode,
         delay = (seconds > 0)
           ? { seconds, mode }
           : undefined
@@ -96,9 +80,9 @@ export default {
         deletable: false,
         x: 50,
         y: 50,
-        fields: {
-          DELAY: (settings.delay?.seconds || 0).toString(),
-          DELAY_MODE: settings.delay?.mode || 'extend'
+        extraState: {
+          delaySeconds: settings.delay?.seconds || 0,
+          delayMode: settings.delay?.mode || 'extend'
         },
         inputs: {
           "TRIGGERS": helpers.arrayToStatements(triggers),

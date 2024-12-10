@@ -164,7 +164,7 @@ const
             map(lines, '[1]'),
             "inputValue"),
           "inputValue"),
-        shadowPropertyToInput)
+        definitionPropsToInputs)
 
     return isEmpty(inputs) ? undefined : inputs
   },
@@ -197,10 +197,34 @@ const
     return isEmpty(fields) ? undefined : fields
   },
 
-  shadowPropertyToInput = ({ shadow }) =>
-    isString(shadow) // is shorthand?
-      ? { shadow: { type: shadow }} // expand to full object
-      : { shadow } // set as shadow value
+  definitionPropsToInputs = ({ inputValue, block, shadow }) => {
+    if(!block && !shadow) {
+      console.warn("Warning: no block or shadow specified for", inputValue)
+      return
+    }
+
+    if(block) {
+      const
+        blockJson = blockToInput(block),
+        shadowJson = shadowToInput(shadow || block)
+
+      return {
+        ...blockJson,
+        ...shadowJson
+      }
+
+    } else if(shadow) {
+      return shadowToInput(shadow)
+    }
+  },
+
+  blockToInput = block => isString(block) // is shorthand?
+    ? { block: { type: block }} // expand to full object
+    : { block }, // set as shadow value
+
+  shadowToInput = shadow => isString(shadow) // is shorthand?
+    ? { shadow: { type: shadow }} // expand to full object
+    : { shadow } // set as shadow value
 
 export default importToolbox
 
