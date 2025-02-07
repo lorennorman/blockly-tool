@@ -109,6 +109,7 @@ export default {
           LAT: payload.lat,
           LON: payload.lon,
           POWER_UP_ID: payload.powerUpId,
+          WEATHER_TIME: payload.weatherTime,
           WEATHER_PROPERTY: payload.weatherProperty,
         }
       }
