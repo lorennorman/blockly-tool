@@ -1,4 +1,4 @@
-### Acton Specification
+### Action Specification
 
 ```js
 const actionSpecification = {

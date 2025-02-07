@@ -4,14 +4,15 @@ A custom Blockly app needs to define:
 - blocks
   - inputs
   - fields
+  - validators
   - generators
+  - extensions
   - mixins
   - mutators
-  - extensions
-  - validators
 - toolboxes
   - categories
   - buttons
+  - labels
 - workspaces
   - starting blocks
   - settings
