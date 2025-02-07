@@ -3,6 +3,7 @@ import Logic from './logic.js'
 import Matchers from './matchers.js'
 import Math from './math.js'
 import Notifications from './notifications.js'
+import PowerUps from './power_ups.js'
 import Text from './text.js'
 import Triggers from './triggers.js'
 import Utility from './utility.js'
@@ -20,5 +21,6 @@ export default [
   Feeds,
   Notifications,
   Web,
+  PowerUps,
   Utility
 ]

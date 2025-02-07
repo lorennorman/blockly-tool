@@ -57,8 +57,8 @@ const
       log(`  - ${labelCount} labels added`)
     }
 
-    if(!contents.length) {
-      warn(`  - Warning: generated no blocks!`)
+    if(!contents.length && !category.callback) {
+      warn(`  - Warning: no blocks generated for category without callback "${category.name}"!`)
     }
 
     // inject other kinds of toolbox objects here
@@ -233,7 +233,7 @@ export const importToolboxJs = () => {
     categoriesWithCallbacks = filter(toolboxConfig, "callback"),
     renderedCategoryCallbacks = `
 const categoryCallbacks = {
-  ${map(categoriesWithCallbacks, ({name, callback}) => `${name}: ${callback}`).join(',\n\n  ')}
+  ${map(categoriesWithCallbacks, ({name, callback}) => `"${name}": ${callback}`).join(',\n\n  ')}
 }
   `
   return renderTemplate(renderedCategoryCallbacks, './src/importer/toolbox.template.js')
