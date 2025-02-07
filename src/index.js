@@ -51,9 +51,9 @@ const workspace = inject('blocklyDiv', {
       ["Feedinsky &", "oneforyou-oneforme"],
     ],
     weatherLocations: [
-      { powerUpId: 1, lat: 40.65513, lon: -74.01111, weatherProperty: "conditions" },
-      { powerUpId: 2, lat: 42.93994, lon: -85.62748, weatherProperty: "cloudCover" },
-      { powerUpId: 3, lat: 36.14993, lon: -86.75903, weatherProperty: "daylight" },
+      { powerUpId: 1, lat: 40.65513, lon: -74.01111 },
+      { powerUpId: 2, lat: 42.93994, lon: -85.62748 },
+      { powerUpId: 3, lat: 36.14993, lon: -86.75903 },
     ]
   },
   injectOptions: {

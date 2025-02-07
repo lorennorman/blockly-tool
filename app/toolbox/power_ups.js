@@ -15,7 +15,6 @@ export default {
         LAT: location.lat,
         LON: location.lon,
         POWER_UP_ID: location.powerUpId,
-        WEATHER_PROPERTY: location.weatherProperty
       }
     })))
 

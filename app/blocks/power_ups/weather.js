@@ -20,29 +20,28 @@ export default {
   ],
 
   extensions: {
-    weatherTimeChangesProperties:  ({ block, data, Blockly }) => {
+    weatherTimeChangesProperties:  ({ block }) => {
       const weatherTimeField = block.getField('WEATHER_TIME')
 
+      let hasRun = false
       // when the user selects a time option
       weatherTimeField.setValidator(function(weatherTimeKey) {
+        // early out if there's no change
+        if(hasRun && this.getValue() === weatherTimeKey) {
+          return
+        }
         // call the mixin to get the new options
         const options = block.propertyOptionsForTime(weatherTimeKey)
         // update the property options
         block.replaceDropdownOptions("WEATHER_PROPERTY", options)
+
+        hasRun = true
       })
     }
   },
 
   lines: [
-    [ "Weather at...", "CENTER" ],
-
-    [ "lat/lon: [%LAT,%LON]", {
-      align: 'CENTER',
-      fields: {
-        LAT: { serializable_label: '0.0' },
-        LON: { serializable_label: '0.0' },
-      }
-    }],
+    [ "Weather", "CENTER" ],
 
     [ "When:", {
       field: "WEATHER_TIME",
@@ -61,17 +60,19 @@ export default {
       ]
     }],
 
-    [ "Property:", {
+    [ "Metric:", {
       field: "WEATHER_PROPERTY",
       options: [
-        [ "Temperature F", "tempF"],
-        [ "Temperature C", "tempC"],
-        [ "Humidty", "humidty"],
-        [ "Cloud Cover", "cloudCover"],
-        [ "Pressure", "pressure"],
-        [ "Conditions", "conditions"],
-        [ "Daylight", "daylight"],
+        [ "select", "cloudCover"], // default to a real value to avoid a warning on block creation
       ]
+    }],
+
+    [ "Where: %LAT,%LON", {
+      align: 'CENTER',
+      fields: {
+        LAT: { serializable_label: '0.0' },
+        LON: { serializable_label: '0.0' },
+      }
     }],
 
     [ "(PowerUp ID:%POWER_UP_ID)", {
@@ -86,10 +87,11 @@ export default {
         lat = block.getFieldValue('LAT'),
         lon = block.getFieldValue('LON'),
         powerUpId = block.getFieldValue('POWER_UP_ID'),
+        weatherTime = block.getFieldValue('WEATHER_TIME'),
         weatherProperty = block.getFieldValue('WEATHER_PROPERTY'),
         payload = JSON.stringify({
           weather: {
-            powerUpId, lat, lon, weatherProperty
+            powerUpId, lat, lon, weatherTime, weatherProperty
           }
         })
 

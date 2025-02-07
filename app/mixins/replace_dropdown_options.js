@@ -26,7 +26,11 @@ export const replaceDropdownOptions = function(fieldKey, newOptions) {
   }
 
   const newField = new Blockly.FieldDropdown(newOptions)
-  newField.setValue(oldValue) // maintain previous value
+
+  // maintain previous value, if present
+  if(oldValue) {
+    newField.setValue(oldValue)
+  }
 
   input.removeField(fieldKey)
   input.insertFieldAt(foundFieldAt, newField, fieldKey)
