@@ -24,6 +24,9 @@ export const
     const blocklyInjectOptions = buildInjectOptions(options)
 
     currentWorkspace = Blockly.inject(blocklyDivId, blocklyInjectOptions)
+    // shortcut to make the outside data available everywhere/global
+    // consider if this could be done other ways, less global
+    currentWorkspace.extensionData = options.extensionData
 
     registerToolboxCallbacks(currentWorkspace)
 
