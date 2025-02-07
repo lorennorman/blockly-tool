@@ -13,9 +13,16 @@ import { toBlockJSON } from './block_processor/index.js'
 const
   PROJECT_ROOT = process.cwd(),
   BLOCK_LOCATION = `app/blocks/`,
+  NON_BLOCK_FILES = [
+    '**/*extension*.js',
+    '**/*mixin*.js',
+    '**/*mutator*.js',
+    '**/*example*.js'
+  ],
+
   gatherBlockFiles = async () => {
     const
-      jsfiles = await glob(`./${BLOCK_LOCATION}**/*.js`, { ignore: [ '**/*mutator.js', '**/*example*.js' ] }),
+      jsfiles = await glob(`./${BLOCK_LOCATION}**/*.js`, { ignore: NON_BLOCK_FILES }),
       random = Math.random()*100000000 // break the import cache
 
     return Promise.all(
@@ -38,6 +45,7 @@ const
     "regenerators",
     "toolbox",
     "visualization",
+    "mixins",
     "extensions",
     "mutator",
     "connections",

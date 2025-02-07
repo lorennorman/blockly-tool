@@ -1,13 +1,26 @@
-import { isArray } from 'lodash-es'
+import { isArray, isString, keys, flatMap } from 'lodash-es'
+
+// input -> output
+// [ 'string1', 'string2' ]       ->  [ 'string1', 'string2' ]
+// { key1: {...}, key2: {...} }   ->  [ 'key1',    'key2' ]
+// [ 'string1', { key2: {...} } ] ->  [ 'string1', 'key2' ]
+const stringsOrKeys = object => {
+  if(!object) { return [] }
+
+  if(isArray(object)) {
+    return flatMap(object, item => {
+      return isString(item) ? item : keys(item)
+    })
+  } else {
+    return Object.keys(object)
+  }
+}
 
 export default block => {
-  const extensions = block?.extensions
+  const
+    definitionExtensions = block?.extensions,
+    definitionMixins = block?.mixins,
+    extensions = [].concat(stringsOrKeys(definitionExtensions)).concat(stringsOrKeys(definitionMixins))
 
-  if(!extensions) { return {} }
-
-  return {
-    extensions: isArray(extensions)
-      ? extensions
-      : Object.keys(block.extensions)
-  }
+  return extensions.length ? { extensions } : {}
 }
