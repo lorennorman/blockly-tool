@@ -1,7 +1,15 @@
-import { forOwn, isString, isFunction, isArray, isNumber, isNull, isObject, map, isRegExp } from 'lodash-es'
+import { forOwn, keys, isString, isFunction, isArray, isNumber, isNull, isObject, map, isRegExp, sortBy } from 'lodash-es'
 
 
-const TAB = "  "
+const
+  TAB = "  ",
+  STARTS_WITH_NUM = /^[0-9]/,
+  CONTAINS_NON_ALPHANUM = /[^a-zA-Z0-9_]+/
+
+const quotedKey = key =>
+  STARTS_WITH_NUM.test(key) || CONTAINS_NON_ALPHANUM.test(key)
+    ? `"${key}"`
+    : key
 
 const renderValue = (value, tab=TAB) => {
   if (isString(value)) {
@@ -19,17 +27,27 @@ const renderValue = (value, tab=TAB) => {
   } else if (isObject(value)) {
     const lines = []
     forOwn(value, (val, key) => {
-      lines.push(`${tab}${key}: ${renderValue(val, tab+TAB)}`)
+      lines.push(`${tab}${quotedKey(key)}: ${renderValue(val, tab+TAB)}`)
     })
-    return `{\n${lines.join(",\n")}\n${tab.slice(-TAB.length)}}`
+    return `{\n${lines.join(",\n\n")}\n${tab.slice(-TAB.length)}}`
 
   } else {
-    throw new Error(`Unexpected value type: ${value}`)
+    // TODO: what to really do here? maybe caller passes a strategy for missing values
+    return '{}'
+    // throw new Error(`Unexpected value type: ${value}`)
   }
 }
 
 const renderObject = object => {
-  return `{\n${TAB}${map(object, (value, key) => `${key}: ${renderValue(value, TAB+TAB)}`).join(',\n\n  ')}\n}`
+  const
+    sortedKeys = sortBy(keys(object)),
+    sortedKeyValues = map(sortedKeys, key => `${quotedKey(key)}: ${renderValue(object[key], TAB+TAB)}`)
+
+  return [
+    '{',
+    `${TAB}${sortedKeyValues.join(`,\n\n${TAB}`)}`,
+    '}'
+  ].join("\n")
 }
 
 export default renderObject
