@@ -8,15 +8,25 @@ export default {
       { kind: 'label', text: "Weather Locations:" },
     ]
 
-    contents.push.apply(contents, workspace.extensionData?.weatherLocations?.map(location => ({
-      kind: 'block',
-      type: 'weather',
-      fields: {
-        LAT: location.lat,
-        LON: location.lon,
-        POWER_UP_ID: location.powerUpId,
-      }
-    })))
+    const weatherLocations = workspace.extensionData?.weatherLocations || []
+
+    if(weatherLocations.length) {
+      contents.push.apply(contents, weatherLocations.map(location => ({
+        kind: 'block',
+        type: 'weather',
+        fields: {
+          LAT: location.lat,
+          LON: location.lon,
+          POWER_UP_ID: location.powerUpId,
+        }
+      })))
+
+    } else {
+      contents.push({
+        kind: 'label',
+        text: "None. Visit Power-Ups: Weather and create some."
+      })
+    }
 
     return contents
   }
