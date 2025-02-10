@@ -1,8 +1,9 @@
-import { compact, forEach, includes, isEmpty, isString, keyBy, keys, map, mapValues, filter, flatMap, reduce, without } from 'lodash-es'
+import { compact, forEach, isEmpty, isString, keyBy, keys, map, mapValues, filter, flatMap, reduce, without } from 'lodash-es'
 
 import toolboxConfig from '../../app/toolbox/index.js'
 import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
+import renderObject from './object_renderer.js'
 
 
 const
@@ -231,10 +232,9 @@ export default importToolbox
 export const importToolboxJs = () => {
   const
     categoriesWithCallbacks = filter(toolboxConfig, "callback"),
-    renderedCategoryCallbacks = `
-const categoryCallbacks = {
-  ${map(categoriesWithCallbacks, ({name, callback}) => `"${name}": ${callback}`).join(',\n\n  ')}
-}
-  `
+    // { "Category Name": () -> { /* category callback */ }}
+    categoriesObject = mapValues(keyBy(categoriesWithCallbacks, "name"), "callback"),
+    renderedCategoryCallbacks = `const categoryCallbacks = ${ renderObject(categoriesObject) }`
+
   return renderTemplate(renderedCategoryCallbacks, './src/importer/toolbox.template.js')
 }

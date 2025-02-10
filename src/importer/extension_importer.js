@@ -1,8 +1,9 @@
 import { glob } from 'glob'
-import { assign, camelCase, fromPairs, isArray, map } from 'lodash-es'
+import { assign, camelCase, fromPairs, isArray } from 'lodash-es'
 
 import { importBlockDefinitions } from './block_importer.js'
 import renderTemplate from './template_renderer.js'
+import renderObject from './object_renderer.js'
 
 
 const
@@ -32,10 +33,8 @@ export default async () => {
       .filter(ext => ext && !isArray(ext))
       .reduce(assign, fileExtensions)
 
-  const renderedExtensions = `
-const allExtensions = {
-  ${map(allExtensions, (func, key) => `${key}: ${func}`).join(',\n\n  ')}
-}`
+
+  const renderedExtensions = `const allExtensions = ${ renderObject(allExtensions) }`
 
   // render the extensions template and return the output
   return renderTemplate(renderedExtensions, './src/importer/extensions.template.js')
