@@ -6,6 +6,8 @@ export default {
     const label = key
       // insert spaces before each capital letter
       .replaceAll(/[A-Z]/g, (match) => `\u00A0${match}`)
+      // insert a space after a : and upcase the next letter
+      .replaceAll(/:[a-z]/g, (match) => `:\u00A0${match.slice(1).toUpperCase()}`)
       // upcase the first letter
       .replace(/^[a-z]/, (match) => match.toUpperCase())
 
@@ -31,8 +33,7 @@ export default {
       )
 
     } else {
-      // throw new Error(`[mixins.weather] timeKey not recognized: ${timeKey}`)
-      return [["oops", ""]]
+      throw new Error(`[mixins.weather] timeKey not recognized: ${timeKey}`)
     }
 
     const propertyOptions = optionKeys.reduce((acc, key) => {
