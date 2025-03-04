@@ -20,6 +20,10 @@ export default {
   ],
 
   extensions: {
+    populateWeatherLocations: ({ block, data: { weatherLocationOptions } }) => {
+      block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
+    },
+
     weatherTimeChangesProperties:  ({ block }) => {
       const weatherTimeField = block.getField('WEATHER_TIME')
 
@@ -42,6 +46,13 @@ export default {
 
   lines: [
     [ "Weather", "CENTER" ],
+
+    [ "At:", {
+      field: "POWER_UP_ID",
+      options: [
+        [ "Loading locations...", ""],
+      ]
+    }],
 
     [ "When:", {
       field: "WEATHER_TIME",
@@ -66,32 +77,17 @@ export default {
         [ "select", "cloudCover"], // default to a real value to avoid a warning on block creation
       ]
     }],
-
-    [ "Where: %LAT,%LON", {
-      align: 'CENTER',
-      fields: {
-        LAT: { serializable_label: '0.0' },
-        LON: { serializable_label: '0.0' },
-      }
-    }],
-
-    [ "(PowerUp ID:%POWER_UP_ID)", {
-      field: "POWER_UP_ID",
-      serializable_label: 'N/A'
-    }],
   ],
 
   generators: {
     json: block => {
       const
-        lat = block.getFieldValue('LAT'),
-        lon = block.getFieldValue('LON'),
-        powerUpId = block.getFieldValue('POWER_UP_ID'),
+        powerUpId = parseInt(block.getFieldValue('POWER_UP_ID'), 10),
         weatherTime = block.getFieldValue('WEATHER_TIME'),
         weatherProperty = block.getFieldValue('WEATHER_PROPERTY'),
         payload = JSON.stringify({
           weather: {
-            powerUpId, lat, lon, weatherTime, weatherProperty
+            powerUpId, weatherTime, weatherProperty
           }
         })
 
@@ -106,9 +102,7 @@ export default {
       return {
         type: "weather",
         fields: {
-          LAT: payload.lat,
-          LON: payload.lon,
-          POWER_UP_ID: payload.powerUpId,
+          POWER_UP_ID: payload.powerUpId.toString(),
           WEATHER_TIME: payload.weatherTime,
           WEATHER_PROPERTY: payload.weatherProperty,
         }

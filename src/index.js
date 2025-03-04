@@ -1,8 +1,10 @@
 import Blockly from 'blockly'
 import { filter } from 'lodash-es'
 
-import initialWorkspace from '../export/workspace.json'
-import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
+// import initialWorkspace from '../export/workspace.json'
+// import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
+import initialWorkspace from './workspace.json'
+import { inject, jsonToWorkspace, workspaceToJson } from './blockly.js'
 import { clear, load, save } from './serialization'
 
 import './index.css'
@@ -50,10 +52,10 @@ const workspace = inject('blocklyDiv', {
       ["A Feed Z", "qrstuv"],
       ["Feedinsky &", "oneforyou-oneforme"],
     ],
-    weatherLocations: [
-      { powerUpId: 1, lat: 40.65513, lon: -74.01111 },
-      { powerUpId: 2, lat: 42.93994, lon: -85.62748 },
-      { powerUpId: 3, lat: 36.14993, lon: -86.75903 },
+    weatherLocationOptions: [
+      [ "Industry City", "1" ],
+      [ "Varick", "2" ],
+      [ "Shenzhen", "3" ],
     ]
   },
   injectOptions: {
