@@ -20,7 +20,11 @@ export default block => {
   const
     definitionExtensions = block?.extensions,
     definitionMixins = block?.mixins,
-    extensions = [].concat(stringsOrKeys(definitionExtensions)).concat(stringsOrKeys(definitionMixins))
+    extensions = [
+      // add mixins first, allows extensions to use them
+      ...stringsOrKeys(definitionMixins),
+      ...stringsOrKeys(definitionExtensions)
+    ]
 
   return extensions.length ? { extensions } : {}
 }
