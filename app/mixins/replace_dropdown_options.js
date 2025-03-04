@@ -21,7 +21,7 @@ export const replaceDropdownOptions = function(fieldKey, newOptions) {
   }
 
   if(!foundFieldAt) {
-    console.error(`[mixins.relaceDropdown] No field named "${fieldKey}" found in ${this.type} block.`)
+    console.error(`[mixins.relaceDropdownOptions] No field named "${fieldKey}" found in ${this.type} block.`)
     return
   }
 

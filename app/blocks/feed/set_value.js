@@ -10,6 +10,7 @@ export default {
     colour: 300
   },
 
+  mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
 
   connections: {
