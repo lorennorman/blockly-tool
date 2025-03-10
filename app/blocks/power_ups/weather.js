@@ -21,6 +21,11 @@ export default {
 
   extensions: {
     populateWeatherLocations: ({ block, data: { weatherLocationOptions } }) => {
+      if(!weatherLocationOptions.length) {
+        weatherLocationOptions = [
+          [ "No locations! Visit Power-Ups -> Weather", "" ]
+        ]
+      }
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
     },
 

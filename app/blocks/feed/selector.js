@@ -7,6 +7,7 @@ export default {
     tooltip: "The last value of this feed or component, always a String"
   },
 
+  mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
 
   lines: [

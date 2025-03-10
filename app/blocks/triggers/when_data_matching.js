@@ -18,6 +18,7 @@ export default {
     next: "trigger"
   },
 
+  mixins: ['replaceDropdownOptions'],
   extensions: [ "populateFeedDropdown" ],
 
   lines: [
