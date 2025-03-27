@@ -19,7 +19,7 @@ const renderValue = (value, tab=TAB) => {
     return value
 
   } else if (isFunction(value)) {
-    return value.toString().replaceAll("\n", "\n  ")
+    return renderFunction(value, tab)
 
   } else if (isArray(value)) {
     return `[ ${value.map(i => renderValue(i, tab+TAB)).join(", ")} ]`
@@ -36,6 +36,24 @@ const renderValue = (value, tab=TAB) => {
     return '{}'
     // throw new Error(`Unexpected value type: ${value}`)
   }
+}
+
+const renderFunction = (func, indentation=TAB) => {
+  const
+    functionString = func.toString(),
+    // capture whitespace after first newline
+    match = /\n\s*/.exec(functionString)?.[0].slice(1)
+
+  // early out if no newlines in function
+  if(!match) { return functionString }
+
+  const reIndentedFunction = functionString
+    // regex replace \n[measured whitespace] \n[indentation]
+    .replaceAll(`\n${match}`, `\n${indentation}`)
+    // replace last line with 2 less indentation and a closing bracket
+    .replace(/\n.*$/, `\n${indentation.slice(0, -2)}}`)
+
+  return reIndentedFunction
 }
 
 const renderObject = object => {
