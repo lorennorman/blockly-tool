@@ -22,10 +22,10 @@ export default {
   extensions: {
     populateWeatherLocations: ({ block, data: { weatherLocationOptions } }) => {
       if(!weatherLocationOptions.length) {
-        weatherLocationOptions = [
-          [ "No locations! Visit Power-Ups -> Weather", "" ]
-        ]
+        weatherLocationOptions = [[ "No locations! Visit Power-Ups -> Weather", "" ]]
+        block.setEnabled(false)
       }
+
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
     },
 
@@ -98,13 +98,13 @@ export default {
         powerUpId = parseInt(block.getFieldValue('POWER_UP_ID'), 10),
         weatherTime = block.getFieldValue('WEATHER_TIME'),
         weatherProperty = block.getFieldValue('WEATHER_PROPERTY'),
-        payload = JSON.stringify({
-          weather: {
-            powerUpId, weatherTime, weatherProperty
-          }
-        })
+        payload = powerUpId
+          ? { weather: {
+                powerUpId, weatherTime, weatherProperty
+            }}
+          : null
 
-      return [ payload, 0 ]
+      return [ JSON.stringify(payload), 0 ]
     }
   },
 
@@ -115,7 +115,7 @@ export default {
       return {
         type: "weather",
         fields: {
-          POWER_UP_ID: payload.powerUpId.toString(),
+          POWER_UP_ID: String(payload.powerUpId),
           WEATHER_TIME: payload.weatherTime,
           WEATHER_PROPERTY: payload.weatherProperty,
         }
