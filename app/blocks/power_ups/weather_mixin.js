@@ -47,15 +47,24 @@ export default {
   },
 
   updateHelpTextForWeatherProperty: function(propertyKey) {
-    const { values="unknown", description="" } = this.HELP_TEXT_BY_PROP[propertyKey]
+    const
+      propertyField = this.getField("WEATHER_PROPERTY"),
+      helpField = this.getField("WEATHER_PROPERTY_HELP")
 
-    // update the metric portion of the tooltip
-    const tooltipLines = this.getTooltip().split("\n---\n")
-    tooltipLines[1] = `${this.keyToLabel(propertyKey)}:\n  ${description}`
-    this.setTooltip(tooltipLines.join("\n---\n"))
+    if(!propertyKey) {
+      propertyKey = propertyField.getValue()
+    }
 
-    // update the field text on-block
-    this.setFieldValue(`Ex: ${values}`, "WEATHER_PROPERTY_HELP")
+    const
+      { values="unknown", description="" } = this.HELP_TEXT_BY_PROP[propertyKey],
+      helpText = `${this.keyToLabel(propertyKey)}:\n  ${description}`
+
+    // set a metric tooltip on dropdown and help text
+    propertyField.setTooltip(helpText)
+    helpField.setTooltip(helpText)
+
+    // update the help text with examples for this metric
+    helpField.setValue(`Ex: ${values}`)
   },
 
   CURRENT_PROPS: [

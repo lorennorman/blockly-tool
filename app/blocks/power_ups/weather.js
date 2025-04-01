@@ -40,8 +40,9 @@ export default {
 
         // call the mixin to get the new options
         const options = block.propertyOptionsForTime(weatherTimeKey)
-        // update the property options
+        // update the property options and the property help
         block.replaceDropdownOptions("WEATHER_PROPERTY", options)
+        block.updateHelpTextForWeatherProperty()
 
         hasRun = true
       })
