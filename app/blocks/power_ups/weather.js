@@ -35,14 +35,28 @@ export default {
       let hasRun = false
       // when the user selects a time option
       weatherTimeField.setValidator(function(weatherTimeKey) {
-        // early out if there's no change
-        if(hasRun && this.getValue() === weatherTimeKey) {
-          return
-        }
+        // early out after first run if there's no change
+        if(hasRun && this.getValue() === weatherTimeKey) { return }
+
         // call the mixin to get the new options
         const options = block.propertyOptionsForTime(weatherTimeKey)
         // update the property options
         block.replaceDropdownOptions("WEATHER_PROPERTY", options)
+
+        hasRun = true
+      })
+    },
+
+    weatherPropertyChangesHint: ({ block }) => {
+      const weatherPropertyField = block.getField('WEATHER_PROPERTY')
+
+      let hasRun = false
+      // when the user selects a property option
+      weatherPropertyField.setValidator(function(weatherPropertyKey) {
+        // early out after first run if there's no change
+        if(hasRun && this.getValue() === weatherPropertyKey) { return }
+
+        block.updateHelpTextForWeatherProperty(weatherPropertyKey)
 
         hasRun = true
       })
@@ -89,6 +103,11 @@ export default {
       options: [
         [ "select", "cloudCover" ], // default to a real value to avoid a warning on block creation
       ]
+    }],
+
+    [ "", {
+      field: "WEATHER_PROPERTY_HELP",
+      label: ""
     }],
   ],
 
