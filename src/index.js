@@ -1,10 +1,13 @@
 import Blockly from 'blockly'
 import { filter } from 'lodash-es'
 
-// import initialWorkspace from '../export/workspace.json'
-// import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
-import initialWorkspace from './workspace.json'
-import { inject, jsonToWorkspace, workspaceToJson } from './blockly.js'
+// for building static:
+import initialWorkspace from '../export/workspace.json'
+import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
+// for running dev server:
+// import initialWorkspace from './workspace.json'
+// import { inject, jsonToWorkspace, workspaceToJson } from './blockly.js'
+
 import { clear, load, save } from './serialization'
 
 import './index.css'
