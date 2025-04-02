@@ -24,12 +24,43 @@ export default {
       if(!weatherLocationOptions.length) {
         weatherLocationOptions = [[ "No locations! Visit Power-Ups -> Weather", "" ]]
         block.setEnabled(false)
+
+      } else if(weatherLocationOptions[0][1] != "") {
+        weatherLocationOptions.unshift([ "Select Location", "" ])
       }
 
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
     },
 
-    weatherTimeChangesProperties:  ({ block }) => {
+    requireWeatherLocationSelection: ({ block }) => {
+      const
+        locationField = block.getField('POWER_UP_ID'),
+        // disable the block if the input is invalid or is an orphan
+        locationValidator = function(powerUpId) {
+          (powerUpId === "" || !block.getParent())
+            ? block.setEnabled(false)
+            : block.setEnabled(true)
+        }
+
+      // run whenever the input changes
+      locationField.setValidator(locationValidator)
+
+      // run after Blockly's disableOrphans listener fires
+      block.setOnChange(function({ type, element, newValue, blockId }) {
+        // verify it is this block being enabled
+        if(blockId === block.id && type === "change" && element === "disabled" && newValue === false) {
+          // potentially re-disables the block
+          locationValidator(locationField.getValue())
+        }
+      })
+
+      // run right now, on load, unless we're in the toolbox
+      if(!block.isInFlyout) {
+        locationValidator(locationField.getValue())
+      }
+    },
+
+    weatherTimeChangesProperties: ({ block }) => {
       const weatherTimeField = block.getField('WEATHER_TIME')
 
       let hasRun = false
