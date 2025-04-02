@@ -33,7 +33,7 @@ const extensions = (() => {
         throw new Error("Extension invoked before extensions.ready() was called.")
       }
 
-      return extensionFunc({
+      return extensionFunc.call(this, {
         block: this,
         data: extensionData,
         Blockly
