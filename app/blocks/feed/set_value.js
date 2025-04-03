@@ -35,12 +35,14 @@ export default {
 
   generators: {
     json: (block, generator) => {
-      const payload = {
-        setFeedValue: {
-          key: block.getFieldValue('FEED_KEY'),
-          value: JSON.parse(generator.valueToCode(block, 'VALUE', 0))
+      const
+        value = generator.valueToCode(block, 'VALUE', 0) || null,
+        payload = {
+          setFeedValue: {
+            key: block.getFieldValue('FEED_KEY'),
+            value: JSON.parse(value)
+          }
         }
-      }
 
       return JSON.stringify(payload)
     }

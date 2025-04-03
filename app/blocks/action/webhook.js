@@ -68,8 +68,8 @@ export default {
     json: (block, generator) => {
       const payload = {
         webhookAction: {
-          url: JSON.parse(generator.valueToCode(block, 'URL', 0)),
-          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0)),
+          url: JSON.parse(generator.valueToCode(block, 'URL', 0) || null),
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0) || null),
           formEncoded: block.getFieldValue('FORM_ENCODE') === 'TRUE'
         }
       }

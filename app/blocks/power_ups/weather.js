@@ -149,11 +149,9 @@ export default {
         powerUpId = parseInt(block.getFieldValue('POWER_UP_ID'), 10),
         weatherTime = block.getFieldValue('WEATHER_TIME'),
         weatherProperty = block.getFieldValue('WEATHER_PROPERTY'),
-        payload = powerUpId
-          ? { weather: {
-                powerUpId, weatherTime, weatherProperty
-            }}
-          : null
+        payload = { weather: {
+            powerUpId, weatherTime, weatherProperty
+        }}
 
       return [ JSON.stringify(payload), 0 ]
     }
