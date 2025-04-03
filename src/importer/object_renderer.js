@@ -1,4 +1,4 @@
-import { forOwn, keys, isString, isFunction, isArray, isNumber, isNull, isObject, isUndefined, map, isRegExp, sortBy } from 'lodash-es'
+import { compact, forOwn, keys, isString, isFunction, isArray, isNumber, isNull, isObject, isUndefined, map, isRegExp, sortBy } from 'lodash-es'
 
 
 const
@@ -69,7 +69,15 @@ const renderFunction = (func, indentation=TAB) => {
 const renderObject = object => {
   const
     sortedKeys = sortBy(keys(object)),
-    sortedKeyValues = map(sortedKeys, key => `${quotedKey(key)}: ${renderValue(object[key], TAB+TAB)}`)
+    sortedKeyValues = compact(map(sortedKeys, rawKey => {
+      const
+        key = quotedKey(rawKey),
+        value = object[key]
+
+      return isUndefined(value)
+        ? null
+        : `${key}: ${renderValue(value, TAB + TAB)}`
+    }))
 
   return [
     '{',
