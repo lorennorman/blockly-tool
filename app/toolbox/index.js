@@ -14,6 +14,7 @@ import Web from './web.js'
 export default [
   Triggers,
   Matchers,
+  { kind: 'sep' },
   Logic,
   Math,
   Text,
