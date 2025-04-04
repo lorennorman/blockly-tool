@@ -56,7 +56,8 @@ export default {
     }
 
     const
-      { values="unknown", description="" } = this.HELP_TEXT_BY_PROP[propertyKey],
+      keyWithoutDayPart = propertyKey.split(":").pop(),
+      { values="unknown", description="" } = this.HELP_TEXT_BY_PROP[keyWithoutDayPart],
       helpText = `${this.keyToLabel(propertyKey)}:\n  ${description}`
 
     // set a metric tooltip on dropdown and help text
