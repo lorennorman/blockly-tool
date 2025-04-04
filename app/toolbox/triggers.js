@@ -1,6 +1,6 @@
 export default {
   name: 'Triggers',
-  colour: 20,
+  colour: "#11ab23",
   label: [
     "Triggers determine when and whether an Action runs.",
     "You can have more than one trigger, each triggers separately.",

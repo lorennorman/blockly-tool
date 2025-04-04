@@ -67,6 +67,9 @@ const
       kind: 'category',
       name: category.name,
       colour: (category.colour === 0) ? "0" : category.colour,
+      cssConfig: {
+        // icon: `${category.name.toLowerCase()}-icon`,
+      },
       ...{
         custom: category.callback ? category.name : undefined
       },

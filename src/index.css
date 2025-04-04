@@ -33,3 +33,46 @@ pre, code {
     background-color: rgb(247, 240, 228);
     width: 400px;
 }
+
+/*
+  Blockly style experiments
+  TODO:
+  - figure out separation of concerns: themes vs styles
+    - themes for colors & styles for layouts?
+  - make themes resource for export
+  - make styles resource for export
+  - expose shorthands in definitions to leverage easily
+*/
+.blocklyTreeSeparator {
+  margin: 5px 0 20px;
+}
+
+.blocklyTreeRow {
+  padding: 13px 0 12px;
+  margin: 0;
+  height: 51px;
+}
+
+.blocklyTreeIcon {
+  width: 32px;
+  height: 32px;
+  border: solid black 1px;
+  /* background-color: red; */
+  margin: 12px 20px 11px;
+  background-image: none;
+  visibility: visible;
+
+  &::before {
+    content: "&";
+  }
+}
+
+.blocklyTreeSelected .blocklyTreeIcon {
+  color: #fff;
+}
+
+.blocklyTreeLabel {
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 600;
+}

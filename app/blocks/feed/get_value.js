@@ -14,7 +14,7 @@ export default {
   extensions: ['populateFeedDropdown'],
 
   lines: [
-    [ "Get %FEED_KEY Feed's last value", {
+    [ "Get %FEED_KEY", {
       field: "FEED_KEY",
       options: [
         [ "Loading Feeds...", "" ],

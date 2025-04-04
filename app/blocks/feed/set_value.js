@@ -20,14 +20,14 @@ export default {
   },
 
   lines: [
-    [ "Set %FEED_KEY Feed's", {
+    [ "Set %FEED_KEY to:", {
       field: "FEED_KEY",
       options: [
         [ "Loading Feeds...", "" ],
       ]
     }],
 
-    ["last value to %VALUE", {
+    ["%VALUE", {
       inputValue: "VALUE",
       shadow: 'io_text'
     }],
