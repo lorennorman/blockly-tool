@@ -43,6 +43,14 @@ const
   }),
 
   generateToolboxContents = () => map(toolboxConfig, category => {
+    if(category.name) {
+      return generateCategoryFromDefinition(category)
+    }
+
+    return category
+  }),
+
+  generateCategoryFromDefinition = category => {
     log(`- "${category.name}"`)
 
     validateCategoryDefinition(category)
@@ -72,7 +80,7 @@ const
       },
       contents
     }
-  }),
+  },
 
   EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "label", "contents", "callback" ],
 

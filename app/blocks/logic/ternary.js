@@ -20,14 +20,14 @@ export default {
   generators: {
     json: (block, generator) => {
       const
-        ifLogic = generator.valueToCode(block, 'IF', 0),
-        thenLogic = generator.valueToCode(block, 'THEN', 0),
-        elseLogic = generator.valueToCode(block, 'ELSE', 0),
+        ifLogic = generator.valueToCode(block, 'IF', 0) || null,
+        thenLogic = generator.valueToCode(block, 'THEN', 0) || null,
+        elseLogic = generator.valueToCode(block, 'ELSE', 0) || null,
         blockPayload = JSON.stringify({
           conditional: {
-            if0: ifLogic ? JSON.parse(ifLogic) : null,
-            then0: thenLogic ? JSON.parse(thenLogic) : null,
-            else: elseLogic ? JSON.parse(elseLogic) : null
+            if0: JSON.parse(ifLogic),
+            then0: JSON.parse(thenLogic),
+            else: JSON.parse(elseLogic)
           }
         })
 

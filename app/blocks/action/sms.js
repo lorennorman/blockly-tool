@@ -50,7 +50,7 @@ export default {
     json: (block, generator) => {
       const payload = {
         smsAction: {
-          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0))
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0) || null)
         }
       }
 

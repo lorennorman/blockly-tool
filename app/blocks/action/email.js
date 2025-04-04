@@ -62,8 +62,8 @@ export default {
     json: (block, generator) => {
       const payload = {
         emailAction: {
-          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0)),
-          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0))
+          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0) || null),
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0) || null)
         }
       }
 
