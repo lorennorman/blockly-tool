@@ -40,6 +40,9 @@ export default {
           (powerUpId === "" || !block.getParent())
             ? block.setEnabled(false)
             : block.setEnabled(true)
+
+          // update metric options
+          block.refreshPropertyOptionsForTime({ locationKey: powerUpId })
         }
 
       // run whenever the input changes
@@ -69,26 +72,27 @@ export default {
         // early out after first run if there's no change
         if(hasRun && this.getValue() === weatherTimeKey) { return }
 
-        // call the mixin to get the new options
-        const options = block.propertyOptionsForTime(weatherTimeKey)
-        // update the property options and the property help
-        block.replaceDropdownOptions("WEATHER_PROPERTY", options)
-        block.updateHelpTextForWeatherProperty()
+        // call the mixin to set the options
+        block.refreshPropertyOptionsForTime({ timeKey: weatherTimeKey })
 
         hasRun = true
       })
     },
 
-    weatherPropertyChangesHint: ({ block }) => {
+    weatherPropertyChangesHint: ({ block, data }) => {
+
       const weatherPropertyField = block.getField('WEATHER_PROPERTY')
 
       let hasRun = false
       // when the user selects a property option
       weatherPropertyField.setValidator(function(weatherPropertyKey) {
+        // update the reference to the injected/updated extension data
+        block.currentWeatherByLocation = data.currentWeatherByLocation
+
         // early out after first run if there's no change
         if(hasRun && this.getValue() === weatherPropertyKey) { return }
 
-        block.updateHelpTextForWeatherProperty(weatherPropertyKey)
+        block.updateHelpTextForWeatherProperty({ propertyKey: weatherPropertyKey })
 
         hasRun = true
       })

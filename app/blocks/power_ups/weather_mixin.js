@@ -26,8 +26,17 @@ export default {
     return `${this.keyToLabel(key)}:\n  ${description}`
   },
 
-  keyToCurrent: function(key) {
-    const { values="unknown" } = this.keyToHelpObject(key)
+  keyToCurrent: function(key, { timeKey=null, locationKey=null }) {
+    const
+      locationId = locationKey || this.getFieldValue("POWER_UP_ID"),
+      forecast = timeKey || this.getFieldValue("WEATHER_TIME"),
+      keyWithCorrectedDayPart = key.replaceAll(/:[a-z]/g, (match) => `${match.slice(1).toUpperCase()}`),
+      currentValue = this.currentWeatherByLocation[locationId]?.[forecast]?.[keyWithCorrectedDayPart]
+
+    // return a current value, if found
+    if(currentValue !== undefined && currentValue !== null) {
+      return currentValue
+    }
 
     // use example value otherwise
     const { example="unknown" } = this.keyToHelpObject(key)
@@ -35,7 +44,9 @@ export default {
     return example
   },
 
-  propertyOptionsForTime: function(timeKey) {
+  refreshPropertyOptionsForTime: function({ timeKey, locationKey }) {
+    timeKey = timeKey || this.getFieldValue("WEATHER_TIME")
+
     let optionKeys
     if(timeKey === 'current') {
       optionKeys = this.CURRENT_PROPS
@@ -61,7 +72,7 @@ export default {
     const propertyOptions = optionKeys.reduce((acc, key) => {
       const
         name = this.keyToLabel(key),
-        current = this.keyToCurrent(key),
+        current = this.keyToCurrent(key, { timeKey, locationKey }),
         label = `${name} (Now: ${current})`
 
       acc.push([ label, key ])
@@ -69,10 +80,12 @@ export default {
       return acc
     }, [])
 
-    return propertyOptions
+    // update the property options and the property help
+    this.replaceDropdownOptions("WEATHER_PROPERTY", propertyOptions)
+    this.updateHelpTextForWeatherProperty({ timeKey, locationKey })
   },
 
-  updateHelpTextForWeatherProperty: function(propertyKey) {
+  updateHelpTextForWeatherProperty: function({ propertyKey, timeKey, locationKey }) {
     const
       propertyField = this.getField("WEATHER_PROPERTY"),
       helpField = this.getField("WEATHER_PROPERTY_HELP")
@@ -83,7 +96,7 @@ export default {
 
     const
       helpText = this.keyToTooltip(propertyKey),
-      current = this.keyToCurrent(propertyKey)
+      current = this.keyToCurrent(propertyKey, { timeKey, locationKey })
 
     // set a metric tooltip on dropdown and help text
     propertyField.setTooltip(helpText)
@@ -92,6 +105,8 @@ export default {
     // update the help text with examples for this metric
     helpField.setValue(`Now: ${current}`)
   },
+
+  currentWeatherByLocation: {},
 
   CURRENT_PROPS: [
     // 'asOf',
