@@ -40,7 +40,7 @@ export default {
         }
 
         // react to incoming forecast data
-        observeData('currentWeatherByLocation', newData => {
+        observeData('currentWeatherByLocation', (newData = {}) => {
           // update the reference to the injected/updated extension data
           block.currentWeatherByLocation = newData
           // re-run the things that use the data

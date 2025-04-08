@@ -37,9 +37,9 @@ const extensions = (() => {
       dataObservers[key] = dataObservers[key] || []
       dataObservers[key].push(observer)
 
-      if(extensionData[key]) {
-        observer(extensionData[key])
-      } else {
+      observer(extensionData[key])
+
+      if(!extensionData[key]) {
         console.warn("Data observer registered for missing data key:", key)
       }
     },
