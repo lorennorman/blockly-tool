@@ -9,11 +9,38 @@ const extensions = (() => {
 
     ready = () => status = 'ready',
 
-    injectDatum = (key, value) => extensionData[key] = value,
+    injectDatum = (key, value) => {
+      extensionData[key] = value
+
+      if(dataObservers[key]) {
+        dataObservers[key].forEach(observer => observer(value))
+      }
+    },
 
     injectData = dataObject => {
       for (const [key, value] of Object.entries(dataObject)) {
         extensions.injectDatum(key, value)
+      }
+    },
+
+    extendDatum = (key, value) => {
+      injectDatum(key, {
+        ...extensionData[key],
+        ...value
+      })
+    },
+
+    dataObservers = {},
+
+    observeData = (key, observer) => {
+      // register the observer to the key
+      dataObservers[key] = dataObservers[key] || []
+      dataObservers[key].push(observer)
+
+      if(extensionData[key]) {
+        observer(extensionData[key])
+      } else {
+        console.warn("Data observer registered for missing data key:", key)
       }
     },
 
@@ -36,6 +63,7 @@ const extensions = (() => {
       return extensionFunc.call(this, {
         block: this,
         data: extensionData,
+        observeData,
         Blockly
       })
     }
@@ -46,5 +74,5 @@ const extensions = (() => {
     Blockly.Extensions.register(extensionName, wrapExtension(extensionFunc))
   }
 
-  return { ready, injectDatum, injectData, dispose }
+  return { ready, injectDatum, injectData, extendDatum, extensionData, dispose }
 })()
