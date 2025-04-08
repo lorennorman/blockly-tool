@@ -1,6 +1,38 @@
 // helper mixin for the weather block
 // simplifies juggling the weather api keys by period type
 export default {
+  onchange: function({ blockId, type, name, element, newValue, oldValue }) {
+    if(this.id !== blockId || type !== "change") { return }
+
+    // double-check anytime this block gets enabled (disableOrphans)
+    if(element === "disabled" && newValue === false) {
+      this.setEnabledByLocation()
+
+    } else if(element === "field") {
+      if (name === "POWER_UP_ID") {
+        // enable/disabled based on location change
+        this.setEnabledByLocation()
+        this.refreshPropertyOptionsForTime({ locationKey: newValue })
+
+      } else if (name === "WEATHER_TIME") {
+        // update available metrics when forecast changes
+        this.refreshPropertyOptionsForTime({ timeKey: newValue })
+
+      } else if (name === "WEATHER_PROPERTY") {
+        // update help text when the metric changes
+        this.updateHelpTextForWeatherProperty({ propertyKey: newValue })
+      }
+    }
+  },
+
+  setEnabledByLocation: function() {
+    if(this.getFieldValue("POWER_UP_ID") === "" || !this.getParent()) {
+      this.setEnabled(false)
+    } else {
+      this.setEnabled(true)
+    }
+  },
+
   // helper to humanize camelCase strings
   keyToLabel: function(key) {
     const label = key
@@ -33,18 +65,18 @@ export default {
       keyWithCorrectedDayPart = key.replaceAll(/:[a-z]/g, (match) => `${match.slice(1).toUpperCase()}`),
       currentValue = this.currentWeatherByLocation[locationId]?.[forecast]?.[keyWithCorrectedDayPart]
 
-    // return a current value, if found
+    // return a current value with "Now" label, if found
     if(currentValue !== undefined && currentValue !== null) {
-      return currentValue
+      return `Now: ${currentValue}`
     }
 
-    // use example value otherwise
+    // use example value with "e.g." label otherwise
     const { example="unknown" } = this.keyToHelpObject(key)
 
-    return example
+    return `e.g. ${example}`
   },
 
-  refreshPropertyOptionsForTime: function({ timeKey, locationKey }) {
+  refreshPropertyOptionsForTime: function({ timeKey=null, locationKey=null }) {
     timeKey = timeKey || this.getFieldValue("WEATHER_TIME")
 
     let optionKeys
@@ -73,7 +105,7 @@ export default {
       const
         name = this.keyToLabel(key),
         current = this.keyToCurrent(key, { timeKey, locationKey }),
-        label = `${name} (Now: ${current})`
+        label = `${name} (${current})`
 
       acc.push([ label, key ])
 
@@ -85,7 +117,7 @@ export default {
     this.updateHelpTextForWeatherProperty({ timeKey, locationKey })
   },
 
-  updateHelpTextForWeatherProperty: function({ propertyKey, timeKey, locationKey }) {
+  updateHelpTextForWeatherProperty: function({ propertyKey=null, timeKey=null, locationKey=null }) {
     const
       propertyField = this.getField("WEATHER_PROPERTY"),
       helpField = this.getField("WEATHER_PROPERTY_HELP")
@@ -103,7 +135,7 @@ export default {
     helpField.setTooltip(helpText)
 
     // update the help text with examples for this metric
-    helpField.setValue(`Now: ${current}`)
+    helpField.setValue(current)
   },
 
   currentWeatherByLocation: {},

@@ -20,7 +20,8 @@ export default {
   ],
 
   extensions: {
-    populateWeatherLocations: ({ block, data: { weatherLocationOptions } }) => {
+    prepareWeather: ({ block, observeData, data: { weatherLocationOptions } }) => {
+      // populate weather locations
       if(!weatherLocationOptions.length) {
         weatherLocationOptions = [[ "No locations! Visit Power-Ups -> Weather", "" ]]
         block.setEnabled(false)
@@ -30,72 +31,23 @@ export default {
       }
 
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
-    },
 
-    requireWeatherLocationSelection: ({ block }) => {
-      const
-        locationField = block.getField('POWER_UP_ID'),
-        // disable the block if the input is invalid or is an orphan
-        locationValidator = function(powerUpId) {
-          (powerUpId === "" || !block.getParent())
-            ? block.setEnabled(false)
-            : block.setEnabled(true)
-
-          // update metric options
-          block.refreshPropertyOptionsForTime({ locationKey: powerUpId })
+      // give a moment for fields to populate
+      setTimeout(() => {
+        // auto-disable block, if necessary
+        if(!block.isInFlyout) {
+          block.setEnabledByLocation()
         }
 
-      // run whenever the input changes
-      locationField.setValidator(locationValidator)
-
-      // run after Blockly's disableOrphans listener fires
-      block.setOnChange(function({ type, element, newValue, blockId }) {
-        // verify it is this block being enabled
-        if(blockId === block.id && type === "change" && element === "disabled" && newValue === false) {
-          // potentially re-disables the block
-          locationValidator(locationField.getValue())
-        }
-      })
-
-      // run right now, on load, unless we're in the toolbox
-      if(!block.isInFlyout) {
-        locationValidator(locationField.getValue())
-      }
-    },
-
-    weatherTimeChangesProperties: ({ block }) => {
-      const weatherTimeField = block.getField('WEATHER_TIME')
-
-      let hasRun = false
-      // when the user selects a time option
-      weatherTimeField.setValidator(function(weatherTimeKey) {
-        // early out after first run if there's no change
-        if(hasRun && this.getValue() === weatherTimeKey) { return }
-
-        // call the mixin to set the options
-        block.refreshPropertyOptionsForTime({ timeKey: weatherTimeKey })
-
-        hasRun = true
-      })
-    },
-
-    weatherPropertyChangesHint: ({ block, data }) => {
-
-      const weatherPropertyField = block.getField('WEATHER_PROPERTY')
-
-      let hasRun = false
-      // when the user selects a property option
-      weatherPropertyField.setValidator(function(weatherPropertyKey) {
-        // update the reference to the injected/updated extension data
-        block.currentWeatherByLocation = data.currentWeatherByLocation
-
-        // early out after first run if there's no change
-        if(hasRun && this.getValue() === weatherPropertyKey) { return }
-
-        block.updateHelpTextForWeatherProperty({ propertyKey: weatherPropertyKey })
-
-        hasRun = true
-      })
+        // react to incoming forecast data
+        observeData('currentWeatherByLocation', newData => {
+          // update the reference to the injected/updated extension data
+          block.currentWeatherByLocation = newData
+          // re-run the things that use the data
+          block.refreshPropertyOptionsForTime({})
+          block.updateHelpTextForWeatherProperty({})
+        })
+      }, 1)
     }
   },
 

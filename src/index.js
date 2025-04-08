@@ -59,7 +59,14 @@ const workspace = inject('blocklyDiv', {
       [ "Industry City", "1" ],
       [ "Varick", "2" ],
       [ "Shenzhen", "3" ],
-    ]
+    ],
+    currentWeatherByLocation: {
+      1: {
+        current: {
+          cloudCover: "5.4321",
+        }
+      }
+    }
   },
   injectOptions: {
     zoom: { controls: true, wheel: true }
