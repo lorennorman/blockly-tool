@@ -1,5 +1,5 @@
-// helper mixin for the weather block
-// simplifies juggling the weather api keys by period type
+// helpers for the weather block
+// simplifies juggling the weather api properties by location and period
 export default {
   onchange: function({ blockId, type, name, element, newValue, oldValue }) {
     if(this.id !== blockId || type !== "change") { return }
