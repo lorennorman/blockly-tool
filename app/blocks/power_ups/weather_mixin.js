@@ -67,13 +67,13 @@ export default {
 
     // return a current value with "Now" label, if found
     if(currentValue !== undefined && currentValue !== null) {
-      return `Now: ${currentValue}`
+      return `Now:\u00A0${currentValue}`
     }
 
     // use example value with "e.g." label otherwise
     const { example="unknown" } = this.keyToHelpObject(key)
 
-    return `e.g. ${example}`
+    return `e.g.\u00A0${example}`
   },
 
   refreshPropertyOptions: function({ timeKey=null, locationKey=null }) {
@@ -105,7 +105,7 @@ export default {
       const
         name = this.keyToLabel(key),
         current = this.keyToCurrent(key, { timeKey, locationKey }),
-        label = `${name} (${current})`
+        label = `${name}\u00A0(${current})`
 
       acc.push([ label, key ])
 
@@ -269,7 +269,7 @@ export default {
       description: "Relative humidity as a percentage of the total water vapor the air can hold at this temperature."
     },
     precipitationIntensity: {
-      example: "13.2",
+      example: "0.0",
       description: "Precipitation intensity measured in millimeters per hour"
     },
     pressure: {
