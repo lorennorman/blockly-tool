@@ -32,12 +32,13 @@ export default {
 
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
 
+      // skip the rest if we're in the toolbox
+      if(block.isInFlyout) { return }
+
       // give a moment for fields to populate
       setTimeout(() => {
         // auto-disable block, if necessary
-        if(!block.isInFlyout) {
-          block.setEnabledByLocation()
-        }
+        block.setEnabledByLocation()
 
         // react to incoming forecast data
         observeData('currentWeatherByLocation', (newData = {}) => {
