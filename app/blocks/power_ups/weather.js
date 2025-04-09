@@ -44,8 +44,7 @@ export default {
           // update the reference to the injected/updated extension data
           block.currentWeatherByLocation = newData
           // re-run the things that use the data
-          block.refreshPropertyOptionsForTime({})
-          block.updateHelpTextForWeatherProperty({})
+          block.refreshPropertyOptions({})
         })
       }, 1)
     }

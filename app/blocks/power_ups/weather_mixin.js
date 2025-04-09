@@ -12,11 +12,11 @@ export default {
       if (name === "POWER_UP_ID") {
         // enable/disabled based on location change
         this.setEnabledByLocation()
-        this.refreshPropertyOptionsForTime({ locationKey: newValue })
+        this.refreshPropertyOptions({ locationKey: newValue })
 
       } else if (name === "WEATHER_TIME") {
         // update available metrics when forecast changes
-        this.refreshPropertyOptionsForTime({ timeKey: newValue })
+        this.refreshPropertyOptions({ timeKey: newValue })
 
       } else if (name === "WEATHER_PROPERTY") {
         // update help text when the metric changes
@@ -76,7 +76,7 @@ export default {
     return `e.g. ${example}`
   },
 
-  refreshPropertyOptionsForTime: function({ timeKey=null, locationKey=null }) {
+  refreshPropertyOptions: function({ timeKey=null, locationKey=null }) {
     timeKey = timeKey || this.getFieldValue("WEATHER_TIME")
 
     let optionKeys

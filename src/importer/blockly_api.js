@@ -64,6 +64,8 @@ export const
     return currentWorkspace
   },
 
+  addExtensionData = extensions.extendDatum,
+
   dispose = () => {
     extensions.dispose()
     if(!currentWorkspace) { throw new Error("Tried to dispose a non-existent workspace.") }
