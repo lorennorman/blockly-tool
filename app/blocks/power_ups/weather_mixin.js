@@ -138,6 +138,7 @@ export default {
     helpField.setValue(current)
   },
 
+  // a placeholder for the incoming preview data from live weatherkit requests
   currentWeatherByLocation: {},
 
   CURRENT_PROPS: [
