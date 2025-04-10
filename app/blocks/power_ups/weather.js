@@ -35,8 +35,11 @@ export default {
       // skip the rest if we're in the toolbox
       if(block.isInFlyout) { return }
 
-      // give a moment for fields to populate
+      // yield so fields can populate, flags can be set
       setTimeout(() => {
+        // nope out for insertion markers
+        if(block.isInsertionMarker()) { return }
+
         // auto-disable block, if necessary
         block.setEnabledByLocation()
 

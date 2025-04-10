@@ -2,7 +2,8 @@
 // simplifies juggling the weather api properties by location and period
 export default {
   onchange: function({ blockId, type, name, element, newValue, oldValue }) {
-    if(this.id !== blockId || type !== "change") { return }
+    // only change events, for this block, unless it is a marker
+    if(this.id !== blockId || type !== "change" || this.isInsertionMarker()) { return }
 
     // double-check anytime this block gets enabled (disableOrphans)
     if(element === "disabled" && newValue === false) {
@@ -26,10 +27,11 @@ export default {
   },
 
   setEnabledByLocation: function() {
+    // must have a location and a parent (copacetic with disableOrphans)
     if(this.getFieldValue("POWER_UP_ID") === "" || !this.getParent()) {
-      this.setEnabled(false)
+      this.disabled || this.setEnabled(false)
     } else {
-      this.setEnabled(true)
+      this.disabled && this.setEnabled(true)
     }
   },
 
@@ -78,6 +80,10 @@ export default {
 
   refreshPropertyOptions: function({ timeKey=null, locationKey=null }) {
     timeKey = timeKey || this.getFieldValue("WEATHER_TIME")
+
+    if(!timeKey) {
+      throw new Error(`[mixins.weather] No timeKey available for ${this.toDevString()}`)
+    }
 
     let optionKeys
     if(timeKey === 'current') {
