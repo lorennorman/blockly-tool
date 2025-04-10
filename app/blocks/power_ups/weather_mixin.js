@@ -1,7 +1,7 @@
 // helpers for the weather block
 // simplifies juggling the weather api properties by location and period
 export default {
-  onchange: function({ blockId, type, name, element, newValue, oldValue }) {
+  onchange: function({ blockId, type, name, element, newValue }) {
     // only change events, for this block, unless it is a marker
     if(this.id !== blockId || type !== "change" || this.isInsertionMarker()) { return }
 
