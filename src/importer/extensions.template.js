@@ -47,7 +47,11 @@ const extensions = (() => {
     dispose = () => {
       // delete all extension data keys
       for (const key in extensionData) {
-        delete extensionData[key];
+        delete extensionData[key]
+      }
+      // remove all data observers
+      for (const key in dataObservers) {
+        delete dataObservers[key]
       }
       // remove ready status
       status = 'loading'
