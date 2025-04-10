@@ -1,5 +1,5 @@
 import Blockly from 'blockly'
-import { filter } from 'lodash-es'
+import { compact, filter } from 'lodash-es'
 
 // for building static:
 import initialWorkspace from '../export/workspace.json'
@@ -79,6 +79,61 @@ const workspace = inject('blocklyDiv', {
 
 // register listeners
 
+// debug listener that logs all events for clarity
+// workspace.addChangeListener(function(event) {
+//   const
+//     { isUiEvent, isBlank, blockId, type, ids, targetType, element, name, newValue, oldValue } = event,
+//     keys = Object.keys(event),
+//     logLines = [],
+//     tags = compact([isUiEvent && 'ui', isBlank && 'blank']).map(tag => `(${tag})`)
+
+//   if(!blockId) {
+//     logLines.push(`Workspace: "${type}"  ${tags}`, element, oldValue, newValue)
+
+//   } else {
+//     const
+//       bid = blockId.slice(0,3),
+//       idLine = `id: "${bid}..."`,
+//       block = workspace.getBlockById(blockId)
+
+//     logLines.push(`Block "${type}":  ${tags}`)
+
+//     if(block) {
+//       const blockInfo = [
+//         idLine,
+//         ids && `ids: ${ids}`,
+//         block.disabled && "disabled",
+//         block.isInFlyout && "flyout",
+//         block.isInsertionMarker() && "insertion marker",
+//         `type: ${block.type}`,
+//         targetType && `target: ${targetType}`,
+//       ]
+//       logLines.push(compact(blockInfo).join("\n  "))
+
+//     } else {
+//       logLines.push(idLine)
+//       logLines.push("no block")
+//     }
+
+//     if(type === "drag") {
+//       logLines.push(`drag ${event.isStart ? "started" : "stopped"}`)
+
+//     } else {
+//       // element = enum 'field', 'comment', 'collapsed', 'disabled', 'inline', 'mutation'
+//       if (element === "field") {
+//         logLines.push(`field: ${name} (${oldValue} -> ${newValue})`)
+
+//       } else if(element === "disabled") {
+//         logLines.push(`block ${newValue ? "disabled" : "enabled"}`)
+
+//       } else {
+//         logLines.push(element, newValue && `${oldValue} -> ${newValue}`)
+//       }
+//     }
+//   }
+
+//   console.log(compact(logLines).join("\n- "))
+// })
 setInterval(() => {
   const
     workspaces = Blockly.Workspace.getAll(),
