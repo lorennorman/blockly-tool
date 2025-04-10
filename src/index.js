@@ -134,6 +134,43 @@ const workspace = inject('blocklyDiv', {
 
 //   console.log(compact(logLines).join("\n- "))
 // })
+
+// weather block live data fetcher/updater
+workspace.addChangeListener(function({ blockId, type, name, element, newValue, oldValue }) {
+  // when a weather block changes its location
+  if(!blockId || type !== "change" || workspace.getBlockById(blockId).type !== "weather" || element !== "field" || name === "WEATHER_PROPERTY_HELP") {
+    return
+  }
+
+  // quick/dirty for demo
+  // if it is changing now, use newValue, otherwise fetch from field
+  const
+    block = workspace.getBlockById(blockId),
+    currentLocation = name === "POWER_UP_ID"
+      ? newValue
+      : block.getFieldValue('POWER_UP_ID'),
+    currentTimeKey = name === "WEATHER_TIME"
+      ? newValue
+      : block.getFieldValue('WEATHER_TIME'),
+    currentMetricKey = name === "WEATHER_PROPERTY"
+      ? newValue
+      : block.getFieldValue('WEATHER_PROPERTY') // this can be wrong if time changed and props haven't been replaced yet
+
+  const newData = {
+    [currentLocation]: {
+      [currentTimeKey]: {
+        [currentMetricKey]: Math.random().toString().slice(0,5)
+      }
+    }
+  }
+
+  // delay to simulate a request happening
+  setTimeout(() => {
+    addExtensionData("currentWeatherByLocation", newData)
+  }, 1500)
+})
+
+
 setInterval(() => {
   const
     workspaces = Blockly.Workspace.getAll(),
