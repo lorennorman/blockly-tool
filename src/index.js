@@ -18,13 +18,16 @@ import './index.css'
 const
   topBlocksDiv = document.getElementById('top-blocks'),
   totalBlocksDiv = document.getElementById('total-blocks'),
+  allBlocksDiv = document.getElementById('all-blocks'),
   totalWorkspacesDiv = document.getElementById('total-workspaces'),
   blocklyJsonOutputDiv = document.getElementById('blockly-json'),
   bytecodeJsonOutputDiv = document.getElementById('bytecode-json'),
 
   onJsonUpdated = bytecodeJson => {
+    const allBlocks = workspace.getAllBlocks()
     topBlocksDiv.innerText = workspace.getTopBlocks().length
-    totalBlocksDiv.innerText = workspace.getAllBlocks().length
+    totalBlocksDiv.innerText = allBlocks.length
+    allBlocksDiv.innerHTML = allBlocks.map(block => `- ${block.type} (${block.id.slice(0,3)})`).join("<br/>")
 
     blocklyJsonOutputDiv.innerText = ``
     bytecodeJsonOutputDiv.innerText = `Bytecode is valid JSON ✅\n\n${bytecodeJson}`
