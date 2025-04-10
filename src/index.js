@@ -3,10 +3,11 @@ import { filter } from 'lodash-es'
 
 // for building static:
 import initialWorkspace from '../export/workspace.json'
-import { inject, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
+import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from '../export/blockly.js'
+
 // for running dev server:
 // import initialWorkspace from './workspace.json'
-// import { inject, jsonToWorkspace, workspaceToJson } from './blockly.js'
+// import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from './blockly.js'
 
 import { clear, load, save } from './serialization'
 
