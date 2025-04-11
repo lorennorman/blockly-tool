@@ -46,7 +46,9 @@ export default {
         block.setEnabledByLocation()
 
         // react to incoming forecast data
-        observeData('currentWeatherByLocation', (newData = {}) => {
+        const unobserve = observeData('currentWeatherByLocation', (newData = {}) => {
+          // if this block is disposed, clean up this listener
+          if (block.isDisposed()) { unobserve(); return }
           // update the reference to the injected/updated extension data
           block.currentWeatherByLocation = newData
           // re-run the things that use the data

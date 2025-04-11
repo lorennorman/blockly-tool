@@ -13,7 +13,9 @@ const extensions = (() => {
       extensionData[key] = value
 
       if(dataObservers[key]) {
-        dataObservers[key].forEach(observer => observer(value))
+        dataObservers[key].forEach(observer => {
+          observer(value)
+        })
       }
     },
 
@@ -42,6 +44,18 @@ const extensions = (() => {
       if(!extensionData[key]) {
         console.warn("Data observer registered for missing data key:", key)
       }
+
+      // return a handy unobserve function
+      // delayed so it can be called while observers are firing
+      return () => setTimeout(() => unobserveData(key, observer), 1)
+    },
+
+    unobserveData = (key, observer) => {
+      // locate the observer
+      const observerIndex = dataObservers[key].indexOf(observer)
+
+      // splice it out
+      dataObservers[key].splice(observerIndex, 1) // at the observer's index, remove one element
     },
 
     dispose = () => {
