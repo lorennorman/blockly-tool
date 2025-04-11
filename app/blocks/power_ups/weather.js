@@ -35,8 +35,6 @@ export default {
       // skip the rest if we're in the toolbox
       if(block.isInFlyout) { return }
 
-      block.refreshPropertyOptions({})
-
       // yield so fields can populate, flags can be set
       setTimeout(() => {
         // nope out for insertion markers
@@ -95,9 +93,9 @@ export default {
 
     [ "Metric:", {
       field: "WEATHER_PROPERTY",
-      options: [
-        [ "select", "cloudCover" ], // default to a real value to avoid a warning on block creation
-      ]
+       // fake label so it can hold any data
+       // gets replaced with a dropdown on load
+      label: ""
     }],
 
     [ "", {
