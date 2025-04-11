@@ -64,8 +64,7 @@ export default {
     const
       locationId = locationKey || this.getFieldValue("POWER_UP_ID"),
       forecast = timeKey || this.getFieldValue("WEATHER_TIME"),
-      keyWithCorrectedDayPart = key.replaceAll(/:[a-z]/g, (match) => `${match.slice(1).toUpperCase()}`),
-      currentValue = this.currentWeatherByLocation[locationId]?.[forecast]?.[keyWithCorrectedDayPart]
+      currentValue = this.currentWeatherByLocation[locationId]?.[forecast]?.[key]
 
     // return a current value with "Now" label, if found
     if(currentValue !== undefined && currentValue !== null) {
