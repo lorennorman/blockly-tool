@@ -35,6 +35,8 @@ export default {
       // skip the rest if we're in the toolbox
       if(block.isInFlyout) { return }
 
+      block.refreshPropertyOptions({})
+
       // yield so fields can populate, flags can be set
       setTimeout(() => {
         // nope out for insertion markers
