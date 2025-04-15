@@ -1,7 +1,8 @@
 export default {
-  name: 'Web',
+  name: 'Weather',
   colour: 360,
+
   contents: [
-    'action_webhook'
-  ]
+    'weather'
+  ],
 }
