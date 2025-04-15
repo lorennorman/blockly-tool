@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Math',
-    label: "Compare Numbers: equality, greater-than, less-than"
   },
 
   visualization: {

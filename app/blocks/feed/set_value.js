@@ -2,7 +2,6 @@ export default {
   type: "feed_set_value",
 
   toolbox: {
-    label: "Publish a new value to a Feed"
   },
 
   visualization: {

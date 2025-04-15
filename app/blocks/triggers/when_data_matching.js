@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Triggers',
-    label: 'Runs the Action when a Feed gets data that passes the Matcher.'
   },
 
   visualization: {

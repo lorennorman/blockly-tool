@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Logic',
-    label: "Make true false, or false true"
   },
 
   visualization: {

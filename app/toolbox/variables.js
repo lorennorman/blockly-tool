@@ -30,9 +30,6 @@ export default {
 
     // category contents
     const contents = [
-      // category label
-      { kind: 'label', text: "Create variables that are local to your action" },
-      { kind: 'label', text: "Use blocks to set a value and get it later" },
       // button for creating new variables
       {
         kind: 'button',
@@ -43,8 +40,6 @@ export default {
 
     // more compatible then contents.push(...variableBlocks)
     contents.push.apply(contents, variableBlocks)
-    // trailing label
-    contents.push({ kind: 'label', text: "Unused variables are removed when you save." })
 
     return contents
   }

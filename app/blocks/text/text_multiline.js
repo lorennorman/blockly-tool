@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Text',
-    label: "Multi-line text string"
   },
 
   visualization: {

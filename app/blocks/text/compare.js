@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Text',
-    label: "Compare two pieces of text, do they match?"
   },
 
   visualization: {

@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Math',
-    label: "A Number, whole or decimal"
   },
 
   visualization: {

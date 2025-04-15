@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Matchers',
-    label: "Compare the new feed value with a number"
   },
 
   visualization: {

@@ -6,7 +6,6 @@ export default {
   type: "weather",
 
   toolbox: {
-    label: "Retrieve current or forecast weather information for a pre-configured location."
   },
 
   visualization: {

@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Matchers',
-    label: 'Compare the new value with a String'
   },
 
   visualization: {

@@ -2,7 +2,6 @@ export default {
   type: "on_schedule",
 
   toolbox: {
-    label: "Run this Action on a set schedule."
   },
 
   visualization: {

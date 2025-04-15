@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: "Variables",
-    label: "Retrieve the value in a variable that was set earlier"
   },
 
   visualization: {

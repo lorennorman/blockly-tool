@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Triggers',
-    label: 'Runs the Action based on the desired change in Matcher state.'
   },
 
   visualization: {

@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "Send yourself an email with custom subject and body templates."
   },
 
   visualization: {

@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Text',
-    label: "Combine two pieces of text into one"
   },
 
   visualization: {

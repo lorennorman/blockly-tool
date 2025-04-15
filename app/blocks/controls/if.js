@@ -7,7 +7,6 @@ export default {
 
   toolbox: {
     category: 'Logic',
-    label: "Conditional evaluation: if-elseif-else"
   },
 
   visualization: {

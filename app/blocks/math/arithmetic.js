@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Math',
-    label: "Operate on Numbers: add, subtract, multiply, divide, power"
   },
 
   visualization: {

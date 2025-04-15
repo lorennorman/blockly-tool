@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "POST a given body template to a given web URL."
   },
 
   visualization: {

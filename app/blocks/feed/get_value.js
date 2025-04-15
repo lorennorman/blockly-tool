@@ -2,7 +2,6 @@ export default {
   type: "feed_get_value",
 
   toolbox: {
-    label: "Retrieve the Feed's last value before this action started"
   },
 
   visualization: {

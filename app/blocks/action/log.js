@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "Plug in a block to see its resolved value in the action's log."
   },
 
   visualization: {

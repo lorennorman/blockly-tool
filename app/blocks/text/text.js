@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Text',
-    label: "Single-line text string"
   },
 
   visualization: {

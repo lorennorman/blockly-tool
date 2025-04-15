@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: 'Actions',
-    label: "Send yourself a templated SMS, or text message."
   },
 
   visualization: {

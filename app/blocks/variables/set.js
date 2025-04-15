@@ -3,7 +3,6 @@ export default {
 
   toolbox: {
     category: "Variables",
-    label: "Set a variable to a value"
   },
 
   visualization: {
