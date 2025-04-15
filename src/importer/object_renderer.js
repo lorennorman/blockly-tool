@@ -1,10 +1,11 @@
-import { forOwn, keys, isString, isFunction, isArray, isNumber, isNull, isObject, map, isRegExp, sortBy } from 'lodash-es'
+import { compact, forOwn, keys, isString, isFunction, isArray, isNumber, isNull, isObject, isUndefined, map, isRegExp, sortBy } from 'lodash-es'
 
 
 const
   TAB = "  ",
   STARTS_WITH_NUM = /^[0-9]/,
-  CONTAINS_NON_ALPHANUM = /[^a-zA-Z0-9_]+/
+  CONTAINS_NON_ALPHANUM = /[^a-zA-Z0-9_]+/,
+  CONTAINS_UNESCAPED_QUOTE = /(^|[^\\])(\")/g
 
 const quotedKey = key =>
   STARTS_WITH_NUM.test(key) || CONTAINS_NON_ALPHANUM.test(key)
@@ -13,9 +14,9 @@ const quotedKey = key =>
 
 const renderValue = (value, tab=TAB) => {
   if (isString(value)) {
-    return `"${value}"`
+    return renderString(value)
 
-  } else if (isRegExp(value) || isNull(value) || isNumber(value) || value === false) {
+  } else if (isRegExp(value) || isNull(value) || isNumber(value) || isUndefined(value) || value === false) {
     return value
 
   } else if (isFunction(value)) {
@@ -29,13 +30,22 @@ const renderValue = (value, tab=TAB) => {
     forOwn(value, (val, key) => {
       lines.push(`${tab}${quotedKey(key)}: ${renderValue(val, tab+TAB)}`)
     })
-    return `{\n${lines.join(",\n\n")}\n${tab.slice(-TAB.length)}}`
+    return `{\n${lines.join(",\n\n")}\n${tab.slice(0, -TAB.length)}}`
 
   } else {
     // TODO: what to really do here? maybe caller passes a strategy for missing values
-    return '{}'
-    // throw new Error(`Unexpected value type: ${value}`)
+    // return '{}'
+    throw new Error(`Unexpected value type: ${value}`)
   }
+}
+
+const renderString = stringValue => {
+  // ensure double-quotes are escaped
+  if(CONTAINS_UNESCAPED_QUOTE.test(stringValue)) {
+    stringValue = stringValue.replaceAll(CONTAINS_UNESCAPED_QUOTE, "$1\\$2")
+  }
+
+  return `"${stringValue}"`
 }
 
 const renderFunction = (func, indentation=TAB) => {
@@ -59,7 +69,15 @@ const renderFunction = (func, indentation=TAB) => {
 const renderObject = object => {
   const
     sortedKeys = sortBy(keys(object)),
-    sortedKeyValues = map(sortedKeys, key => `${quotedKey(key)}: ${renderValue(object[key], TAB+TAB)}`)
+    sortedKeyValues = compact(map(sortedKeys, rawKey => {
+      const
+        key = quotedKey(rawKey),
+        value = object[key]
+
+      return isUndefined(value)
+        ? null
+        : `${key}: ${renderValue(value, TAB + TAB)}`
+    }))
 
   return [
     '{',

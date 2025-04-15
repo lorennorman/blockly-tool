@@ -39,8 +39,8 @@ export default {
     json: (block, generator) => {
       const payload = {
         publishAction: {
-          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0)),
-          value: JSON.parse(generator.valueToCode(block, 'VALUE', 0))
+          feed: JSON.parse(generator.valueToCode(block, 'FEED', 0) || null),
+          value: JSON.parse(generator.valueToCode(block, 'VALUE', 0) || null)
         }
       }
 

@@ -20,32 +20,39 @@ export default {
   ],
 
   extensions: {
-    populateWeatherLocations: ({ block, data: { weatherLocationOptions } }) => {
+    prepareWeather: ({ block, observeData, data: { weatherLocationOptions } }) => {
+      // populate weather locations
       if(!weatherLocationOptions.length) {
         weatherLocationOptions = [[ "No locations! Visit Power-Ups -> Weather", "" ]]
         block.setEnabled(false)
+
+      } else if(weatherLocationOptions[0][1] != "") {
+        weatherLocationOptions.unshift([ "Select Location", "" ])
       }
 
       block.replaceDropdownOptions("POWER_UP_ID", weatherLocationOptions)
-    },
 
-    weatherTimeChangesProperties:  ({ block }) => {
-      const weatherTimeField = block.getField('WEATHER_TIME')
+      // skip the rest if we're in the toolbox
+      if(block.isInFlyout) { return }
 
-      let hasRun = false
-      // when the user selects a time option
-      weatherTimeField.setValidator(function(weatherTimeKey) {
-        // early out if there's no change
-        if(hasRun && this.getValue() === weatherTimeKey) {
-          return
-        }
-        // call the mixin to get the new options
-        const options = block.propertyOptionsForTime(weatherTimeKey)
-        // update the property options
-        block.replaceDropdownOptions("WEATHER_PROPERTY", options)
+      // yield so fields can populate, flags can be set
+      setTimeout(() => {
+        // nope out for insertion markers
+        if(block.isInsertionMarker()) { return }
 
-        hasRun = true
-      })
+        // auto-disable block, if necessary
+        block.setEnabledByLocation()
+
+        // react to incoming forecast data
+        const unobserve = observeData('currentWeatherByLocation', (newData = {}) => {
+          // if this block is disposed, clean up this listener
+          if (block.isDisposed()) { unobserve(); return }
+          // update the reference to the injected/updated extension data
+          block.currentWeatherByLocation = newData
+          // re-run the things that use the data
+          block.refreshPropertyOptions({})
+        })
+      }, 1)
     }
   },
 
@@ -86,9 +93,14 @@ export default {
 
     [ "Metric:", {
       field: "WEATHER_PROPERTY",
-      options: [
-        [ "select", "cloudCover" ], // default to a real value to avoid a warning on block creation
-      ]
+       // fake label so it can hold any data
+       // gets replaced with a dropdown on load
+      label: ""
+    }],
+
+    [ "", {
+      field: "WEATHER_PROPERTY_HELP",
+      label: ""
     }],
   ],
 
@@ -98,11 +110,9 @@ export default {
         powerUpId = parseInt(block.getFieldValue('POWER_UP_ID'), 10),
         weatherTime = block.getFieldValue('WEATHER_TIME'),
         weatherProperty = block.getFieldValue('WEATHER_PROPERTY'),
-        payload = powerUpId
-          ? { weather: {
-                powerUpId, weatherTime, weatherProperty
-            }}
-          : null
+        payload = { weather: {
+            powerUpId, weatherTime, weatherProperty
+        }}
 
       return [ JSON.stringify(payload), 0 ]
     }

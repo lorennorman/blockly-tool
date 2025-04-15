@@ -1,5 +1,7 @@
 export const replaceDropdownOptions = function(fieldKey, newOptions) {
-  const oldValue = this.getFieldValue(fieldKey)
+  const
+    oldValidator = this.getField(fieldKey).getValidator(),
+    oldValue = this.getFieldValue(fieldKey)
 
   // search this block's inputs...
   let input, foundFieldAt
@@ -27,7 +29,11 @@ export const replaceDropdownOptions = function(fieldKey, newOptions) {
 
   const newField = new Blockly.FieldDropdown(newOptions)
 
-  // maintain previous value, if present
+  // reconnect prior configuration
+  if(oldValidator) {
+    newField.setValidator(oldValidator)
+  }
+
   if(oldValue) {
     newField.setValue(oldValue)
   }
