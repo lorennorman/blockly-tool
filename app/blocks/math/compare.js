@@ -9,7 +9,7 @@ export default {
     inputsInline: true,
     colour: 120,
     tooltip: [
-      "Compare two numeric values in various ways.",
+      "Compare two numeric values in the specified way.",
       "-",
       "Inputs:",
       "---------------",

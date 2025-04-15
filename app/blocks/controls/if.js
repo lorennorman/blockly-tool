@@ -11,6 +11,17 @@ export default {
 
   visualization: {
     colour: 60,
+    tooltip: [
+      "Conditionally execute specified commands based on the outcome of conditional checks.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "if - the first value to check for truthiness",
+      "do - the commands to execute if the first check was true",
+      "else if - (optional, repeating) an extra value to check for truthiness",
+      "do - the commands to execute if the previous check was true",
+      "else - (optional) the commands to execute if no checks were true",
+    ].join('\n'),
   },
 
   connections: {

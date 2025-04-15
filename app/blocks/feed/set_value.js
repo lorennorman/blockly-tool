@@ -6,7 +6,14 @@ export default {
 
   visualization: {
     inputsInline: true,
-    colour: 300
+    colour: 300,
+    tooltip: [
+      "Publish the specified data point to the specified Feed.",
+      "-",
+      "Inputs:",
+      "Feed - the Feed to publish to",
+      "Value - the value to write",
+    ].join('\n'),
   },
 
   mixins: ['replaceDropdownOptions'],

@@ -8,6 +8,20 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 120,
+    tooltip: [
+      "Perform the specified arithmetic operation on two specified operands.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Number A - the first input",
+      "Operation - the operation to perform on the operands",
+      "+ addition",
+      "- subtraction",
+      "x multiplication",
+      "/ division",
+      "^ exponent",
+      "Number B - the second input",
+    ].join('\n'),
   },
 
   lines: [

@@ -8,7 +8,14 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 30,
-    tooltip: "Run this action when a feed receives data."
+    tooltip: [
+      "Run this Action when the specified Feed receives data that matches the specified condition.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Feed - the Feed to watch for new data points",
+      "Matcher - a numerical or textual matcher block to try new Feed data points with",
+    ].join('\n'),
   },
 
   connections: {
@@ -21,7 +28,7 @@ export default {
   extensions: [ "populateFeedDropdown" ],
 
   lines: [
-    [ "...when %FEED_KEY", {
+    [ "When %FEED_KEY", {
       align: "LEFT",
       field: 'FEED_KEY',
       options: [

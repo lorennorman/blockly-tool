@@ -8,6 +8,21 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 60,
+    tooltip: [
+      "Perform the specifed boolean logic operation on two operands.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Operator - the type of operation to perform, \"and\" or \"or\"",
+      "\"and\" - true if all inputs are true, false otherwise",
+      "\"or\" - true if any input is true, false otherwise",
+      "Boolean A - the first boolean",
+      "Boolean B - the second boolean",
+      "-",
+      "Casting:",
+      "---------------",
+      "both inputs are coerced to true or false before the operation",
+    ].join('\n'),
   },
 
   lines: [

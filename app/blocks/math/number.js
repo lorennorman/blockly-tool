@@ -7,7 +7,7 @@ export default {
 
   visualization: {
     colour: 120,
-    tooltip: "",
+    tooltip: "A numeric value, whole or decimal.",
   },
 
   connections: {

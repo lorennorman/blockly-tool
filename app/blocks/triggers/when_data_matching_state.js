@@ -8,7 +8,19 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 30,
-    tooltip: "Run this action when a feed receives data."
+    tooltip: [
+      "Run this Action when the specified Feed receives a data point that compares to its previous data point in the specified way.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Feed - the Feed to watch for new data points",
+      "Match State - the kind of change to watch for:",
+      "- \"starts\" - the last data point DID NOT match, but this one DOES",
+      "- \"stops\" - the last data point DID match, but this one DOES NOT",
+      "- \"keeps\" - both data points DO match",
+      "- \"keeps not\" - both data points DO NOT match",
+      "Matcher - a numerical or textual matcher block to use on both data points before making the above comparison",
+    ].join('\n'),
   },
 
   connections: {
@@ -21,7 +33,7 @@ export default {
   extensions: [ "populateFeedDropdown" ],
 
   lines: [
-    [ "...when %FEED_KEY", {
+    [ "When %FEED_KEY", {
       align: "LEFT",
       field: 'FEED_KEY',
       options: [

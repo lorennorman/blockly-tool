@@ -7,7 +7,7 @@ export default {
 
   visualization: {
     colour: 180,
-    tooltip: "",
+    tooltip: "A String of text",
   },
 
   connections: {

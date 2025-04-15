@@ -8,7 +8,13 @@ export default {
   visualization: {
     inputsInline: true,
     colour: 30,
-    tooltip: "Run this action when a feed receives data."
+    tooltip: [
+      "Run this action when a Feed receives a new data point.",
+      "-",
+      "Inputs:",
+      "---------------",
+      "Feed - the Feed to watch for new data points",
+    ].join("\n")
   },
 
   connections: {
@@ -21,7 +27,7 @@ export default {
   extensions: ['populateFeedDropdown'],
 
   lines: [
-    [ "...when %FEED_KEY gets data", {
+    [ "When %FEED_KEY gets any data", {
       align: 'LEFT',
       field: "FEED_KEY",
       options: [

@@ -7,7 +7,7 @@ export default {
 
   visualization: {
     colour: 60,
-    tooltip: "Negates a true or false value"
+    tooltip: "Swaps a truthy value to false, or a falsy value to true."
   },
 
   lines: [

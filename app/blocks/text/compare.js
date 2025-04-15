@@ -20,12 +20,6 @@ export default {
       "Casting:",
       "---------------",
       "both inputs are coerced to strings",
-      "-",
-      "Options: (not implemented)",
-      "---------------",
-      "Trim? - trim whitespace from the front and back of the input strings",
-      "Trim front? - trim whitespace from the front of the input strings",
-      "Trim back? - trim whitespace from the back of the input strings",
     ].join('\n'),
   },
 
