@@ -34,10 +34,7 @@ export default {
           shadow: {
             type: 'io_text_multiline',
             fields: {
-              TEXT: [
-                'The {{ vars.feed_name }} feed has a new',
-                'value: {{ vars.feed_value }} at {{ vars.now }}'
-              ].join('\n')
+              TEXT: '                     \n\n\n'
             }
           }
         }}

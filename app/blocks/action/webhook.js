@@ -50,11 +50,7 @@ export default {
             shadow: {
               type: 'io_text_multiline',
               fields: {
-                TEXT:
-`{
-  "id": "{{ vars.feed_id }}",
-  "value": "{{ vars.feed_value }}"
-}`
+                TEXT: '                     \n\n\n'
               }
             }
           }

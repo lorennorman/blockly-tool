@@ -33,7 +33,7 @@ export default {
           shadow: {
             type: 'io_text',
             fields: {
-              TEXT: '{{ vars.feed_name }} feed has a new value: {{ vars.feed_value }}'
+              TEXT: '                      '
             }
           }
         }}
@@ -49,7 +49,7 @@ export default {
           shadow: {
             type: 'io_text_multiline',
             fields: {
-              TEXT: 'Hello!\nThe {{ vars.feed_name }} feed has a new value: {{ vars.value }}\nProcessed at: {{ vars.now }}'
+              TEXT: '                     \n\n\n'
             }
           }
         }}
