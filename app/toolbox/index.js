@@ -19,5 +19,10 @@ export default [
   Feeds,
   Notifications,
   Weather,
+  {
+    name: 'AI',
+    colour: 60,
+    contents: [ "ai_prompt" ]
+  },
   Utility
 ]

@@ -33,6 +33,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   webhookAction: 'action_webhook',
   emailAction: 'action_email',
   smsAction: 'action_sms',
+  aiPrompt: 'ai_prompt',
 }
 
 const lookupRegenerator = expressionName => {
