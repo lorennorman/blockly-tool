@@ -15,7 +15,23 @@ export default {
     output: "number",
   },
 
-  // describes each line of the block, from top to bottom
+  extensions: {
+    validateNumbers: ({ block }) => {
+      const numField = block.getField("NUM")
+
+      numField.setValidator(newValue => {
+        const parsed = Number(newValue)
+
+        if(!parsed && parsed !== 0) {
+          return null // failed to parse, signal validation failure
+
+        } else {
+          return parsed// parsed fine, use the result
+        }
+      })
+    }
+  },
+
   lines: [
     ["", {
       field: 'NUM',
