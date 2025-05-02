@@ -10,10 +10,16 @@ let currentWorkspace
 // internal helpers
 const
   processContextMenu = contextMenu => {
-    const { unregister=[] } = contextMenu
+    const
+      { registry } = Blockly.ContextMenuRegistry,
+      { unregister=[] } = contextMenu
 
-    // remove all items specified for unregistry
-    unregister.forEach(menuId => Blockly.ContextMenuRegistry.registry.unregister(menuId))
+    // remove all specified items from the registry, if present
+    unregister.forEach(menuId => {
+      if(registry.getItem(menuId)) {
+        registry.unregister(menuId)
+      }
+    })
   }
 
 // public api
