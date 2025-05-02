@@ -53,6 +53,9 @@ const workspace = inject('blocklyDiv', {
   disableToolboxZoom: true,
   onJsonUpdated,
   onJsonError,
+  contextMenu: {
+    unregister: [ "blockComment", "blockDisable" ]
+  },
   extensionData: {
     feedOptions: [
       ["Feeder 1", "abc123"],

@@ -7,11 +7,23 @@ Blockly.defineBlocksWithJsonArray(blocks)
 
 let currentWorkspace
 
+// internal helpers
+const
+  processContextMenu = contextMenu => {
+    const { unregister=[] } = contextMenu
+
+    // remove all items specified for unregistry
+    unregister.forEach(menuId => Blockly.ContextMenuRegistry.registry.unregister(menuId))
+  }
+
+// public api
 export const
   inject = function(blocklyDivId, options = {}) {
     if(currentWorkspace) {
       throw new Error('Already have a workspace, dispose of it before injecting a new one.')
     }
+
+    options.contextMenu && processContextMenu(options.contextMenu)
 
     // inject extension data
     options.extensionData && extensions.injectData(options.extensionData)
@@ -23,7 +35,9 @@ export const
 
     const blocklyInjectOptions = buildInjectOptions(options)
 
+    // do normal Blockly injection here
     currentWorkspace = Blockly.inject(blocklyDivId, blocklyInjectOptions)
+
     // shortcut to make the outside data available everywhere/global
     // consider if this could be done other ways, less global
     currentWorkspace.extensionData = options.extensionData
