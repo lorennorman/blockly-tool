@@ -71,7 +71,18 @@ export default {
 
   regenerators: {
     json: (blockObject, helpers) => {
-      const EVERY_REGEX = /^(\d{1,2})(-(\d{1,2}))?\/(\d{1,2})$/m
+      const
+        EVERY_REGEX = /^(\d{1,2})(-(\d{1,2}))?\/(\d{1,2})$/m,
+        isEveryBetween = cron => EVERY_REGEX.test(cron),
+
+        everyBetweenToBlock = (everyBetweenCron, blockType) => {
+          const [ skip1, START, skip2, END, FREQUENCY ] = everyBetweenCron.match(EVERY_REGEX)
+
+          return { block: {
+            type: blockType,
+            fields: { START, END, FREQUENCY }
+          }}
+        }
 
       const
         monthCronToBlock = monthCron => {
@@ -91,8 +102,11 @@ export default {
 
             return { block: { type: 'some_months', fields }}
 
+          } else if(isEveryBetween(monthCron)) {
+            return everyBetweenToBlock(monthCron, 'every_months_between')
+
           } else {
-            console.warn(`Bad crontab for months: ${monthCron}`)
+            throw new Error(`Bad crontab for months: ${monthCron}`)
           }
         },
 
@@ -111,6 +125,9 @@ export default {
           if(monthDayCron !== '*') {
             if(/^\d*$/gm.test(monthDayCron)) {
               return { block: { type: 'one_day', fields: { DAY: monthDayCron } } }
+
+            } else if(isEveryBetween(monthDayCron)) {
+              return everyBetweenToBlock(monthDayCron, 'every_days_between')
 
             } else {
               throw new Error(`Bad cron string for month days: ${monthDayCron}`)
@@ -143,6 +160,9 @@ export default {
           } else if(/^\d*$/gm.test(hourCron)) {
             return { block: { type: 'one_hour', fields: { HOUR: hourCron } } }
 
+          } else if(isEveryBetween(hourCron)) {
+            return everyBetweenToBlock(hourCron, 'every_hours_between')
+
           } else {
             throw new Error(`Bad cron string for hours: ${hourCron}`)
           }
@@ -155,13 +175,8 @@ export default {
           } else if(/^\d*$/gm.test(minuteCron)) {
             return { block: { type: 'one_minute', fields: { MINUTE: minuteCron } } }
 
-          } else if(EVERY_REGEX.test(minuteCron)) {
-            const [ skip1, START, skip2, END, FREQUENCY ] = minuteCron.match(EVERY_REGEX)
-
-            return { block: {
-              type: 'every_minutes_between',
-              fields: { START, END, FREQUENCY }
-            }}
+          } else if(isEveryBetween(minuteCron)) {
+            return everyBetweenToBlock(minuteCron, 'every_minutes_between')
 
           } else {
             throw new Error(`Bad cron string for minutes: ${minuteCron}`)

@@ -3,7 +3,7 @@ const
   makeScheduleMutator = (await import(`../schedule_mutator.js?key=${random}`)).default
 
 export default makeScheduleMutator(
-  [ 'all_days', 'one_day', 'days_of_week' ],
+  [ 'all_days', 'one_day', 'days_of_week', 'every_days_between' ],
   'day_settings',
   'all_days'
 )
