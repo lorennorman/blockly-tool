@@ -59,6 +59,7 @@ export default {
               : months
           ), []),
         months = selectedMonths.join(',').toLowerCase()
+        // TODO: use a validator to ensure at least 1 month is set
 
       return [ months, 0 ]
     }

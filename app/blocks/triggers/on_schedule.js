@@ -54,9 +54,12 @@ export default {
       const
         minute = generator.valueToCode(block, 'MINUTE', 0)  || "*/1",
         hour = generator.valueToCode(block, 'HOUR', 0)  || "*/1",
-        daysOfMonth = generator.valueToCode(block, 'DAY', 0)  || "*/1",
-        daysOfWeek = "*",
-        month = generator.valueToCode(block, 'MONTH', 0)  || "*"
+        days = generator.valueToCode(block, 'DAY', 0)  || "*/1",
+        // w means days of week. if it's present then days of month is *
+        daysOfMonth = days.startsWith("w") ? '*' : days,
+        month = generator.valueToCode(block, 'MONTH', 0)  || "*",
+        // w means days of week. if it's present, strip it, otherwise days of week is *
+        daysOfWeek = days.startsWith("w") ? days.slice(1) : '*'
 
       return JSON.stringify({
         onSchedule: {
@@ -93,15 +96,43 @@ export default {
           }
         },
 
-        dayCronToBlock = dayCron => {
-          if(dayCron === '*') {
+        dayCronsToBlock = (monthDayCron, weekDayCron) => {
+          // if both are "all" just use all_days block
+          if(monthDayCron === '*' && weekDayCron === '*') {
             return { block: { type: 'all_days' } }
+          }
 
-          } else if(/^\d*$/gm.test(dayCron)) {
-              return { block: { type: 'one_day', fields: { DAY: dayCron } } }
+          // if both are specified, soemthing is wrong
+          if(monthDayCron !== '*' && weekDayCron !== '*') {
+            throw new Error(`Both days of month (${monthDayCron}) and days of week (${weekDayCron}) are set.`)
+          }
 
+          // look up a month-days block
+          if(monthDayCron !== '*') {
+            if(/^\d*$/gm.test(monthDayCron)) {
+              return { block: { type: 'one_day', fields: { DAY: monthDayCron } } }
+
+            } else {
+              throw new Error(`Bad cron string for month days: ${monthDayCron}`)
+            }
+
+          // look up a week-days block
           } else {
-            throw new Error(`Bad cron string for days: ${dayCron}`)
+            // one or more single-digit numbers separated by commas
+            if(/^\d(,\d)*$/gm.test(weekDayCron)) {
+              return { block: { type: 'days_of_week', fields: {
+                SUN: weekDayCron.includes("0"),
+                MON: weekDayCron.includes("1"),
+                TUE: weekDayCron.includes("2"),
+                WED: weekDayCron.includes("3"),
+                THU: weekDayCron.includes("4"),
+                FRI: weekDayCron.includes("5"),
+                SAT: weekDayCron.includes("6"),
+              } } }
+
+            } else {
+              throw new Error(`Bad cron string for week days: ${weekDayCron}`)
+            }
           }
         },
 
@@ -150,7 +181,7 @@ export default {
             shadow: { type: "all_months" }
           },
           DAY: {
-            ...dayCronToBlock(daysOfMonth),
+            ...dayCronsToBlock(daysOfMonth, daysOfWeek),
             shadow: { type: "all_days" }
           },
           HOUR: {
