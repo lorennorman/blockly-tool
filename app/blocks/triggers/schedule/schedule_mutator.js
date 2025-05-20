@@ -43,8 +43,10 @@ const MUTATOR_BASE = {
 
       // mutator is closing
       if(!e.isOpen) {
-        // update outer block if inner present
-        if(this.newBlockType) { this.attachOuterBlock(settingsBlock) }
+        // update outer block if inner present & we're parented
+        if(this.newBlockType && this.outputConnection.targetConnection) {
+          this.attachOuterBlock(settingsBlock)
+        }
         // remove ourself
         this.workspace.removeChangeListener(bubbleCloseCallback)
       }
