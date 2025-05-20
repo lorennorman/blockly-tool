@@ -26,7 +26,7 @@ export default {
   lines: [
     ["On date:", {
       field: 'DAY',
-      options: makeOptions({ from: 1, upTo: 31 })
+      options: makeOptions({ from: 1, upTo: 32 })
     }]
   ],
 
