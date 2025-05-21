@@ -7,6 +7,7 @@ export default {
     "io_logic_compare",
     "io_math_arithmetic",
     "io_math_round",
+    "io_math_constrain",
     "math_map",
   ]
 }

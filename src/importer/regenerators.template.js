@@ -24,6 +24,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   arithmetic: 'io_math_arithmetic',
   mapValue: 'math_map',
   round: 'io_math_round',
+  constrain: 'io_math_constrain',
   range: 'math_range',
   logic: 'io_logic_operation',
   negate: 'io_logic_negate',
