@@ -40,7 +40,8 @@ export default {
     json: (block, generator) => {
       const
         value = JSON.parse(generator.valueToCode(block, 'VALUE', 0)),
-        payload = { round: { value } }
+        operation = block.getFieldValue('OPERATION'),
+        payload = { round: { value, operation } }
 
       return [ JSON.stringify(payload), 0 ]
     }
@@ -49,12 +50,15 @@ export default {
   regenerators: {
     json: (blockObject, helpers) => {
       const
-        { value } = blockObject.round,
+        { value, operation } = blockObject.round,
         inputs = {
           VALUE: helpers.expressionToBlock(value, { shadow: 'io_math_number' }),
+        },
+        fields = {
+          OPERATION: operation,
         }
 
-      return { type: 'io_math_round', inputs }
+      return { type: 'io_math_round', inputs, fields }
     }
   }
 }
