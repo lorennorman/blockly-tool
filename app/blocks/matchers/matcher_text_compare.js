@@ -9,11 +9,11 @@ export default {
     inputsInline: true,
     colour: 180,
     tooltip: [
-      "Compare the new feed value with text for equality or inequality.",
+      "Compare the new feed value with text for equality, inequality, or inclusion.",
       "-",
       "Inputs:",
       "---------------",
-      "Comparator - check for equality or inequality?",
+      "Comparator - check for equality, inequality, or inclusion.",
       "Text B - the string of text to compare against the feed value",
       "-",
       "Casting:",
@@ -30,6 +30,7 @@ export default {
       options: [
         ['=', 'EQ'],
         ['\u2260', 'NEQ'],
+        ['includes', 'INC'],
       ]
     }],
     ["", { inputValue: 'B', shadow: "io_text" }]

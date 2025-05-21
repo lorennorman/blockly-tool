@@ -9,11 +9,11 @@ export default {
     inputsInline: true,
     colour: 180,
     tooltip: [
-      "Compare two chunks of text for equality or inequality.",
+      "Compare two chunks of text for equality, inequality, or inclusion.",
       "-",
       "Inputs:",
       "---------------",
-      "Comparator - check for equality or inequality?",
+      "Comparator - check for equality, inequality, or inclusion",
       "Text A - the first string of text",
       "Text B - the second string of text",
       "-",
@@ -30,6 +30,7 @@ export default {
       options: [
         ['=', 'EQ'],
         ['\u2260', 'NEQ'],
+        ['includes', 'INC'],
       ]
     }],
     ["", { inputValue: 'B', shadow: "io_text" }]
