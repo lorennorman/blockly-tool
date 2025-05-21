@@ -5,7 +5,7 @@ export default {
 
   visualization: {
     colour: 120,
-    tooltip: "Scale a value from one range to another"
+    tooltip: "Scale a value from one range of numbers to another"
   },
 
   connections: {

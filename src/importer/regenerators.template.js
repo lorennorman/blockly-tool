@@ -23,6 +23,7 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   // textRegex: 'text_regex',
   arithmetic: 'io_math_arithmetic',
   mapValue: 'math_map',
+  round: 'io_math_round',
   range: 'math_range',
   logic: 'io_logic_operation',
   negate: 'io_logic_negate',
