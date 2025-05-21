@@ -22,6 +22,8 @@ const BYTECODE_BLOCK_TYPE_MAP = {
   textJoin: 'io_text_join',
   // textRegex: 'text_regex',
   arithmetic: 'io_math_arithmetic',
+  mapValue: 'math_map',
+  range: 'math_range',
   logic: 'io_logic_operation',
   negate: 'io_logic_negate',
   setVariable: 'io_variables_set',
@@ -82,10 +84,18 @@ const helpers = {
     return { block: blockJson }
   },
 
+  parseShadow: shadowOption => {
+    if(typeof shadowOption === 'string') {
+      return { shadow: { type: shadowOption }}
+    }
+
+    return { shadow: shadowOption }
+  },
+
   expressionToBlock: (expressionBytecode, options={}) => {
     if(expressionBytecode === null || expressionBytecode === undefined) {
       return options.shadow
-        ? { shadow: { type: options.shadow }}
+        ? helpers.parseShadow(options.shadow)
         : null
     }
 
@@ -114,9 +124,8 @@ const helpers = {
       default: throw new Error(`Unrecognized expression type: ${expressionType}`)
     }
 
-    // TODO: regenerators need to support nested shadow blocks
     return options.shadow
-      ? { ...expressionBlock, shadow: { type: options.shadow }}
+      ? { ...expressionBlock, ...helpers.parseShadow(options.shadow)}
       : expressionBlock
   },
 
