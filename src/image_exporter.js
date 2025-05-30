@@ -1,6 +1,7 @@
 import Blockly from 'blockly'
 
 
+// right-click menu items
 export const imageExportRegistryItems = [
   {
     id: "block-svg",
@@ -27,64 +28,80 @@ export const imageExportRegistryItems = [
 const blockToSVGBlob = (blockId) => {
   const
     workspace = Blockly.getMainWorkspace(),
-    svgCanvas = workspace.svgBlockCanvas_,
+    // blockly object
     block = workspace.getBlockById(blockId),
-    blockElement = svgCanvas.querySelector(`[data-id="${block.id}"`),
-    bbox = blockElement.getBBox(),
+    // svg/dom element
+    blockElement = workspace.svgBlockCanvas_.querySelector(`[data-id="${block.id}"`),
+    // remember where block was
     blockTransform = blockElement.getAttribute("transform")
 
+  // remove yellow highlight border
   block.unselect()
+  // move block to 0,0
   blockElement.removeAttribute("transform")
 
   const
     blockContent = new XMLSerializer().serializeToString(blockElement),
+    // block dimensions
+    { x, y, width, height } = blockElement.getBBox(),
+    // svg tag attributes
+    widthAttr = `width="${width}"`,
+    heightAttr = `height="${height}"`,
+    viewBoxAttr = `viewBox="${x} ${y} ${width} ${height}"`,
+    // all css active on the svg
     css = "<style>\n" + BLOCKLY_CSS + "\n</style>",
-    xml = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="'
-        + (bbox.width) + '" height="' + bbox.height + '" viewBox=" ' + bbox.x + ' ' + bbox.y + ' ' + (bbox.width) + ' ' + bbox.height +
-        '">' + css + blockContent + '</svg>',
+    // build a new svg of just this block
+    xml =
+    `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ${widthAttr} ${heightAttr} ${viewBoxAttr}>
+      ${css}
+      ${blockContent}
+    </svg>`,
+    // turn it into an object url for easy sharing
     svgBlob = new Blob([xml], { type: 'image/svg+xml;base64' }),
     svgUrl = URL.createObjectURL(svgBlob)
 
+  // put the block back where it was
   blockElement.setAttribute("transform", blockTransform)
 
-  // download(svgUrl, 'block.svg')
   return svgUrl
 }
 
+const
+  download = (url, filename) => {
+    const element = document.createElement('a')
+    element.href = url
+    element.download = filename
+    element.click()
+    URL.revokeObjectURL(element.href)
+  },
 
-function download(url, filename){
-  const element = document.createElement('a')
-  element.href = url
-  element.download = filename
-  element.click()
-  URL.revokeObjectURL(element.href)
-}
+  downloadBlockAsSVG = blockId => {
+    const svgObjectURL = blockToSVGBlob(blockId)
 
-function downloadBlockAsSVG(blockId) {
-  const svgObjectURL = blockToSVGBlob(blockId)
+    download(svgObjectURL, 'block.svg')
+  },
 
-  download(svgObjectURL, 'block.svg')
-}
+  downloadBlockAsPNG = blockId => {
+    const
+      svgObjectURL = blockToSVGBlob(blockId),
+      img = new Image()
 
-function downloadBlockAsPNG(blockId) {
-  const
-    svgObjectURL = blockToSVGBlob(blockId),
-    img = new Image()
+    img.onload = function() {
+      // draw this image into a canvas of the same dimensions
+      const canvas = document.createElement('canvas')
+      canvas.width = img.width
+      canvas.height = img.height
+      canvas.getContext("2d").drawImage(img, 0, 0)
 
-  img.onload = function() {
-    console.log('size:', img.width, 'x', img.height)
-    const canvas = document.createElement('canvas')
-    canvas.width = img.width
-    canvas.height = img.height
-    canvas.getContext("2d").drawImage(img, 0, 0)
+      // extract a png object url from the canvas and download it
+      const pngObjectURL = canvas.toDataURL("image/png")
+      download(pngObjectURL, 'block.png')
+    }
 
-    const pngObjectURL = canvas.toDataURL("image/png")
-    download(pngObjectURL, 'block.png')
+    img.src = svgObjectURL
   }
 
-  img.src = svgObjectURL
-}
-
+// hardcode the CSS we actually use for now (includes geras renderer CSS)
 const BLOCKLY_CSS = `
 .blocklySvg {
   background-color: #fff;
