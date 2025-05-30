@@ -15,6 +15,9 @@ import { imageExportRegistryItems } from './image_exporter.js'
 import './index.css'
 
 
+// let me play in the console
+window.Blockly = Blockly
+
 // wire up the internal json to the dom
 const
   topBlocksDiv = document.getElementById('top-blocks'),
