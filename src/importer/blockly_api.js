@@ -12,13 +12,18 @@ const
   processContextMenu = contextMenu => {
     const
       { registry } = Blockly.ContextMenuRegistry,
-      { unregister=[] } = contextMenu
+      { register=[], unregister=[] } = contextMenu
 
     // remove all specified items from the registry, if present
     unregister.forEach(menuId => {
       if(registry.getItem(menuId)) {
         registry.unregister(menuId)
       }
+    })
+
+    // add all specified items to the registry
+    register.forEach(registryItem => {
+      registry.register(registryItem)
     })
   }
 
