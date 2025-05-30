@@ -10,6 +10,7 @@ import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from '../e
 // import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from './blockly.js'
 
 import { clear, load, save } from './serialization'
+import { imageExportRegistryItems } from './image_exporter.js'
 
 import './index.css'
 
@@ -54,7 +55,10 @@ const workspace = inject('blocklyDiv', {
   onJsonUpdated,
   onJsonError,
   contextMenu: {
-    unregister: [ "blockComment", "blockDisable" ]
+    unregister: [ "blockComment", "blockDisable" ],
+    register: [
+      ...imageExportRegistryItems
+    ]
   },
   extensionData: {
     feedOptions: [
