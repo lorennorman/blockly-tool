@@ -39,6 +39,7 @@ const
 const
   BLOCK_KEYS = [
     "type",
+    "name",
     "disabled",
     "generators",
     "regenerators",

@@ -1,5 +1,6 @@
 export default {
   type: "action_email",
+  name: "Email",
 
   toolbox: {
     category: 'Actions',
