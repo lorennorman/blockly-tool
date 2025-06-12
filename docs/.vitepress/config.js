@@ -1,11 +1,23 @@
 import { defineConfig } from 'vitepress'
 
+
+const REPO = 'https://github.com/lorennorman/blockly-tool'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "IO Actions: Block Reference",
   description: "Documentation for Adafruit IO's block-based Actions",
+
+  // https://vitepress.dev/reference/default-theme-config
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
+    editLink: {
+      pattern: ({ filePath }) => {
+        const jsPath = filePath.replace(/.md$/, '.js')
+
+        return `https://github.com/lorennorman/blockly-tool/edit/main/app/${jsPath}`
+      }
+    },
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Examples', link: '/markdown-examples' }
@@ -13,16 +25,16 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Blocks',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Email', link: '/blocks/action/email' },
+          { text: 'Log', link: '/blocks/action/log' }
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: REPO }
     ]
   }
 })

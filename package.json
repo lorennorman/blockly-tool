@@ -19,6 +19,7 @@
     "build-all-branches": "node build_all_branches.js",
     "preview": "npm run build && vite preview",
     "export": "node export.js",
+    "docs:export": "node export_documentation.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
