@@ -33,8 +33,7 @@ const
         })
       )
     )
-  },
-  allBlockDefinitionsAndPaths = await gatherBlockFiles()
+  }
 
 // definitions
 const
@@ -90,7 +89,9 @@ export const
   importBlockJson = async () =>
     sortBy(compact(map(await gatherBlockFiles(), processBlock)), "type"),
 
-  // all definitions
+  // defs and paths
+  allBlockDefinitionsAndPaths = await gatherBlockFiles(),
+  // just the definitions
   allBlockDefinitions = keyBy(compact(map(allBlockDefinitionsAndPaths, "definition")), "type"),
   // without disabled definitions
   blockDefinitions = omitBy(allBlockDefinitions, def => def.disabled),
