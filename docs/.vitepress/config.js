@@ -25,7 +25,7 @@ export default defineConfig({
       // runs on the frontend, must be a pure function!
       pattern: ({ filePath }) => {
         // special handling for block pages
-        if(filePath.match(/\/blocks\//)) {
+        if(filePath.match(/^blocks\//)) {
           // docs come from the js, md is not the true source
           const jsPath = filePath.replace(/.md$/, '.js')
           // and we want to link to the main branch, not docs
