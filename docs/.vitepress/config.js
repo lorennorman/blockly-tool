@@ -22,17 +22,25 @@ export default defineConfig({
     },
 
     editLink: {
+      // runs on the frontend, must be a pure function!
       pattern: ({ filePath }) => {
-        // runs on the frontend, must be a pure function
-        const jsPath = filePath.replace(/.md$/, '.js')
+        // special handling for block pages
+        if(filePath.match(/\/blocks\//)) {
+          // docs come from the js, md is not the true source
+          const jsPath = filePath.replace(/.md$/, '.js')
+          // and we want to link to the main branch, not docs
+          return `https://github.com/lorennorman/blockly-tool/edit/main/app/${jsPath}`
+        }
 
-        return `https://github.com/lorennorman/blockly-tool/edit/main/app/${jsPath}`
+        return `https://github.com/lorennorman/blockly-tool/edit/docs/docs/${filePath}`
       }
     },
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Getting Started', link: '/getting-started' },
+      { text: 'The Blocks', link: '/block-index' },
+      { text: 'Examples', link: '/automation-examples' }
     ],
 
     sidebar: [
