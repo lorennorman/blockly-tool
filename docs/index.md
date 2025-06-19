@@ -3,26 +3,25 @@
 layout: home
 
 hero:
-  name: "IO Actions: Block Reference"
-  text: "Documentation for Adafruit IO's block-based Actions"
-  tagline: Automation that just clicks!
+  name: "IO Actions:"
+  text: "Block Reference"
+  tagline: Automation that clicks!
   actions:
     - theme: brand
       text: Getting Started
-      link: /markdown-examples
+      link: /getting-started.md
     - theme: alt
       text: The Blocks
-      link: /markdown-examples
+      link: /block-index.md
     - theme: alt
       text: Automation Examples
-      link: /api-examples
+      link: /automation-examples.md
 
 features:
-  - title: Learn
+  - title: 📚 Learn
     details: ...about the whole system and each individual block
-  - title: Experiment
+  - title: 🧪 Experiment
     details: ...using the embedded sandbox environments
-  - title: Automate
+  - title: ⚙️ Automate
     details: ...with Adafruit IO's flexible, block-based Actions
 ---
-
