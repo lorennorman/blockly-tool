@@ -62,6 +62,10 @@ export const
     if(options.workspaceData) {
       const workspaceJson = jsonToWorkspace(options.workspaceData)
       Blockly.serialization.workspaces.load(workspaceJson, currentWorkspace)
+
+    } else if(options.workspaceJson) {
+      Blockly.serialization.workspaces.load(options.workspaceJson, currentWorkspace)
+
     } else {
       Blockly.serialization.workspaces.load(initialWorkspace, currentWorkspace)
     }
