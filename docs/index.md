@@ -18,10 +18,13 @@ hero:
       link: /automation-examples.md
 
 features:
-  - title: 📚 Learn
+  - icon: 📚
+    title: Learn
     details: ...about the whole system and each individual block
-  - title: 🧪 Experiment
+  - icon: 🧪
+    title: Experiment
     details: ...using the embedded sandbox environments
-  - title: ⚙️ Automate
+  - icon: ⚙️
+    title: Automate
     details: ...with Adafruit IO's flexible, block-based Actions
 ---
