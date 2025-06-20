@@ -71,7 +71,9 @@ editLink: true
 ## Description
     ${ definition.visualization?.tooltip?.replaceAll("\n", "\n    ") || "No docs for this block, yet." }
 
-## Workspace 🔜
+## Workspace
+
+<BlocklyWorkspace />
 
 ## Fields
 
