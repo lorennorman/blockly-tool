@@ -15,6 +15,8 @@ export default defineConfig({
 
   base: "/blockly-tool/",
 
+  lastUpdated: true,
+
   // https://vitepress.dev/reference/default-theme-config
   themeConfig: {
     search: {
