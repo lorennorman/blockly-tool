@@ -73,7 +73,7 @@ editLink: true
 
 ## Workspace
 
-<BlocklyWorkspace />
+<BlocklyWorkspace block="${ definition.type }" />
 
 ## Fields
 
