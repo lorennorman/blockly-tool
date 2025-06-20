@@ -1,7 +1,11 @@
 # build the docs and deploy to github-pages
 name: Build Docs and Deploy to Pages
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: ["docs"]
+
 # later: auto-build on version tags
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
