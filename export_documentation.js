@@ -33,11 +33,10 @@ const withCleanDir = async (dirName, writeFunction) => {
   return totalBytesWritten
 }
 
-import { importBlockJson, importBlockDefinitions, allBlockDefinitionsAndPaths } from './src/importer/block_importer.js'
+import toBlockMarkdown from "#src/docs/render_block.js"
+import { allBlockDefinitionsAndPaths } from './src/importer/block_importer.js'
 import importToolboxJson from './src/importer/toolbox_importer.js'
-import importWorkspaceJson from './src/importer/workspace_importer.js'
-import importBlocklyJs from './src/importer/blockly_importer.js'
-import { capitalize, filter, find, forEach, get, isArray, isObject, keyBy, map, mapValues, sortBy } from 'lodash-es'
+import { capitalize, filter, find, forEach, keyBy, map, mapValues } from 'lodash-es'
 
 const
   toolbox = await importToolboxJson(),
@@ -46,61 +45,6 @@ const
 
 const pretty = jsObject => JSON.stringify(jsObject, null, 2) + "\n"
 
-const toBlockMarkdown = definition => {
-  const
-    lineObjects = filter(map(filter(definition.lines, isArray), "[1]"), isObject),
-    fields = filter(lineObjects, "field"),
-    inputValues = filter(lineObjects, "inputValue"),
-    inputStatements = filter(lineObjects, "inputStatement")
-
-  return `---
-title: "Block: ${definition.name}"
-editLink: true
----
-
-# Block: ${definition.name}
-
-## Description
-    ${ definition.visualization?.tooltip?.replaceAll("\n", "\n    ") || "No docs for this block, yet." }
-
-## Workspace
-
-<BlocklyWorkspace block="${ definition.type }" />
-
-## Fields
-
-${ fields.map(field =>
-`### \`${ capitalize(field.field) }\`
-
-- Text: ${ field.text || 'None' }
-- Select:
-  - ${ map(field.options||[], 0).join("\n  - ") }`
-).join("\n\n") }
-
-## Inputs
-
-${ inputValues.map(inputValue =>
-`### \`${ capitalize(inputValue.inputValue) }\`
-
-- Check: ${inputValue.check || 'None' }
-- Shadow: ${inputValue.shadow?.type || inputValue.shadow}`
-).join("\n\n") }
-
-${ inputStatements.map(inputStatement =>
-`### \`${ capitalize(inputStatement.inputStatement) }\`
-
-- Check: ${inputStatement.check || 'None' }`
-).join("\n\n") }
-
-## Output
-
-${ capitalize(definition.connections?.output || "Unspecified") }
-
-## Examples
-
-Coming soon...
-`
-}
 
 /** Begin Export Script */
 
