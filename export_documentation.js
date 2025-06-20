@@ -108,6 +108,10 @@ ${ capitalize(definition.connections?.output || "Unspecified") }
 `
 }
 
+withCleanDir("docs/blockly", () => {
+  fs.cpSync("export", "docs/blockly", { recursive: true })
+})
+
 withCleanDir("docs/blocks", async write => {
   const blockSidebar = {
     text: 'Blocks',
