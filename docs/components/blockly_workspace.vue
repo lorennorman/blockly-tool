@@ -40,5 +40,9 @@
   div#blocklyDiv {
     width: 100%;
     height: 200px;
+
+    .injectionDiv {
+      border-radius: 5px;
+    }
   }
 </style>

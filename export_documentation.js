@@ -2,10 +2,6 @@ import fs from 'fs'
 
 // make a tiny DSL
 const withCleanDir = async (dirName, writeFunction) => {
-  const startTime = Date.now()
-  console.log("Starting Documentation Export")
-  console.log("=======================")
-
   if(fs.existsSync(dirName)) {
     fs.rmSync(dirName, { recursive: true, force: true })
   }
@@ -28,15 +24,13 @@ const withCleanDir = async (dirName, writeFunction) => {
     fs.writeFileSync(exportFilename, fileContents)
 
     // log and remember
-    // console.log(`/${exportFilename} (${bytesToWrite}k)`)
+    console.log(`/${exportFilename} (${bytesToWrite}k)`)
     totalBytesWritten += bytesToWrite
   }
 
   await writeFunction(write)
 
-  const elapsed = Date.now() - startTime
-  console.log("=======================")
-  console.log(`🏁 Done. Wrote ${totalBytesWritten.toString().slice(0,5)}k in ${elapsed}ms 🏁`)
+  return totalBytesWritten
 }
 
 import { importBlockJson, importBlockDefinitions, allBlockDefinitionsAndPaths } from './src/importer/block_importer.js'
@@ -64,9 +58,7 @@ title: "Block: ${definition.name}"
 editLink: true
 ---
 
-# Block ${definition.name}
-
-## Categories 🔜
+# Block: ${definition.name}
 
 ## Description
     ${ definition.visualization?.tooltip?.replaceAll("\n", "\n    ") || "No docs for this block, yet." }
@@ -104,15 +96,26 @@ ${ inputStatements.map(inputStatement =>
 
 ${ capitalize(definition.connections?.output || "Unspecified") }
 
-## Examples 🔜
+## Examples
+
+Coming soon...
 `
 }
 
-withCleanDir("docs/blockly", () => {
+/** Begin Export Script */
+
+const startTime = Date.now()
+let totalBytes = 0
+
+console.log("")
+console.log("Starting Documentation Export")
+console.log("=======================")
+
+totalBytes += await withCleanDir("docs/blockly", () => {
   fs.cpSync("export", "docs/blockly", { recursive: true })
 })
 
-withCleanDir("docs/blocks", async write => {
+totalBytes += await withCleanDir("docs/blocks", async write => {
   const blockSidebar = {
     text: 'Blocks',
     items: map(categoryBlocksMap, (blocks, categoryName) => {
@@ -155,3 +158,9 @@ withCleanDir("docs/blocks", async write => {
 
   write('_blocks_sidebar.json', pretty(blockSidebar))
 })
+
+
+
+const elapsed = Date.now() - startTime
+console.log("=======================")
+console.log(`🏁 Done. Wrote ${totalBytes.toString().slice(0,5)}k in ${elapsed}ms 🏁`)
