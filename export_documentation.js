@@ -103,8 +103,6 @@ totalBytes += await withCleanDir("docs/blocks", async write => {
   write('_blocks_sidebar.json', pretty(blockSidebar))
 })
 
-
-
 const elapsed = Date.now() - startTime
 console.log("=======================")
 console.log(`🏁 Done. Wrote ${totalBytes.toString().slice(0,5)}k in ${elapsed}ms 🏁`)
