@@ -1,6 +1,7 @@
 export default {
   name: 'Variables',
   colour: 240,
+  usesBlocks: [ 'io_variables_set', 'io_variables_get' ],
   // called each time the category is opened
   callback: workspace => {
     // TODO: make a Button abstraction to wrap this up

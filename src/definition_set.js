@@ -18,7 +18,7 @@ export class DefinitionSet {
 
     newDefinitionSet.workspaces = WorkspaceDefinition.loadAll()
     newDefinitionSet.toolboxes = await ToolboxDefinition.loadAll()
-    newDefinitionSet.blocks = await BlockDefinition.loadAll()
+    newDefinitionSet.blocks = await BlockDefinition.loadAll(newDefinitionSet)
 
     return newDefinitionSet
   }
@@ -27,6 +27,10 @@ export class DefinitionSet {
     return {
       toBlocklyJSON: async () => await BlockDefinition.exportAll(this.blocks)
     }
+  }
+
+  getCategories() {
+    return this.toolboxes[0].getCategories()
   }
 }
 

@@ -82,7 +82,7 @@ const
     }
   },
 
-  EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "label", "contents", "callback" ],
+  EXPECTED_TOOLBOX_KEYS = [ "name", "colour", "label", "contents", "callback", "usesBlocks" ],
 
   validateCategoryDefinition = definition => {
     const

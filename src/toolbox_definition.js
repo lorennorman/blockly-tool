@@ -1,3 +1,5 @@
+import { filter } from 'lodash-es'
+
 import exportToolboxJSON from '#src/importer/toolbox_importer.js'
 import toolboxDefinition from '#app/toolbox/index.js'
 
@@ -16,6 +18,10 @@ class ToolboxDefinition {
 
   toBlocklyJSONString = async function() {
     return JSON.stringify(await exportToolboxJSON(), null, 2) + "\n"
+  }
+
+  getCategories = () => {
+    return filter(toolboxDefinition, item => item.contents || item.callback)
   }
 }
 

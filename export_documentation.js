@@ -1,18 +1,9 @@
+import { capitalize, find, forEach, map } from 'lodash-es'
+
 import { cleanDir, copyDir, write, totalBytesWritten } from "./export_util.js"
-
+import DefinitionSet from '#src/definition_set.js'
 import toBlockMarkdown from "#src/docs/render_block.js"
-import { allBlockDefinitionsAndPaths } from './src/importer/block_importer.js'
-import importToolboxJson from './src/importer/toolbox_importer.js'
-import { capitalize, filter, find, forEach, keyBy, map, mapValues } from 'lodash-es'
 
-const
-  toolbox = await importToolboxJson(),
-  categories = filter(toolbox.contents, { kind: 'category' }),
-  categoryBlocksMap = mapValues(keyBy(categories, "name"), cat => map(cat.contents, "type"))
-
-const pretty = jsObject => JSON.stringify(jsObject, null, 2) + "\n"
-
-// import DefinitionSet from '#src/definition_set.js'
 
 /** Begin Export Script */
 
@@ -20,62 +11,56 @@ const startTime = Date.now()
 console.log("\nStarting Documentation Export")
 console.log("=======================")
 
-// const definitionSet = await DefinitionSet.load()
-
 cleanDir("docs/blockly")
 // TODO: instead, export exactly what we need
 copyDir("export", "docs/blockly")
 
 cleanDir("docs/blocks")
 
+const definitionSet = await DefinitionSet.load()
+const categories = definitionSet.getCategories()
+
 // INIT SIDEBAR
 const blockSidebar = {
   text: 'Blocks',
-  // items: map(definitionSet.toolbox.categories, categoryName => {
-  items: map(categoryBlocksMap, (blocks, categoryName) => {
-    return {
-      text: categoryName,
-      collapsed: true,
-      items: []
-    }
-  })
+  items: map(categories, ({ name }) => ({
+    text: name,
+    collapsed: true,
+    items: []
+  }))
 }
 
-// forEach(definitionSet.blocks, ({ definitionPath, definition }) => {
-forEach(allBlockDefinitionsAndPaths, ({ path, definition }) => {
+forEach(definitionSet.blocks, blockDefinition => {
   // skip disabled blocks
-  if(definition.disabled) { return }
-
-  // set a default name if missing
-  // TODO: should happen in definition class
-  if(!definition.name) {
-    definition.name = capitalize(definition.type.replaceAll("_", " ").replace(/^io /, ""))
-  }
+  if(blockDefinition.disabled) { return }
 
   // mirror the blocks/**/*.js path structure
-  const docPath = path.replace(/.js$/, '.md')
-  write(`docs/blocks/${docPath}`, toBlockMarkdown(definition)) // EXPORT MARKDOWN
+  const docPath = blockDefinition.definitionPath.replace(/.js$/, '.md')
+  write(`docs/blocks/${docPath}`, toBlockMarkdown(blockDefinition)) // EXPORT MARKDOWN
 
   // APPEND TO SIDEBAR
   const
     blockSidebarPath = `/blocks/${docPath.slice(0, -3)}`,
     sidebarEntry = {
-      text: capitalize(definition.name),
+      text: capitalize(blockDefinition.name),
       link: blockSidebarPath
     }
 
-  // definition.categories
-  // add block links to the appropriate sidebar
-  forEach(categoryBlocksMap, (categoryBlocks, categoryName) => {
+  // add links to each sidebar category we're a part of
+  forEach(blockDefinition.getCategories(), category => {
     // if category contains this block, add to its sidebar
-    if(categoryBlocks.includes(definition.type)) {
-      find(blockSidebar.items, { text: categoryName }).items.push(sidebarEntry)
+    const sidebarCategory = find(blockSidebar.items, { text: category.name })
+
+    if(!sidebarCategory) {
+      throw new Error(`Block category (${ category.name }) not present in sidebar!`)
     }
+
+    sidebarCategory.items.push(sidebarEntry)
   })
 })
 
 // WRITE SIDEBAR
-write('docs/blocks/_blocks_sidebar.json', pretty(blockSidebar))
+write('docs/blocks/_blocks_sidebar.json', JSON.stringify(blockSidebar, null, 2) + "\n")
 
 const elapsed = Date.now() - startTime
 console.log("=======================")
