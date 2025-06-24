@@ -1,25 +1,4 @@
-import fs from 'fs'
-
-
-// make a tiny DSL
-const cleanDir = (dirName) => {
-  if(fs.existsSync(dirName)) {
-    fs.rmSync(dirName, { recursive: true, force: true })
-  }
-  fs.mkdirSync(dirName)
-  console.log(`/${dirName}: clean`)
-}
-
-let totalBytesWritten = 0
-const write = (filename, fileContents) => {
-  const bytesToWrite = fileContents.length/1000
-
-  fs.writeFileSync(filename, fileContents)
-
-  console.log(`/${filename} (${bytesToWrite}k)`)
-  totalBytesWritten += bytesToWrite
-}
-
+import { cleanDir, write, totalBytesWritten } from "./export_util.js"
 import DefinitionSet from '#src/definition_set.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
 
