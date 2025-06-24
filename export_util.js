@@ -12,8 +12,20 @@ export const
     console.log(`/${dirName}: clean`)
   },
 
+  copyDir = (from, to) => {
+    fs.cpSync(from, to, { recursive: true })
+    console.log(`/${from}/* copied to /${to}/*`)
+  },
+
   write = (filename, fileContents) => {
-    const bytesToWrite = fileContents.length/1000
+    const
+      dirName = filename.split("/").slice(0, -1).join("/"),
+      bytesToWrite = fileContents.length/1000
+
+    // ensure dir is present before writing
+    if(!fs.existsSync(dirName)) {
+      fs.mkdirSync(dirName, { recursive: true })
+    }
 
     fs.writeFileSync(filename, fileContents)
 

@@ -4,7 +4,7 @@ import BlocklyJSExporter from '#src/blockly_js_exporter.js'
 
 
 const startTime = Date.now()
-console.log("Starting Blockly Export")
+console.log("\nStarting Blockly Export")
 console.log("=======================")
 
 // clear the export directory
