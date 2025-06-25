@@ -25,7 +25,7 @@ export class DefinitionSet {
 
   getBlocksFrom(...referrers) {
     return {
-      toBlocklyJSON: async () => await BlockDefinition.exportAll(this.blocks)
+      toBlocklyJSON: () => BlockDefinition.allToBlocklyJSONString(this.blocks)
     }
   }
 

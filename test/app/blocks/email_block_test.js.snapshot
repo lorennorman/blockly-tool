@@ -1,0 +1,33 @@
+exports[`Email Block > works 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_email",
+  "colour": "0",
+  "tooltip": "Sends an email with given SUBJECT and BODY\\n---------------\\nParameters:\\nSUBJECT - a template for generating the email subject\\nBODY - a template for generating the email body",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📧 Email %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Subject: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "SUBJECT",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Body: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;

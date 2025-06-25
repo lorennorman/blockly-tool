@@ -4,7 +4,9 @@ import processExtensions from './extensions.js'
 import processMutator from './mutators.js'
 
 export const toBlockJSON = block => ({
+  inputsInline: block.inputsInline,
   type: block.type,
+  colour: block.colour,
   ...block.visualization,
   ...processConnections(block),
   ...processLines(block),
