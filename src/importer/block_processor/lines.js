@@ -218,3 +218,83 @@ const lineToMessageAndInput = ({ text, input }, dataKeys) => {
 }
 
 export default processLines
+
+
+const
+  ALIGNMENT_REGEX = /\s*\|(CENTER|CENTRE|RIGHT|LEFT)$/m,
+  // %, followed by a letter, optionally followed by letters/numbers, followed by whitespace or EoI
+  ARG_REGEX = /(%[a-zA-Z]\w*)(?:$|\s)/gm
+
+export const processTemplate = blockDefinition => {
+  const { template, inputs, field } = blockDefinition
+  if (!template) { return {} }
+
+  const msgAndArgs = {}
+  // break template on newlines, each line:
+  niceTemplate(template).split("\n").forEach((line, idx) => {
+    // - extract alignment
+    let alignment = DEFAULT_ALIGNMENT
+    const alignMatches = line.match(ALIGNMENT_REGEX)
+    if(alignMatches) {
+      // remember the alignment
+      alignment = alignMatches[1]
+      // purge from the line
+      line = line.replace(alignMatches[0], "")
+    }
+    alignment = alignment.replace("ER", "RE") // anglocize CENTER
+
+    // - extract data refs, replace with indices
+    const matches = line.match(ARG_REGEX) || []
+    matches.forEach((match, matchIdx) => {
+      line = line.replace(match, `%${matchIdx+1}`)
+    })
+
+    // - append default index if no others present
+    if(!line.includes("%1")) {
+      line += " %1"
+    }
+
+    msgAndArgs[`message${idx}`] = line
+
+    // build up the args for this line
+    const args = []
+
+    matches.forEach(match => {
+      args.push({
+        type: "input_value",
+        name: match.slice(1),
+        align: alignment
+      })
+    })
+
+    // add a dummy if no others
+    if(!args.length){
+      args.push({
+        type: "input_dummy",
+        align: alignment
+      })
+    }
+
+    msgAndArgs[`args${idx}`] = args
+  })
+
+  return msgAndArgs
+}
+
+
+const niceTemplate = tplString => {
+  const
+    lines = tplString.split("\n"),
+    firstLineBlank = /^\s*$/.test(lines[0]),
+    remainingLines = lines.slice(1, -1),
+    indentCounts = map(remainingLines, line => line.search(/\S/)),
+    firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts.slice(1, -1))
+
+  // ensure first line is blank and every other line has at least as much whitespace as the first line
+  if(firstLineBlank && firstLineLeastIndented) {
+    // drop the first line, remove X whitespace chars from the rest and join with newline
+    return map(remainingLines, line => line.slice(indentCounts[0])).join("\n")
+  }
+
+  return tplString
+}
