@@ -1,0 +1,4401 @@
+exports[`Block Snapshots > \"Action Log\" (action_log) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_log",
+  "colour": "0",
+  "tooltip": "Executes the block you plug in and reveals its final value or error message.\\n---------------\\nParameters:\\nEXPRESSION - a block you'd like to see the resolved value of",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "Log: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "EXPRESSION",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Action Publish\" (action_publish) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_publish",
+  "colour": "0",
+  "tooltip": "Sends a given VALUE to a given FEED.\\n---------------\\nParameters:\\nVALUE - the value to write\\nFEED - the feed to write to",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📈 Publish %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "...value: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "...to: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "FEED",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Action Root\" (action_root) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_root",
+  "colour": "0",
+  "tooltip": "Add Triggers to determine when this Action runs.\\nAdd Actions to determine what this Action does.",
+  "message0": "Triggers: %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "TRIGGERS",
+      "check": "trigger",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message3": "Actions: %1",
+  "args3": [
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message4": " %1",
+  "args4": [
+    {
+      "type": "input_statement",
+      "name": "EXPRESSIONS",
+      "check": "expression",
+      "align": "RIGHT"
+    }
+  ],
+  "message5": " %1",
+  "args5": [
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Action Sms\" (action_sms) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_sms",
+  "colour": "0",
+  "tooltip": "(IO+ only)\\nSends a text message with a given BODY template.\\n---------------\\nParameters:\\nBODY - a template for generating the SMS body",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📲 SMS %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Message: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Action Webhook\" (action_webhook) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_webhook",
+  "colour": "0",
+  "tooltip": "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.\\n---------------\\nParameters:\\nURL - a valid web location to send a request to\\nBODY - a JSON template to render and POST\\nFORM_ENCODE - optionally encode as form input",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "🔗 Webhook %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "URL: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "URL",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Form Encode? %1 %2",
+  "args2": [
+    {
+      "name": "FORM_ENCODE",
+      "type": "field_checkbox",
+      "checked": false,
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "POST Body: %1",
+  "args3": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"All Days\" (all_days) 1`] = `
+{
+  "inputsInline": false,
+  "type": "all_days",
+  "colour": 30,
+  "tooltip": "Runs during every day of the month.",
+  "output": "cron_day",
+  "message0": "Every day %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"All Hours\" (all_hours) 1`] = `
+{
+  "inputsInline": false,
+  "type": "all_hours",
+  "colour": 30,
+  "tooltip": "Runs during all hours of the day.",
+  "output": "cron_hour",
+  "message0": "Every hour %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"All Minutes\" (all_minutes) 1`] = `
+{
+  "inputsInline": false,
+  "type": "all_minutes",
+  "colour": 30,
+  "tooltip": "Runs every minute of the hour.",
+  "output": "cron_minute",
+  "message0": "Every minute %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"All Months\" (all_months) 1`] = `
+{
+  "inputsInline": false,
+  "type": "all_months",
+  "colour": 30,
+  "tooltip": "Runs during all months.",
+  "output": "cron_month",
+  "message0": "Every month %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Controls If\" (io_controls_if) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_controls_if",
+  "colour": 60,
+  "tooltip": "Conditionally execute specified commands based on the outcome of conditional checks.\\n-\\nInputs:\\n---------------\\nif - the first value to check for truthiness\\ndo - the commands to execute if the first check was true\\nelse if - (optional, repeating) an extra value to check for truthiness\\ndo - the commands to execute if the previous check was true\\nelse - (optional) the commands to execute if no checks were true",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "if %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "IF0",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "do %1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "THEN0",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "else if %1",
+  "args2": [
+    {
+      "type": "input_dummy",
+      "name": "ELSE_IF_LABEL",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "else %1",
+  "args3": [
+    {
+      "type": "input_dummy",
+      "name": "ELSE_LABEL",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Day Settings\" (day_settings) 1`] = `
+{
+  "inputsInline": false,
+  "type": "day_settings",
+  "colour": 30,
+  "tooltip": "How would you like to specify days of the month for your schedule?",
+  "message0": "Day: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "DAY_BLOCK",
+      "check": "cron_day",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Days Of Week\" (days_of_week) 1`] = `
+{
+  "inputsInline": false,
+  "type": "days_of_week",
+  "colour": 30,
+  "tooltip": "Runs during certain days of the week.",
+  "output": "cron_day",
+  "message0": "Sun: %1 Mon: %2 Tue: %3 Wed: %4 %5",
+  "args0": [
+    {
+      "name": "SUN",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "name": "MON",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "name": "TUE",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "name": "WED",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "Thu: %1 Fri: %2 Sat: %3 %4",
+  "args1": [
+    {
+      "name": "THU",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "name": "FRI",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "name": "SAT",
+      "type": "field_checkbox",
+      "checked": true
+    },
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay Days\" (delay_days) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_days",
+  "colour": "0",
+  "tooltip": "1 day is the maximum delay available",
+  "output": "delay_period",
+  "message0": "1 day %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay Hours\" (delay_hours) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_hours",
+  "colour": "0",
+  "tooltip": "Set a delay between 1 and 23 hours",
+  "output": "delay_period",
+  "message0": "%1 hours %2",
+  "args0": [
+    {
+      "name": "SECONDS",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "3600"
+        ],
+        [
+          "2",
+          "7200"
+        ],
+        [
+          "3",
+          "10800"
+        ],
+        [
+          "4",
+          "14400"
+        ],
+        [
+          "5",
+          "18000"
+        ],
+        [
+          "6",
+          "21600"
+        ],
+        [
+          "7",
+          "25200"
+        ],
+        [
+          "8",
+          "28800"
+        ],
+        [
+          "9",
+          "32400"
+        ],
+        [
+          "10",
+          "36000"
+        ],
+        [
+          "11",
+          "39600"
+        ],
+        [
+          "12",
+          "43200"
+        ],
+        [
+          "13",
+          "46800"
+        ],
+        [
+          "14",
+          "50400"
+        ],
+        [
+          "15",
+          "54000"
+        ],
+        [
+          "16",
+          "57600"
+        ],
+        [
+          "17",
+          "61200"
+        ],
+        [
+          "18",
+          "64800"
+        ],
+        [
+          "19",
+          "68400"
+        ],
+        [
+          "20",
+          "72000"
+        ],
+        [
+          "21",
+          "75600"
+        ],
+        [
+          "22",
+          "79200"
+        ],
+        [
+          "23",
+          "82800"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay Minutes\" (delay_minutes) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_minutes",
+  "colour": "0",
+  "tooltip": "Set a delay between 1 and 59 minutes",
+  "output": "delay_period",
+  "message0": "%1 minutes %2",
+  "args0": [
+    {
+      "name": "SECONDS",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "60"
+        ],
+        [
+          "2",
+          "120"
+        ],
+        [
+          "3",
+          "180"
+        ],
+        [
+          "4",
+          "240"
+        ],
+        [
+          "5",
+          "300"
+        ],
+        [
+          "6",
+          "360"
+        ],
+        [
+          "7",
+          "420"
+        ],
+        [
+          "8",
+          "480"
+        ],
+        [
+          "9",
+          "540"
+        ],
+        [
+          "10",
+          "600"
+        ],
+        [
+          "11",
+          "660"
+        ],
+        [
+          "12",
+          "720"
+        ],
+        [
+          "13",
+          "780"
+        ],
+        [
+          "14",
+          "840"
+        ],
+        [
+          "15",
+          "900"
+        ],
+        [
+          "16",
+          "960"
+        ],
+        [
+          "17",
+          "1020"
+        ],
+        [
+          "18",
+          "1080"
+        ],
+        [
+          "19",
+          "1140"
+        ],
+        [
+          "20",
+          "1200"
+        ],
+        [
+          "21",
+          "1260"
+        ],
+        [
+          "22",
+          "1320"
+        ],
+        [
+          "23",
+          "1380"
+        ],
+        [
+          "24",
+          "1440"
+        ],
+        [
+          "25",
+          "1500"
+        ],
+        [
+          "26",
+          "1560"
+        ],
+        [
+          "27",
+          "1620"
+        ],
+        [
+          "28",
+          "1680"
+        ],
+        [
+          "29",
+          "1740"
+        ],
+        [
+          "30",
+          "1800"
+        ],
+        [
+          "31",
+          "1860"
+        ],
+        [
+          "32",
+          "1920"
+        ],
+        [
+          "33",
+          "1980"
+        ],
+        [
+          "34",
+          "2040"
+        ],
+        [
+          "35",
+          "2100"
+        ],
+        [
+          "36",
+          "2160"
+        ],
+        [
+          "37",
+          "2220"
+        ],
+        [
+          "38",
+          "2280"
+        ],
+        [
+          "39",
+          "2340"
+        ],
+        [
+          "40",
+          "2400"
+        ],
+        [
+          "41",
+          "2460"
+        ],
+        [
+          "42",
+          "2520"
+        ],
+        [
+          "43",
+          "2580"
+        ],
+        [
+          "44",
+          "2640"
+        ],
+        [
+          "45",
+          "2700"
+        ],
+        [
+          "46",
+          "2760"
+        ],
+        [
+          "47",
+          "2820"
+        ],
+        [
+          "48",
+          "2880"
+        ],
+        [
+          "49",
+          "2940"
+        ],
+        [
+          "50",
+          "3000"
+        ],
+        [
+          "51",
+          "3060"
+        ],
+        [
+          "52",
+          "3120"
+        ],
+        [
+          "53",
+          "3180"
+        ],
+        [
+          "54",
+          "3240"
+        ],
+        [
+          "55",
+          "3300"
+        ],
+        [
+          "56",
+          "3360"
+        ],
+        [
+          "57",
+          "3420"
+        ],
+        [
+          "58",
+          "3480"
+        ],
+        [
+          "59",
+          "3540"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay None\" (delay_none) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_none",
+  "colour": "0",
+  "tooltip": "No delay: Actions run immediately when triggered.",
+  "output": "delay_period",
+  "message0": "No Delay %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay Seconds\" (delay_seconds) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_seconds",
+  "colour": "0",
+  "tooltip": "Set a delay between 1 and 59 seconds (or 0 for no delay)",
+  "output": "delay_period",
+  "message0": "%1 seconds %2",
+  "args0": [
+    {
+      "name": "SECONDS",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "31",
+          "31"
+        ],
+        [
+          "32",
+          "32"
+        ],
+        [
+          "33",
+          "33"
+        ],
+        [
+          "34",
+          "34"
+        ],
+        [
+          "35",
+          "35"
+        ],
+        [
+          "36",
+          "36"
+        ],
+        [
+          "37",
+          "37"
+        ],
+        [
+          "38",
+          "38"
+        ],
+        [
+          "39",
+          "39"
+        ],
+        [
+          "40",
+          "40"
+        ],
+        [
+          "41",
+          "41"
+        ],
+        [
+          "42",
+          "42"
+        ],
+        [
+          "43",
+          "43"
+        ],
+        [
+          "44",
+          "44"
+        ],
+        [
+          "45",
+          "45"
+        ],
+        [
+          "46",
+          "46"
+        ],
+        [
+          "47",
+          "47"
+        ],
+        [
+          "48",
+          "48"
+        ],
+        [
+          "49",
+          "49"
+        ],
+        [
+          "50",
+          "50"
+        ],
+        [
+          "51",
+          "51"
+        ],
+        [
+          "52",
+          "52"
+        ],
+        [
+          "53",
+          "53"
+        ],
+        [
+          "54",
+          "54"
+        ],
+        [
+          "55",
+          "55"
+        ],
+        [
+          "56",
+          "56"
+        ],
+        [
+          "57",
+          "57"
+        ],
+        [
+          "58",
+          "58"
+        ],
+        [
+          "59",
+          "59"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Delay Settings\" (delay_settings) 1`] = `
+{
+  "inputsInline": false,
+  "type": "delay_settings",
+  "colour": "0",
+  "tooltip": "Causes a delay between this Action's trigger and its execution\\n---------------\\nParameters:\\nDelay - how long to delay, from 1 second to 1 day\\nMode - how to proceed if another action is already on delay.\\n...'keep' will keep the existing delay and ignore new triggers\\n...'reset' will delete the existing delay and start a new one",
+  "message0": "Delay Settings %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Delay: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "DELAY_PERIOD",
+      "check": "delay_period",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "and %1 %2",
+  "args2": [
+    {
+      "name": "DELAY_MODE",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "reset",
+          "extend"
+        ],
+        [
+          "keep",
+          "static"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "existing delays %1",
+  "args3": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Email\" (action_email) 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_email",
+  "colour": "0",
+  "tooltip": "Sends an email with given SUBJECT and BODY",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📧 Email %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Subject: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "SUBJECT",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Body: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Email\" (action_email) 2`] = `
+{
+  "inputsInline": false,
+  "type": "action_email",
+  "colour": "0",
+  "tooltip": "Sends an email with given SUBJECT and BODY\\n---------------\\nParameters:\\nSUBJECT - a template for generating the email subject\\nBODY - a template for generating the email body",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📧 Email %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Subject: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "SUBJECT",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Body: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Every Days Between\" (every_days_between) 1`] = `
+{
+  "inputsInline": false,
+  "type": "every_days_between",
+  "colour": 30,
+  "tooltip": "Runs every X days, between days Y and Z.",
+  "output": "cron_day",
+  "message0": "Every %1 days between %2 and %3 %4",
+  "args0": [
+    {
+      "name": "FREQUENCY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "15",
+          "15"
+        ]
+      ]
+    },
+    {
+      "name": "START",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "31",
+          "31"
+        ]
+      ]
+    },
+    {
+      "name": "END",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "31",
+          "31"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Every Hours Between\" (every_hours_between) 1`] = `
+{
+  "inputsInline": false,
+  "type": "every_hours_between",
+  "colour": 30,
+  "tooltip": "Runs every X hours, between hours Y and Z.",
+  "output": "cron_hour",
+  "message0": "Every %1 hours between %2 and %3 %4",
+  "args0": [
+    {
+      "name": "FREQUENCY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "12",
+          "12"
+        ]
+      ]
+    },
+    {
+      "name": "START",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ]
+      ]
+    },
+    {
+      "name": "END",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "23",
+          "23"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Every Minutes Between\" (every_minutes_between) 1`] = `
+{
+  "inputsInline": false,
+  "type": "every_minutes_between",
+  "colour": 30,
+  "tooltip": "Runs every X minutes, between minutes Y and Z.",
+  "output": "cron_minute",
+  "message0": "Every %1 minutes between %2 and %3 %4",
+  "args0": [
+    {
+      "name": "FREQUENCY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "30",
+          "30"
+        ]
+      ]
+    },
+    {
+      "name": "START",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "31",
+          "31"
+        ],
+        [
+          "32",
+          "32"
+        ],
+        [
+          "33",
+          "33"
+        ],
+        [
+          "34",
+          "34"
+        ],
+        [
+          "35",
+          "35"
+        ],
+        [
+          "36",
+          "36"
+        ],
+        [
+          "37",
+          "37"
+        ],
+        [
+          "38",
+          "38"
+        ],
+        [
+          "39",
+          "39"
+        ],
+        [
+          "40",
+          "40"
+        ],
+        [
+          "41",
+          "41"
+        ],
+        [
+          "42",
+          "42"
+        ],
+        [
+          "43",
+          "43"
+        ],
+        [
+          "44",
+          "44"
+        ],
+        [
+          "45",
+          "45"
+        ],
+        [
+          "46",
+          "46"
+        ],
+        [
+          "47",
+          "47"
+        ],
+        [
+          "48",
+          "48"
+        ],
+        [
+          "49",
+          "49"
+        ],
+        [
+          "50",
+          "50"
+        ],
+        [
+          "51",
+          "51"
+        ],
+        [
+          "52",
+          "52"
+        ],
+        [
+          "53",
+          "53"
+        ],
+        [
+          "54",
+          "54"
+        ],
+        [
+          "55",
+          "55"
+        ],
+        [
+          "56",
+          "56"
+        ],
+        [
+          "57",
+          "57"
+        ],
+        [
+          "58",
+          "58"
+        ],
+        [
+          "59",
+          "59"
+        ]
+      ]
+    },
+    {
+      "name": "END",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "59",
+          "59"
+        ],
+        [
+          "58",
+          "58"
+        ],
+        [
+          "57",
+          "57"
+        ],
+        [
+          "56",
+          "56"
+        ],
+        [
+          "55",
+          "55"
+        ],
+        [
+          "54",
+          "54"
+        ],
+        [
+          "53",
+          "53"
+        ],
+        [
+          "52",
+          "52"
+        ],
+        [
+          "51",
+          "51"
+        ],
+        [
+          "50",
+          "50"
+        ],
+        [
+          "49",
+          "49"
+        ],
+        [
+          "48",
+          "48"
+        ],
+        [
+          "47",
+          "47"
+        ],
+        [
+          "46",
+          "46"
+        ],
+        [
+          "45",
+          "45"
+        ],
+        [
+          "44",
+          "44"
+        ],
+        [
+          "43",
+          "43"
+        ],
+        [
+          "42",
+          "42"
+        ],
+        [
+          "41",
+          "41"
+        ],
+        [
+          "40",
+          "40"
+        ],
+        [
+          "39",
+          "39"
+        ],
+        [
+          "38",
+          "38"
+        ],
+        [
+          "37",
+          "37"
+        ],
+        [
+          "36",
+          "36"
+        ],
+        [
+          "35",
+          "35"
+        ],
+        [
+          "34",
+          "34"
+        ],
+        [
+          "33",
+          "33"
+        ],
+        [
+          "32",
+          "32"
+        ],
+        [
+          "31",
+          "31"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Every Months Between\" (every_months_between) 1`] = `
+{
+  "inputsInline": false,
+  "type": "every_months_between",
+  "colour": 30,
+  "tooltip": "Runs every X months, between months Y and Z.",
+  "output": "cron_month",
+  "message0": "Every %1 months between %2 and %3 %4",
+  "args0": [
+    {
+      "name": "FREQUENCY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "6",
+          "6"
+        ]
+      ]
+    },
+    {
+      "name": "START",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ]
+      ]
+    },
+    {
+      "name": "END",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "12",
+          "12"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Feed Get Value\" (feed_get_value) 1`] = `
+{
+  "inputsInline": false,
+  "type": "feed_get_value",
+  "colour": 300,
+  "tooltip": "The last value of this feed or component, always a String",
+  "output": null,
+  "message0": "Get %1 %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Feed Selector\" (feed_selector) 1`] = `
+{
+  "inputsInline": false,
+  "type": "feed_selector",
+  "colour": 300,
+  "tooltip": "The last value of this feed or component, always a String",
+  "output": null,
+  "message0": "Feed: %1 %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Feed Set Value\" (feed_set_value) 1`] = `
+{
+  "inputsInline": true,
+  "type": "feed_set_value",
+  "colour": 300,
+  "tooltip": "Publish the specified data point to the specified Feed.\\n-\\nInputs:\\nFeed - the Feed to publish to\\nValue - the value to write",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "Set %1 to:  %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "%1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Hour Settings\" (hour_settings) 1`] = `
+{
+  "inputsInline": false,
+  "type": "hour_settings",
+  "colour": 30,
+  "tooltip": "How would you like to specify hours of the day for your schedule?",
+  "message0": "Hour: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "HOUR_BLOCK",
+      "check": "cron_hour",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Logic Boolean\" (io_logic_boolean) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_logic_boolean",
+  "colour": 60,
+  "tooltip": "A true or false value.",
+  "output": "boolean",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "BOOL",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "true",
+          "TRUE"
+        ],
+        [
+          "false",
+          "FALSE"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Logic Compare\" (io_logic_compare) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_logic_compare",
+  "colour": 120,
+  "tooltip": "Compare two numeric values in the specified way.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber A - the first number\\nNumber B - the second number\\n-\\nCasting:\\n---------------\\nboth Number inputs are coerced to floating point numbers",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1 %2",
+  "args1": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "‏<",
+          "LT"
+        ],
+        [
+          "‏≤",
+          "LTE"
+        ],
+        [
+          "‏>",
+          "GT"
+        ],
+        [
+          "‏≥",
+          "GTE"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Logic Negate\" (io_logic_negate) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_logic_negate",
+  "colour": 60,
+  "tooltip": "Swaps a truthy value to false, or a falsy value to true.",
+  "output": null,
+  "message0": "not %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "EXPRESSION",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Logic Operation\" (io_logic_operation) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_logic_operation",
+  "colour": 60,
+  "tooltip": "Perform the specifed boolean logic operation on two operands.\\n-\\nInputs:\\n---------------\\nOperator - the type of operation to perform, \\"and\\" or \\"or\\"\\n\\"and\\" - true if all inputs are true, false otherwise\\n\\"or\\" - true if any input is true, false otherwise\\nBoolean A - the first boolean\\nBoolean B - the second boolean\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to true or false before the operation",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1 %2",
+  "args1": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "and",
+          "AND"
+        ],
+        [
+          "or",
+          "OR"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Logic Ternary\" (io_logic_ternary) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_logic_ternary",
+  "colour": 60,
+  "tooltip": "",
+  "output": null,
+  "message0": "if %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "IF",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "then %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "THEN",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "else %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "ELSE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Matcher Boolean Operation\" (matcher_boolean_operation) 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_boolean_operation",
+  "colour": 60,
+  "tooltip": "",
+  "output": "matcher",
+  "message0": "is true %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "and",
+          "AND"
+        ],
+        [
+          "or",
+          "OR"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Matcher Compare\" (matcher_compare) 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_compare",
+  "colour": 224,
+  "tooltip": "Compare the new feed value with a number in various ways.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber B - the number to compare the feed value with\\n-\\nCasting:\\n---------------\\nThe feed value and Number B are coerced to floating point numbers",
+  "output": "matcher",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "‏<",
+          "LT"
+        ],
+        [
+          "‏≤",
+          "LTE"
+        ],
+        [
+          "‏>",
+          "GT"
+        ],
+        [
+          "‏≥",
+          "GTE"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Matcher Text Compare\" (matcher_text_compare) 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_text_compare",
+  "colour": 180,
+  "tooltip": "Compare the new feed value with text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion.\\nText B - the string of text to compare against the feed value\\n-\\nCasting:\\n---------------\\nBoth the Feed value and Text B input are coerced to strings",
+  "output": "matcher",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "includes",
+          "INC"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Arithmetic\" (io_math_arithmetic) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_math_arithmetic",
+  "colour": 120,
+  "tooltip": "Perform the specified arithmetic operation on two specified operands.\\n-\\nInputs:\\n---------------\\nNumber A - the first input\\nOperation - the operation to perform on the operands\\n+ addition\\n- subtraction\\nx multiplication\\n/ division\\n^ exponent\\nNumber B - the second input",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1 %2",
+  "args1": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "+",
+          "ADD"
+        ],
+        [
+          "-",
+          "MINUS"
+        ],
+        [
+          "x",
+          "MULTIPLY"
+        ],
+        [
+          "/",
+          "DIVIDE"
+        ],
+        [
+          "^",
+          "POWER"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Constrain\" (io_math_constrain) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_math_constrain",
+  "colour": 120,
+  "tooltip": "Constrain a given number to fall within a given range.",
+  "output": "number",
+  "message0": "Constrain %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "to %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "RANGE",
+      "check": "range",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Map\" (math_map) 1`] = `
+{
+  "inputsInline": false,
+  "type": "math_map",
+  "colour": 120,
+  "tooltip": "Scale a value from one range of numbers to another",
+  "output": "number",
+  "message0": "Map %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "Value: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "From: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "FROM_RANGE",
+      "check": "range",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "To: %1",
+  "args3": [
+    {
+      "type": "input_value",
+      "name": "TO_RANGE",
+      "check": "range",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Number\" (io_math_number) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_math_number",
+  "colour": 120,
+  "tooltip": "A numeric value, whole or decimal.",
+  "output": "number",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "NUM",
+      "type": "field_input",
+      "text": "0"
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Range\" (math_range) 1`] = `
+{
+  "inputsInline": true,
+  "type": "math_range",
+  "colour": 120,
+  "tooltip": "A range of numbers specified by a lower and upper bound.",
+  "output": "range",
+  "message0": "(%1,",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "FROM",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "%1)",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "TO",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Math Round\" (io_math_round) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_math_round",
+  "colour": 120,
+  "tooltip": "Round a value to the nearest whole number\\n-------------\\nRound: rounds up if .5 or higher, down otherwise\\nFloor: rounds down\\nCeiling: rounds up",
+  "output": "expression",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "name": "OPERATION",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Round",
+          "round"
+        ],
+        [
+          "Floor",
+          "floor"
+        ],
+        [
+          "Ceiling",
+          "ceiling"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "%1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Minute Settings\" (minute_settings) 1`] = `
+{
+  "inputsInline": false,
+  "type": "minute_settings",
+  "colour": 30,
+  "tooltip": "How would you like to specify minutes of the hour for your schedule?",
+  "message0": "Minute: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "MINUTE_BLOCK",
+      "check": "cron_minute",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Month Settings\" (month_settings) 1`] = `
+{
+  "inputsInline": false,
+  "type": "month_settings",
+  "colour": 30,
+  "tooltip": "How would you like to specify the months portion of your schedule?",
+  "message0": "Month: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "MONTH_BLOCK",
+      "check": "cron_month",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"On Schedule\" (on_schedule) 1`] = `
+{
+  "inputsInline": false,
+  "type": "on_schedule",
+  "colour": 30,
+  "tooltip": "A schedule to run the action, from every minute to once a year.",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "Schedule %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Months: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "MONTH",
+      "check": "cron_month",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Days: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "DAY",
+      "check": "cron_day",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "Hours: %1",
+  "args3": [
+    {
+      "type": "input_value",
+      "name": "HOUR",
+      "check": "cron_hour",
+      "align": "RIGHT"
+    }
+  ],
+  "message4": "Minutes: %1",
+  "args4": [
+    {
+      "type": "input_value",
+      "name": "MINUTE",
+      "check": "cron_minute",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"One Day\" (one_day) 1`] = `
+{
+  "inputsInline": false,
+  "type": "one_day",
+  "colour": 30,
+  "tooltip": "Runs during a particular day of the month.\\nRemember: not all months have days after 28!",
+  "output": "cron_day",
+  "message0": "On date: %1 %2",
+  "args0": [
+    {
+      "name": "DAY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "31",
+          "31"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"One Hour\" (one_hour) 1`] = `
+{
+  "inputsInline": false,
+  "type": "one_hour",
+  "colour": 30,
+  "tooltip": "Runs during a particular hour of the day.",
+  "output": "cron_hour",
+  "message0": "During hour: %1 %2",
+  "args0": [
+    {
+      "name": "HOUR",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"One Minute\" (one_minute) 1`] = `
+{
+  "inputsInline": false,
+  "type": "one_minute",
+  "colour": 30,
+  "tooltip": "Runs at a particular minute of the hour.",
+  "output": "cron_minute",
+  "message0": "At minute: %1 %2",
+  "args0": [
+    {
+      "name": "MINUTE",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ],
+        [
+          "7",
+          "7"
+        ],
+        [
+          "8",
+          "8"
+        ],
+        [
+          "9",
+          "9"
+        ],
+        [
+          "10",
+          "10"
+        ],
+        [
+          "11",
+          "11"
+        ],
+        [
+          "12",
+          "12"
+        ],
+        [
+          "13",
+          "13"
+        ],
+        [
+          "14",
+          "14"
+        ],
+        [
+          "15",
+          "15"
+        ],
+        [
+          "16",
+          "16"
+        ],
+        [
+          "17",
+          "17"
+        ],
+        [
+          "18",
+          "18"
+        ],
+        [
+          "19",
+          "19"
+        ],
+        [
+          "20",
+          "20"
+        ],
+        [
+          "21",
+          "21"
+        ],
+        [
+          "22",
+          "22"
+        ],
+        [
+          "23",
+          "23"
+        ],
+        [
+          "24",
+          "24"
+        ],
+        [
+          "25",
+          "25"
+        ],
+        [
+          "26",
+          "26"
+        ],
+        [
+          "27",
+          "27"
+        ],
+        [
+          "28",
+          "28"
+        ],
+        [
+          "29",
+          "29"
+        ],
+        [
+          "30",
+          "30"
+        ],
+        [
+          "31",
+          "31"
+        ],
+        [
+          "32",
+          "32"
+        ],
+        [
+          "33",
+          "33"
+        ],
+        [
+          "34",
+          "34"
+        ],
+        [
+          "35",
+          "35"
+        ],
+        [
+          "36",
+          "36"
+        ],
+        [
+          "37",
+          "37"
+        ],
+        [
+          "38",
+          "38"
+        ],
+        [
+          "39",
+          "39"
+        ],
+        [
+          "40",
+          "40"
+        ],
+        [
+          "41",
+          "41"
+        ],
+        [
+          "42",
+          "42"
+        ],
+        [
+          "43",
+          "43"
+        ],
+        [
+          "44",
+          "44"
+        ],
+        [
+          "45",
+          "45"
+        ],
+        [
+          "46",
+          "46"
+        ],
+        [
+          "47",
+          "47"
+        ],
+        [
+          "48",
+          "48"
+        ],
+        [
+          "49",
+          "49"
+        ],
+        [
+          "50",
+          "50"
+        ],
+        [
+          "51",
+          "51"
+        ],
+        [
+          "52",
+          "52"
+        ],
+        [
+          "53",
+          "53"
+        ],
+        [
+          "54",
+          "54"
+        ],
+        [
+          "55",
+          "55"
+        ],
+        [
+          "56",
+          "56"
+        ],
+        [
+          "57",
+          "57"
+        ],
+        [
+          "58",
+          "58"
+        ],
+        [
+          "59",
+          "59"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"One Month\" (one_month) 1`] = `
+{
+  "inputsInline": false,
+  "type": "one_month",
+  "colour": 30,
+  "tooltip": "Runs during a particular month.",
+  "output": "cron_month",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "MONTH",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "January",
+          "1"
+        ],
+        [
+          "February",
+          "2"
+        ],
+        [
+          "March",
+          "3"
+        ],
+        [
+          "April",
+          "4"
+        ],
+        [
+          "May",
+          "5"
+        ],
+        [
+          "June",
+          "6"
+        ],
+        [
+          "July",
+          "7"
+        ],
+        [
+          "August",
+          "8"
+        ],
+        [
+          "September",
+          "9"
+        ],
+        [
+          "October",
+          "10"
+        ],
+        [
+          "November",
+          "11"
+        ],
+        [
+          "December",
+          "12"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Some Months\" (some_months) 1`] = `
+{
+  "inputsInline": false,
+  "type": "some_months",
+  "colour": 30,
+  "tooltip": "Run during particular months.",
+  "output": "cron_month",
+  "message0": "Jan: %1 Feb: %2 Mar: %3 Apr: %4 %5",
+  "args0": [
+    {
+      "name": "JAN",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "FEB",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "MAR",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "APR",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "May: %1 Jun: %2 Jul: %3 Aug: %4 %5",
+  "args1": [
+    {
+      "name": "MAY",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "JUN",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "JUL",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "AUG",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message2": "Sep: %1 Oct: %2 Nov: %3 Dec: %4 %5",
+  "args2": [
+    {
+      "name": "SEP",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "OCT",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "NOV",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "name": "DEC",
+      "type": "field_checkbox",
+      "checked": false
+    },
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text Compare\" (text_compare) 1`] = `
+{
+  "inputsInline": true,
+  "type": "text_compare",
+  "colour": 180,
+  "tooltip": "Compare two chunks of text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1 %2",
+  "args1": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "includes",
+          "INC"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text Join\" (io_text_join) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_text_join",
+  "colour": 180,
+  "tooltip": "Join two pieces of text into one.\\n-\\nInputs:\\n---------------\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "+ %1",
+  "args1": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text Multiline\" (io_text_multiline) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_text_multiline",
+  "colour": 180,
+  "tooltip": "A String of longer-form text with newlines.",
+  "output": "String",
+  "message0": "P %1 %2",
+  "args0": [
+    {
+      "name": "TEXT",
+      "type": "field_multilinetext",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text Regex\" (text_regex) 1`] = `
+{
+  "inputsInline": false,
+  "type": "text_regex",
+  "colour": 180,
+  "tooltip": "Check for a regex match\\n-\\nInputs:\\n---------------\\n-\\nCasting:\\n---------------\\n-\\nOptions:\\n---------------",
+  "output": null,
+  "message0": "Regex: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "REGEX",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "Matches? %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "TARGET",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text Template\" (text_template) 1`] = `
+{
+  "inputsInline": true,
+  "type": "text_template",
+  "colour": 180,
+  "tooltip": "Render a text template. Special forms surrounded by {{ curly_braces }}\\nwill be replaced with their current value during the action run. (See\\n'Template Variables' below for a list of available forms.)\\n-\\nInputs:\\n---------------\\nText - the text to render with the template engine\\n-\\nTemplate Variables:\\n---------------\\n/{/{ variables.var_name }} - get the value of a variable you have defined\\n  with name 'var_name'\\n/{/{ vars.var_name }} - shorthand for same as above\\n/{/{ variables['var name'] }} - get the value of a variable you have\\n  defined with name 'var name' (allows spaces in variable names\\n/{/{ vars['var name'] }} - shorthand for same as above\\n/{/{ user.name }} - your user's name\\n/{/{ user.username }} - your user's username\\n/{/{ feeds['group_key.feed_key'].name }} - access a feed with key\\n  'group_key.feed_key' and get its name\\n/{/{ feeds[...].key }} - ...get its key\\n/{/{ feeds[...].value }} - ...get its last value",
+  "helpUrl": "https://shopify.github.io/liquid/basics/introduction/",
+  "output": null,
+  "message0": "{{ %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "TEMPLATE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Text\" (io_text) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_text",
+  "colour": 180,
+  "tooltip": "A String of text",
+  "output": "String",
+  "message0": "\\" %1 %2",
+  "args0": [
+    {
+      "name": "TEXT",
+      "type": "field_input",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Variables Get\" (io_variables_get) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_variables_get",
+  "colour": 240,
+  "tooltip": "Retrieve the value in a variable that was set earlier",
+  "output": "String",
+  "message0": "Get variable %1 %2",
+  "args0": [
+    {
+      "name": "VAR",
+      "type": "field_variable",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Variables Set\" (io_variables_set) 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_variables_set",
+  "colour": 240,
+  "tooltip": "Set a variable to a value",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "Set variable %1 = %2",
+  "args0": [
+    {
+      "name": "VAR",
+      "type": "field_variable",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Weather\" (weather) 1`] = `
+{
+  "inputsInline": false,
+  "type": "weather",
+  "colour": 360,
+  "tooltip": "Current and forecast weather conditions",
+  "output": null,
+  "message0": "Weather %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "At: %1 %2",
+  "args1": [
+    {
+      "name": "POWER_UP_ID",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading locations...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "When: %1 %2",
+  "args2": [
+    {
+      "name": "WEATHER_TIME",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Now",
+          "current"
+        ],
+        [
+          "In 5 minutes",
+          "forecast_minutes_5"
+        ],
+        [
+          "In 30 minutes",
+          "forecast_minutes_30"
+        ],
+        [
+          "This hour",
+          "forecast_hours_0"
+        ],
+        [
+          "In 1 hour",
+          "forecast_hours_1"
+        ],
+        [
+          "In 2 hours",
+          "forecast_hours_2"
+        ],
+        [
+          "In 6 hours",
+          "forecast_hours_6"
+        ],
+        [
+          "In 12 hours",
+          "forecast_hours_12"
+        ],
+        [
+          "In 24 hours",
+          "forecast_hours_24"
+        ],
+        [
+          "Today",
+          "forecast_days_0"
+        ],
+        [
+          "Tomorrow",
+          "forecast_days_1"
+        ],
+        [
+          "In 2 days",
+          "forecast_days_2"
+        ],
+        [
+          "In 3 days",
+          "forecast_days_3"
+        ],
+        [
+          "In 4 days",
+          "forecast_days_4"
+        ],
+        [
+          "In 5 days",
+          "forecast_days_5"
+        ],
+        [
+          "In 6 days",
+          "forecast_days_6"
+        ],
+        [
+          "In 7 days",
+          "forecast_days_7"
+        ],
+        [
+          "In 8 days",
+          "forecast_days_8"
+        ],
+        [
+          "In 9 days",
+          "forecast_days_9"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "Metric: %1 %2",
+  "args3": [
+    {
+      "name": "WEATHER_PROPERTY",
+      "type": "field_label",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message4": " %1 %2",
+  "args4": [
+    {
+      "name": "WEATHER_PROPERTY_HELP",
+      "type": "field_label",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"When Data Matching State\" (when_data_matching_state) 1`] = `
+{
+  "inputsInline": true,
+  "type": "when_data_matching_state",
+  "colour": 30,
+  "tooltip": "Run this Action when the specified Feed receives a data point that compares to its previous data point in the specified way.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatch State - the kind of change to watch for:\\n- \\"starts\\" - the last data point DID NOT match, but this one DOES\\n- \\"stops\\" - the last data point DID match, but this one DOES NOT\\n- \\"keeps\\" - both data points DO match\\n- \\"keeps not\\" - both data points DO NOT match\\nMatcher - a numerical or textual matcher block to use on both data points before making the above comparison",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "When %1 %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message1": "gets data that %1 %2",
+  "args1": [
+    {
+      "name": "MATCH_STATE",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "starts",
+          "starts"
+        ],
+        [
+          "stops",
+          "stops"
+        ],
+        [
+          "keeps",
+          "keeps"
+        ],
+        [
+          "keeps not",
+          "avoids"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "matching %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "MATCHER",
+      "check": "matcher",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"When Data Matching\" (when_data_matching) 1`] = `
+{
+  "inputsInline": true,
+  "type": "when_data_matching",
+  "colour": 30,
+  "tooltip": "Run this Action when the specified Feed receives data that matches the specified condition.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatcher - a numerical or textual matcher block to try new Feed data points with",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "When %1 %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message1": "gets data matching: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "MATCHER",
+      "check": "matcher",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"When Data\" (when_data) 1`] = `
+{
+  "inputsInline": true,
+  "type": "when_data",
+  "colour": 30,
+  "tooltip": "Run this action when a Feed receives a new data point.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "When %1 gets any data %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ]
+}
+`;
