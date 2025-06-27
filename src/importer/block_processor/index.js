@@ -7,6 +7,7 @@ export const toBlockJSON = block => ({
   inputsInline: block.inputsInline,
   type: block.type,
   colour: block.colour,
+  tooltip: block.tooltip,
   ...block.visualization,
   ...processConnections(block),
   ...processLines(block),

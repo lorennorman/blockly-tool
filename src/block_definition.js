@@ -1,8 +1,25 @@
-import { capitalize, filter, invokeMap } from 'lodash-es'
+import { capitalize, filter, invokeMap, map } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
-import { allBlockDefinitionsAndPaths, importBlockJson } from '#src/importer/block_importer.js'
+import { allBlockDefinitionsAndPaths } from '#src/importer/block_importer.js'
 
+
+const niceTemplate = tplString => {
+  const
+    lines = tplString.split("\n"),
+    firstLineBlank = /^\s*$/.test(lines[0]),
+    remainingLines = lines.slice(1, -1),
+    indentCounts = map(remainingLines, line => line.search(/\S/)),
+    firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts.slice(1, -1))
+
+  // ensure first line is blank and every other line has at least as much whitespace as the first line
+  if(firstLineBlank && firstLineLeastIndented) {
+    // drop the first line, remove X whitespace chars from the rest and join with newline
+    return map(remainingLines, line => line.slice(indentCounts[0])).join("\n")
+  }
+
+  return tplString
+}
 
 class BlockDefinition {
   definitionSet = null
@@ -11,9 +28,11 @@ class BlockDefinition {
 
   definitionJS = null
 
+  type = null
+
   name = null
 
-  type = null
+  description = ''
 
   colour = null
   color = null
@@ -26,29 +45,44 @@ class BlockDefinition {
 
   lines = null
 
+  template = null
+
+  inputs = []
+
+  fields = []
+
   disabled = false
 
   categories = []
 
   /** @returns BlockDefinition */
   static parseDefinition(rawBlockDefinition, definitionPath) {
+    // throw on any problems
     if(!rawBlockDefinition.type) {
       throw new Error('BlockDefinition: A unique `type` property is required for block definitions.')
     }
 
+    // defaults, desugars, localizations, transformations, assignments
     const blockDef = new BlockDefinition()
     blockDef.definitionPath = definitionPath
     blockDef.type = rawBlockDefinition.type
+    blockDef.name = rawBlockDefinition.name
+    blockDef.description = rawBlockDefinition.description
+      ? niceTemplate(rawBlockDefinition.description)
+      : ""
+    blockDef.tooltip = blockDef.description.split("\n")[0]
     // blockDef.definitionSet = definitionSet
     // blockDef.definitionJS = rawBlockDefinition
     // blockDef.disabled = !!rawBlockDefinition.disabled
     blockDef.visualization = rawBlockDefinition.visualization
     blockDef.connections = rawBlockDefinition.connections
     blockDef.lines = rawBlockDefinition.lines
+    blockDef.template = rawBlockDefinition.template
     blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
     blockDef.color = blockDef.colour
     blockDef.inputsInline = rawBlockDefinition.inputsInline || false
-    blockDef.name = rawBlockDefinition.name
+
+    // warnings on any data that's missing, ugly, etc
     if(!blockDef.name) {
       // if no name given, humanize the type property as a default
       console.warn(`No "name" property provided for block: "${rawBlockDefinition.type}" (${definitionPath})`)

@@ -7,6 +7,11 @@ import BlockDefinition from "#src/block_definition.js"
 const BLOCK_FIXTURE = {
   type: 'test_block_fixture',
   name: 'Test Block',
+  description: `
+    Line 1
+    Line 2
+    Line 3
+  `,
   inputsInline: true,
   color: 256,
 }
@@ -25,7 +30,7 @@ const fixture = (options = {}) => {
   return newFixture
 }
 
-describe("BlockDefinition", { only: true }, () => {
+describe("BlockDefinition", () => {
   describe("parseDefinition", () => {
     it("clean parse, properties available on instance", () => {
       // parses without issue
@@ -33,9 +38,10 @@ describe("BlockDefinition", { only: true }, () => {
       // fields are available on the class instance
       assert.equal(blockDefinition.type, BLOCK_FIXTURE.type)
       assert.equal(blockDefinition.name, BLOCK_FIXTURE.name)
+      assert.equal(blockDefinition.description, "Line 1\nLine 2\nLine 3")//BLOCK_FIXTURE.description)
       assert.equal(blockDefinition.definitionPath, 'path/to/block')
-      assert.equal(blockDefinition.inputsInline, true)
-      assert.equal(blockDefinition.colour, 256)
+      assert.equal(blockDefinition.inputsInline, BLOCK_FIXTURE.inputsInline)
+      assert.equal(blockDefinition.colour, BLOCK_FIXTURE.color)
     })
 
     it("requires a type", () => {

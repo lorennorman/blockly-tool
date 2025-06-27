@@ -17,7 +17,8 @@ const
     '**/*extension*.js',
     '**/*mixin*.js',
     '**/*mutator*.js',
-    '**/*example*.js'
+    '**/*shadow*.js',
+    '**/*example*.js',
   ],
 
   gatherBlockFiles = async () => {
@@ -40,6 +41,13 @@ const
   BLOCK_KEYS = [
     "type",
     "name",
+    "primaryCategory",
+    "color",
+    "bytecodeKey",
+    "inputs",
+    "fields",
+    "template",
+    "description",
     "disabled",
     "generators",
     "regenerators",

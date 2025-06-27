@@ -1,7 +1,7 @@
 import { includes, isArray, isObject, isString, keys, map, range, reduce, without } from 'lodash-es'
 
 
-const defaultAlignment = "RIGHT"
+const DEFAULT_ALIGNMENT = "RIGHT"
 
 const processLines = block => {
   // grab block settings
@@ -142,7 +142,7 @@ const parseLine = line => {
 }
 
 const parseStringLine = text =>
- ({ alignment: defaultAlignment, lineValue: { text } })
+ ({ alignment: DEFAULT_ALIGNMENT, lineValue: { text } })
 
 const parseArrayLine = line => {
   const [ text, second ] = line
@@ -164,14 +164,14 @@ const parseArrayLine = line => {
   throw new Error(`second index invalid for line: ${JSON.stringify(line, null, 2)}`)
 }
 
-const validAlignments = [ 'CENTER', 'CENTRE', 'RIGHT', 'LEFT' ]
+const VALID_ALIGNMENTS = [ 'CENTER', 'CENTRE', 'RIGHT', 'LEFT' ]
 const parseAlignment = alignmentString => {
   // if the input is falsy, return default alignment
-  if( !alignmentString ) { return defaultAlignment }
+  if( !alignmentString ) { return DEFAULT_ALIGNMENT }
 
   alignmentString = alignmentString.toUpperCase()
   // throw if the downcased string is not in the valid list
-  if( !includes(validAlignments, alignmentString) ) {
+  if( !includes(VALID_ALIGNMENTS, alignmentString) ) {
     throw new Error(`Alignment not valid: ${alignmentString}`)
   }
 
