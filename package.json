@@ -13,6 +13,8 @@
     "start": "vite --force",
     "test": "node --test",
     "test-watch": "node --test --watch",
+    "test-snapshots": "node --test test/app/blocks/snapshots/block_snapshots_test.js",
+    "test-update-snapshots": "node --test --test-update-snapshots test/app/blocks/snapshots/block_snapshots_test.js",
     "lint": "eslint src/",
     "lint-export": "eslint export/",
     "build": "npm run export && vite build",
