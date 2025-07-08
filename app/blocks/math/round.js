@@ -1,40 +1,40 @@
 export default {
   type: "io_math_round",
-
-  toolbox: { },
-
-  visualization: {
-    inputsInline: true,
-    colour: 120,
-    tooltip: [
-      "Round a value to the nearest whole number",
-      "-------------",
-      "Round: rounds up if .5 or higher, down otherwise",
-      "Floor: rounds down",
-      "Ceiling: rounds up",
-    ].join("\n"),
-  },
+  bytecodeKey: "round",
+  name: "Round/Floor/Ceiling",
+  description: "Round a value to the nearest whole number via round, floor, or ceiling functions",
+  color: 120,
 
   connections: {
     mode: "value",
     output: "expression",
   },
 
-  lines: [
-    [ "%OPERATION", {
-      field: "OPERATION",
+  inputs: {
+    VALUE: {
+      description: "A value you'd like to round to a whole number",
+      bytecodeProperty: "value",
+      shadow: "io_math_number"
+    }
+  },
+
+  fields: {
+    OPERATION: {
+      description: `
+        Round: rounds up if .5 or higher, down otherwise
+        Floor: rounds down
+        Ceiling: rounds up
+      `,
+      bytecodeProperty: "operation",
       options: [
         ["Round", "round"],
         ["Floor", "floor"],
         ["Ceiling", "ceiling"],
       ]
-    }],
+    }
+  },
 
-    [ "%VALUE", {
-      inputValue: "VALUE",
-      shadow: "io_math_number"
-    }],
-  ],
+  template: "%OPERATION %VALUE",
 
   generators: {
     json: (block, generator) => {
