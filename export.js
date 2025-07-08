@@ -23,7 +23,7 @@ write("export/toolbox.json", await toolbox.toBlocklyJSONString())
 
 // select blocks from the workspace and toolbox
 const blocks = definitionSet.getBlocksFrom(workspace, toolbox)
-write("export/blocks.json", await blocks.toBlocklyJSON())
+write("export/blocks.json", blocks.toBlocklyJSON())
 
 // export blockly_app.js
 write("export/blockly.js", await BlocklyJSExporter.exportFor(workspace, toolbox, blocks))
