@@ -1,4 +1,4 @@
-import { compact, forEach, isEmpty, isString, keyBy, keys, map, mapValues, filter, flatMap, reduce, without } from 'lodash-es'
+import { compact, forEach, identity, isEmpty, isString, keyBy, keys, map, mapValues, filter, flatMap, pickBy, reduce, without } from 'lodash-es'
 
 import toolboxConfig from '../../app/toolbox/index.js'
 import { importBlockDefinitions } from './block_importer.js'
@@ -156,54 +156,67 @@ const
       type: block.type,
       inputs: blockToInputs(block),
       fields: blockToFields(block)
-    }, block.toolbox.label
+    }, block.toolbox?.label
       ? makeLabel(block.toolbox.label)
       : null
   ]),
 
   makeLabel = text => ({ kind: 'label', text }),
 
-  blockToInputs = ({ lines }) => {
-    if(!lines) { return }
-
-    const inputs =
-      mapValues(
-        keyBy(
-          filter(
-            map(lines, '[1]'),
+  blockToInputs = ({ lines, inputs }) => {
+    if(lines) {
+      const inputValues =
+        mapValues(
+          keyBy(
+            filter(
+              map(lines, '[1]'),
+              "inputValue"),
             "inputValue"),
-          "inputValue"),
-        definitionPropsToInputs)
+          definitionPropsToInputs)
 
-    return isEmpty(inputs) ? undefined : inputs
+      return isEmpty(inputValues) ? undefined : inputValues
+    }
+
+    if(inputs) {
+      const inputValues = mapValues(inputs, definitionPropsToInputs)
+
+      return isEmpty(inputValues) ? undefined : inputValues
+    }
   },
 
-  blockToFields = ({ lines }) => {
-    if(!lines) { return }
-    // get every field that contains a "value" property
-    const fields =
-      reduce(
-        map(
-          filter(
-            map(lines, '[1]'),
+  // produces:
+  // {
+  //   FIELD_NAME: field_value,
+  //   ...
+  // }
+  blockToFields = ({ lines, fields }) => {
+    if(lines) {
+      // get every field that contains a "value" property
+      const defaultFields =
+        reduce(
+          map(
+            filter(
+              map(lines, '[1]'),
+              "fields"),
             "fields"),
-          "fields"),
-        (acc, fields) => {
-          forEach(fields, (field, fieldKey) => {
-            if(field.value){
-              acc[fieldKey] = field.value
-            }
-          })
+          (acc, fields) => {
+            forEach(fields, (field, fieldKey) => {
+              if(field.value){
+                acc[fieldKey] = field.value
+              }
+            })
 
-          return acc
-        }, {})
+            return acc
+          }, {})
 
-    // produces:
-    // {
-    //   FIELD_NAME: field_value,
-    //   ...
-    // }
-    return isEmpty(fields) ? undefined : fields
+      return isEmpty(defaultFields) ? undefined : defaultFields
+    }
+
+    if(fields) {
+      const defaultFields = pickBy(mapValues(fields, "value"), identity)
+
+      return isEmpty(defaultFields) ? undefined : defaultFields
+    }
   },
 
   definitionPropsToInputs = ({ inputValue, block, shadow }) => {
