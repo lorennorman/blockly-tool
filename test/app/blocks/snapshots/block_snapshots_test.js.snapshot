@@ -3026,50 +3026,6 @@ exports[`Block Snapshots > \"Math Range\" (math_range) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Math Round\" (io_math_round) 1`] = `
-{
-  "inputsInline": true,
-  "type": "io_math_round",
-  "colour": 120,
-  "tooltip": "Round a value to the nearest whole number\\n-------------\\nRound: rounds up if .5 or higher, down otherwise\\nFloor: rounds down\\nCeiling: rounds up",
-  "output": "expression",
-  "message0": "%1 %2",
-  "args0": [
-    {
-      "name": "OPERATION",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "Round",
-          "round"
-        ],
-        [
-          "Floor",
-          "floor"
-        ],
-        [
-          "Ceiling",
-          "ceiling"
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "%1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "VALUE",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
 exports[`Block Snapshots > \"Minute Settings\" (minute_settings) 1`] = `
 {
   "inputsInline": false,
@@ -3758,6 +3714,43 @@ exports[`Block Snapshots > \"One Month\" (one_month) 1`] = `
     },
     {
       "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > \"Round/Floor/Ceiling\" (io_math_round) 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_math_round",
+  "colour": 120,
+  "tooltip": "Round a value to the nearest whole number via round, floor, or ceiling functions",
+  "output": "expression",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "name": "OPERATION",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Round",
+          "round"
+        ],
+        [
+          "Floor",
+          "floor"
+        ],
+        [
+          "Ceiling",
+          "ceiling"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE",
       "align": "RIGHT"
     }
   ]
