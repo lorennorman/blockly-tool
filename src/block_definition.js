@@ -78,6 +78,8 @@ class BlockDefinition {
     blockDef.connections = rawBlockDefinition.connections
     blockDef.lines = rawBlockDefinition.lines
     blockDef.template = rawBlockDefinition.template
+    blockDef.inputs = rawBlockDefinition.inputs
+    blockDef.fields = rawBlockDefinition.fields
     blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
     blockDef.color = blockDef.colour
     blockDef.inputsInline = rawBlockDefinition.inputsInline || false
