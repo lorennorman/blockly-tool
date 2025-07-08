@@ -34,4 +34,32 @@ export default {
     Subject: %SUBJECT
     Body: %BODY
   `,
+
+  generators: {
+    json: (block, generator) => {
+      const payload = {
+        emailAction: {
+          subjectTemplate: JSON.parse(generator.valueToCode(block, 'SUBJECT', 0) || null),
+          bodyTemplate: JSON.parse(generator.valueToCode(block, 'BODY', 0) || null)
+        }
+      }
+
+      return JSON.stringify(payload)
+    }
+  },
+
+  regenerators: {
+    json: (blockObject, helpers) => {
+      const payload = blockObject.emailAction
+
+      return {
+        type: "action_email",
+        inputs: {
+          // TODO: regenerators need to support nested shadow blocks
+          SUBJECT: helpers.expressionToBlock(payload.subjectTemplate, { shadow: 'text_template' }),
+          BODY: helpers.expressionToBlock(payload.bodyTemplate, { shadow: 'text_template' })
+        }
+      }
+    }
+  }
 }
