@@ -1,4 +1,4 @@
-import { includes, isArray, isObject, isString, keys, map, range, reduce, without } from 'lodash-es'
+import { includes, isArray, isEmpty, isObject, isString, keys, map, range, reduce, trim, without } from 'lodash-es'
 
 
 const DEFAULT_ALIGNMENT = "RIGHT"
@@ -226,10 +226,12 @@ const
   ARG_REGEX = /(%[a-zA-Z]\w*)(?:$|\s)/gm
 
 export const processTemplate = blockDefinition => {
-  const { template, inputs, field } = blockDefinition
+  const { template, inputs={}, fields={} } = blockDefinition
   if (!template) { return {} }
 
-  const msgAndArgs = {}
+  const
+    msgAndArgs = {},
+    covered = []
   // break template on newlines, each line:
   niceTemplate(template).split("\n").forEach((line, idx) => {
     // - extract alignment
@@ -246,7 +248,7 @@ export const processTemplate = blockDefinition => {
     // - extract data refs, replace with indices
     const matches = line.match(ARG_REGEX) || []
     matches.forEach((match, matchIdx) => {
-      line = line.replace(match, `%${matchIdx+1}`)
+      line = line.replace(trim(match), `%${matchIdx+1}`)
     })
 
     // - append default index if no others present
@@ -260,11 +262,44 @@ export const processTemplate = blockDefinition => {
     const args = []
 
     matches.forEach(match => {
-      args.push({
-        type: "input_value",
-        name: match.slice(1),
-        align: alignment
-      })
+      const matchName = trim(match.slice(1)) // strip the leading %
+
+      // error if already covered
+      if(covered.includes(matchName)) {
+        throw new Error(`Duplicate input/field name (${matchName}) referenced in template (for block: ${blockDefinition.type})`)
+      }
+
+      // find the match input or field
+      if(inputs[matchName]) {
+        // add the input arg
+        args.push({
+          type: "input_value",
+          name: matchName,
+          align: alignment
+        })
+
+      } else if(fields[matchName]) {
+        // add the field arg
+        const
+          fieldData = fields[matchName],
+          type = fieldTypeFromProperties(fieldData)
+
+        args.push({
+          name: matchName,
+          type,
+          checked: fieldData.checked,
+          options: fieldData.options,
+          text: fieldData.text || fieldData.multiline_text || fieldData.label || "",
+          spellcheck: fieldData.spellcheck,
+          value: fieldData.value,
+        })
+
+      } else {
+        throw new Error(`No input or field with name ${matchName} (processing block: ${blockDefinition.type})`)
+      }
+
+      // remember we covered this one
+      covered.push(matchName)
     })
 
     // add a dummy if no others
@@ -277,6 +312,16 @@ export const processTemplate = blockDefinition => {
 
     msgAndArgs[`args${idx}`] = args
   })
+
+  // warn on any uncovered inputs or fields
+  const unusedInputs = without(keys(inputs), ...covered)
+  if(!isEmpty(unusedInputs)) {
+    throw new Error(`Some inputs where not used in the template: ${unusedInputs}`)
+  }
+  const unusedFields = without(keys(fields), ...covered)
+  if(!isEmpty(unusedFields)) {
+    throw new Error(`Some fields where not used in the template: ${unusedFields}`)
+  }
 
   return msgAndArgs
 }
@@ -297,4 +342,31 @@ const niceTemplate = tplString => {
   }
 
   return tplString
+}
+
+const fieldTypeFromProperties = fieldData => {
+  const fieldKeys = keys(fieldData)
+
+  let finalType
+
+  finalType = (fieldData.options && "field_dropdown")
+    || (includes(fieldKeys, "checked") && "field_checkbox")
+    || (includes(fieldKeys, "text") && "field_input")
+    || (includes(fieldKeys, "label") && "field_label")
+    || (includes(fieldKeys, "serializable_label") && "field_label_serializable")
+    || (includes(fieldKeys, "multiline_text") && "field_multilinetext")
+
+  if(fieldData.type) {
+    if(finalType && finalType !== fieldData.type) {
+      throw new Error(`Given type (${fieldData.type}) is different than the discovered type (${finalType})`)
+    }
+
+    finalType = fieldData.type
+  }
+
+  if(!finalType){
+    throw new Error(`No type found or discovered in field properties: ${JSON.stringify(fieldData, null, 2)}`)
+  }
+
+  return finalType
 }
