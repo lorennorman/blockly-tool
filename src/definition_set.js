@@ -18,6 +18,12 @@ export class DefinitionSet {
   /** @type BlockDefinition[] */
   blocks = []
 
+  mixins = {}
+  extensions = {}
+  mutators = {}
+  generators = {}
+  regenerators = {}
+
   getBlocksFrom(...referrers) {
     return {
       toBlocklyJSON: () => BlockDefinition.allToBlocklyJSONString(this.blocks)
@@ -37,6 +43,11 @@ export class DefinitionSet {
       blocks: this.blocks,
       toolbox: this.toolboxes[0],
       workspace: this.workspaces[0],
+      mixins: this.mixins,
+      extensions: this.extensions,
+      mutators: this.mutators,
+      generators: this.generators,
+      regenerators: this.regenerators,
     }))
   }
 }
@@ -57,13 +68,17 @@ DefinitionSet.load = async function() {
   // TODO: fields
   // TODO: shadows
   // TODO: inputs
-  // TODO: mixins
-  // TODO: extensions
-  // TODO: mutators
+
+  definitionSet.mixins = rawDefinitions.mixins
+  definitionSet.extensions = rawDefinitions.extensions
+  // TODO: update mutator definition/template/export routine
+  definitionSet.mutators = rawDefinitions.mutators
 
   forEach(rawDefinitions.blocks, ({ definition, path }) => {
     const blockDef = BlockDefinition.parseRawDefinition(definition, path, definitionSet)
     definitionSet.blocks.push(blockDef)
+    definitionSet.generators[blockDef.type] = blockDef.generators
+    definitionSet.regenerators[blockDef.type] = blockDef.regenerators
   })
 
   forEach(rawDefinitions.toolboxes, rawToolboxDef => {

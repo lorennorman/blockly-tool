@@ -51,6 +51,10 @@ class BlockDefinition {
 
   fields = []
 
+  generators = {}
+
+  regenerators = {}
+
   disabled = false
 
   categories = []
@@ -101,6 +105,8 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   blockDef.template = rawBlockDefinition.template
   blockDef.inputs = rawBlockDefinition.inputs
   blockDef.fields = rawBlockDefinition.fields
+  blockDef.generators = rawBlockDefinition.generators
+  blockDef.regenerators = rawBlockDefinition.regenerators
   blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
   blockDef.color = blockDef.colour
   blockDef.inputsInline = rawBlockDefinition.inputsInline || false
@@ -114,15 +120,6 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
 
   return blockDef
 }
-
-/** @returns BlockDefinition[] */
-// BlockDefinition.loadAll = async function(definitionSet) {
-//   const allDefinitions = allBlockDefinitionsAndPaths.map(({ definition, path }) =>
-//     BlockDefinition.parseRawDefinition(definition, path)
-//   )
-
-//   return allDefinitions
-// }
 
 BlockDefinition.allToBlocklyJSONString = function(blockDefinitions) {
   return JSON.stringify(this.allToBlocklyJSON(blockDefinitions), null, 2) + "\n"
