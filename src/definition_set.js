@@ -80,25 +80,37 @@ DefinitionSet.load = async function() {
     definitionSet.blocks.push(blockDef)
 
     // process inline mixins:
-    const inlineMixins = definition.mixins
+    const mixins = definition.mixins
     // could be a list of mixin names and objects
-    if(isArray(inlineMixins)) {
+    if(isArray(mixins)) {
       // step through each mixin
-      forEach(inlineMixins, mixin => {
+      forEach(mixins, mixin => {
         if(isString(mixin)){
           // TODO: validate named mixins actually exist
+
         } else {
           // objects get assigned up into the definition set's mixins
+          // TODO: error if any keys exist
           assign(definitionSet.mixins, mixin)
         }
       })
 
     // could be a single mixin
-    } else if(isObject(inlineMixins)) {
-      assign(definitionSet.mixins, inlineMixins)
+    } else if(isObject(mixins)) {
+      // TODO: error if any keys exist
+      assign(definitionSet.mixins, mixins)
     }
 
-    // TODO: inline extensions defined on blocks
+    // process inline extensions:
+    const extensions = definition.extensions
+    if(isArray(extensions)) {
+      // TODO: check named extensions actually exist
+
+    } else if(isObject(extensions)) {
+      // TODO: error if any keys exist
+      assign(definitionSet.extensions, extensions)
+    }
+
     definitionSet.generators[blockDef.type] = blockDef.generators
     definitionSet.regenerators[blockDef.type] = blockDef.regenerators
   })
