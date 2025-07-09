@@ -34,6 +34,7 @@ export const BlocklyJSExporter = {
 
 const
   exportToolboxJs = toolboxDefinition => {
+    // TODO: fix category callbacks
     const
       categoriesWithCallbacks = filter(toolboxDefinition, "callback"),
       // { "Category Name": () -> { /* category callback */ }}

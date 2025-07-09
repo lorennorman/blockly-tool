@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { forEach } from 'lodash-es'
+import { forEach, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
@@ -63,6 +63,7 @@ DefinitionSet.load = async function() {
 
   const
     rawDefinitions = await DefinitionLoader.loadAll(),
+    enabledBlocks = reject(rawDefinitions.blocks, "definition.disabled"),
     definitionSet = new DefinitionSet()
 
   // TODO: fields
@@ -74,9 +75,11 @@ DefinitionSet.load = async function() {
   // TODO: update mutator definition/template/export routine
   definitionSet.mutators = rawDefinitions.mutators
 
-  forEach(rawDefinitions.blocks, ({ definition, path }) => {
+  forEach(enabledBlocks, ({ definition, path }) => {
     const blockDef = BlockDefinition.parseRawDefinition(definition, path, definitionSet)
     definitionSet.blocks.push(blockDef)
+    // TODO: inline mixins defined on blocks
+    // TODO: inline extensions defined on blocks
     definitionSet.generators[blockDef.type] = blockDef.generators
     definitionSet.regenerators[blockDef.type] = blockDef.regenerators
   })

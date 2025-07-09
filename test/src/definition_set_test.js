@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import { describe, it, beforeEach, afterEach } from 'node:test'
+import { filter } from "lodash-es"
 import { assert } from 'chai'
 
 import DefinitionSet from "#src/definition_set.js"
@@ -29,9 +30,10 @@ describe("DefinitionSet", function() {
       assert.instanceOf(this.definitionSet.toolboxes[0], ToolboxDefinition)
     })
 
-    it("has blocks", function() {
+    it("has blocks, but not disabled blocks", function() {
       assert.isAbove(this.definitionSet.blocks.length, 1)
       assert.instanceOf(this.definitionSet.blocks[0], BlockDefinition)
+      assert.isEmpty(filter(this.definitionSet.blocks, "disabled"))
     })
 
     it("has mixins", function() {
