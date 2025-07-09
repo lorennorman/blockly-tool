@@ -13,16 +13,6 @@ export class DefinitionSet {
   /** @type BlockDefinition[] */
   blocks = []
 
-  static async load() {
-    const newDefinitionSet = new DefinitionSet()
-
-    newDefinitionSet.workspaces = WorkspaceDefinition.loadAll()
-    newDefinitionSet.toolboxes = await ToolboxDefinition.loadAll()
-    newDefinitionSet.blocks = await BlockDefinition.loadAll(newDefinitionSet)
-
-    return newDefinitionSet
-  }
-
   getBlocksFrom(...referrers) {
     return {
       toBlocklyJSON: () => BlockDefinition.allToBlocklyJSONString(this.blocks)
@@ -35,3 +25,39 @@ export class DefinitionSet {
 }
 
 export default DefinitionSet
+
+DefinitionSet.load = async function() {
+  // locate all files for all definition types
+  //   verify shape of each raw definition type (required and optional keys -> value types)
+  // hydrate interlinked definition instances
+  //   de-sugar raw definitions
+  //   verify referenced definitions exist
+
+  const
+    rawDefinitions = await DefinitionLoader.loadAll(),
+    definitionSet = new DefinitionSet()
+
+  // TODO: fields
+  // TODO: shadows
+  // TODO: inputs
+  // TODO: mixins
+  // TODO: extensions
+  // TODO: mutators
+
+  forEach(rawDefinitions.blocks, ({ definition, path }) => {
+    const blockDef = BlockDefinition.parseRawDefinition(definition, path, definitionSet)
+    definitionSet.blocks.push(blockDef)
+  })
+
+  forEach(rawDefinitions.toolboxes, rawToolboxDef => {
+    const toolboxDef = ToolboxDefinition.parseRawDefinition(rawToolboxDef, definitionSet)
+    definitionSet.toolboxes.push(toolboxDef)
+  })
+
+  forEach(rawDefinitions.workspaces, rawWorkspaceDef => {
+    const workspaceDef = WorkspaceDefinition.parseRawDefinition(rawWorkspaceDef, definitionSet)
+    definitionSet.workspaces.push(workspaceDef)
+  })
+
+  return definitionSet
+}

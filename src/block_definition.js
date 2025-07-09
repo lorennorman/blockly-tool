@@ -55,61 +55,6 @@ class BlockDefinition {
 
   categories = []
 
-  /** @returns BlockDefinition */
-  static parseDefinition(rawBlockDefinition, definitionPath) {
-    // throw on any problems
-    if(!rawBlockDefinition.type) {
-      throw new Error('BlockDefinition: A unique `type` property is required for block definitions.')
-    }
-
-    // defaults, desugars, localizations, transformations, assignments
-    const blockDef = new BlockDefinition()
-    blockDef.definitionPath = definitionPath
-    blockDef.type = rawBlockDefinition.type
-    blockDef.name = rawBlockDefinition.name
-    blockDef.description = rawBlockDefinition.description
-      ? niceTemplate(rawBlockDefinition.description)
-      : ""
-    blockDef.tooltip = blockDef.description.split("\n")[0]
-    // blockDef.definitionSet = definitionSet
-    // blockDef.definitionJS = rawBlockDefinition
-    // blockDef.disabled = !!rawBlockDefinition.disabled
-    blockDef.visualization = rawBlockDefinition.visualization
-    blockDef.connections = rawBlockDefinition.connections
-    blockDef.lines = rawBlockDefinition.lines
-    blockDef.template = rawBlockDefinition.template
-    blockDef.inputs = rawBlockDefinition.inputs
-    blockDef.fields = rawBlockDefinition.fields
-    blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
-    blockDef.color = blockDef.colour
-    blockDef.inputsInline = rawBlockDefinition.inputsInline || false
-
-    // warnings on any data that's missing, ugly, etc
-    if(!blockDef.name) {
-      // if no name given, humanize the type property as a default
-      console.warn(`No "name" property provided for block: "${rawBlockDefinition.type}" (${definitionPath})`)
-      blockDef.name = rawBlockDefinition.type.split(/[\W_]+/).map(capitalize).join(" ").replace(/^io /i, "")
-    }
-
-    return blockDef
-  }
-
-  /** @returns BlockDefinition[] */
-  static async loadAll(definitionSet) {
-    const allDefinitions = allBlockDefinitionsAndPaths.map(({ definition, path }) =>
-      BlockDefinition.parseDefinition(definition, path)
-    )
-
-    return allDefinitions
-  }
-
-  static allToBlocklyJSONString(blockDefinitions) {
-    return JSON.stringify(this.allToBlocklyJSON(blockDefinitions), null, 2) + "\n"
-  }
-
-  static allToBlocklyJSON(blockDefinitions) {
-    return invokeMap(blockDefinitions, 'toBlocklyJSON')
-  }
 
   getCategories() {
     return (this.definitionSet
@@ -129,3 +74,60 @@ class BlockDefinition {
 }
 
 export default BlockDefinition
+
+
+/** @returns BlockDefinition */
+BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath, definitionSet) {
+  // throw on any problems
+  if(!rawBlockDefinition.type) {
+    throw new Error('BlockDefinition: A unique `type` property is required for block definitions.')
+  }
+
+  // defaults, desugars, localizations, transformations, assignments
+  const blockDef = new BlockDefinition()
+  blockDef.definitionPath = definitionPath
+  blockDef.type = rawBlockDefinition.type
+  blockDef.name = rawBlockDefinition.name
+  blockDef.description = rawBlockDefinition.description
+    ? niceTemplate(rawBlockDefinition.description)
+    : ""
+  blockDef.tooltip = blockDef.description.split("\n")[0]
+  // blockDef.definitionSet = definitionSet
+  // blockDef.definitionJS = rawBlockDefinition
+  // blockDef.disabled = !!rawBlockDefinition.disabled
+  blockDef.visualization = rawBlockDefinition.visualization
+  blockDef.connections = rawBlockDefinition.connections
+  blockDef.lines = rawBlockDefinition.lines
+  blockDef.template = rawBlockDefinition.template
+  blockDef.inputs = rawBlockDefinition.inputs
+  blockDef.fields = rawBlockDefinition.fields
+  blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
+  blockDef.color = blockDef.colour
+  blockDef.inputsInline = rawBlockDefinition.inputsInline || false
+
+  // warnings on any data that's missing, ugly, etc
+  if(!blockDef.name) {
+    // if no name given, humanize the type property as a default
+    console.warn(`No "name" property provided for block: "${rawBlockDefinition.type}" (${definitionPath})`)
+    blockDef.name = rawBlockDefinition.type.split(/[\W_]+/).map(capitalize).join(" ").replace(/^io /i, "")
+  }
+
+  return blockDef
+}
+
+/** @returns BlockDefinition[] */
+// BlockDefinition.loadAll = async function(definitionSet) {
+//   const allDefinitions = allBlockDefinitionsAndPaths.map(({ definition, path }) =>
+//     BlockDefinition.parseDefinition(definition, path)
+//   )
+
+//   return allDefinitions
+// }
+
+BlockDefinition.allToBlocklyJSONString = function(blockDefinitions) {
+  return JSON.stringify(this.allToBlocklyJSON(blockDefinitions), null, 2) + "\n"
+}
+
+BlockDefinition.allToBlocklyJSON = function(blockDefinitions) {
+  return invokeMap(blockDefinitions, 'toBlocklyJSON')
+}
