@@ -5,6 +5,7 @@
   "type": "module",
   "imports": {
     "#app/*.js": "./app/*.js",
+    "#app/*.json": "./app/*.json",
     "#src/*.js": "./src/*.js",
     "#test/*.js": "./test/*.js"
   },
