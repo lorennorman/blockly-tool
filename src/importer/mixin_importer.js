@@ -1,4 +1,3 @@
-import util from 'util'
 import { glob } from 'glob'
 import { assign, camelCase, fromPairs, isArray, isString } from 'lodash-es'
 
