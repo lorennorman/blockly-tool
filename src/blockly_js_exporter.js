@@ -26,7 +26,7 @@ export const BlocklyJSExporter = {
       section("Extensions", exportExtensionJs(extensions)),
       section("Mutators", exportMutatorJs(mutators)),
       section("Generators", exportGeneratorJs(generators)),
-      section("Regenerators", await exportRegeneratorJs(regenerators)),
+      section("Regenerators", exportRegeneratorJs(regenerators)),
       section("Blockly API Wrapper", readFileSync(`./src/importer/blockly_api.js`))
     ].join("")
   }
@@ -34,9 +34,8 @@ export const BlocklyJSExporter = {
 
 const
   exportToolboxJs = toolboxDefinition => {
-    // TODO: fix category callbacks
     const
-      categoriesWithCallbacks = filter(toolboxDefinition, "callback"),
+      categoriesWithCallbacks = filter(toolboxDefinition.categories, "callback"),
       // { "Category Name": () -> { /* category callback */ }}
       categoriesObject = mapValues(keyBy(categoriesWithCallbacks, "name"), "callback"),
       renderedCategoryCallbacks = `const categoryCallbacks = ${ renderObject(categoriesObject) }`

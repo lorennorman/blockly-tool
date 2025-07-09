@@ -31,7 +31,7 @@ export class DefinitionSet {
   }
 
   getCategories() {
-    return this.toolboxes[0].getCategories()
+    return this.toolboxes[0].categories
   }
 
   async export(options = {}) {

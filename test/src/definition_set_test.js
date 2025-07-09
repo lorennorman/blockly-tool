@@ -83,7 +83,9 @@ describe("DefinitionSet", function() {
       // blockly_app.js
       assert(fs.existsSync("./tmp/blockly_app.js"))
       const jsContents = fs.readFileSync("./tmp/blockly_app.js").toString()
+      // console.log(jsContents)
       assert.include(jsContents, "\n// Toolbox\n")
+      assert.include(jsContents, "Variables: workspace => {")
       assert.include(jsContents, "\n// Mixins\n")
       assert.include(jsContents, "const allMixins = {")
       assert.include(jsContents, "\n// Extensions\n")
@@ -96,7 +98,6 @@ describe("DefinitionSet", function() {
       assert.include(jsContents, "const blockRegenerators = {")
       assert.include(jsContents, "\n// Blockly API Wrapper\n")
 
-      // console.log(fs.readFileSync("./tmp/blockly_app.js").toString())
     })
 
     afterEach(function() {

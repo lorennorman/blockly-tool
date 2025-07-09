@@ -13,9 +13,8 @@ class WorkspaceDefinition {
 export default WorkspaceDefinition
 
 
-WorkspaceDefinition.parseRawDefinition = function(definition, path, definitionSet) {
+WorkspaceDefinition.parseRawDefinition = function(definition, definitionSet) {
   const workspaceDef = new WorkspaceDefinition()
-  workspaceDef.definitionPath = path
   workspaceDef.definitionStatic = definition
 
   return workspaceDef
