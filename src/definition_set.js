@@ -80,7 +80,7 @@ DefinitionSet.load = async function() {
     definitionSet.blocks.push(blockDef)
 
     // process inline mixins:
-    const mixins = definition.mixins
+    const { mixins } = definition
     // could be a list of mixin names and objects
     if(isArray(mixins)) {
       // step through each mixin
@@ -102,13 +102,19 @@ DefinitionSet.load = async function() {
     }
 
     // process inline extensions:
-    const extensions = definition.extensions
+    const { extensions } = definition
     if(isArray(extensions)) {
       // TODO: check named extensions actually exist
 
     } else if(isObject(extensions)) {
       // TODO: error if any keys exist
       assign(definitionSet.extensions, extensions)
+    }
+
+    // process mutator
+    const { mutator } = definition
+    if(isObject(mutator)) {
+      definitionSet.mutators[blockDef.type] = mutator
     }
 
     definitionSet.generators[blockDef.type] = blockDef.generators

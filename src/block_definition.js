@@ -1,7 +1,6 @@
 import { capitalize, filter, invokeMap, map } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
-import { allBlockDefinitionsAndPaths } from '#src/importer/block_importer.js'
 
 
 const niceTemplate = tplString => {
