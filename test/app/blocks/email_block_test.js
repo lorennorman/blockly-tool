@@ -7,7 +7,7 @@ import BlockDefinition from "#src/block_definition.js"
 
 describe("Email Block", () => {
   it("works", () => {
-    const emailDefinition = BlockDefinition.parseDefinition(emailBlockDefObject)
+    const emailDefinition = BlockDefinition.parseRawDefinition(emailBlockDefObject)
 
     assert.equal(emailDefinition.type, 'action_email')
   })

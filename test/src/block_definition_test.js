@@ -31,10 +31,10 @@ const fixture = (options = {}) => {
 }
 
 describe("BlockDefinition", () => {
-  describe("parseDefinition", () => {
+  describe("parseRawDefinition", () => {
     it("clean parse, properties available on instance", () => {
       // parses without issue
-      const blockDefinition = BlockDefinition.parseDefinition(BLOCK_FIXTURE, 'path/to/block')
+      const blockDefinition = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block')
       // fields are available on the class instance
       assert.equal(blockDefinition.type, BLOCK_FIXTURE.type)
       assert.equal(blockDefinition.name, BLOCK_FIXTURE.name)
@@ -46,21 +46,21 @@ describe("BlockDefinition", () => {
 
     it("requires a type", () => {
       assert.throws(() => {
-        BlockDefinition.parseDefinition(fixture({ without: ['type']}))
+        BlockDefinition.parseRawDefinition(fixture({ without: ['type']}))
       }, 'A unique `type` property is required')
     })
 
     describe("missing name", () => {
       it("warns", ({ mock }) => {
         mock.method(console, 'warn')
-        BlockDefinition.parseDefinition(fixture({ without: ['name'] }))
+        BlockDefinition.parseRawDefinition(fixture({ without: ['name'] }))
         assert.equal(console.warn.mock.callCount(), 1)
       })
 
       it("sets a default name from the type", () => {
         const
           noName = fixture({ without: ['name'] }),
-          def = BlockDefinition.parseDefinition(noName)
+          def = BlockDefinition.parseRawDefinition(noName)
 
         assert.equal(def.name, "Test Block Fixture")
       })
@@ -68,7 +68,7 @@ describe("BlockDefinition", () => {
       it("removes leading io from default name", () => {
         const
           noNameIoType = fixture({ without: ['name'], override: { type: "io_test_block_fixture" }}),
-          def = BlockDefinition.parseDefinition(noNameIoType)
+          def = BlockDefinition.parseRawDefinition(noNameIoType)
 
         assert.equal(def.name, "Test Block Fixture")
       })
@@ -77,7 +77,7 @@ describe("BlockDefinition", () => {
     it("defaults inputsInline to false", () => {
       const
         noInputsInline = fixture({ without: ['inputsInline'] }),
-        def = BlockDefinition.parseDefinition(noInputsInline)
+        def = BlockDefinition.parseRawDefinition(noInputsInline)
 
       assert.equal(def.inputsInline, false)
     })
@@ -89,14 +89,14 @@ describe("BlockDefinition", () => {
 
   describe("exporting", () => {
     it("toBlockly* returns a JSON object or string", () => {
-      const blockDefinition = BlockDefinition.parseDefinition(BLOCK_FIXTURE, 'path/to/block')
+      const blockDefinition = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block')
 
       assert.instanceOf(blockDefinition.toBlocklyJSON(), Object)
       assert.typeOf(blockDefinition.toBlocklyJSONString(), 'string')
     })
 
     it("matches Blockly's JSON", () => {
-      const blocklyObject = BlockDefinition.parseDefinition(BLOCK_FIXTURE, 'path/to/block').toBlocklyJSON()
+      const blocklyObject = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block').toBlocklyJSON()
 
       console.log(blocklyObject)
       assert.equal(blocklyObject.type, BLOCK_FIXTURE.type)
@@ -104,7 +104,7 @@ describe("BlockDefinition", () => {
 
     it("allToBlocklyJSON", () => {
       const
-        definition = BlockDefinition.parseDefinition(BLOCK_FIXTURE, 'path/to/block'),
+        definition = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block'),
         blocklyObjects = BlockDefinition.allToBlocklyJSON([ definition, definition, definition ])
 
       assert.lengthOf(blocklyObjects, 3)

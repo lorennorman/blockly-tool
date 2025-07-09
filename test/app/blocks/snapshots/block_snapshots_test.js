@@ -1,11 +1,13 @@
 import { describe, it } from 'node:test'
 
-import BlockDefinition from "#src/block_definition.js"
+import DefinitionSet from "#src/definition_set.js"
 
 
 describe("Block Snapshots", async () => {
+  const definitionSet = await DefinitionSet.load();
+
   // load all current blocks
-  (await BlockDefinition.loadAll()).forEach(blockDefinition => {
+  definitionSet.blocks.forEach(blockDefinition => {
     // define a test for each block
     it(`"${blockDefinition.name}" (${blockDefinition.type})`, ({ assert: { snapshot }}) => {
       // test merely checks the json representation

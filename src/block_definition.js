@@ -118,7 +118,7 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
 /** @returns BlockDefinition[] */
 // BlockDefinition.loadAll = async function(definitionSet) {
 //   const allDefinitions = allBlockDefinitionsAndPaths.map(({ definition, path }) =>
-//     BlockDefinition.parseDefinition(definition, path)
+//     BlockDefinition.parseRawDefinition(definition, path)
 //   )
 
 //   return allDefinitions

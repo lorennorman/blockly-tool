@@ -7,7 +7,7 @@ import BlockDefinition from "#src/block_definition.js"
 
 describe("Round Block", { only: true }, () => {
   it("works", () => {
-    const roundDefinition = BlockDefinition.parseDefinition(roundDef)
+    const roundDefinition = BlockDefinition.parseRawDefinition(roundDef)
 
     assert.equal(roundDefinition.type, 'io_math_round')
   })
