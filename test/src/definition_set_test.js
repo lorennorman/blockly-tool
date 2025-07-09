@@ -40,12 +40,24 @@ describe("DefinitionSet", function() {
       fs.mkdirSync("./tmp")
     })
 
-    it("makes a tmp dir", function() {
-      assert(fs.existsSync("./tmp"))
+    it("exports 4 files", { only: true }, async function() {
+      const definitionSet = await DefinitionSet.load()
+      await definitionSet.export({ to: "./tmp" })
+
+      assert(fs.existsSync("./tmp/blocks.json"))
+      assert.isAbove(fs.readFileSync("./tmp/blocks.json").length, 10)
+      assert(fs.existsSync("./tmp/toolbox.json"))
+      assert.isAbove(fs.readFileSync("./tmp/toolbox.json").length, 10)
+      assert(fs.existsSync("./tmp/workspace.json"))
+      assert.isAbove(fs.readFileSync("./tmp/workspace.json").length, 10)
+      assert(fs.existsSync("./tmp/blockly_app.js"))
+      assert.isAbove(fs.readFileSync("./tmp/blockly_app.js").length, 100)
+
+      // console.log(fs.readFileSync("./tmp/blockly_app.js").toString())
     })
 
     afterEach(function() {
-      fs.rmdirSync("./tmp")
+      fs.rmSync("./tmp", { recursive: true })
     })
   })
 })

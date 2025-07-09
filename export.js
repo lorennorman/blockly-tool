@@ -12,21 +12,21 @@ cleanDir("export")
 
 // load the definitions
 const definitionSet = await DefinitionSet.load()
+definitionSet.export({ to: "export" })
+// // pick a workspace to export
+// const workspace = definitionSet.workspaces[0]
+// write("export/workspace.json", workspace.toBlocklyJSONString())
 
-// pick a workspace to export
-const workspace = definitionSet.workspaces[0]
-write("export/workspace.json", workspace.toBlocklyJSONString())
+// // pick a toolbox to export
+// const toolbox = definitionSet.toolboxes[0]
+// write("export/toolbox.json", await toolbox.toBlocklyJSONString())
 
-// pick a toolbox to export
-const toolbox = definitionSet.toolboxes[0]
-write("export/toolbox.json", await toolbox.toBlocklyJSONString())
+// // select blocks from the workspace and toolbox
+// const blocks = definitionSet.getBlocksFrom(workspace, toolbox)
+// write("export/blocks.json", blocks.toBlocklyJSON())
 
-// select blocks from the workspace and toolbox
-const blocks = definitionSet.getBlocksFrom(workspace, toolbox)
-write("export/blocks.json", blocks.toBlocklyJSON())
-
-// export blockly_app.js
-write("export/blockly.js", await BlocklyJSExporter.exportFor(workspace, toolbox, blocks))
+// // export blockly_app.js
+// write("export/blockly.js", await BlocklyJSExporter.exportFor(workspace, toolbox, blocks))
 
 const elapsed = Date.now() - startTime
 console.log("=======================")
