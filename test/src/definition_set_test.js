@@ -36,8 +36,9 @@ describe("DefinitionSet", function() {
       assert.isEmpty(filter(this.definitionSet.blocks, "disabled"))
     })
 
-    it("has mixins", function() {
-      assert.lengthOf(Object.keys(this.definitionSet.mixins), 1)
+    it("has mixins, including inline mixins from blocks", function() {
+      assert.isAbove(Object.keys(this.definitionSet.mixins).length, 1)
+      assert(this.definitionSet.mixins.weatherMixin, "Expected an inline mixin to be present")
     })
 
     it("has extensions", function() {

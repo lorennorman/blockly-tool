@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { forEach, reject } from 'lodash-es'
+import { assign, forEach, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
@@ -78,7 +78,26 @@ DefinitionSet.load = async function() {
   forEach(enabledBlocks, ({ definition, path }) => {
     const blockDef = BlockDefinition.parseRawDefinition(definition, path, definitionSet)
     definitionSet.blocks.push(blockDef)
-    // TODO: inline mixins defined on blocks
+
+    // process inline mixins:
+    const inlineMixins = definition.mixins
+    // could be a list of mixin names and objects
+    if(isArray(inlineMixins)) {
+      // step through each mixin
+      forEach(inlineMixins, mixin => {
+        if(isString(mixin)){
+          // TODO: validate named mixins actually exist
+        } else {
+          // objects get assigned up into the definition set's mixins
+          assign(definitionSet.mixins, mixin)
+        }
+      })
+
+    // could be a single mixin
+    } else if(isObject(inlineMixins)) {
+      assign(definitionSet.mixins, inlineMixins)
+    }
+
     // TODO: inline extensions defined on blocks
     definitionSet.generators[blockDef.type] = blockDef.generators
     definitionSet.regenerators[blockDef.type] = blockDef.regenerators
