@@ -12,22 +12,20 @@ const TEMPLATE_FIXTURE = {
   `,
 
   inputs: {
-    // SUBJECT: {
-    //   description: "a template for generating the email subject",
-    //   bytecodeProperty: "subjectTemplate",
-    //   shadow: singleLineTemplate,
-    // },
+    SUBJECT: {
+      description: "a template for generating the email subject",
+      bytecodeProperty: "subjectTemplate",
+    },
 
-    // BODY: {
-    //   description: "a multi-line template for generating the email body",
-    //   bytecodeProperty: "bodyTemplate",
-    //   shadow: multilineLineTemplate,
-    // }
+    BODY: {
+      description: "a multi-line template for generating the email body",
+      bytecodeProperty: "bodyTemplate",
+    }
   },
 }
 
 describe("Block template processing", { only: true }, () => {
-  it("works", ({ assert: { snapshot }}) => {
+  it("works", () => {
     const templateProperties = processTemplate(TEMPLATE_FIXTURE)
 
     // console.log(templateProperties)
