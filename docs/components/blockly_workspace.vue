@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, onUnmounted } from 'vue'
-  import { dispose, inject } from "../blockly/blockly.js"
+  import { dispose, inject } from "../blockly/blockly_app.js"
 
   const
     props = defineProps(['block'])

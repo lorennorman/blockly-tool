@@ -89,14 +89,14 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   // defaults, desugars, localizations, transformations, assignments
   const blockDef = new BlockDefinition()
   blockDef.definitionPath = definitionPath
+  blockDef.definitionSet = definitionSet
+  blockDef.definitionJS = rawBlockDefinition
   blockDef.type = rawBlockDefinition.type
   blockDef.name = rawBlockDefinition.name
   blockDef.description = rawBlockDefinition.description
     ? niceTemplate(rawBlockDefinition.description)
     : ""
   blockDef.tooltip = blockDef.description.split("\n")[0]
-  // blockDef.definitionSet = definitionSet
-  // blockDef.definitionJS = rawBlockDefinition
   blockDef.disabled = !!rawBlockDefinition.disabled
   blockDef.visualization = rawBlockDefinition.visualization
   blockDef.connections = rawBlockDefinition.connections
