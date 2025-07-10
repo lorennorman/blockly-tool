@@ -3,6 +3,15 @@ export default {
   bytecodeKey: "round",
   name: "Round/Floor/Ceiling",
   description: "Round a value to the nearest whole number via round, floor, or ceiling functions",
+  docBlocks: [
+    {
+      type: 'io_math_number',
+      fields: { NUM: 1.45 }
+    }, {
+      type: 'io_text',
+      fields: { TEXT: "1.55" }
+    }
+  ],
   color: 120,
 
   connections: {

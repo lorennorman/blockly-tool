@@ -48,6 +48,7 @@ const
     "fields",
     "template",
     "description",
+    "docBlocks",
     "disabled",
     "generators",
     "regenerators",

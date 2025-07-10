@@ -16,5 +16,7 @@ export const
       return map(remainingLines, line => line.slice(indentCounts[0])).join("\n")
     }
 
+    // TODO: support niceties for markdown, double-newlines, escaping, etc
+
     return tplString
   }

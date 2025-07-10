@@ -4,23 +4,28 @@
   import initialWorkspace from "../blockly/workspace.json"
 
   const
-    { block, width="100%", height="200px", toolbox=true } = defineProps(
-      ['block', 'width', 'height', 'toolbox']
+    { block, blocks=[], width="100%", height="200px", toolbox=true } = defineProps(
+      ['block', 'blocks', 'width', 'height', 'toolbox']
     ),
     injectOptions = {},
     options = {
       injectOptions,
       workspaceJson: block
         ? {
-            "blocks": {
-              "languageVersion": 0,
-              "blocks": [
+            blocks: {
+              languageVersion: 0,
+              blocks: [
                 {
-                  "type": block,
-                  "deletable": false,
-                  "x": 50,
-                  "y": 50
-                }
+                  type: block,
+                  deletable: false,
+                  x: 50,
+                  y: 50
+                },
+                ...blocks.map((docBlock, idx) => ({
+                  ...docBlock,
+                  x: 150,
+                  y: idx*30 + 50
+                }))
               ]
             }
           }

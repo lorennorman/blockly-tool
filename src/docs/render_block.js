@@ -5,18 +5,16 @@ import renderInputs from './render_block_inputs.js'
 
 
 const
-  renderDescription = definition => {
-    const
-      rawDescription = definition.visualization?.tooltip,
-      description = rawDescription
-        ? rawDescription.replaceAll("\n", "\n    ")
-        : "No docs for this block, yet."
-
-    return `    ${ description }`
-  },
+  renderDescription = ({ description }) => description || "No docs for this block, yet.",
 
   renderWorkspace = definition => {
-    return `<BlocklyWorkspace :toolbox="false" block="${ definition.type }" />`
+    const workspaceProps = JSON.stringify({
+      toolbox: false,
+      block: definition.type,
+      blocks: definition.docBlocks || []
+    })
+
+    return `<BlocklyWorkspace v-bind='${ workspaceProps }' />`
   },
 
   renderOutput = definition => {
@@ -35,7 +33,8 @@ editLink: true
 
 # Block: ${definition.name}
 
-## Description
+Type: \`${definition.type}\`
+
 ${ renderDescription(definition) }
 
 ## Workspace

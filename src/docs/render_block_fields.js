@@ -26,7 +26,7 @@ const
     lines.push(`### \`${capitalize(field.field)}\`:`)
 
     // add lines based on what properties are present
-    Object.hasOwn(field, 'description') && lines.push(niceTemplate(field.description).replaceAll("\n", "\n\n"))
+    Object.hasOwn(field, 'description') && lines.push(niceTemplate(field.description))
     Object.hasOwn(field, 'text') && lines.push(renderTextField(field))
     Object.hasOwn(field, 'checked') && lines.push(renderCheckboxField(field))
     Object.hasOwn(field, 'options') && lines.push(renderSelectField(field))
