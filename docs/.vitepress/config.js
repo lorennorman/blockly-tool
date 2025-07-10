@@ -39,15 +39,42 @@ export default defineConfig({
     },
 
     nav: [
+      { text: '🪏', link: '/sandbox' },
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'The Blocks', link: '/block-index' },
       { text: 'Examples', link: '/automation-examples' }
     ],
 
-    sidebar: [
-      blocksSidebar
-    ],
+    sidebar: {
+      // covers /blocks/* and /block-index
+      "/block": [ blocksSidebar ],
+
+      // devtools for the sandbox
+      "/sandbox": [
+        {
+          "text": "Tools",
+          "items": [
+            {
+              "text": "Custom Feed Names",
+              "link": "#"
+            },
+            {
+              "text": "Weather Locations",
+              "link": "#"
+            },
+            {
+              "text": "IO Bytecode Explorer",
+              "link": "#"
+            },
+            {
+              "text": "Blockly JSON Explorer",
+              "link": "#"
+            },
+          ]
+        }
+      ],
+    },
 
     socialLinks: [
       { icon: 'github', link: REPO }

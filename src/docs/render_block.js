@@ -16,7 +16,7 @@ const
   },
 
   renderWorkspace = definition => {
-    return `<BlocklyWorkspace block="${ definition.type }" />`
+    return `<BlocklyWorkspace :toolbox="false" block="${ definition.type }" />`
   },
 
   renderOutput = definition => {

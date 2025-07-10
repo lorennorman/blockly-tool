@@ -1,24 +1,8 @@
-import { capitalize, filter, invokeMap, map } from 'lodash-es'
+import { capitalize, filter, invokeMap } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
+import { niceTemplate } from '#src/util.js'
 
-
-const niceTemplate = tplString => {
-  const
-    lines = tplString.split("\n"),
-    firstLineBlank = /^\s*$/.test(lines[0]),
-    remainingLines = lines.slice(1, -1),
-    indentCounts = map(remainingLines, line => line.search(/\S/)),
-    firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts.slice(1, -1))
-
-  // ensure first line is blank and every other line has at least as much whitespace as the first line
-  if(firstLineBlank && firstLineLeastIndented) {
-    // drop the first line, remove X whitespace chars from the rest and join with newline
-    return map(remainingLines, line => line.slice(indentCounts[0])).join("\n")
-  }
-
-  return tplString
-}
 
 class BlockDefinition {
   definitionSet = null

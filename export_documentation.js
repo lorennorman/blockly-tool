@@ -1,6 +1,6 @@
 import { capitalize, find, forEach, map } from 'lodash-es'
 
-import { cleanDir, copyDir, write, totalBytesWritten } from "./export_util.js"
+import { cleanDir, write, totalBytesWritten } from "./export_util.js"
 import DefinitionSet from '#src/definition_set.js'
 import toBlockMarkdown from "#src/docs/render_block.js"
 
@@ -11,24 +11,25 @@ const startTime = Date.now()
 console.log("\nStarting Documentation Export")
 console.log("=======================")
 
+const definitionSet = await DefinitionSet.load()
+
 cleanDir("docs/blockly")
-// TODO: instead, export exactly what we need
-copyDir("export", "docs/blockly")
+definitionSet.export({ to: "docs/blockly" })
 
 cleanDir("docs/blocks")
 
-const definitionSet = await DefinitionSet.load()
-const categories = definitionSet.getCategories()
+const
+  categories = definitionSet.getCategories(),
 
-// INIT SIDEBAR
-const blockSidebar = {
-  text: 'Blocks',
-  items: map(categories, ({ name }) => ({
-    text: name,
-    collapsed: true,
-    items: []
-  }))
-}
+  // INIT SIDEBAR
+  blockSidebar = {
+    text: 'Blocks',
+    items: map(categories, ({ name }) => ({
+      text: name,
+      collapsed: true,
+      items: []
+    }))
+  }
 
 forEach(definitionSet.blocks, blockDefinition => {
   // skip disabled blocks
@@ -36,9 +37,10 @@ forEach(definitionSet.blocks, blockDefinition => {
 
   // mirror the blocks/**/*.js path structure
   const docPath = blockDefinition.definitionPath.replace(/.js$/, '.md')
-  write(`docs/blocks/${docPath}`, toBlockMarkdown(blockDefinition)) // EXPORT MARKDOWN
+  // DEDICATED DOC PAGE FOR BLOCK
+  write(`docs/blocks/${docPath}`, toBlockMarkdown(blockDefinition))
 
-  // APPEND TO SIDEBAR
+  // BLOCK SIDEBAR ITEM
   const
     blockSidebarPath = `/blocks/${docPath.slice(0, -3)}`,
     sidebarEntry = {
@@ -55,6 +57,7 @@ forEach(definitionSet.blocks, blockDefinition => {
       throw new Error(`Block category (${ category.name }) not present in sidebar!`)
     }
 
+    // ADD TO SIDEBAR
     sidebarCategory.items.push(sidebarEntry)
   })
 })

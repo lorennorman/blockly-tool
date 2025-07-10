@@ -20,17 +20,13 @@ export default {
 
   fields: {
     OPERATION: {
-      description: `
-        Round: rounds up if .5 or higher, down otherwise
-        Floor: rounds down
-        Ceiling: rounds up
-      `,
-      bytecodeProperty: "operation",
+      description: "Select which rounding operation to perform on the input:",
       options: [
-        ["Round", "round"],
-        ["Floor", "floor"],
-        ["Ceiling", "ceiling"],
-      ]
+        ["Round", "round", "if .5 or higher: round up; otherwise round down"],
+        ["Floor", "floor", "rounds down"],
+        ["Ceiling", "ceiling", "rounds up"],
+      ],
+      bytecodeProperty: "operation",
     }
   },
 

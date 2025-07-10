@@ -1,11 +1,18 @@
-import { capitalize, filter, isArray, isObject, isString, map } from 'lodash-es'
+import { capitalize, filter, isArray, isObject, isString, map, mapValues, values } from 'lodash-es'
+
+import { niceTemplate } from '#src/util.js'
 
 
 const
   getLineObjects = definition => filter(map(filter(definition.lines, isArray), "[1]"), isObject),
 
   renderFields = definition => {
-    const fields = filter(getLineObjects(definition), "field")
+    const fields = filter(getLineObjects(definition), "field").concat(
+      values(mapValues(definition.fields, (newField, name) => {
+        newField.field = name
+        return newField
+      }))
+    )
 
     if(!fields.length) { return "This block has no form fields." }
 
@@ -16,9 +23,10 @@ const
     const lines = []
 
     // title for this field
-    lines.push(`### Field: \`${capitalize(field.field)}\``)
+    lines.push(`### \`${capitalize(field.field)}\`:`)
 
     // add lines based on what properties are present
+    Object.hasOwn(field, 'description') && lines.push(niceTemplate(field.description).replaceAll("\n", "\n\n"))
     Object.hasOwn(field, 'text') && lines.push(renderTextField(field))
     Object.hasOwn(field, 'checked') && lines.push(renderCheckboxField(field))
     Object.hasOwn(field, 'options') && lines.push(renderSelectField(field))
@@ -32,10 +40,12 @@ const
 
   renderSelectField = selectField => {
     const
-      optionLabels = map(selectField.options, 0),
-      optionList = map(optionLabels, label => `  - ${label}`).join("\n")
+      optionList = map(selectField.options, ([ label, , doc ]) => doc
+        ? `- \`${label}\`: ${doc}`
+        : `- \`${label}\``
+      ).join("\n")
 
-    return `- Options:\n${optionList}`
+    return optionList
   }
 
 
