@@ -102,7 +102,8 @@ exports[`Block Snapshots > \"Action Root\" (action_root) 1`] = `
       "type": "input_dummy",
       "align": "LEFT"
     }
-  ]
+  ],
+  "mutator": "action_root"
 }
 `;
 
@@ -192,7 +193,8 @@ exports[`Block Snapshots > \"All Days\" (all_days) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "all_days"
 }
 `;
 
@@ -209,7 +211,8 @@ exports[`Block Snapshots > \"All Hours\" (all_hours) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "all_hours"
 }
 `;
 
@@ -226,7 +229,8 @@ exports[`Block Snapshots > \"All Minutes\" (all_minutes) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "all_minutes"
 }
 `;
 
@@ -243,7 +247,8 @@ exports[`Block Snapshots > \"All Months\" (all_months) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "all_months"
 }
 `;
 
@@ -286,7 +291,8 @@ exports[`Block Snapshots > \"Controls If\" (io_controls_if) 1`] = `
       "name": "ELSE_LABEL",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "io_controls_if"
 }
 `;
 
@@ -363,7 +369,8 @@ exports[`Block Snapshots > \"Days Of Week\" (days_of_week) 1`] = `
       "type": "input_dummy",
       "align": "CENTRE"
     }
-  ]
+  ],
+  "mutator": "days_of_week"
 }
 `;
 
@@ -1432,7 +1439,8 @@ exports[`Block Snapshots > \"Every Days Between\" (every_days_between) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "every_days_between"
 }
 `;
 
@@ -1687,7 +1695,8 @@ exports[`Block Snapshots > \"Every Hours Between\" (every_hours_between) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "every_hours_between"
 }
 `;
 
@@ -2246,7 +2255,8 @@ exports[`Block Snapshots > \"Every Minutes Between\" (every_minutes_between) 1`]
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "every_minutes_between"
 }
 `;
 
@@ -2397,7 +2407,8 @@ exports[`Block Snapshots > \"Every Months Between\" (every_months_between) 1`] =
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "every_months_between"
 }
 `;
 
@@ -2425,6 +2436,10 @@ exports[`Block Snapshots > \"Feed Get Value\" (feed_get_value) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
@@ -2453,6 +2468,10 @@ exports[`Block Snapshots > \"Feed Selector\" (feed_selector) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
@@ -2490,6 +2509,10 @@ exports[`Block Snapshots > \"Feed Set Value\" (feed_set_value) 1`] = `
       "name": "VALUE",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
@@ -2668,40 +2691,6 @@ exports[`Block Snapshots > \"Logic Operation\" (io_logic_operation) 1`] = `
     {
       "type": "input_value",
       "name": "B",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Logic Ternary\" (io_logic_ternary) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_logic_ternary",
-  "colour": 60,
-  "tooltip": "",
-  "output": null,
-  "message0": "if %1",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "IF",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "then %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "THEN",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": "else %1",
-  "args2": [
-    {
-      "type": "input_value",
-      "name": "ELSE",
       "align": "RIGHT"
     }
   ]
@@ -2996,6 +2985,9 @@ exports[`Block Snapshots > \"Math Number\" (io_math_number) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "validateNumbers"
   ]
 }
 `;
@@ -3260,7 +3252,8 @@ exports[`Block Snapshots > \"One Day\" (one_day) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "one_day"
 }
 `;
 
@@ -3380,7 +3373,8 @@ exports[`Block Snapshots > \"One Hour\" (one_hour) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "one_hour"
 }
 `;
 
@@ -3644,7 +3638,8 @@ exports[`Block Snapshots > \"One Minute\" (one_minute) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "one_minute"
 }
 `;
 
@@ -3716,7 +3711,8 @@ exports[`Block Snapshots > \"One Month\" (one_month) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
-  ]
+  ],
+  "mutator": "one_month"
 }
 `;
 
@@ -3844,7 +3840,8 @@ exports[`Block Snapshots > \"Some Months\" (some_months) 1`] = `
       "type": "input_dummy",
       "align": "CENTRE"
     }
-  ]
+  ],
+  "mutator": "some_months"
 }
 `;
 
@@ -3949,32 +3946,6 @@ exports[`Block Snapshots > \"Text Multiline\" (io_text_multiline) 1`] = `
     },
     {
       "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Text Regex\" (text_regex) 1`] = `
-{
-  "inputsInline": false,
-  "type": "text_regex",
-  "colour": 180,
-  "tooltip": "Check for a regex match\\n-\\nInputs:\\n---------------\\n-\\nCasting:\\n---------------\\n-\\nOptions:\\n---------------",
-  "output": null,
-  "message0": "Regex: %1",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "REGEX",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "Matches? %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "TARGET",
       "align": "RIGHT"
     }
   ]
@@ -4220,6 +4191,11 @@ exports[`Block Snapshots > \"Weather\" (weather) 1`] = `
       "type": "input_dummy",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "weatherMixin",
+    "prepareWeather"
   ]
 }
 `;
@@ -4288,6 +4264,10 @@ exports[`Block Snapshots > \"When Data Matching State\" (when_data_matching_stat
       "check": "matcher",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
@@ -4326,6 +4306,10 @@ exports[`Block Snapshots > \"When Data Matching\" (when_data_matching) 1`] = `
       "check": "matcher",
       "align": "RIGHT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
@@ -4355,6 +4339,10 @@ exports[`Block Snapshots > \"When Data\" (when_data) 1`] = `
       "type": "input_dummy",
       "align": "LEFT"
     }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
   ]
 }
 `;
