@@ -1,4 +1,4 @@
-import { capitalize, filter, invokeMap } from 'lodash-es'
+import { capitalize, filter, invokeMap, sortBy } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
 import { niceTemplate } from '#src/util.js'
@@ -111,5 +111,5 @@ BlockDefinition.allToBlocklyJSONString = function(blockDefinitions) {
 }
 
 BlockDefinition.allToBlocklyJSON = function(blockDefinitions) {
-  return invokeMap(blockDefinitions, 'toBlocklyJSON')
+  return invokeMap(sortBy(blockDefinitions, "type"), 'toBlocklyJSON')
 }
