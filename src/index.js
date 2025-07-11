@@ -7,7 +7,7 @@ import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from '../e
 
 // for running dev server:
 // import initialWorkspace from './workspace.json'
-// import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from './blockly.js'
+// import { inject, addExtensionData, jsonToWorkspace, workspaceToJson } from './blockly_app.js'
 
 import { clear, load, save } from './serialization'
 import { imageExportRegistryItems } from './image_exporter.js'
