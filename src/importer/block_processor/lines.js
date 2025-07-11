@@ -1,5 +1,7 @@
 import { includes, isArray, isEmpty, isObject, isString, keys, map, range, reduce, trim, without } from 'lodash-es'
 
+import { niceTemplate } from '#src/util.js'
+
 
 const DEFAULT_ALIGNMENT = "RIGHT"
 
@@ -324,24 +326,6 @@ export const processTemplate = blockDefinition => {
   }
 
   return msgAndArgs
-}
-
-
-const niceTemplate = tplString => {
-  const
-    lines = tplString.split("\n"),
-    firstLineBlank = /^\s*$/.test(lines[0]),
-    remainingLines = lines.slice(1, -1),
-    indentCounts = map(remainingLines, line => line.search(/\S/)),
-    firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts.slice(1, -1))
-
-  // ensure first line is blank and every other line has at least as much whitespace as the first line
-  if(firstLineBlank && firstLineLeastIndented) {
-    // drop the first line, remove X whitespace chars from the rest and join with newline
-    return map(remainingLines, line => line.slice(indentCounts[0])).join("\n")
-  }
-
-  return tplString
 }
 
 const fieldTypeFromProperties = fieldData => {
