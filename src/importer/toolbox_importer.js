@@ -17,7 +17,7 @@ const
 export const exportToolboxJSON = toolboxDef => {
   return {
     kind: 'categoryToolbox',
-    contents: generateToolboxContents(toolboxDef)
+    contents: generateToolboxContents(toolboxDef.contents)
   }
 }
 
@@ -47,10 +47,10 @@ const
 
   buildToolbox = () => ({
     kind: 'categoryToolbox',
-    contents: generateToolboxContents()
+    contents: generateToolboxContents(toolboxConfig)
   }),
 
-  generateToolboxContents = toolboxDef => map(toolboxDef.contents, category => {
+  generateToolboxContents = toolboxContents => map(toolboxContents, category => {
     if(category.name) {
       return generateCategoryFromDefinition(category)
     }
@@ -125,11 +125,14 @@ const
     if(contents) {
       log(`  - using toolbox def`)
 
+      const definitionContents = typeof contents[0] === "string"
+        ? map(contents, findBlockByType)
+        : contents
       // const blockDefinitions = map(contents, findBlockByType)
 
-      toolboxContents.push(...flatMap(contents, blockDefinition => blockToLabelAndBlock(blockDefinition)))
+      toolboxContents.push(...flatMap(definitionContents, blockDefinition => blockToLabelAndBlock(blockDefinition)))
 
-      warnOnExtraBlocksSpecifyCategory(name, contents)
+      warnOnExtraBlocksSpecifyCategory(name, definitionContents)
 
       // otherwise add blocks by their toolbox.category
     } else {
