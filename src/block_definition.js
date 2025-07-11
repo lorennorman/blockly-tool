@@ -1,4 +1,4 @@
-import { capitalize, filter, invokeMap, sortBy } from 'lodash-es'
+import { capitalize, filter, invokeMap, map, sortBy } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
 import { niceTemplate } from '#src/util.js'
@@ -32,8 +32,11 @@ class BlockDefinition {
   template = null
 
   inputs = []
-
   fields = []
+
+  mixins = []
+  extensions = []
+  mutator = null
 
   generators = {}
 
@@ -47,7 +50,7 @@ class BlockDefinition {
   getCategories() {
     return (this.definitionSet
       ? filter(this.definitionSet.getCategories(), ({ contents=[], usesBlocks=[]}) =>
-          contents.includes(this.type) || usesBlocks.includes(this.type)
+          contents.includes(this) || usesBlocks.includes(this.type)
         )
       : [])
   }
@@ -90,6 +93,9 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   blockDef.template = rawBlockDefinition.template
   blockDef.inputs = rawBlockDefinition.inputs
   blockDef.fields = rawBlockDefinition.fields
+  blockDef.mixins = rawBlockDefinition.mixins
+  blockDef.extensions = rawBlockDefinition.extensions
+  blockDef.mutator = rawBlockDefinition.mutator
   blockDef.generators = rawBlockDefinition.generators
   blockDef.regenerators = rawBlockDefinition.regenerators
   blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"

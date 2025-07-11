@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { assign, forEach, isArray, isObject, isString, reject } from 'lodash-es'
+import { assign, find, forEach, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
@@ -28,6 +28,15 @@ export class DefinitionSet {
     return {
       toBlocklyJSON: () => BlockDefinition.allToBlocklyJSONString(this.blocks)
     }
+  }
+
+  findBlock(query) {
+    const found = find(this.blocks, query)
+    if(!found) {
+      throw new Error(`No block found for query: ${query}`)
+    }
+
+    return found
   }
 
   getCategories() {
@@ -72,7 +81,6 @@ DefinitionSet.load = async function() {
 
   definitionSet.mixins = rawDefinitions.mixins
   definitionSet.extensions = rawDefinitions.extensions
-  // TODO: update mutator definition/template/export routine
   definitionSet.mutators = rawDefinitions.mutators
 
   forEach(enabledBlocks, ({ definition, path }) => {

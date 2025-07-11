@@ -13,6 +13,14 @@ const
   warn = (...messages) => (DEBUG || WARN) && console.warn(...messages),
   error = (...messages) => DEBUG && console.error(...messages)
 
+
+export const exportToolboxJSON = toolboxDef => {
+  return {
+    kind: 'categoryToolbox',
+    contents: generateToolboxContents(toolboxDef)
+  }
+}
+
 let
   blockDefinitionsByType = {},
   blockDefinitionsByCategory = {}
@@ -42,7 +50,7 @@ const
     contents: generateToolboxContents()
   }),
 
-  generateToolboxContents = () => map(toolboxConfig, category => {
+  generateToolboxContents = toolboxDef => map(toolboxDef.contents, category => {
     if(category.name) {
       return generateCategoryFromDefinition(category)
     }
@@ -96,10 +104,10 @@ const
     // callback precludes contents and label
     if(categoryKeys.includes("callback")) {
       if(categoryKeys.includes("contents")) {
-        warn(`  - Warning: "contents" defined on toolbox category with a "callback" defined.`)
+        warn(`  - Warning: "contents" defined (${definition.contents}) on toolbox category ("${definition.name}") with a "callback" defined.`)
       }
       if(categoryKeys.includes("label")) {
-        warn(`  - Warning: "contents" defined on toolbox category with a "label" defined.`)
+        warn(`  - Warning: "contents" defined on toolbox category ("${definition.name}") with a "label" defined.`)
       }
     }
   },
@@ -117,11 +125,11 @@ const
     if(contents) {
       log(`  - using toolbox def`)
 
-      const blockDefinitions = map(contents, findBlockByType)
+      // const blockDefinitions = map(contents, findBlockByType)
 
-      toolboxContents.push(...flatMap(blockDefinitions, blockDefinition => blockToLabelAndBlock(blockDefinition)))
+      toolboxContents.push(...flatMap(contents, blockDefinition => blockToLabelAndBlock(blockDefinition)))
 
-      warnOnExtraBlocksSpecifyCategory(name, blockDefinitions)
+      warnOnExtraBlocksSpecifyCategory(name, contents)
 
       // otherwise add blocks by their toolbox.category
     } else {

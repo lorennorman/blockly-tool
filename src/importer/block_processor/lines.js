@@ -290,7 +290,7 @@ export const processTemplate = blockDefinition => {
           name: matchName,
           type,
           checked: fieldData.checked,
-          options: fieldData.options,
+          options: fieldData.options.map(option => option.slice(0,2)), // slice out option documentation
           text: fieldData.text || fieldData.multiline_text || fieldData.label || "",
           spellcheck: fieldData.spellcheck,
           value: fieldData.value,
