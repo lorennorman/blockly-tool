@@ -10,7 +10,7 @@ const
   renderWorkspace = definition => {
     const workspaceProps = JSON.stringify({
       toolbox: false,
-      block: definition.type,
+      block: definition.toBlocklyInstanceJSON(),
       blocks: definition.docBlocks || []
     })
 

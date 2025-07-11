@@ -97,7 +97,6 @@ describe("DefinitionSet", function() {
       assert.include(jsContents, "\n// Regenerators\n")
       assert.include(jsContents, "const blockRegenerators = {")
       assert.include(jsContents, "\n// Blockly API Wrapper\n")
-
     })
 
     afterEach(function() {

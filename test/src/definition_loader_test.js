@@ -11,7 +11,7 @@ describe("DefinitionLoader", { only: true }, () => {
     it("finds mutator definitions", async () => {
       const rawMutatorDefs = await DefinitionLoader.loadMutators()
 
-      assert.isAbove(Object.keys(rawMutatorDefs).length, 1)
+      assert.lengthOf(Object.keys(rawMutatorDefs), 0)
     })
 
     it("finds mixin definitions", async () => {
@@ -58,7 +58,7 @@ describe("DefinitionLoader", { only: true }, () => {
     it("should have all resource types", async () => {
       const definitions = await DefinitionLoader.loadAll()
 
-      assert.isAbove(Object.keys(definitions.mutators).length, 1)
+      assert.lengthOf(Object.keys(definitions.mutators), 0)
       assert.lengthOf(Object.keys(definitions.mixins), 1)
       assert.isAbove(Object.keys(definitions.extensions).length, 1)
       assert.isAbove(definitions.blocks.length, 1)

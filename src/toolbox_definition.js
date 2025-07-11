@@ -34,9 +34,11 @@ ToolboxDefinition.parseRawDefinition = function(definition, definitionSet) {
 
     // for static category contents...
     if(item.contents) {
-      // replace block types with block definitions
+      // replace block types (strings) with block definitions
       item.contents = item.contents.map(blockType =>
-        definitionSet.findBlock({ type: blockType })
+        (typeof blockType === 'string')
+          ? definitionSet.findBlock({ type: blockType })
+          : blockType
       )
     }
 

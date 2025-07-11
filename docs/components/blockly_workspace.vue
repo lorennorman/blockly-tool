@@ -16,14 +16,14 @@
               languageVersion: 0,
               blocks: [
                 {
-                  type: block,
+                  ...block,
                   deletable: false,
                   x: 50,
                   y: 50
                 },
                 ...blocks.map((docBlock, idx) => ({
                   ...docBlock,
-                  x: 150,
+                  x: 180,
                   y: idx*30 + 50
                 }))
               ]

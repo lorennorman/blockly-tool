@@ -1,4 +1,4 @@
-import { capitalize, filter, invokeMap, map, sortBy } from 'lodash-es'
+import { capitalize, filter, invokeMap, isString, map, sortBy, isEmpty, keyBy, mapValues, reduce, forEach, pickBy, identity } from 'lodash-es'
 
 import { toBlockJSON } from '#src/importer/block_processor/index.js'
 import { niceTemplate } from '#src/util.js'
@@ -62,7 +62,100 @@ class BlockDefinition {
   toBlocklyJSONString() {
     return JSON.stringify(this.toBlocklyJSON(), null, 2) + "\n"
   }
+
+  toBlocklyInstanceJSON() {
+    return pickBy({
+      type: this.type,
+      inputs: this.getInstanceInputs(),
+      fields: this.getInstanceFields(),
+    }, identity)
+  }
+
+  getInstanceInputs() {
+    const { lines, inputs } = this
+
+    if(lines) {
+      const inputValues =
+        mapValues(
+          keyBy(
+            filter(
+              map(lines, '[1]'),
+              "inputValue"),
+            "inputValue"),
+          definitionPropsToInputs)
+
+      return isEmpty(inputValues) ? undefined : inputValues
+    }
+
+    if(inputs) {
+      const inputValues = mapValues(inputs, definitionPropsToInputs)
+
+      return isEmpty(inputValues) ? undefined : inputValues
+    }
+  }
+
+  getInstanceFields() {
+    const { lines, fields } = this
+
+    if(lines) {
+      // get every field that contains a "value" property
+      const defaultFields =
+        reduce(
+          map(
+            filter(
+              map(lines, '[1]'),
+              "fields"),
+            "fields"),
+          (acc, fields) => {
+            forEach(fields, (field, fieldKey) => {
+              if(field.value){
+                acc[fieldKey] = field.value
+              }
+            })
+
+            return acc
+          }, {})
+
+      return isEmpty(defaultFields) ? undefined : defaultFields
+    }
+
+    if(fields) {
+      const defaultFields = pickBy(mapValues(fields, "value"), identity)
+
+      return isEmpty(defaultFields) ? undefined : defaultFields
+    }
+  }
 }
+
+const
+  definitionPropsToInputs = ({ inputValue, block, shadow }) => {
+    if(!block && !shadow) {
+      console.warn("Warning: no block or shadow specified for", inputValue)
+      return
+    }
+
+    if(block) {
+      const
+        blockJson = blockToInput(block),
+        shadowJson = shadowToInput(shadow || block)
+
+      return {
+        ...blockJson,
+        ...shadowJson
+      }
+
+    } else if(shadow) {
+      return shadowToInput(shadow)
+    }
+  },
+
+  blockToInput = block => isString(block) // is shorthand?
+    ? { block: { type: block }} // expand to full object
+    : { block }, // set as shadow value
+
+  shadowToInput = shadow => isString(shadow) // is shorthand?
+    ? { shadow: { type: shadow }} // expand to full object
+    : { shadow } // set as shadow value
 
 export default BlockDefinition
 
