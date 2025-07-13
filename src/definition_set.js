@@ -63,7 +63,7 @@ export class DefinitionSet {
 
 export default DefinitionSet
 
-DefinitionSet.load = async function() {
+DefinitionSet.load = async function(appLocation) {
   // locate all files for all definition types
   //   verify shape of each raw definition type (required and optional keys -> value types)
   // hydrate interlinked definition instances
@@ -71,7 +71,7 @@ DefinitionSet.load = async function() {
   //   verify referenced definitions exist
 
   const
-    rawDefinitions = await DefinitionLoader.loadAll(),
+    rawDefinitions = await DefinitionLoader.loadAll({ source: appLocation }),
     enabledBlocks = reject(rawDefinitions.blocks, "definition.disabled"),
     definitionSet = new DefinitionSet()
 

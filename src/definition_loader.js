@@ -5,12 +5,14 @@ import { camelCase, fromPairs } from 'lodash-es'
 const
   PROJECT_ROOT = process.cwd(),
 
-  BLOCK_LOCATION = `app/blocks/`,
-  EXTENSION_LOCATION = `app/extensions/`,
-  MIXIN_LOCATION = `app/mixins/`,
-  MUTATOR_LOCATION = `app/mutators/`,
-  TOOLBOX_LOCATION = `app/toolbox/`,
-  WORKSPACE_LOCATION = `app/workspace/`,
+  APP_LOCATION = 'app',
+
+  BLOCK_LOCATION = `blocks/`,
+  EXTENSION_LOCATION = `extensions/`,
+  MIXIN_LOCATION = `mixins/`,
+  MUTATOR_LOCATION = `mutators/`,
+  TOOLBOX_LOCATION = `toolbox/`,
+  WORKSPACE_LOCATION = `workspace/`,
 
   EXAMPLE_FILES = [ '**/*example*.js' ],
   NON_BLOCK_FILES = [
@@ -21,8 +23,8 @@ const
   ].concat(EXAMPLE_FILES)
 
 export const DefinitionLoader = {
-  loadMutators: async () => {
-    const jsfiles = await glob(`./${MUTATOR_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
+  loadMutators: async (appLocation=APP_LOCATION) => {
+    const jsfiles = await glob(`./${appLocation}/${MUTATOR_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
 
     // loads app/mutators/mutator_name.js into object like:
     // { mutatorName: Function }
@@ -34,8 +36,8 @@ export const DefinitionLoader = {
     ))
   },
 
-  loadMixins: async () => {
-    const jsfiles = await glob(`./${MIXIN_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
+  loadMixins: async (appLocation=APP_LOCATION) => {
+    const jsfiles = await glob(`./${appLocation}/${MIXIN_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
 
     // loads app/mixins/mixin_name.js into object like:
     // { mixinName: Function }
@@ -47,8 +49,8 @@ export const DefinitionLoader = {
     ))
   },
 
-  loadExtensions: async () => {
-    const jsfiles = await glob(`./${EXTENSION_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
+  loadExtensions: async (appLocation=APP_LOCATION) => {
+    const jsfiles = await glob(`./${appLocation}/${EXTENSION_LOCATION}**/*.js`, { ignore: EXAMPLE_FILES })
 
     // loads app/extensions/extension_name.js into object like:
     // { extensionName: Function }
@@ -60,9 +62,9 @@ export const DefinitionLoader = {
     ))
   },
 
-  loadBlocks: async () => {
+  loadBlocks: async (appLocation=APP_LOCATION) => {
     // get the file listing
-    const jsfiles = await glob(`./${BLOCK_LOCATION}**/*.js`, { ignore: NON_BLOCK_FILES })
+    const jsfiles = await glob(`${appLocation}/${BLOCK_LOCATION}**/*.js`, { ignore: NON_BLOCK_FILES })
     // load each file
     return Promise.all(
       jsfiles.map(
@@ -74,26 +76,31 @@ export const DefinitionLoader = {
     )
   },
 
-  loadToolboxes: async () => {
+  loadToolboxes: async (appLocation=APP_LOCATION) => {
     // hardcode to a single toolbox for now
-    const rawToolboxDef = (await import(`${PROJECT_ROOT}/${TOOLBOX_LOCATION}index.js`)).default
+    const rawToolboxDef = (await import(`${PROJECT_ROOT}/${appLocation}/${TOOLBOX_LOCATION}index.js`)).default
     return [ rawToolboxDef ]
   },
 
-  loadWorkspaces: async () => {
+  loadWorkspaces: async (appLocation=APP_LOCATION) => {
     // hardcode to a single workspace for now
-    const rawWorkspaceDef = (await import(`${PROJECT_ROOT}/${WORKSPACE_LOCATION}workspace.json`, { with: { type: 'json' }})).default
+    const rawWorkspaceDef = (await import(`${PROJECT_ROOT}/${appLocation}/${WORKSPACE_LOCATION}workspace.json`, { with: { type: 'json' }})).default
     return [ rawWorkspaceDef ]
   },
 
-  loadAll: async () => {
+  loadAll: async (givenOptions = {}) => {
+    const options = {
+      source: APP_LOCATION,
+      ...givenOptions
+    }
+
     return {
-      mutators: await DefinitionLoader.loadMutators(),
-      mixins: await DefinitionLoader.loadMixins(),
-      extensions: await DefinitionLoader.loadExtensions(),
-      blocks: await DefinitionLoader.loadBlocks(),
-      toolboxes: await DefinitionLoader.loadToolboxes(),
-      workspaces: await DefinitionLoader.loadWorkspaces(),
+      mutators: await DefinitionLoader.loadMutators(options.source),
+      mixins: await DefinitionLoader.loadMixins(options.source),
+      extensions: await DefinitionLoader.loadExtensions(options.source),
+      blocks: await DefinitionLoader.loadBlocks(options.source),
+      toolboxes: await DefinitionLoader.loadToolboxes(options.source),
+      workspaces: await DefinitionLoader.loadWorkspaces(options.source),
     }
   }
 }
