@@ -9,6 +9,7 @@ import BlockDefinition from "#src/block_definition.js"
 
 
 export class DefinitionSet {
+  exportDirectory = "export"
   /** @type WorkspaceDefinition[] */
   workspaces = []
 
@@ -33,7 +34,7 @@ export class DefinitionSet {
   findBlock(query) {
     const found = find(this.blocks, query)
     if(!found) {
-      throw new Error(`No block found for query: ${query}`)
+      throw new Error(`No block found for query: ${ JSON.stringify(query) }`)
     }
 
     return found
@@ -43,10 +44,28 @@ export class DefinitionSet {
     return this.toolboxes[0].categories
   }
 
+  exportBlock(blockType, givenOptions = {}) {
+    const
+      options = {
+        toFile: false,
+        ...givenOptions
+      },
+      blockDefinition = this.findBlock({ type: blockType }),
+      blocklyObject = blockDefinition.toBlocklyJSON()
+
+    if(!options.toFile) { return blocklyObject }
+
+    const filename = isString(options.toFile)
+      ? options.toFile
+      : `${blockDefinition.type}.json`
+
+    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyObject))
+  }
+
   async export(options = {}) {
-    const destination = options.to || "export"
-    writeFileSync(`${destination}/workspace.json`, await this.workspaces[0].toBlocklyJSONString())
-    writeFileSync(`${destination}/toolbox.json`, await this.toolboxes[0].toBlocklyJSONString())
+    const destination = options.to || this.exportDirectory
+    writeFileSync(`${destination}/workspace.json`, this.workspaces[0].toBlocklyJSONString())
+    writeFileSync(`${destination}/toolbox.json`, this.toolboxes[0].toBlocklyJSONString())
     writeFileSync(`${destination}/blocks.json`, BlockDefinition.allToBlocklyJSONString(this.blocks))
     writeFileSync(`${destination}/blockly_app.js`, await BlocklyJSExporter.exportFor({
       blocks: this.blocks,
