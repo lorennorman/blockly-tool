@@ -198,7 +198,8 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   // warnings on any data that's missing, ugly, etc
   if(!blockDef.name) {
     // if no name given, humanize the type property as a default
-    console.warn(`No "name" property provided for block: "${rawBlockDefinition.type}" (${definitionPath})`)
+    // TODO: make a setting for this and re-enable
+    // console.warn(`No "name" property provided for block: "${rawBlockDefinition.type}" (${definitionPath})`)
     blockDef.name = rawBlockDefinition.type.split(/[\W_]+/).map(capitalize).join(" ").replace(/^io /i, "")
   }
 
