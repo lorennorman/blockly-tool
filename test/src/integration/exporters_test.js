@@ -125,12 +125,21 @@ describe("Exporting Blockly Files", () => {
     })
   })
 
-  describe("exporting a Workspaces", { skip: true }, () => {
+  describe("exporting a Workspaces", { only: true }, () => {
     it("export a Workspace Blockly object", () => {
       // the entire primary workspace
-      defSet.exportWorkspace("main", { toFile: false }) // default, returns the workspace object
-      defSet.exportWorkspace("main", { toFile: true }) // writes the workspace to workspace.json
-      defSet.exportWorkspace("main", { toFile: "other_workspace.json" }) // writes the workspace to other_workspace.json
+      const workspaceObject = defSet.exportWorkspace({ toFile: false }) // default, returns the workspace object
+      assert.exists(workspaceObject)
+      assert.hasAllKeys(workspaceObject, ["blocks"])
+      assert.hasAllKeys(workspaceObject.blocks, ["languageVersion", "blocks"])
+
+      const noReturn = defSet.exportWorkspace({ toFile: true }) // writes the workspace to workspace.json
+      assert.notExists(noReturn)
+      exportExists('workspace.json')
+
+      const stillNoReturn = defSet.exportWorkspace({ toFile: "other_workspace.json" }) // writes the workspace to other_workspace.json
+      assert.notExists(stillNoReturn)
+      exportExists('other_workspace.json')
     })
   })
 
