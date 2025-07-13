@@ -11,7 +11,7 @@ const PROCESSORS = {
   "/blocks.json": async () => JSON.stringify(await importBlockJson(), null, 2),
   "/toolbox.json": async () => JSON.stringify(await importToolboxJson(), null, 2),
   "/workspace.json": async () => JSON.stringify(await importWorkspaceJson(), null, 2),
-  "/blockly.js": importBlocklyJs,
+  "/blockly_app.js": importBlocklyJs,
 }
 const PROCESSED_FILES = keys(PROCESSORS)
 
