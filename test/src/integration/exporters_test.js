@@ -16,6 +16,11 @@ const
     mkdirSync(EXPORTS_DIR)
   },
 
+  exportExists = filename => {
+    const completePath = `${EXPORTS_DIR}/${filename}`
+    assert(existsSync(completePath), `Expected file "${filename}" to be exported to path: ${completePath}`)
+  },
+
   // load the fixture app once
   defSet = await DefinitionSet.load("test/src/integration/app_fixture")
 
@@ -37,25 +42,29 @@ describe("Exporting Blockly Files", () => {
 
   describe("exporting Blocks", () => {
     it("export a block definition as a Blockly object", { only:true }, async () => {
-
       const sentenceObject = defSet.exportBlock("sentence", { toFile: false }) // default, returns the object
       assert.equal(sentenceObject.type, "sentence")
 
       const noReturn = defSet.exportBlock("sentence", { toFile: true }) // use default filename for block (sentence.json)
       assert.notExists(noReturn)
-      assert(existsSync(`${EXPORTS_DIR}/sentence.json`))
+      exportExists(`sentence.json`)
 
       const stillNoReturn = defSet.exportBlock("sentence", { toFile: `my_block.json` }) // use given name
       assert.notExists(stillNoReturn)
-      assert(existsSync(`${EXPORTS_DIR}/my_block.json`))
+      exportExists(`my_block.json`)
     })
 
-    it("export all block definitions as Blockly objects", () => {
-      const defSet = {}
-      const query = { whatever: 'thing' }
-      defSet.exportBlocks(query, { toFile: false }) // default, returns the object
-      defSet.exportBlocks(query, { toFile: true }) // writes blocks.json
-      defSet.exportBlocks(query, { toFile: "all_blocks.json" }) // writes all_blocks.json
+    it("export all block definitions as Blockly objects", { only:true }, () => {
+      const allBlocks = defSet.exportBlocks({ toFile: false }) // default, returns the object
+      assert.hasAllKeys(allBlocks, ["sentence", "subject", "predicate"])
+
+      const noReturn = defSet.exportBlocks({ toFile: true }) // writes blocks.json
+      assert.notExists(noReturn)
+      exportExists(`blocks.json`)
+
+      const stillNoReturn = defSet.exportBlocks({ toFile: "all_blocks.json" }) // writes all_blocks.json
+      assert.notExists(stillNoReturn)
+      exportExists(`all_blocks.json`)
     })
 
     // "trunk" refers to the base form of a block, with:
@@ -63,7 +72,6 @@ describe("Exporting Blockly Files", () => {
     // - unremovable shadows attached to inputs
     // - optional sub-blocks, as warranted
     it("export the special 'trunk' form of a block", () => {
-      const defSet = {}
       defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
     })
 

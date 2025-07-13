@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { assign, find, forEach, isArray, isObject, isString, reject } from 'lodash-es'
+import { assign, find, forEach, keyBy, map, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
@@ -60,6 +60,26 @@ export class DefinitionSet {
       : `${blockDefinition.type}.json`
 
     writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyObject))
+  }
+
+  exportBlocks(givenOptions = {}) {
+    const
+      options = {
+        toFile: false,
+        ...givenOptions
+      },
+      blocklyObjects = map(this.blocks, ({ type }) => this.exportBlock(type)),
+      blocklyCollection = keyBy(blocklyObjects, "type")
+
+    if(!options.toFile) {
+      return blocklyCollection
+    }
+
+    const filename = isString(options.toFile)
+      ? options.toFile
+      : `blocks.json`
+
+    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyCollection, null, 2))
   }
 
   async export(options = {}) {
