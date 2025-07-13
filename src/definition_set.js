@@ -62,6 +62,12 @@ export class DefinitionSet {
     writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyObject))
   }
 
+  exportBlockTrunk(blockType) {
+    const blockDefinition = this.findBlock({ type: blockType })
+
+    return blockDefinition.toBlocklyInstanceJSON()
+  }
+
   exportBlocks(givenOptions = {}) {
     const
       options = {
@@ -83,11 +89,13 @@ export class DefinitionSet {
   }
 
   async export(options = {}) {
-    const destination = options.to || this.exportDirectory
-    writeFileSync(`${destination}/workspace.json`, this.workspaces[0].toBlocklyJSONString())
-    writeFileSync(`${destination}/toolbox.json`, this.toolboxes[0].toBlocklyJSONString())
-    writeFileSync(`${destination}/blocks.json`, BlockDefinition.allToBlocklyJSONString(this.blocks))
-    writeFileSync(`${destination}/blockly_app.js`, await BlocklyJSExporter.exportFor({
+    if(options.to) {
+      this.exportDirectory = options.to
+    }
+    writeFileSync(`${this.exportDirectory}/workspace.json`, this.workspaces[0].toBlocklyJSONString())
+    writeFileSync(`${this.exportDirectory}/toolbox.json`, this.toolboxes[0].toBlocklyJSONString())
+    this.exportBlocks({ toFile: true })
+    writeFileSync(`${this.exportDirectory}/blockly_app.js`, await BlocklyJSExporter.exportFor({
       blocks: this.blocks,
       toolbox: this.toolboxes[0],
       workspace: this.workspaces[0],

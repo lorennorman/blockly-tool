@@ -1,4 +1,14 @@
 export default {
   type: "sentence",
-  name: "Sentence"
+  name: "Sentence",
+
+  inputs: {
+    SUBJECT: {
+      shadow: 'subject'
+    },
+
+    PREDICATE: {
+      shadow: 'predicate'
+    }
+  }
 }

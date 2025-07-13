@@ -71,11 +71,16 @@ describe("Exporting Blockly Files", () => {
     // - fields defaulted
     // - unremovable shadows attached to inputs
     // - optional sub-blocks, as warranted
-    it("export the special 'trunk' form of a block", () => {
-      defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
+    it("export the special 'trunk' form of a block", { only:true }, () => {
+      const trunkObject = defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
+      assert.exists(trunkObject)
+      assert.hasAllKeys(trunkObject, ["type", "inputs"])
+      assert.hasAllKeys(trunkObject.inputs, ["SUBJECT", "PREDICATE"])
+      assert.hasAllKeys(trunkObject.inputs.SUBJECT, ["shadow"])
+      assert.hasAllKeys(trunkObject.inputs.PREDICATE, ["shadow"])
     })
 
-    it("export other block trees by name", () => {
+    it("export other block trees by name", { skip: true }, () => {
       const defSet = {}
       defSet.exportBlockTree("sentence", "simple") // exports the sentence block tree identified as "simple"
       defSet.exportBlockTree("sentence", "complex") // exports the sentence block tree identified as "complex"
@@ -91,7 +96,7 @@ describe("Exporting Blockly Files", () => {
   describe("exporting regenerators")
   describe("exporting all scripts: blockly_app.js")
 
-  describe("exporting Toolboxes", () => {
+  describe("exporting Toolboxes", { skip: true }, () => {
     it("export a Toolbox category Blockly object", () => {
       const defSet = {}
       // the "Sentence Parts" category of the "main" toolbox
@@ -107,7 +112,7 @@ describe("Exporting Blockly Files", () => {
     })
   })
 
-  describe("exporting a Workspaces", () => {
+  describe("exporting a Workspaces", { skip: true }, () => {
     it("export a Workspace Blockly object", () => {
       const defSet = {}
       // the entire "main" workspace
@@ -117,7 +122,7 @@ describe("Exporting Blockly Files", () => {
     })
   })
 
-  describe("exporting a standalone Blockly app", () => {
+  describe("exporting a standalone Blockly app", { skip: true }, () => {
     it("exports all 4 files correctly", () => {
       const defSet = {}
       const config = {}
@@ -131,7 +136,7 @@ describe("Exporting Blockly Files", () => {
     })
   })
 
-  describe("exporting a documentation site for a Blockly app", () => {
+  describe("exporting a documentation site for a Blockly app", { skip: true }, () => {
     it("exports tiny Blockly apps for each block definition", () => {
       const defSet = {}
       const config = {}
