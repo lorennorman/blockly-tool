@@ -88,12 +88,39 @@ export class DefinitionSet {
     writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyCollection, null, 2))
   }
 
+  exportToolboxCategory(categoryName) {
+    const
+      toolboxObject = this.exportToolbox(),
+      category = find(toolboxObject.contents, { name: categoryName })
+
+    return category
+  }
+
+  exportToolbox(givenOptions = {}) {
+    const
+      options = {
+        toFile: false,
+        ...givenOptions
+      },
+      toolboxObject = this.toolboxes[0].toBlocklyJSON()
+
+    if(!options.toFile) {
+      return toolboxObject
+    }
+
+    const filename = isString(options.toFile)
+      ? options.toFile
+      : `toolbox.json`
+
+    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(toolboxObject, null, 2))
+  }
+
   async export(options = {}) {
     if(options.to) {
       this.exportDirectory = options.to
     }
     writeFileSync(`${this.exportDirectory}/workspace.json`, this.workspaces[0].toBlocklyJSONString())
-    writeFileSync(`${this.exportDirectory}/toolbox.json`, this.toolboxes[0].toBlocklyJSONString())
+    this.exportToolbox({ toFile: true })
     this.exportBlocks({ toFile: true })
     writeFileSync(`${this.exportDirectory}/blockly_app.js`, await BlocklyJSExporter.exportFor({
       blocks: this.blocks,

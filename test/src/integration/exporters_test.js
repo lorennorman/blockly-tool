@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, rmSync } from 'node:fs'
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import { assert } from 'chai'
+import { map } from 'lodash-es'
 
 import DefinitionSet from "#src/definition_set.js"
 
@@ -41,7 +42,7 @@ describe("Exporting Blockly Files", () => {
   afterEach(clearExportsDir) // comment to inspect a test's output
 
   describe("exporting Blocks", () => {
-    it("export a block definition as a Blockly object", { only:true }, async () => {
+    it("export a block definition as a Blockly object", async () => {
       const sentenceObject = defSet.exportBlock("sentence", { toFile: false }) // default, returns the object
       assert.equal(sentenceObject.type, "sentence")
 
@@ -54,7 +55,7 @@ describe("Exporting Blockly Files", () => {
       exportExists(`my_block.json`)
     })
 
-    it("export all block definitions as Blockly objects", { only:true }, () => {
+    it("export all block definitions as Blockly objects", () => {
       const allBlocks = defSet.exportBlocks({ toFile: false }) // default, returns the object
       assert.hasAllKeys(allBlocks, ["sentence", "subject", "predicate"])
 
@@ -71,7 +72,7 @@ describe("Exporting Blockly Files", () => {
     // - fields defaulted
     // - unremovable shadows attached to inputs
     // - optional sub-blocks, as warranted
-    it("export the special 'trunk' form of a block", { only:true }, () => {
+    it("export the special 'trunk' form of a block", () => {
       const trunkObject = defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
       assert.exists(trunkObject)
       assert.hasAllKeys(trunkObject, ["type", "inputs"])
@@ -81,7 +82,7 @@ describe("Exporting Blockly Files", () => {
     })
 
     it("export other block trees by name", { skip: true }, () => {
-      const defSet = {}
+      // aspirational for now
       defSet.exportBlockTree("sentence", "simple") // exports the sentence block tree identified as "simple"
       defSet.exportBlockTree("sentence", "complex") // exports the sentence block tree identified as "complex"
       defSet.exportBlockTree("sentence", "trunk") // exports the trunk
@@ -96,26 +97,37 @@ describe("Exporting Blockly Files", () => {
   describe("exporting regenerators")
   describe("exporting all scripts: blockly_app.js")
 
-  describe("exporting Toolboxes", { skip: true }, () => {
+  describe("exporting Toolboxes", () => {
     it("export a Toolbox category Blockly object", () => {
-      const defSet = {}
-      // the "Sentence Parts" category of the "main" toolbox
-      defSet.exportToolboxCategory("main", "Sentence Parts")
+      // the "Sentence Parts" category of the primary toolbox
+      const categoryObject = defSet.exportToolboxCategory("Sentence Parts")
+      assert.exists(categoryObject)
+      assert.hasAllKeys(categoryObject, [ "kind", "name", "colour", "contents" ])
+      assert.lengthOf(categoryObject.contents, 2)
+
+      const contentTypes = map(categoryObject.contents, "type")
+      assert.include(contentTypes, "subject")
+      assert.include(contentTypes, "predicate")
     })
 
     it("export a Toolbox Blockly object", () => {
-      const defSet = {}
-      // the entire "main" toolbox
-      defSet.exportToolbox("main", { toFile: false }) // default, returns the toolbox object
-      defSet.exportToolbox("main", { toFile: true }) // exports the main toolbox object to toolbox.json
-      defSet.exportToolbox("main", { toFile: "other_toolbox.json" }) // exports the main toolbox object to other_toolbox.json
+      // the entire primary toolbox
+      const toolboxObject = defSet.exportToolbox({ toFile: false }) // default, returns the toolbox object
+      assert.exists(toolboxObject)
+
+      const noReturn = defSet.exportToolbox({ toFile: true }) // exports the main toolbox object to toolbox.json
+      assert.notExists(noReturn)
+      exportExists(`toolbox.json`)
+
+      const stillNoReturn = defSet.exportToolbox({ toFile: "other_toolbox.json" }) // exports the main toolbox object to other_toolbox.json
+      assert.notExists(stillNoReturn)
+      exportExists(`other_toolbox.json`)
     })
   })
 
   describe("exporting a Workspaces", { skip: true }, () => {
     it("export a Workspace Blockly object", () => {
-      const defSet = {}
-      // the entire "main" workspace
+      // the entire primary workspace
       defSet.exportWorkspace("main", { toFile: false }) // default, returns the workspace object
       defSet.exportWorkspace("main", { toFile: true }) // writes the workspace to workspace.json
       defSet.exportWorkspace("main", { toFile: "other_workspace.json" }) // writes the workspace to other_workspace.json
@@ -124,7 +136,6 @@ describe("Exporting Blockly Files", () => {
 
   describe("exporting a standalone Blockly app", { skip: true }, () => {
     it("exports all 4 files correctly", () => {
-      const defSet = {}
       const config = {}
       // config can specify export locations, bundling stuff, etc
       defSet.exportApp("io-actions", config) // export the app named "io-actions" to standalone files
@@ -138,7 +149,6 @@ describe("Exporting Blockly Files", () => {
 
   describe("exporting a documentation site for a Blockly app", { skip: true }, () => {
     it("exports tiny Blockly apps for each block definition", () => {
-      const defSet = {}
       const config = {}
       // config can specify export locations, bundling stuff, etc
       defSet.exportDocs("io-actions", config) // export the documentation site for the app named "io-actions" to standalone files

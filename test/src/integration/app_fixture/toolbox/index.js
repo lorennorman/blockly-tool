@@ -2,6 +2,9 @@ export default [
   {
     name: "Sentence Parts",
     color: 'blue',
-    contents: []
+    contents: [
+      'subject',
+      'predicate'
+    ]
   }
 ]
