@@ -18,3 +18,25 @@ architecture (WIP)
   - files (3 .jsons and a .js)
     ...rolls up into
   - apps (production app, docs site)
+
+/loaders
+  - block_loader.js
+  - ...
+/definitions
+  - definition_set.js
+  - block_definition.js
+  - ...
+/exporters
+  - block_exporter.js
+  - ...
+
+...vs...
+
+/blocks
+  - block_loader.js
+  - block_definition.js
+  - block_exporter.js
+/toolbox
+  - toolbox_loader.js
+  - toolbox_definition.js
+  - toolbox_exporter.js

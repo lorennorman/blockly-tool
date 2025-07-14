@@ -18,6 +18,8 @@
     "test-update-snapshots": "node --test --test-update-snapshots test/app/blocks/snapshots/block_snapshots_test.js",
     "lint": "eslint src/",
     "lint-export": "eslint export/",
+    "export:app": "node export.js app",
+    "export:docs": "node export.js docs",
     "build": "npm run export && vite build",
     "build-all-branches": "node build_all_branches.js",
     "preview": "npm run build && vite preview",

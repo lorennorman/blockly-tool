@@ -40,6 +40,14 @@ export class DefinitionSet {
     return found
   }
 
+  primaryWorkspace() {
+    return this.workspaces[0]
+  }
+
+  primaryToolbox() {
+    return this.toolboxes[0]
+  }
+
   getCategories() {
     return this.toolboxes[0].categories
   }
