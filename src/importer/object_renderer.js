@@ -72,7 +72,7 @@ const renderObject = object => {
     sortedKeyValues = compact(map(sortedKeys, rawKey => {
       const
         key = quotedKey(rawKey),
-        value = object[key]
+        value = object[rawKey]
 
       return isUndefined(value)
         ? null
