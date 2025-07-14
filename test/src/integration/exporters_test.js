@@ -4,6 +4,10 @@ import { assert } from 'chai'
 import { map } from 'lodash-es'
 
 import DefinitionSet from "#src/definition_set.js"
+import BlockExporter from "#src/exporters/block_exporter.js"
+import ToolboxExporter from "#src/exporters/toolbox_exporter.js"
+import WorkspaceExporter from "#src/exporters/workspace_exporter.js"
+import ScriptExporter from "#src/exporters/script_exporter.js"
 
 
 const
@@ -27,15 +31,6 @@ const
 
 defSet.exportDirectory = EXPORTS_DIR
 
-// The new programmer says 'hello' to the world.
-// The humble programmer waits.
-// Time waits for no one.
-//
-// sentence:
-// - noun
-// - verb
-// - predicate
-
 describe("Exporting Blockly Files", () => {
   // ensure exports dir is cleared before and after each test
   beforeEach(clearExportsDir)
@@ -43,27 +38,31 @@ describe("Exporting Blockly Files", () => {
 
   describe("exporting Blocks", () => {
     it("export a block definition as a Blockly object", async () => {
-      const sentenceObject = defSet.exportBlock("sentence", { toFile: false }) // default, returns the object
+      const blockExporter = new BlockExporter(defSet, EXPORTS_DIR)
+
+      const sentenceObject = blockExporter.exportBlock("sentence", { toFile: false }) // default, returns the object
       assert.equal(sentenceObject.type, "sentence")
 
-      const noReturn = defSet.exportBlock("sentence", { toFile: true }) // use default filename for block (sentence.json)
+      const noReturn = blockExporter.exportBlock("sentence", { toFile: true }) // use default filename for block (sentence.json)
       assert.notExists(noReturn)
       exportExists(`sentence.json`)
 
-      const stillNoReturn = defSet.exportBlock("sentence", { toFile: `my_block.json` }) // use given name
+      const stillNoReturn = blockExporter.exportBlock("sentence", { toFile: `my_block.json` }) // use given name
       assert.notExists(stillNoReturn)
       exportExists(`my_block.json`)
     })
 
     it("export all block definitions as Blockly objects", () => {
-      const allBlocks = defSet.exportBlocks({ toFile: false }) // default, returns the object
+      const blockExporter = new BlockExporter(defSet, EXPORTS_DIR)
+
+      const allBlocks = blockExporter.export({ toFile: false }) // default, returns the object
       assert.hasAllKeys(allBlocks, ["sentence", "subject", "predicate"])
 
-      const noReturn = defSet.exportBlocks({ toFile: true }) // writes blocks.json
+      const noReturn = blockExporter.export({ toFile: true }) // writes blocks.json
       assert.notExists(noReturn)
       exportExists(`blocks.json`)
 
-      const stillNoReturn = defSet.exportBlocks({ toFile: "all_blocks.json" }) // writes all_blocks.json
+      const stillNoReturn = blockExporter.export({ toFile: "all_blocks.json" }) // writes all_blocks.json
       assert.notExists(stillNoReturn)
       exportExists(`all_blocks.json`)
     })
@@ -73,7 +72,10 @@ describe("Exporting Blockly Files", () => {
     // - unremovable shadows attached to inputs
     // - optional sub-blocks, as warranted
     it("export the special 'trunk' form of a block", () => {
-      const trunkObject = defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
+      const blockExporter = new BlockExporter(defSet, EXPORTS_DIR)
+
+      const trunkObject = blockExporter.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
+      // const trunkObject = defSet.exportBlockTrunk("sentence") // returns the trunk form of the sentence block
       assert.exists(trunkObject)
       assert.hasAllKeys(trunkObject, ["type", "inputs"])
       assert.hasAllKeys(trunkObject.inputs, ["SUBJECT", "PREDICATE"])
@@ -95,12 +97,34 @@ describe("Exporting Blockly Files", () => {
   describe("exporting validations")
   describe("exporting generators")
   describe("exporting regenerators")
-  describe("exporting all scripts: blockly_app.js")
+  describe("exporting all scripts: blockly_app.js", { only: true}, () => {
+    it("exports all parts with section headings", () => {
+      const scriptExporter = new ScriptExporter(defSet, EXPORTS_DIR)
+
+      const jsContents = scriptExporter.export()
+      // console.log(jsContents)
+      assert.include(jsContents, "\n// Toolbox\n")
+      assert.include(jsContents, "\"Callback Category\": workspace => {")
+      assert.include(jsContents, "\n// Mixins\n")
+      assert.include(jsContents, "const allMixins = {")
+      assert.include(jsContents, "\n// Extensions\n")
+      assert.include(jsContents, "const allExtensions = {")
+      assert.include(jsContents, "\n// Mutators\n")
+      assert.include(jsContents, "const allBlockMutators = {")
+      assert.include(jsContents, "\n// Generators\n")
+      assert.include(jsContents, "const blockGenerators = {")
+      assert.include(jsContents, "\n// Regenerators\n")
+      assert.include(jsContents, "const blockRegenerators = {")
+      assert.include(jsContents, "\n// Blockly API Wrapper\n")
+    })
+  })
 
   describe("exporting Toolboxes", () => {
     it("export a Toolbox category Blockly object", () => {
+      const toolboxExporter = new ToolboxExporter(defSet, EXPORTS_DIR)
+
       // the "Sentence Parts" category of the primary toolbox
-      const categoryObject = defSet.exportToolboxCategory("Sentence Parts")
+      const categoryObject = toolboxExporter.exportCategory("Sentence Parts")
       assert.exists(categoryObject)
       assert.hasAllKeys(categoryObject, [ "kind", "name", "colour", "contents" ])
       assert.lengthOf(categoryObject.contents, 2)
@@ -111,33 +135,37 @@ describe("Exporting Blockly Files", () => {
     })
 
     it("export a Toolbox Blockly object", () => {
+      const toolboxExporter = new ToolboxExporter(defSet, EXPORTS_DIR)
+
       // the entire primary toolbox
-      const toolboxObject = defSet.exportToolbox({ toFile: false }) // default, returns the toolbox object
+      const toolboxObject = toolboxExporter.export({ toFile: false }) // default, returns the toolbox object
       assert.exists(toolboxObject)
 
-      const noReturn = defSet.exportToolbox({ toFile: true }) // exports the main toolbox object to toolbox.json
+      const noReturn = toolboxExporter.export({ toFile: true }) // exports the main toolbox object to toolbox.json
       assert.notExists(noReturn)
       exportExists(`toolbox.json`)
 
-      const stillNoReturn = defSet.exportToolbox({ toFile: "other_toolbox.json" }) // exports the main toolbox object to other_toolbox.json
+      const stillNoReturn = toolboxExporter.export({ toFile: "other_toolbox.json" }) // exports the main toolbox object to other_toolbox.json
       assert.notExists(stillNoReturn)
       exportExists(`other_toolbox.json`)
     })
   })
 
-  describe("exporting a Workspaces", { only: true }, () => {
+  describe("exporting Workspaces", () => {
     it("export a Workspace Blockly object", () => {
+      const workspaceExporter = new WorkspaceExporter(defSet, EXPORTS_DIR)
+
       // the entire primary workspace
-      const workspaceObject = defSet.exportWorkspace({ toFile: false }) // default, returns the workspace object
+      const workspaceObject = workspaceExporter.export({ toFile: false }) // default, returns the workspace object
       assert.exists(workspaceObject)
       assert.hasAllKeys(workspaceObject, ["blocks"])
       assert.hasAllKeys(workspaceObject.blocks, ["languageVersion", "blocks"])
 
-      const noReturn = defSet.exportWorkspace({ toFile: true }) // writes the workspace to workspace.json
+      const noReturn = workspaceExporter.export({ toFile: true }) // writes the workspace to workspace.json
       assert.notExists(noReturn)
       exportExists('workspace.json')
 
-      const stillNoReturn = defSet.exportWorkspace({ toFile: "other_workspace.json" }) // writes the workspace to other_workspace.json
+      const stillNoReturn = workspaceExporter.export({ toFile: "other_workspace.json" }) // writes the workspace to other_workspace.json
       assert.notExists(stillNoReturn)
       exportExists('other_workspace.json')
     })

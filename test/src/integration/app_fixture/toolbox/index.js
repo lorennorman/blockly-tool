@@ -6,5 +6,15 @@ export default [
       'subject',
       'predicate'
     ]
+  },
+  {
+    name: "Callback Category",
+    color: 'red',
+    callback: workspace => {
+      return [
+        'predicate',
+        'subject'
+      ]
+    }
   }
 ]

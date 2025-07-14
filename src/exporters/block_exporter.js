@@ -49,6 +49,12 @@ export default class BlockExporter {
     writeFileSync(`${this.destination}/${filename}`, JSON.stringify(blocklyObject))
   }
 
+  exportBlockTrunk(blockType) {
+    const blockDefinition = this.definitionSet.findBlock({ type: blockType })
+
+    return blockDefinition.toBlocklyInstanceJSON()
+  }
+
   exportToFile = (toFile=true) => {
     this.export({ toFile })
   }

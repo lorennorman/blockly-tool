@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { assign, find, forEach, keyBy, map, isArray, isObject, isString, reject } from 'lodash-es'
+import { assign, find, forEach, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
 import BlocklyJSExporter from '#src/blockly_js_exporter.js'
@@ -25,14 +25,9 @@ export class DefinitionSet {
   generators = {}
   regenerators = {}
 
-  getBlocksFrom(...referrers) {
-    return {
-      toBlocklyJSON: () => BlockDefinition.allToBlocklyJSONString(this.blocks)
-    }
-  }
-
   findBlock(query) {
     const found = find(this.blocks, query)
+
     if(!found) {
       throw new Error(`No block found for query: ${ JSON.stringify(query) }`)
     }
@@ -49,97 +44,7 @@ export class DefinitionSet {
   }
 
   getCategories() {
-    return this.toolboxes[0].categories
-  }
-
-  exportBlock(blockType, givenOptions = {}) {
-    const
-      options = {
-        toFile: false,
-        ...givenOptions
-      },
-      blockDefinition = this.findBlock({ type: blockType }),
-      blocklyObject = blockDefinition.toBlocklyJSON()
-
-    if(!options.toFile) { return blocklyObject }
-
-    const filename = isString(options.toFile)
-      ? options.toFile
-      : `${blockDefinition.type}.json`
-
-    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyObject))
-  }
-
-  exportBlockTrunk(blockType) {
-    const blockDefinition = this.findBlock({ type: blockType })
-
-    return blockDefinition.toBlocklyInstanceJSON()
-  }
-
-  exportBlocks(givenOptions = {}) {
-    const
-      options = {
-        toFile: false,
-        ...givenOptions
-      },
-      blocklyObjects = map(this.blocks, ({ type }) => this.exportBlock(type)),
-      blocklyCollection = keyBy(blocklyObjects, "type")
-
-    if(!options.toFile) {
-      return blocklyCollection
-    }
-
-    const filename = isString(options.toFile)
-      ? options.toFile
-      : `blocks.json`
-
-    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(blocklyCollection, null, 2))
-  }
-
-  exportToolboxCategory(categoryName) {
-    const
-      toolboxObject = this.exportToolbox(),
-      category = find(toolboxObject.contents, { name: categoryName })
-
-    return category
-  }
-
-  exportToolbox(givenOptions = {}) {
-    const
-      options = {
-        toFile: false,
-        ...givenOptions
-      },
-      toolboxObject = this.toolboxes[0].toBlocklyJSON()
-
-    if(!options.toFile) {
-      return toolboxObject
-    }
-
-    const filename = isString(options.toFile)
-      ? options.toFile
-      : `toolbox.json`
-
-    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(toolboxObject, null, 2))
-  }
-
-  exportWorkspace(givenOptions = {}) {
-    const
-      options = {
-        toFile: false,
-        ...givenOptions
-      },
-      workspaceObject = this.workspaces[0].toBlocklyJSON()
-
-    if(!options.toFile) {
-      return workspaceObject
-    }
-
-    const filename = isString(options.toFile)
-      ? options.toFile
-      : `workspace.json`
-
-    writeFileSync(`${this.exportDirectory}/${filename}`, JSON.stringify(workspaceObject, null, 2))
+    return this.primaryToolbox().categories
   }
 
   async export(options = {}) {

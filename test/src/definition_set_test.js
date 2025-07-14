@@ -1,5 +1,4 @@
-import fs from "node:fs"
-import { describe, it, beforeEach, afterEach } from 'node:test'
+import { describe, it, beforeEach } from 'node:test'
 import { filter } from "lodash-es"
 import { assert } from 'chai'
 
@@ -56,51 +55,6 @@ describe("DefinitionSet", function() {
 
     it("has regenerators", function() {
       assert.isAbove(Object.keys(this.definitionSet.regenerators).length, 1)
-    })
-  })
-
-  describe("exporting blockly app", function() {
-    beforeEach(function() {
-      fs.mkdirSync("./tmp")
-    })
-
-    it("exports 4 files", async function() {
-      const definitionSet = await DefinitionSet.load()
-      await definitionSet.export({ to: "./tmp" })
-
-      // blocks.json
-      assert(fs.existsSync("./tmp/blocks.json"))
-      assert.isAbove(fs.readFileSync("./tmp/blocks.json").length, 10)
-
-      // toolbox.json
-      assert(fs.existsSync("./tmp/toolbox.json"))
-      assert.isAbove(fs.readFileSync("./tmp/toolbox.json").length, 10)
-
-      // workspace.json
-      assert(fs.existsSync("./tmp/workspace.json"))
-      assert.isAbove(fs.readFileSync("./tmp/workspace.json").length, 10)
-
-      // blockly_app.js
-      assert(fs.existsSync("./tmp/blockly_app.js"))
-      const jsContents = fs.readFileSync("./tmp/blockly_app.js").toString()
-      // console.log(jsContents)
-      assert.include(jsContents, "\n// Toolbox\n")
-      assert.include(jsContents, "Variables: workspace => {")
-      assert.include(jsContents, "\n// Mixins\n")
-      assert.include(jsContents, "const allMixins = {")
-      assert.include(jsContents, "\n// Extensions\n")
-      assert.include(jsContents, "const allExtensions = {")
-      assert.include(jsContents, "\n// Mutators\n")
-      assert.include(jsContents, "const allBlockMutators = {")
-      assert.include(jsContents, "\n// Generators\n")
-      assert.include(jsContents, "const blockGenerators = {")
-      assert.include(jsContents, "\n// Regenerators\n")
-      assert.include(jsContents, "const blockRegenerators = {")
-      assert.include(jsContents, "\n// Blockly API Wrapper\n")
-    })
-
-    afterEach(function() {
-      fs.rmSync("./tmp", { recursive: true })
     })
   })
 })

@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { isString } from 'lodash-es'
+import { find, isString } from 'lodash-es'
 
 
 export default class ToolboxExporter {
@@ -28,6 +28,14 @@ export default class ToolboxExporter {
       : `toolbox.json`
 
     writeFileSync(`${this.destination}/${filename}`, JSON.stringify(toolboxObject, null, 2))
+  }
+
+  exportCategory(categoryName) {
+    const
+      toolboxObject = this.export(),
+      category = find(toolboxObject.contents, { name: categoryName })
+
+    return category
   }
 
   exportToFile = (toFile=true) => {
