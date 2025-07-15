@@ -35,7 +35,7 @@ export default class ScriptExporter {
         section("Mutators", exportMutatorJs(this.definitionSet.mutators)),
         section("Generators", exportGeneratorJs(this.definitionSet.generators)),
         section("Regenerators", exportRegeneratorJs(this.definitionSet.regenerators)),
-        section("Blockly API Wrapper", readFileSync(`./src/importer/blockly_api.js`))
+        section("Blockly API Wrapper", readFileSync(`./src/exporters/script_templates/blockly_api.js`))
       ].join("")
 
     if(!options.toFile) {
@@ -62,38 +62,38 @@ const
       categoriesObject = mapValues(keyBy(categoriesWithCallbacks, "name"), "callback"),
       renderedCategoryCallbacks = `const categoryCallbacks = ${ renderObject(categoriesObject) }`
 
-    return renderTemplate(renderedCategoryCallbacks, './src/importer/toolbox.template.js')
+    return renderTemplate(renderedCategoryCallbacks, './src/exporters/script_templates/toolbox.template.js')
   },
 
   exportMixinJs = mixins => {
     const renderedMixins = `const allMixins = ${renderObject(mixins)}`
     // render the mixins template and return the output
-    return renderTemplate(renderedMixins, './src/importer/mixins.template.js')
+    return renderTemplate(renderedMixins, './src/exporters/script_templates/mixins.template.js')
   },
 
   exportExtensionJs = extensions => {
     const renderedExtensions = `const allExtensions = ${ renderObject(extensions) }`
     // render the extensions template and return the output
-    return renderTemplate(renderedExtensions, './src/importer/extensions.template.js')
+    return renderTemplate(renderedExtensions, './src/exporters/script_templates/extensions.template.js')
   },
 
   exportMutatorJs = mutators => {
     // write the javascript into a string
     const renderedMutators = `const allBlockMutators = ${ renderObject(mutators) }`
     // render the mutators template and return the output
-    return renderTemplate(renderedMutators, './src/importer/mutators.template.js')
+    return renderTemplate(renderedMutators, './src/exporters/script_templates/mutators.template.js')
   },
 
   exportGeneratorJs = generators => {
     // write the javascript into a string
     const renderedGenerators = `const blockGenerators = ${ renderObject(generators) }`
     // render the generators template and return the output
-    return renderTemplate(renderedGenerators, './src/importer/generators.template.js')
+    return renderTemplate(renderedGenerators, './src/exporters/script_templates/generators.template.js')
   },
 
   exportRegeneratorJs = regenerators => {
     // write the javascript into a string
     const renderedRegenerators = `const blockRegenerators = ${ renderObject(regenerators) }`
 
-    return renderTemplate(renderedRegenerators, './src/importer/regenerators.template.js')
+    return renderTemplate(renderedRegenerators, './src/exporters/script_templates/regenerators.template.js')
   }
