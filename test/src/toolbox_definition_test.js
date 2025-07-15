@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
-import ToolboxDefinition from "#src/toolbox_definition.js"
-import BlockDefinition from "#src/block_definition.js"
+import ToolboxDefinition from "#src/definitions/toolbox_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 const RAW_DEFINITION = [

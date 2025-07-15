@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
-import BlockDefinition from "#src/block_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 const BLOCK_FIXTURE = {

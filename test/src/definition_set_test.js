@@ -2,10 +2,10 @@ import { describe, it, beforeEach } from 'node:test'
 import { filter } from "lodash-es"
 import { assert } from 'chai'
 
-import DefinitionSet from "#src/definition_set.js"
-import WorkspaceDefinition from "#src/workspace_definition.js"
-import ToolboxDefinition from "#src/toolbox_definition.js"
-import BlockDefinition from "#src/block_definition.js"
+import DefinitionSet from "#src/definitions/definition_set.js"
+import WorkspaceDefinition from "#src/definitions/workspace_definition.js"
+import ToolboxDefinition from "#src/definitions/toolbox_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 describe("DefinitionSet", function() {

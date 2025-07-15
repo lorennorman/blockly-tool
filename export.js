@@ -1,5 +1,5 @@
 import { cleanDir, write, totalBytesWritten } from "./export_util.js"
-import DefinitionSet from '#src/definition_set.js'
+import DefinitionSet from '#src/definitions/definition_set.js'
 import { exportTo } from '#src/exporters/index.js'
 
 

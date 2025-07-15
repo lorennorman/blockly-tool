@@ -3,7 +3,7 @@ import { describe, it, beforeEach, afterEach } from 'node:test'
 import { assert } from 'chai'
 import { find, map } from 'lodash-es'
 
-import DefinitionSet from "#src/definition_set.js"
+import DefinitionSet from "#src/definitions/definition_set.js"
 import BlockExporter from "#src/exporters/block_exporter.js"
 import ToolboxExporter from "#src/exporters/toolbox_exporter.js"
 import WorkspaceExporter from "#src/exporters/workspace_exporter.js"

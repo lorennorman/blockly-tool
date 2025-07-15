@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 
-import DefinitionSet from "#src/definition_set.js"
+import DefinitionSet from "#src/definitions/definition_set.js"
 
 
 describe("Block Snapshots", async () => {

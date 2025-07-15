@@ -1,9 +1,9 @@
 import { assign, find, forEach, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
-import WorkspaceDefinition from "#src/workspace_definition.js"
-import ToolboxDefinition from "#src/toolbox_definition.js"
-import BlockDefinition from "#src/block_definition.js"
+import WorkspaceDefinition from "#src/definitions/workspace_definition.js"
+import ToolboxDefinition from "#src/definitions/toolbox_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 export class DefinitionSet {

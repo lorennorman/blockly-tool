@@ -3,7 +3,7 @@ import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
 import emailBlockDefObject from "#app/blocks/action/email.js"
-import BlockDefinition from "#src/block_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 describe("Email Block", () => {

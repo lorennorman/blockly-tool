@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
 import roundDef from "#app/blocks/math/round.js"
-import BlockDefinition from "#src/block_definition.js"
+import BlockDefinition from "#src/definitions/block_definition.js"
 
 
 describe("Round Block", { only: true }, () => {
