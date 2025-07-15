@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { filter, isString, keyBy, mapValues } from 'lodash-es'
 
-import renderTemplate from '#src/importer/template_renderer.js'
-import renderObject from '#src/importer/object_renderer.js'
+import renderTemplate from '#src/renderers/template_renderer.js'
+import renderObject from '#src/renderers/object_renderer.js'
 
 
 const section = (title, contents) => `

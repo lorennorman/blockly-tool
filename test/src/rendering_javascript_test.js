@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import { assert } from 'chai'
 
-import renderObject from '#src/importer/object_renderer.js'
+import renderObject from '#src/renderers/object_renderer.js'
 
 
 describe("Rendering JavaScript", () => {
