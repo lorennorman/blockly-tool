@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
-import DefinitionLoader from "#src/definition_loader.js"
+import DefinitionLoader from "#src/loaders/definition_loader.js"
 
 
 describe("DefinitionLoader", { only: true }, () => {
