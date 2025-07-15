@@ -1,4 +1,3 @@
-import { inspect } from 'node:util'
 import { describe, it } from 'node:test'
 import { assert } from 'chai'
 

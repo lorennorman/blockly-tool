@@ -99,7 +99,6 @@ describe("BlockDefinition", () => {
     it("matches Blockly's JSON", () => {
       const blocklyObject = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block').toBlocklyJSON()
 
-      console.log(blocklyObject)
       assert.equal(blocklyObject.type, BLOCK_FIXTURE.type)
     })
   })
