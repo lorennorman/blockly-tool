@@ -40,14 +40,14 @@ describe("Exporting Blockly Files", () => {
     it("export a block definition as a Blockly object", async () => {
       const blockExporter = new BlockExporter(defSet, EXPORTS_DIR)
 
-      const sentenceObject = blockExporter.exportBlock("sentence", { toFile: false }) // default, returns the object
+      const sentenceObject = blockExporter.exportBlockByType("sentence", { toFile: false }) // default, returns the object
       assert.equal(sentenceObject.type, "sentence")
 
-      const noReturn = blockExporter.exportBlock("sentence", { toFile: true }) // use default filename for block (sentence.json)
+      const noReturn = blockExporter.exportBlockByType("sentence", { toFile: true }) // use default filename for block (sentence.json)
       assert.notExists(noReturn)
       exportExists(`sentence.json`)
 
-      const stillNoReturn = blockExporter.exportBlock("sentence", { toFile: `my_block.json` }) // use given name
+      const stillNoReturn = blockExporter.exportBlockByType("sentence", { toFile: `my_block.json` }) // use given name
       assert.notExists(stillNoReturn)
       exportExists(`my_block.json`)
     })

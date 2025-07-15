@@ -102,13 +102,5 @@ describe("BlockDefinition", () => {
       console.log(blocklyObject)
       assert.equal(blocklyObject.type, BLOCK_FIXTURE.type)
     })
-
-    it("allToBlocklyJSON", () => {
-      const
-        definition = BlockDefinition.parseRawDefinition(BLOCK_FIXTURE, 'path/to/block'),
-        blocklyObjects = BlockDefinition.allToBlocklyJSON([ definition, definition, definition ])
-
-      assert.lengthOf(blocklyObjects, 3)
-    })
   })
 })

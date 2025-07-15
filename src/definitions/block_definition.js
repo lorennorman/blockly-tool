@@ -1,6 +1,6 @@
-import { capitalize, filter, invokeMap, isString, map, sortBy, isEmpty, keyBy, mapValues, reduce, forEach, pickBy, identity } from 'lodash-es'
+import { capitalize, filter, isString, map, isEmpty, keyBy, mapValues, reduce, forEach, pickBy, identity } from 'lodash-es'
 
-import { toBlockJSON } from '#src/exporters/block_processor/index.js'
+import BlockExporter from "#src/exporters/block_exporter.js"
 import { niceTemplate } from '#src/util.js'
 
 
@@ -56,7 +56,7 @@ class BlockDefinition {
   }
 
   toBlocklyJSON() {
-    return toBlockJSON(this)
+    return BlockExporter.export(this)
   }
 
   toBlocklyJSONString() {
@@ -204,12 +204,4 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   }
 
   return blockDef
-}
-
-BlockDefinition.allToBlocklyJSONString = function(blockDefinitions) {
-  return JSON.stringify(this.allToBlocklyJSON(blockDefinitions), null, 2) + "\n"
-}
-
-BlockDefinition.allToBlocklyJSON = function(blockDefinitions) {
-  return invokeMap(sortBy(blockDefinitions, "type"), 'toBlocklyJSON')
 }

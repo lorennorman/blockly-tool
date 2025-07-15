@@ -1,5 +1,7 @@
 import { writeFileSync } from 'fs'
-import { isString, keyBy, map, sortBy } from 'lodash-es'
+import { isString, map, sortBy } from 'lodash-es'
+
+import { toBlockJSON } from '#src/exporters/block_processor/index.js'
 
 
 export default class BlockExporter {
@@ -17,7 +19,7 @@ export default class BlockExporter {
         toFile: false,
         ...givenOptions
       },
-      blocklyObjects = map(sortBy(this.definitionSet.blocks, "type"), ({ type }) => this.exportBlock(type))
+      blocklyObjects = map(sortBy(this.definitionSet.blocks, "type"), this.exportBlock)
 
     if(!options.toFile) {
       return blocklyObjects
@@ -30,14 +32,23 @@ export default class BlockExporter {
     writeFileSync(`${this.destination}/${filename}`, JSON.stringify(blocklyObjects, null, 2))
   }
 
-  exportBlock(blockType, givenOptions = {}) {
+  exportBlockByType(blockType, givenOptions = {}) {
+    if(!this.definitionSet) {
+      throw new Error(`Cannot exportBlockByType without a DefinitionSet. Exporting: "${blockType}"`)
+    }
+
+    const blockDefinition = this.definitionSet.findBlock({ type: blockType })
+
+    return this.exportBlock(blockDefinition, givenOptions)
+  }
+
+  exportBlock(blockDefinition, givenOptions = {}) {
     const
       options = {
         toFile: false,
         ...givenOptions
       },
-      blockDefinition = this.definitionSet.findBlock({ type: blockType }),
-      blocklyObject = blockDefinition.toBlocklyJSON()
+      blocklyObject = toBlockJSON(blockDefinition)
 
     if(!options.toFile) { return blocklyObject }
 
@@ -57,4 +68,8 @@ export default class BlockExporter {
   exportToFile = (toFile=true) => {
     this.export({ toFile })
   }
+}
+
+BlockExporter.export = (blockDefinition, givenOptions = {}) => {
+  return new BlockExporter().exportBlock(blockDefinition, givenOptions)
 }

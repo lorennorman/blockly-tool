@@ -46,7 +46,6 @@ describe("ToolboxDefinition", () => {
         definitionSet = { findBlock: () => TEST_BLOCK_DEFINITION },
         toolboxDefinition = ToolboxDefinition.parseRawDefinition(RAW_DEFINITION, definitionSet)
 
-      console.log(toolboxDefinition.toBlocklyJSON().contents[0])
       assert.deepEqual(toolboxDefinition.toBlocklyJSON(), {
         "kind": "categoryToolbox",
         "contents": [
