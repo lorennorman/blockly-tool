@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import { assert } from 'chai'
 
-import { processTemplate } from '#src/importer/block_processor/lines.js'
+import { processTemplate } from '#src/exporters/block_processor/lines.js'
 
 
 const TEMPLATE_FIXTURE = {

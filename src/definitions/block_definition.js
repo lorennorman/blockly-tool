@@ -1,6 +1,6 @@
 import { capitalize, filter, invokeMap, isString, map, sortBy, isEmpty, keyBy, mapValues, reduce, forEach, pickBy, identity } from 'lodash-es'
 
-import { toBlockJSON } from '#src/importer/block_processor/index.js'
+import { toBlockJSON } from '#src/exporters/block_processor/index.js'
 import { niceTemplate } from '#src/util.js'
 
 
