@@ -18,13 +18,13 @@
                 {
                   ...block,
                   deletable: false,
-                  x: 50,
-                  y: 50
+                  x: 20,
+                  y: 20
                 },
                 ...blocks.map((docBlock, idx) => ({
                   ...docBlock,
                   x: 180,
-                  y: idx*30 + 50
+                  y: idx*30 + 20
                 }))
               ]
             }

@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, rmSync } from 'node:fs'
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import { assert } from 'chai'
-import { map } from 'lodash-es'
+import { find, map } from 'lodash-es'
 
 import DefinitionSet from "#src/definition_set.js"
 import BlockExporter from "#src/exporters/block_exporter.js"
@@ -56,7 +56,9 @@ describe("Exporting Blockly Files", () => {
       const blockExporter = new BlockExporter(defSet, EXPORTS_DIR)
 
       const allBlocks = blockExporter.export({ toFile: false }) // default, returns the object
-      assert.hasAllKeys(allBlocks, ["sentence", "subject", "predicate"])
+      assert.exists(find(allBlocks, { type: "sentence" }))
+      assert.exists(find(allBlocks, { type: "subject" }))
+      assert.exists(find(allBlocks, { type: "predicate" }))
 
       const noReturn = blockExporter.export({ toFile: true }) // writes blocks.json
       assert.notExists(noReturn)

@@ -12,17 +12,17 @@ if(!toExport) {
 }
 
 const
+  // load the definitions
+  definitions = await DefinitionSet.load(),
+
   exporters = {
-    "app": async () => {
-      // load the definitions
-      const definitions = await DefinitionSet.load()
+    "app": async (destination="export") => {
 
       // clear the export directory
-      cleanDir("export")
+      cleanDir(destination)
 
-      // await definitions.export({ to: "export" })
-
-      await exportTo("export", definitions, exportItem => {
+      // app export routine
+      await exportTo(destination, definitions, exportItem => {
         exportItem.toolbox("toolbox.json")
         exportItem.workspace("workspace.json")
         exportItem.blocks("blocks.json")
@@ -31,11 +31,15 @@ const
     },
 
     "docs": async () => {
-      // Export.to("docs", defSet, exporter => {
-      //   exporters.sidebar("blocks/_blocks_sidebar.json")
-      //   exporters.blockPages(block => "blocks/${block.definitionPath}.md")
-      //   exporters.blockExamples(block => "blocks/${block.definitionPath}/examples.json")
-      // })
+      await exporters.app("docs/blockly")
+
+      cleanDir("docs/blocks")
+
+      await exportTo("docs", definitions, exportItem => {
+        exportItem.sidebar("blocks/_blocks_sidebar.json")
+        exportItem.blockPages(block => `blocks/${block.definitionPath.replace(/.js$/, '.md')}`)
+        // exportItem.blockExamples(block => "blocks/${block.definitionPath}/examples.json")
+      })
     },
   },
   exporterNames = Object.keys(exporters)

@@ -17,18 +17,17 @@ export default class BlockExporter {
         toFile: false,
         ...givenOptions
       },
-      blocklyObjects = map(sortBy(this.definitionSet.blocks, "type"), ({ type }) => this.exportBlock(type)),
-      blocklyCollection = keyBy(blocklyObjects, "type")
+      blocklyObjects = map(sortBy(this.definitionSet.blocks, "type"), ({ type }) => this.exportBlock(type))
 
     if(!options.toFile) {
-      return blocklyCollection
+      return blocklyObjects
     }
 
     const filename = isString(options.toFile)
       ? options.toFile
       : `blocks.json`
 
-    writeFileSync(`${this.destination}/${filename}`, JSON.stringify(blocklyCollection, null, 2))
+    writeFileSync(`${this.destination}/${filename}`, JSON.stringify(blocklyObjects, null, 2))
   }
 
   exportBlock(blockType, givenOptions = {}) {

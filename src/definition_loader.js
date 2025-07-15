@@ -64,13 +64,16 @@ export const DefinitionLoader = {
 
   loadBlocks: async (appLocation=APP_LOCATION) => {
     // get the file listing
-    const jsfiles = await glob(`${appLocation}/${BLOCK_LOCATION}**/*.js`, { ignore: NON_BLOCK_FILES })
+    const
+      fullBlockPath = `${appLocation}/${BLOCK_LOCATION}`,
+      jsfiles = await glob(`${fullBlockPath}**/*.js`, { ignore: NON_BLOCK_FILES })
+
     // load each file
     return Promise.all(
       jsfiles.map(
         async filePath => ({
           definition: (await import(`${PROJECT_ROOT}/${filePath}`)).default,
-          path: filePath.slice(BLOCK_LOCATION.length)
+          path: filePath.slice(fullBlockPath.length)
         })
       )
     )
