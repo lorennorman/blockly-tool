@@ -52,13 +52,25 @@
 
 <style>
   div#blocklyDiv {
-    /* width: 100%; */
     width: v-bind(width);
-    /* height: 200px; */
     height: v-bind(height);
 
     .injectionDiv {
       border-radius: 5px;
     }
+  }
+
+  /* category labels need a color style or
+     dark mode will bleed into them unfavorably */
+  .blocklyTreeLabel {
+    color: #000;
+  }
+
+  /* fix a style bleed where toolbox scrollbars will
+  fail to hide after being shown
+  see: https://github.com/google/blockly/issues/5840
+  */
+  svg[display="none"] {
+    display: none;
   }
 </style>

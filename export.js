@@ -1,7 +1,6 @@
 import { cleanDir, write, totalBytesWritten } from "./export_util.js"
 import DefinitionSet from '#src/definition_set.js'
 import { exportTo } from '#src/exporters/index.js'
-import BlocklyJSExporter from '#src/blockly_js_exporter.js'
 
 
 const toExport = process.argv[2]
