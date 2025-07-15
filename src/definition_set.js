@@ -1,8 +1,6 @@
-import { writeFileSync } from 'fs'
 import { assign, find, forEach, isArray, isObject, isString, reject } from 'lodash-es'
 
 import DefinitionLoader from '#src/definition_loader.js'
-import BlocklyJSExporter from '#src/blockly_js_exporter.js'
 import WorkspaceDefinition from "#src/workspace_definition.js"
 import ToolboxDefinition from "#src/toolbox_definition.js"
 import BlockDefinition from "#src/block_definition.js"
@@ -45,25 +43,6 @@ export class DefinitionSet {
 
   getCategories() {
     return this.primaryToolbox().categories
-  }
-
-  async export(options = {}) {
-    if(options.to) { this.exportDirectory = options.to }
-
-    this.exportWorkspace({ toFile: true })
-    this.exportToolbox({ toFile: true })
-    this.exportBlocks({ toFile: true })
-
-    writeFileSync(`${this.exportDirectory}/blockly_app.js`, await BlocklyJSExporter.exportFor({
-      blocks: this.blocks,
-      toolbox: this.toolboxes[0],
-      workspace: this.workspaces[0],
-      mixins: this.mixins,
-      extensions: this.extensions,
-      mutators: this.mutators,
-      generators: this.generators,
-      regenerators: this.regenerators,
-    }))
   }
 }
 

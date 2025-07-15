@@ -7,14 +7,15 @@ import BlockPageExporter from "./block_page_exporter.js"
 
 
 /**
+ * Organizes all the Exporters for use with the given
+ * DefinitionSet and to the given destination. Yields
+ * them to a builder function to use as appropriate.
  *
  * @param {String} destination
  * @param {DefinitionSet} definitions
  * @param {Function} exportFunc
  */
 export const exportTo = async (destination, definitions, exportFunc) => {
-  // await definitions.export({ to: destination })
-
   const exporters = {
     // app exporters
     toolbox: new ToolboxExporter(definitions, destination).exportToFile,
