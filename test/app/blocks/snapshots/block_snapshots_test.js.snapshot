@@ -1,4 +1,38 @@
-exports[`Block Snapshots > \"Action Log\" (action_log) 1`] = `
+exports[`Block Snapshots > Blockly JSON for action_email 1`] = `
+{
+  "inputsInline": false,
+  "type": "action_email",
+  "colour": "0",
+  "tooltip": "Sends an email with given subject and body templates",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "📧 Email %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "align": "CENTRE"
+    }
+  ],
+  "message1": "Subject: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "SUBJECT",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "Body: %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "BODY",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for action_log 1`] = `
 {
   "inputsInline": false,
   "type": "action_log",
@@ -17,7 +51,7 @@ exports[`Block Snapshots > \"Action Log\" (action_log) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Action Publish\" (action_publish) 1`] = `
+exports[`Block Snapshots > Blockly JSON for action_publish 1`] = `
 {
   "inputsInline": false,
   "type": "action_publish",
@@ -51,7 +85,7 @@ exports[`Block Snapshots > \"Action Publish\" (action_publish) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Action Root\" (action_root) 1`] = `
+exports[`Block Snapshots > Blockly JSON for action_root 1`] = `
 {
   "inputsInline": false,
   "type": "action_root",
@@ -107,7 +141,7 @@ exports[`Block Snapshots > \"Action Root\" (action_root) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Action Sms\" (action_sms) 1`] = `
+exports[`Block Snapshots > Blockly JSON for action_sms 1`] = `
 {
   "inputsInline": false,
   "type": "action_sms",
@@ -133,7 +167,7 @@ exports[`Block Snapshots > \"Action Sms\" (action_sms) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Action Webhook\" (action_webhook) 1`] = `
+exports[`Block Snapshots > Blockly JSON for action_webhook 1`] = `
 {
   "inputsInline": false,
   "type": "action_webhook",
@@ -180,7 +214,7 @@ exports[`Block Snapshots > \"Action Webhook\" (action_webhook) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"All Days\" (all_days) 1`] = `
+exports[`Block Snapshots > Blockly JSON for all_days 1`] = `
 {
   "inputsInline": false,
   "type": "all_days",
@@ -198,7 +232,7 @@ exports[`Block Snapshots > \"All Days\" (all_days) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"All Hours\" (all_hours) 1`] = `
+exports[`Block Snapshots > Blockly JSON for all_hours 1`] = `
 {
   "inputsInline": false,
   "type": "all_hours",
@@ -216,7 +250,7 @@ exports[`Block Snapshots > \"All Hours\" (all_hours) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"All Minutes\" (all_minutes) 1`] = `
+exports[`Block Snapshots > Blockly JSON for all_minutes 1`] = `
 {
   "inputsInline": false,
   "type": "all_minutes",
@@ -234,7 +268,7 @@ exports[`Block Snapshots > \"All Minutes\" (all_minutes) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"All Months\" (all_months) 1`] = `
+exports[`Block Snapshots > Blockly JSON for all_months 1`] = `
 {
   "inputsInline": false,
   "type": "all_months",
@@ -252,51 +286,7 @@ exports[`Block Snapshots > \"All Months\" (all_months) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Controls If\" (io_controls_if) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_controls_if",
-  "colour": 60,
-  "tooltip": "Conditionally execute specified commands based on the outcome of conditional checks.\\n-\\nInputs:\\n---------------\\nif - the first value to check for truthiness\\ndo - the commands to execute if the first check was true\\nelse if - (optional, repeating) an extra value to check for truthiness\\ndo - the commands to execute if the previous check was true\\nelse - (optional) the commands to execute if no checks were true",
-  "nextStatement": "expression",
-  "previousStatement": "expression",
-  "message0": "if %1",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "IF0",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "do %1",
-  "args1": [
-    {
-      "type": "input_statement",
-      "name": "THEN0",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": "else if %1",
-  "args2": [
-    {
-      "type": "input_dummy",
-      "name": "ELSE_IF_LABEL",
-      "align": "RIGHT"
-    }
-  ],
-  "message3": "else %1",
-  "args3": [
-    {
-      "type": "input_dummy",
-      "name": "ELSE_LABEL",
-      "align": "RIGHT"
-    }
-  ],
-  "mutator": "io_controls_if"
-}
-`;
-
-exports[`Block Snapshots > \"Day Settings\" (day_settings) 1`] = `
+exports[`Block Snapshots > Blockly JSON for day_settings 1`] = `
 {
   "inputsInline": false,
   "type": "day_settings",
@@ -314,7 +304,7 @@ exports[`Block Snapshots > \"Day Settings\" (day_settings) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Days Of Week\" (days_of_week) 1`] = `
+exports[`Block Snapshots > Blockly JSON for days_of_week 1`] = `
 {
   "inputsInline": false,
   "type": "days_of_week",
@@ -374,7 +364,7 @@ exports[`Block Snapshots > \"Days Of Week\" (days_of_week) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay Days\" (delay_days) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_days 1`] = `
 {
   "inputsInline": false,
   "type": "delay_days",
@@ -391,7 +381,7 @@ exports[`Block Snapshots > \"Delay Days\" (delay_days) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay Hours\" (delay_hours) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_hours 1`] = `
 {
   "inputsInline": false,
   "type": "delay_hours",
@@ -507,7 +497,7 @@ exports[`Block Snapshots > \"Delay Hours\" (delay_hours) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay Minutes\" (delay_minutes) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_minutes 1`] = `
 {
   "inputsInline": false,
   "type": "delay_minutes",
@@ -767,7 +757,7 @@ exports[`Block Snapshots > \"Delay Minutes\" (delay_minutes) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay None\" (delay_none) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_none 1`] = `
 {
   "inputsInline": false,
   "type": "delay_none",
@@ -784,7 +774,7 @@ exports[`Block Snapshots > \"Delay None\" (delay_none) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay Seconds\" (delay_seconds) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_seconds 1`] = `
 {
   "inputsInline": false,
   "type": "delay_seconds",
@@ -1044,7 +1034,7 @@ exports[`Block Snapshots > \"Delay Seconds\" (delay_seconds) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Delay Settings\" (delay_settings) 1`] = `
+exports[`Block Snapshots > Blockly JSON for delay_settings 1`] = `
 {
   "inputsInline": false,
   "type": "delay_settings",
@@ -1098,41 +1088,7 @@ exports[`Block Snapshots > \"Delay Settings\" (delay_settings) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Email\" (action_email) 1`] = `
-{
-  "inputsInline": false,
-  "type": "action_email",
-  "colour": "0",
-  "tooltip": "Sends an email with given subject and body templates",
-  "nextStatement": "expression",
-  "previousStatement": "expression",
-  "message0": "📧 Email %1",
-  "args0": [
-    {
-      "type": "input_dummy",
-      "align": "CENTRE"
-    }
-  ],
-  "message1": "Subject: %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "SUBJECT",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": "Body: %1",
-  "args2": [
-    {
-      "type": "input_value",
-      "name": "BODY",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Every Days Between\" (every_days_between) 1`] = `
+exports[`Block Snapshots > Blockly JSON for every_days_between 1`] = `
 {
   "inputsInline": false,
   "type": "every_days_between",
@@ -1444,7 +1400,7 @@ exports[`Block Snapshots > \"Every Days Between\" (every_days_between) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Every Hours Between\" (every_hours_between) 1`] = `
+exports[`Block Snapshots > Blockly JSON for every_hours_between 1`] = `
 {
   "inputsInline": false,
   "type": "every_hours_between",
@@ -1700,7 +1656,7 @@ exports[`Block Snapshots > \"Every Hours Between\" (every_hours_between) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Every Minutes Between\" (every_minutes_between) 1`] = `
+exports[`Block Snapshots > Blockly JSON for every_minutes_between 1`] = `
 {
   "inputsInline": false,
   "type": "every_minutes_between",
@@ -2260,7 +2216,7 @@ exports[`Block Snapshots > \"Every Minutes Between\" (every_minutes_between) 1`]
 }
 `;
 
-exports[`Block Snapshots > \"Every Months Between\" (every_months_between) 1`] = `
+exports[`Block Snapshots > Blockly JSON for every_months_between 1`] = `
 {
   "inputsInline": false,
   "type": "every_months_between",
@@ -2412,7 +2368,7 @@ exports[`Block Snapshots > \"Every Months Between\" (every_months_between) 1`] =
 }
 `;
 
-exports[`Block Snapshots > \"Feed Get Value\" (feed_get_value) 1`] = `
+exports[`Block Snapshots > Blockly JSON for feed_get_value 1`] = `
 {
   "inputsInline": false,
   "type": "feed_get_value",
@@ -2444,7 +2400,7 @@ exports[`Block Snapshots > \"Feed Get Value\" (feed_get_value) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Feed Selector\" (feed_selector) 1`] = `
+exports[`Block Snapshots > Blockly JSON for feed_selector 1`] = `
 {
   "inputsInline": false,
   "type": "feed_selector",
@@ -2476,7 +2432,7 @@ exports[`Block Snapshots > \"Feed Selector\" (feed_selector) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Feed Set Value\" (feed_set_value) 1`] = `
+exports[`Block Snapshots > Blockly JSON for feed_set_value 1`] = `
 {
   "inputsInline": true,
   "type": "feed_set_value",
@@ -2517,7 +2473,7 @@ exports[`Block Snapshots > \"Feed Set Value\" (feed_set_value) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Hour Settings\" (hour_settings) 1`] = `
+exports[`Block Snapshots > Blockly JSON for hour_settings 1`] = `
 {
   "inputsInline": false,
   "type": "hour_settings",
@@ -2535,7 +2491,51 @@ exports[`Block Snapshots > \"Hour Settings\" (hour_settings) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Logic Boolean\" (io_logic_boolean) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_controls_if 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_controls_if",
+  "colour": 60,
+  "tooltip": "Conditionally execute specified commands based on the outcome of conditional checks.\\n-\\nInputs:\\n---------------\\nif - the first value to check for truthiness\\ndo - the commands to execute if the first check was true\\nelse if - (optional, repeating) an extra value to check for truthiness\\ndo - the commands to execute if the previous check was true\\nelse - (optional) the commands to execute if no checks were true",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "if %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "IF0",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "do %1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "THEN0",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": "else if %1",
+  "args2": [
+    {
+      "type": "input_dummy",
+      "name": "ELSE_IF_LABEL",
+      "align": "RIGHT"
+    }
+  ],
+  "message3": "else %1",
+  "args3": [
+    {
+      "type": "input_dummy",
+      "name": "ELSE_LABEL",
+      "align": "RIGHT"
+    }
+  ],
+  "mutator": "io_controls_if"
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_logic_boolean 1`] = `
 {
   "inputsInline": false,
   "type": "io_logic_boolean",
@@ -2567,7 +2567,7 @@ exports[`Block Snapshots > \"Logic Boolean\" (io_logic_boolean) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Logic Compare\" (io_logic_compare) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_logic_compare 1`] = `
 {
   "inputsInline": true,
   "type": "io_logic_compare",
@@ -2631,7 +2631,7 @@ exports[`Block Snapshots > \"Logic Compare\" (io_logic_compare) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Logic Negate\" (io_logic_negate) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_logic_negate 1`] = `
 {
   "inputsInline": false,
   "type": "io_logic_negate",
@@ -2649,7 +2649,7 @@ exports[`Block Snapshots > \"Logic Negate\" (io_logic_negate) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Logic Operation\" (io_logic_operation) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_logic_operation 1`] = `
 {
   "inputsInline": true,
   "type": "io_logic_operation",
@@ -2697,147 +2697,7 @@ exports[`Block Snapshots > \"Logic Operation\" (io_logic_operation) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Matcher Boolean Operation\" (matcher_boolean_operation) 1`] = `
-{
-  "inputsInline": true,
-  "type": "matcher_boolean_operation",
-  "colour": 60,
-  "tooltip": "",
-  "output": "matcher",
-  "message0": "is true %1 %2",
-  "args0": [
-    {
-      "name": "OP",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "and",
-          "AND"
-        ],
-        [
-          "or",
-          "OR"
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "B",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Matcher Compare\" (matcher_compare) 1`] = `
-{
-  "inputsInline": true,
-  "type": "matcher_compare",
-  "colour": 224,
-  "tooltip": "Compare the new feed value with a number in various ways.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber B - the number to compare the feed value with\\n-\\nCasting:\\n---------------\\nThe feed value and Number B are coerced to floating point numbers",
-  "output": "matcher",
-  "message0": " %1 %2",
-  "args0": [
-    {
-      "name": "OP",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "=",
-          "EQ"
-        ],
-        [
-          "≠",
-          "NEQ"
-        ],
-        [
-          "‏<",
-          "LT"
-        ],
-        [
-          "‏≤",
-          "LTE"
-        ],
-        [
-          "‏>",
-          "GT"
-        ],
-        [
-          "‏≥",
-          "GTE"
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "B",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Matcher Text Compare\" (matcher_text_compare) 1`] = `
-{
-  "inputsInline": true,
-  "type": "matcher_text_compare",
-  "colour": 180,
-  "tooltip": "Compare the new feed value with text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion.\\nText B - the string of text to compare against the feed value\\n-\\nCasting:\\n---------------\\nBoth the Feed value and Text B input are coerced to strings",
-  "output": "matcher",
-  "message0": " %1 %2",
-  "args0": [
-    {
-      "name": "OP",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "=",
-          "EQ"
-        ],
-        [
-          "≠",
-          "NEQ"
-        ],
-        [
-          "includes",
-          "INC"
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "B",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Math Arithmetic\" (io_math_arithmetic) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_math_arithmetic 1`] = `
 {
   "inputsInline": true,
   "type": "io_math_arithmetic",
@@ -2897,7 +2757,7 @@ exports[`Block Snapshots > \"Math Arithmetic\" (io_math_arithmetic) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Math Constrain\" (io_math_constrain) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_math_constrain 1`] = `
 {
   "inputsInline": false,
   "type": "io_math_constrain",
@@ -2924,7 +2784,339 @@ exports[`Block Snapshots > \"Math Constrain\" (io_math_constrain) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Math Map\" (math_map) 1`] = `
+exports[`Block Snapshots > Blockly JSON for io_math_number 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_math_number",
+  "colour": 120,
+  "tooltip": "A numeric value, whole or decimal.",
+  "output": "number",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "NUM",
+      "type": "field_input",
+      "text": "0"
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "extensions": [
+    "validateNumbers"
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_math_round 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_math_round",
+  "colour": 120,
+  "tooltip": "Round a value to the nearest whole number via round, floor, or ceiling functions",
+  "output": "expression",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "name": "OPERATION",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Round",
+          "round"
+        ],
+        [
+          "Floor",
+          "floor"
+        ],
+        [
+          "Ceiling",
+          "ceiling"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_text 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_text",
+  "colour": 180,
+  "tooltip": "A String of text",
+  "output": "String",
+  "message0": "\\" %1 %2",
+  "args0": [
+    {
+      "name": "TEXT",
+      "type": "field_input",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_text_join 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_text_join",
+  "colour": 180,
+  "tooltip": "Join two pieces of text into one.\\n-\\nInputs:\\n---------------\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
+  "output": null,
+  "message0": " %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "+ %1",
+  "args1": [
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": " %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_text_multiline 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_text_multiline",
+  "colour": 180,
+  "tooltip": "A String of longer-form text with newlines.",
+  "output": "String",
+  "message0": "P %1 %2",
+  "args0": [
+    {
+      "name": "TEXT",
+      "type": "field_multilinetext",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_variables_get 1`] = `
+{
+  "inputsInline": false,
+  "type": "io_variables_get",
+  "colour": 240,
+  "tooltip": "Retrieve the value in a variable that was set earlier",
+  "output": "String",
+  "message0": "Get variable %1 %2",
+  "args0": [
+    {
+      "name": "VAR",
+      "type": "field_variable",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for io_variables_set 1`] = `
+{
+  "inputsInline": true,
+  "type": "io_variables_set",
+  "colour": 240,
+  "tooltip": "Set a variable to a value",
+  "nextStatement": "expression",
+  "previousStatement": "expression",
+  "message0": "Set variable %1 = %2",
+  "args0": [
+    {
+      "name": "VAR",
+      "type": "field_variable",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for matcher_boolean_operation 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_boolean_operation",
+  "colour": 60,
+  "tooltip": "",
+  "output": "matcher",
+  "message0": "is true %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "and",
+          "AND"
+        ],
+        [
+          "or",
+          "OR"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for matcher_compare 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_compare",
+  "colour": 224,
+  "tooltip": "Compare the new feed value with a number in various ways.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber B - the number to compare the feed value with\\n-\\nCasting:\\n---------------\\nThe feed value and Number B are coerced to floating point numbers",
+  "output": "matcher",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "‏<",
+          "LT"
+        ],
+        [
+          "‏≤",
+          "LTE"
+        ],
+        [
+          "‏>",
+          "GT"
+        ],
+        [
+          "‏≥",
+          "GTE"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for matcher_text_compare 1`] = `
+{
+  "inputsInline": true,
+  "type": "matcher_text_compare",
+  "colour": 180,
+  "tooltip": "Compare the new feed value with text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion.\\nText B - the string of text to compare against the feed value\\n-\\nCasting:\\n---------------\\nBoth the Feed value and Text B input are coerced to strings",
+  "output": "matcher",
+  "message0": " %1 %2",
+  "args0": [
+    {
+      "name": "OP",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "=",
+          "EQ"
+        ],
+        [
+          "≠",
+          "NEQ"
+        ],
+        [
+          "includes",
+          "INC"
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": " %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "B",
+      "align": "RIGHT"
+    }
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for math_map 1`] = `
 {
   "inputsInline": false,
   "type": "math_map",
@@ -2967,32 +3159,7 @@ exports[`Block Snapshots > \"Math Map\" (math_map) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Math Number\" (io_math_number) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_math_number",
-  "colour": 120,
-  "tooltip": "A numeric value, whole or decimal.",
-  "output": "number",
-  "message0": " %1 %2",
-  "args0": [
-    {
-      "name": "NUM",
-      "type": "field_input",
-      "text": "0"
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "extensions": [
-    "validateNumbers"
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Math Range\" (math_range) 1`] = `
+exports[`Block Snapshots > Blockly JSON for math_range 1`] = `
 {
   "inputsInline": true,
   "type": "math_range",
@@ -3018,7 +3185,7 @@ exports[`Block Snapshots > \"Math Range\" (math_range) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Minute Settings\" (minute_settings) 1`] = `
+exports[`Block Snapshots > Blockly JSON for minute_settings 1`] = `
 {
   "inputsInline": false,
   "type": "minute_settings",
@@ -3036,7 +3203,7 @@ exports[`Block Snapshots > \"Minute Settings\" (minute_settings) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Month Settings\" (month_settings) 1`] = `
+exports[`Block Snapshots > Blockly JSON for month_settings 1`] = `
 {
   "inputsInline": false,
   "type": "month_settings",
@@ -3054,7 +3221,7 @@ exports[`Block Snapshots > \"Month Settings\" (month_settings) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"On Schedule\" (on_schedule) 1`] = `
+exports[`Block Snapshots > Blockly JSON for on_schedule 1`] = `
 {
   "inputsInline": false,
   "type": "on_schedule",
@@ -3108,7 +3275,7 @@ exports[`Block Snapshots > \"On Schedule\" (on_schedule) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"One Day\" (one_day) 1`] = `
+exports[`Block Snapshots > Blockly JSON for one_day 1`] = `
 {
   "inputsInline": false,
   "type": "one_day",
@@ -3257,7 +3424,7 @@ exports[`Block Snapshots > \"One Day\" (one_day) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"One Hour\" (one_hour) 1`] = `
+exports[`Block Snapshots > Blockly JSON for one_hour 1`] = `
 {
   "inputsInline": false,
   "type": "one_hour",
@@ -3378,7 +3545,7 @@ exports[`Block Snapshots > \"One Hour\" (one_hour) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"One Minute\" (one_minute) 1`] = `
+exports[`Block Snapshots > Blockly JSON for one_minute 1`] = `
 {
   "inputsInline": false,
   "type": "one_minute",
@@ -3643,7 +3810,7 @@ exports[`Block Snapshots > \"One Minute\" (one_minute) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"One Month\" (one_month) 1`] = `
+exports[`Block Snapshots > Blockly JSON for one_month 1`] = `
 {
   "inputsInline": false,
   "type": "one_month",
@@ -3716,44 +3883,7 @@ exports[`Block Snapshots > \"One Month\" (one_month) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Round/Floor/Ceiling\" (io_math_round) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_math_round",
-  "colour": 120,
-  "tooltip": "Round a value to the nearest whole number via round, floor, or ceiling functions",
-  "output": "expression",
-  "message0": "%1 %2",
-  "args0": [
-    {
-      "name": "OPERATION",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "Round",
-          "round"
-        ],
-        [
-          "Floor",
-          "floor"
-        ],
-        [
-          "Ceiling",
-          "ceiling"
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_value",
-      "name": "VALUE",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Some Months\" (some_months) 1`] = `
+exports[`Block Snapshots > Blockly JSON for some_months 1`] = `
 {
   "inputsInline": false,
   "type": "some_months",
@@ -3845,7 +3975,7 @@ exports[`Block Snapshots > \"Some Months\" (some_months) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Text Compare\" (text_compare) 1`] = `
+exports[`Block Snapshots > Blockly JSON for text_compare 1`] = `
 {
   "inputsInline": true,
   "type": "text_compare",
@@ -3897,62 +4027,7 @@ exports[`Block Snapshots > \"Text Compare\" (text_compare) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Text Join\" (io_text_join) 1`] = `
-{
-  "inputsInline": true,
-  "type": "io_text_join",
-  "colour": 180,
-  "tooltip": "Join two pieces of text into one.\\n-\\nInputs:\\n---------------\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
-  "output": null,
-  "message0": " %1",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "A",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "+ %1",
-  "args1": [
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
-    {
-      "type": "input_value",
-      "name": "B",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Text Multiline\" (io_text_multiline) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_text_multiline",
-  "colour": 180,
-  "tooltip": "A String of longer-form text with newlines.",
-  "output": "String",
-  "message0": "P %1 %2",
-  "args0": [
-    {
-      "name": "TEXT",
-      "type": "field_multilinetext",
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Text Template\" (text_template) 1`] = `
+exports[`Block Snapshots > Blockly JSON for text_template 1`] = `
 {
   "inputsInline": true,
   "type": "text_template",
@@ -3971,82 +4046,7 @@ exports[`Block Snapshots > \"Text Template\" (text_template) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"Text\" (io_text) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_text",
-  "colour": 180,
-  "tooltip": "A String of text",
-  "output": "String",
-  "message0": "\\" %1 %2",
-  "args0": [
-    {
-      "name": "TEXT",
-      "type": "field_input",
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Variables Get\" (io_variables_get) 1`] = `
-{
-  "inputsInline": false,
-  "type": "io_variables_get",
-  "colour": 240,
-  "tooltip": "Retrieve the value in a variable that was set earlier",
-  "output": "String",
-  "message0": "Get variable %1 %2",
-  "args0": [
-    {
-      "name": "VAR",
-      "type": "field_variable",
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Variables Set\" (io_variables_set) 1`] = `
-{
-  "inputsInline": true,
-  "type": "io_variables_set",
-  "colour": 240,
-  "tooltip": "Set a variable to a value",
-  "nextStatement": "expression",
-  "previousStatement": "expression",
-  "message0": "Set variable %1 = %2",
-  "args0": [
-    {
-      "name": "VAR",
-      "type": "field_variable",
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "VALUE",
-      "align": "RIGHT"
-    }
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"Weather\" (weather) 1`] = `
+exports[`Block Snapshots > Blockly JSON for weather 1`] = `
 {
   "inputsInline": false,
   "type": "weather",
@@ -4200,7 +4200,82 @@ exports[`Block Snapshots > \"Weather\" (weather) 1`] = `
 }
 `;
 
-exports[`Block Snapshots > \"When Data Matching State\" (when_data_matching_state) 1`] = `
+exports[`Block Snapshots > Blockly JSON for when_data 1`] = `
+{
+  "inputsInline": true,
+  "type": "when_data",
+  "colour": 30,
+  "tooltip": "Run this action when a Feed receives a new data point.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "When %1 gets any data %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for when_data_matching 1`] = `
+{
+  "inputsInline": true,
+  "type": "when_data_matching",
+  "colour": 30,
+  "tooltip": "Run this Action when the specified Feed receives data that matches the specified condition.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatcher - a numerical or textual matcher block to try new Feed data points with",
+  "nextStatement": "trigger",
+  "previousStatement": "trigger",
+  "message0": "When %1 %2",
+  "args0": [
+    {
+      "name": "FEED_KEY",
+      "type": "field_dropdown",
+      "options": [
+        [
+          "Loading Feeds...",
+          ""
+        ]
+      ],
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "align": "LEFT"
+    }
+  ],
+  "message1": "gets data matching: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "MATCHER",
+      "check": "matcher",
+      "align": "RIGHT"
+    }
+  ],
+  "extensions": [
+    "replaceDropdownOptions",
+    "populateFeedDropdown"
+  ]
+}
+`;
+
+exports[`Block Snapshots > Blockly JSON for when_data_matching_state 1`] = `
 {
   "inputsInline": true,
   "type": "when_data_matching_state",
@@ -4263,81 +4338,6 @@ exports[`Block Snapshots > \"When Data Matching State\" (when_data_matching_stat
       "name": "MATCHER",
       "check": "matcher",
       "align": "RIGHT"
-    }
-  ],
-  "extensions": [
-    "replaceDropdownOptions",
-    "populateFeedDropdown"
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"When Data Matching\" (when_data_matching) 1`] = `
-{
-  "inputsInline": true,
-  "type": "when_data_matching",
-  "colour": 30,
-  "tooltip": "Run this Action when the specified Feed receives data that matches the specified condition.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatcher - a numerical or textual matcher block to try new Feed data points with",
-  "nextStatement": "trigger",
-  "previousStatement": "trigger",
-  "message0": "When %1 %2",
-  "args0": [
-    {
-      "name": "FEED_KEY",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "Loading Feeds...",
-          ""
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "LEFT"
-    }
-  ],
-  "message1": "gets data matching: %1",
-  "args1": [
-    {
-      "type": "input_value",
-      "name": "MATCHER",
-      "check": "matcher",
-      "align": "RIGHT"
-    }
-  ],
-  "extensions": [
-    "replaceDropdownOptions",
-    "populateFeedDropdown"
-  ]
-}
-`;
-
-exports[`Block Snapshots > \"When Data\" (when_data) 1`] = `
-{
-  "inputsInline": true,
-  "type": "when_data",
-  "colour": 30,
-  "tooltip": "Run this action when a Feed receives a new data point.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points",
-  "nextStatement": "trigger",
-  "previousStatement": "trigger",
-  "message0": "When %1 gets any data %2",
-  "args0": [
-    {
-      "name": "FEED_KEY",
-      "type": "field_dropdown",
-      "options": [
-        [
-          "Loading Feeds...",
-          ""
-        ]
-      ],
-      "text": ""
-    },
-    {
-      "type": "input_dummy",
-      "align": "LEFT"
     }
   ],
   "extensions": [

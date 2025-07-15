@@ -9,7 +9,7 @@ describe("Block Snapshots", async () => {
   // load all current blocks
   definitionSet.blocks.forEach(blockDefinition => {
     // define a test for each block
-    it(`"${blockDefinition.name}" (${blockDefinition.type})`, ({ assert: { snapshot }}) => {
+    it(`Blockly JSON for ${blockDefinition.type}`, ({ assert: { snapshot }}) => {
       // test merely checks the json representation
       snapshot(blockDefinition.toBlocklyJSON())
     })
