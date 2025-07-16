@@ -8,7 +8,7 @@ export const
       firstLineBlank = /^\s*$/.test(lines[0]),
       remainingLines = lines.slice(1, -1),
       indentCounts = map(remainingLines, line => line.search(/\S/)),
-      firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts.slice(1, -1))
+      firstLineLeastIndented = indentCounts[0] >= Math.min(...indentCounts)
 
     // ensure first line is blank and every other line has at least as much whitespace as the first line
     if(firstLineBlank && firstLineLeastIndented) {

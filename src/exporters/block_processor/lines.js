@@ -225,7 +225,7 @@ export default processLines
 const
   ALIGNMENT_REGEX = /\s*\|(CENTER|CENTRE|RIGHT|LEFT)$/m,
   // %, followed by a letter, optionally followed by letters/numbers, followed by whitespace or EoI
-  ARG_REGEX = /(%[a-zA-Z]\w*)(?:$|\s)/gm
+  ARG_REGEX = /(%[a-zA-Z]\w*)/gm
 
 export const processTemplate = blockDefinition => {
   const { template, inputs={}, fields={} } = blockDefinition
@@ -233,92 +233,113 @@ export const processTemplate = blockDefinition => {
 
   const
     msgAndArgs = {},
-    covered = []
-  // break template on newlines, each line:
-  niceTemplate(template).split("\n").forEach((line, idx) => {
-    // - extract alignment
-    let alignment = DEFAULT_ALIGNMENT
-    const alignMatches = line.match(ALIGNMENT_REGEX)
-    if(alignMatches) {
-      // remember the alignment
-      alignment = alignMatches[1]
-      // purge from the line
-      line = line.replace(alignMatches[0], "")
-    }
-    alignment = alignment.replace("ER", "RE") // anglocize CENTER
+    covered = [],
+    // break template on newlines
+    givenLines = niceTemplate(template).split("\n")
 
-    // - extract data refs, replace with indices
-    const matches = line.match(ARG_REGEX) || []
-    matches.forEach((match, matchIdx) => {
-      line = line.replace(trim(match), `%${matchIdx+1}`)
-    })
+  let lineIndex = 0
 
-    // - append default index if no others present
-    if(!line.includes("%1")) {
-      line += " %1"
-    }
+  givenLines.forEach(lineWithAlignment => {
+    const
+      [line, alignment] = breakLineAndAlignment(lineWithAlignment),
+      matches = line.match(ARG_REGEX) || [],
+      subLines = []
 
-    msgAndArgs[`message${idx}`] = line
-
-    // build up the args for this line
-    const args = []
-
+    // create a sub-line each time we encounter an input
+    let endOfLastMatch = 0
     matches.forEach(match => {
       const matchName = trim(match.slice(1)) // strip the leading %
+      // early out if not an input
+      if (!inputs[matchName]) { return }
 
-      // error if already covered
-      if(covered.includes(matchName)) {
-        throw new Error(`Duplicate input/field name (${matchName}) referenced in template (for block: ${blockDefinition.type})`)
-      }
-
-      // find the match input or field
-      if(inputs[matchName]) {
-        // add the input arg
-        args.push({
-          type: "input_value",
-          name: matchName,
-          align: alignment
-        })
-
-      } else if(fields[matchName]) {
-        // add the field arg
-        const
-          fieldData = fields[matchName],
-          type = fieldTypeFromProperties(fieldData)
-
-        args.push({
-          name: matchName,
-          type,
-          checked: fieldData.checked,
-          options: fieldData.options.map(option => option.slice(0,2)), // slice out option documentation
-          text: fieldData.text || fieldData.multiline_text || fieldData.label || "",
-          spellcheck: fieldData.spellcheck,
-          value: fieldData.value,
-        })
-
-      } else {
-        throw new Error(`No input or field with name ${matchName} (processing block: ${blockDefinition.type})`)
-      }
-
-      // remember we covered this one
-      covered.push(matchName)
+      // add a sub-line up to it
+      const endOfMatch = line.indexOf(match) + match.length
+      subLines.push(line.slice(endOfLastMatch, endOfMatch))
+      endOfLastMatch = endOfMatch
     })
 
-    // add a dummy if no others
-    if(!args.length){
-      args.push({
-        type: "input_dummy",
-        align: alignment
-      })
+    // add another line if there is content after the last input
+    if(endOfLastMatch < line.length) {
+      subLines.push(line.slice(endOfLastMatch, line.length))
     }
 
-    msgAndArgs[`args${idx}`] = args
+    subLines.forEach(subLine => {
+      // rematch for just this sub-line
+      const subMatches = subLine.match(ARG_REGEX) || []
+      // - extract data refs, replace with indices
+      subMatches.forEach((match, matchIdx) => {
+        subLine = subLine.replace(trim(match), `%${matchIdx+1}`)
+      })
+
+      // - append default index if no others present
+      if(!subLine.includes("%1")) {
+        subLine += " %1"
+      }
+
+      msgAndArgs[`message${lineIndex}`] = subLine
+
+      // build up the args for this line
+      const args = []
+
+      subMatches.forEach(match => {
+        const matchName = trim(match.slice(1)) // strip the leading %
+
+        // error if already covered
+        if(covered.includes(matchName)) {
+          throw new Error(`Duplicate input/field name (${matchName}) referenced in template (for block: ${blockDefinition.type})`)
+        }
+
+        // find the match input or field
+        if(inputs[matchName]) {
+          // add the input arg
+          args.push({
+            type: "input_value",
+            name: matchName,
+            align: alignment
+          })
+
+        } else if(fields[matchName]) {
+          // add the field arg
+          const
+            fieldData = fields[matchName],
+            type = fieldTypeFromProperties(fieldData)
+
+          args.push({
+            name: matchName,
+            type,
+            checked: fieldData.checked,
+            options: fieldData.options?.map(option => option.slice(0,2)), // slice out option documentation
+            text: fieldData.text || fieldData.multiline_text || fieldData.label || "",
+            spellcheck: fieldData.spellcheck,
+            value: fieldData.value,
+          })
+
+        } else {
+          throw new Error(`No input or field with name ${matchName} (processing block: ${blockDefinition.type})`)
+        }
+
+        // remember we covered this one
+        covered.push(matchName)
+      })
+
+      // add a dummy if no others
+      if(!args.length){
+        args.push({
+          type: "input_dummy",
+          align: alignment
+        })
+      }
+
+      msgAndArgs[`args${lineIndex}`] = args
+
+      lineIndex += 1
+    })
   })
 
   // warn on any uncovered inputs or fields
   const unusedInputs = without(keys(inputs), ...covered)
   if(!isEmpty(unusedInputs)) {
-    throw new Error(`Some inputs where not used in the template: ${unusedInputs}`)
+    throw new Error(`Some inputs were not used in the template: ${unusedInputs}`)
   }
   const unusedFields = without(keys(fields), ...covered)
   if(!isEmpty(unusedFields)) {
@@ -326,6 +347,20 @@ export const processTemplate = blockDefinition => {
   }
 
   return msgAndArgs
+}
+
+const breakLineAndAlignment = line => {
+  // - extract alignment
+  let alignment = DEFAULT_ALIGNMENT
+  const alignMatches = line.match(ALIGNMENT_REGEX)
+  if(alignMatches) {
+    // remember the alignment
+    alignment = alignMatches[1]
+    // purge from the line
+    line = line.replace(alignMatches[0], "")
+  }
+
+  return [ line, alignment.replace("ER", "RE")] // anglocize CENTER
 }
 
 const fieldTypeFromProperties = fieldData => {
