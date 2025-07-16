@@ -2,7 +2,9 @@ export default {
   type: "io_math_round",
   bytecodeKey: "round",
   name: "Round/Floor/Ceiling",
+  color: 120,
   description: "Round a value to the nearest whole number via round, floor, or ceiling functions",
+
   docBlocks: [
     {
       type: 'io_math_number',
@@ -12,7 +14,6 @@ export default {
       fields: { TEXT: "1.55" }
     }
   ],
-  color: 120,
 
   connections: {
     mode: "value",
