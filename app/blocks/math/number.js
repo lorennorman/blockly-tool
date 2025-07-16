@@ -32,12 +32,11 @@ export default {
     }
   },
 
-  lines: [
-    ["", {
-      field: 'NUM',
-      text: '0'
-    }]
-  ],
+  template: " %NUM",
+
+  fields: {
+    NUM: { text: '0' }
+  },
 
   generators: {
     json: block => {

@@ -271,16 +271,10 @@ export const processTemplate = blockDefinition => {
         subLine = subLine.replace(trim(match), `%${matchIdx+1}`)
       })
 
-      // - append default index if no others present
-      if(!subLine.includes("%1")) {
-        subLine += " %1"
-      }
-
-      msgAndArgs[`message${lineIndex}`] = subLine
-
       // build up the args for this line
       const args = []
 
+      let foundInput = false
       subMatches.forEach(match => {
         const matchName = trim(match.slice(1)) // strip the leading %
 
@@ -291,6 +285,7 @@ export const processTemplate = blockDefinition => {
 
         // find the match input or field
         if(inputs[matchName]) {
+          foundInput = true
           // add the input arg
           args.push({
             type: "input_value",
@@ -322,14 +317,16 @@ export const processTemplate = blockDefinition => {
         covered.push(matchName)
       })
 
-      // add a dummy if no others
-      if(!args.length){
+      // attach a dummy input for alignment
+      if(!foundInput) {
+        subLine += ` %${subMatches.length + 1}`
         args.push({
           type: "input_dummy",
           align: alignment
         })
       }
 
+      msgAndArgs[`message${lineIndex}`] = subLine
       msgAndArgs[`args${lineIndex}`] = args
 
       lineIndex += 1

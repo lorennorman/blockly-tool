@@ -97,6 +97,15 @@ describe("Block template processing", () => {
     assertNumberOfLines(blockProps, 2)
   })
 
+  it("adds a dummy input for lines with only fields", () => {
+    const
+      template = "%A",
+      fields = { A: { type: 'any' } },
+      blockProps = processTemplate({ template, fields })
+
+    assert.equal(blockProps.message0, "%1 %2")
+  })
+
   it("data prop detection", () => {
     const
       template = "(%A,%B)",
