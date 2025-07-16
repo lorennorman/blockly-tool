@@ -1,6 +1,7 @@
 export default {
   type: "io_math_constrain",
   bytecodeKey: "constrain",
+  name: "Constrain",
   colour: 120,
   description: "Constrain a given number to fall within a given range.",
 

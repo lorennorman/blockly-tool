@@ -2572,9 +2572,9 @@ exports[`Block Snapshots > Blockly JSON > io_logic_compare 1`] = `
   "inputsInline": true,
   "type": "io_logic_compare",
   "colour": 120,
-  "tooltip": "Compare two numeric values in the specified way.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber A - the first number\\nNumber B - the second number\\n-\\nCasting:\\n---------------\\nboth Number inputs are coerced to floating point numbers",
+  "tooltip": "Numerically compare two given values using the selected math operation.",
   "output": null,
-  "message0": " %1",
+  "message0": "%1",
   "args0": [
     {
       "type": "input_value",
@@ -2615,13 +2615,6 @@ exports[`Block Snapshots > Blockly JSON > io_logic_compare 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
     {
       "type": "input_value",
       "name": "B",

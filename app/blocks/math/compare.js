@@ -1,43 +1,37 @@
 export default {
   type: 'io_logic_compare',
+  bytecodeKey: "",
+  name: "Compare Numbers",
+  colour: 120,
+  inputsInline: true,
+  description: "Numerically compare two given values using the selected math operation.",
 
-  toolbox: {
-    category: 'Math',
+  template: `%A %OP %B`,
+
+  inputs: {
+    A: {
+      description: "The left side of the comparison. Will be coerced to a number",
+      shadow: 'io_math_number'
+    },
+    B: {
+      description: "The right side of the comparison. Will be coerced to a number",
+      shadow: 'io_math_number'
+    },
   },
 
-  visualization: {
-    inputsInline: true,
-    colour: 120,
-    tooltip: [
-      "Compare two numeric values in the specified way.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Comparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?",
-      "Number A - the first number",
-      "Number B - the second number",
-      "-",
-      "Casting:",
-      "---------------",
-      "both Number inputs are coerced to floating point numbers",
-    ].join('\n'),
-  },
-
-  lines: [
-    ["", { inputValue: 'A', shadow: 'io_math_number' }],
-    [ "", {
-      field: "OP",
+  fields: {
+    OP: {
+      description: "The mathematical comparison to use.",
       options: [
-        ['=', 'EQ'],
-        ['\u2260', 'NEQ'],
-        ['\u200F<', 'LT'],
-        ['\u200F\u2264', 'LTE'],
-        ['\u200F>', 'GT'],
-        ['\u200F\u2265', 'GTE'],
+        ['=', 'EQ', "True if the two numbers are equal"],
+        ['\u2260', 'NEQ', "True if the two numbers are not equal"],
+        ['\u200F<', 'LT', "True if number A is less than number B"],
+        ['\u200F\u2264', 'LTE', "True if number A is less than or equal to number B"],
+        ['\u200F>', 'GT', "True if number A is greater than number B"],
+        ['\u200F\u2265', 'GTE', "True if number A is greater than or equal to number B"],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: 'io_math_number' }]
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {
