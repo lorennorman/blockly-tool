@@ -1,14 +1,9 @@
 export default {
   type: 'io_math_number',
+  name: "Number",
+  colour: 120,
 
-  toolbox: {
-    category: 'Math',
-  },
-
-  visualization: {
-    colour: 120,
-    tooltip: "A numeric value, whole or decimal.",
-  },
+  description: "A numeric value, whole or decimal.",
 
   connections: {
     mode: "value",
