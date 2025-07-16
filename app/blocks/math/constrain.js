@@ -1,26 +1,25 @@
 export default {
   type: "io_math_constrain",
-
-  toolbox: { },
-
-  visualization: {
-    colour: 120,
-    tooltip: "Constrain a given number to fall within a given range.",
-  },
+  bytecodeKey: "constrain",
+  colour: 120,
+  description: "Constrain a given number to fall within a given range.",
 
   connections: {
     mode: "value",
     output: "number",
   },
 
-  lines: [
-    [ "Constrain %VALUE", {
-      inputValue: "VALUE",
-      shadow: "io_math_number"
-    }],
+  template: `
+    Constrain %VALUE
+    to %RANGE
+  `,
 
-    [ "to %RANGE", {
-      inputValue: "RANGE",
+  inputs: {
+    VALUE: {
+      shadow: "io_math_number"
+    },
+
+    RANGE: {
       check: 'range',
       shadow: {
         type: "math_range",
@@ -35,8 +34,8 @@ export default {
           }}
         }
       }
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {
