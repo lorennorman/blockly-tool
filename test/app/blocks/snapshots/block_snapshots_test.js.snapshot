@@ -3166,7 +3166,7 @@ exports[`Block Snapshots > Blockly JSON for math_range 1`] = `
   "colour": 120,
   "tooltip": "A range of numbers specified by a lower and upper bound.",
   "output": "range",
-  "message0": "(%1,",
+  "message0": "(%1",
   "args0": [
     {
       "type": "input_value",
@@ -3174,11 +3174,18 @@ exports[`Block Snapshots > Blockly JSON for math_range 1`] = `
       "align": "RIGHT"
     }
   ],
-  "message1": "%1)",
+  "message1": ",%1",
   "args1": [
     {
       "type": "input_value",
       "name": "TO",
+      "align": "RIGHT"
+    }
+  ],
+  "message2": ") %1",
+  "args2": [
+    {
+      "type": "input_dummy",
       "align": "RIGHT"
     }
   ]
