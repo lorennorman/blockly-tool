@@ -284,13 +284,15 @@ export const processTemplate = blockDefinition => {
         }
 
         // find the match input or field
-        if(inputs[matchName]) {
+        const inputMatch = inputs[matchName]
+        if(inputMatch) {
           foundInput = true
           // add the input arg
           args.push({
             type: "input_value",
             name: matchName,
-            align: alignment
+            ...(inputMatch.check ? { check: inputMatch.check } : {}),
+            align: alignment,
           })
 
         } else if(fields[matchName]) {

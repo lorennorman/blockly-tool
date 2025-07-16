@@ -29,8 +29,6 @@ describe("Block template processing", () => {
   it("works", () => {
     const templateProperties = processTemplate(TEMPLATE_FIXTURE)
 
-    // console.log(templateProperties)
-
     assert.equal(templateProperties.message0, "📧 Email %1")
     assert.deepEqual(templateProperties.args0, [
       {
