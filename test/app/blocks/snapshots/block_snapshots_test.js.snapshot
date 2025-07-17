@@ -2818,7 +2818,7 @@ exports[`Block Snapshots > Blockly JSON > io_text 1`] = `
   "colour": 180,
   "tooltip": "A String of text",
   "output": "String",
-  "message0": "\\" %1 %2",
+  "message0": "\\"%1 %2",
   "args0": [
     {
       "name": "TEXT",
@@ -2838,9 +2838,9 @@ exports[`Block Snapshots > Blockly JSON > io_text_join 1`] = `
   "inputsInline": true,
   "type": "io_text_join",
   "colour": 180,
-  "tooltip": "Join two pieces of text into one.\\n-\\nInputs:\\n---------------\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
+  "tooltip": "Join two pieces of text into one.",
   "output": null,
-  "message0": " %1",
+  "message0": "%1",
   "args0": [
     {
       "type": "input_value",
@@ -2848,15 +2848,8 @@ exports[`Block Snapshots > Blockly JSON > io_text_join 1`] = `
       "align": "RIGHT"
     }
   ],
-  "message1": "+ %1",
+  "message1": " + %1",
   "args1": [
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
     {
       "type": "input_value",
       "name": "B",
@@ -3931,9 +3924,9 @@ exports[`Block Snapshots > Blockly JSON > text_compare 1`] = `
   "inputsInline": true,
   "type": "text_compare",
   "colour": 180,
-  "tooltip": "Compare two chunks of text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion\\nText A - the first string of text\\nText B - the second string of text\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to strings",
+  "tooltip": "Compare two chunks of text for equality, inequality, or inclusion.",
   "output": null,
-  "message0": " %1",
+  "message0": "%1",
   "args0": [
     {
       "type": "input_value",
@@ -3963,13 +3956,6 @@ exports[`Block Snapshots > Blockly JSON > text_compare 1`] = `
       "text": ""
     },
     {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
-    {
       "type": "input_value",
       "name": "B",
       "align": "RIGHT"
@@ -3983,8 +3969,7 @@ exports[`Block Snapshots > Blockly JSON > text_template 1`] = `
   "inputsInline": true,
   "type": "text_template",
   "colour": 180,
-  "tooltip": "Render a text template. Special forms surrounded by {{ curly_braces }}\\nwill be replaced with their current value during the action run. (See\\n'Template Variables' below for a list of available forms.)\\n-\\nInputs:\\n---------------\\nText - the text to render with the template engine\\n-\\nTemplate Variables:\\n---------------\\n/{/{ variables.var_name }} - get the value of a variable you have defined\\n  with name 'var_name'\\n/{/{ vars.var_name }} - shorthand for same as above\\n/{/{ variables['var name'] }} - get the value of a variable you have\\n  defined with name 'var name' (allows spaces in variable names\\n/{/{ vars['var name'] }} - shorthand for same as above\\n/{/{ user.name }} - your user's name\\n/{/{ user.username }} - your user's username\\n/{/{ feeds['group_key.feed_key'].name }} - access a feed with key\\n  'group_key.feed_key' and get its name\\n/{/{ feeds[...].key }} - ...get its key\\n/{/{ feeds[...].value }} - ...get its last value",
-  "helpUrl": "https://shopify.github.io/liquid/basics/introduction/",
+  "tooltip": "Render a text template.",
   "output": null,
   "message0": "{{ %1",
   "args0": [

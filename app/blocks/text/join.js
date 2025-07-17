@@ -1,32 +1,24 @@
 export default {
   type: 'io_text_join',
+  bytecodeKey: "textJoin",
+  name: "Join Text",
+  colour: 180,
+  inputsInline: true,
+  description: "Join two pieces of text into one.",
 
-  toolbox: {
-    category: 'Text',
+  template: "%A + %B",
+
+  inputs: {
+    A: {
+      description: "The first string of text",
+      shadow: "io_text"
+    },
+
+    B: {
+      description: "The last string of text",
+      shadow: "io_text"
+    },
   },
-
-  visualization: {
-    inputsInline: true,
-    colour: 180,
-    tooltip: [
-      "Join two pieces of text into one.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Text A - the first string of text",
-      "Text B - the second string of text",
-      "-",
-      "Casting:",
-      "---------------",
-      "both inputs are coerced to strings",
-    ].join('\n'),
-  },
-
-  lines: [
-    ["", { inputValue: 'A', shadow: "io_text" }],
-    ["+", ""],
-    ["", { inputValue: 'B', shadow: "io_text" }]
-  ],
 
   generators: {
     json: (block, generator) => {
