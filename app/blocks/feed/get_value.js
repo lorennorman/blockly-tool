@@ -1,25 +1,25 @@
 export default {
   type: "feed_get_value",
-
-  toolbox: {
-  },
-
-  visualization: {
-    colour: 300,
-    tooltip: "The last value of this feed or component, always a String"
-  },
+  bytecodeKey: "getFeedValue",
+  name: "Get Feed Value",
+  colour: 300,
+  description: "Resolves to the last value of this feed or component, always a String",
 
   mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
 
-  lines: [
-    [ "Get %FEED_KEY", {
-      field: "FEED_KEY",
+  template: `Get %FEED_KEY`,
+
+  fields: {
+    FEED_KEY: {
+      description: "Select the Feed you'd like to fetch data from",
+      // TODO: a way to override select options documentation because
+      // this block selector field is dynamically populated
       options: [
         [ "Loading Feeds...", "" ],
       ]
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: block => {

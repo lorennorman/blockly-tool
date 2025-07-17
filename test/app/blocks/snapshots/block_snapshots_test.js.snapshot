@@ -2373,7 +2373,7 @@ exports[`Block Snapshots > Blockly JSON > feed_get_value 1`] = `
   "inputsInline": false,
   "type": "feed_get_value",
   "colour": 300,
-  "tooltip": "The last value of this feed or component, always a String",
+  "tooltip": "Resolves to the last value of this feed or component, always a String",
   "output": null,
   "message0": "Get %1 %2",
   "args0": [
@@ -2437,10 +2437,10 @@ exports[`Block Snapshots > Blockly JSON > feed_set_value 1`] = `
   "inputsInline": true,
   "type": "feed_set_value",
   "colour": 300,
-  "tooltip": "Publish the specified data point to the specified Feed.\\n-\\nInputs:\\nFeed - the Feed to publish to\\nValue - the value to write",
+  "tooltip": "",
   "nextStatement": "expression",
   "previousStatement": "expression",
-  "message0": "Set %1 to:  %2",
+  "message0": "Set %1 to: %2",
   "args0": [
     {
       "name": "FEED_KEY",
@@ -2453,13 +2453,6 @@ exports[`Block Snapshots > Blockly JSON > feed_set_value 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": "%1",
-  "args1": [
     {
       "type": "input_value",
       "name": "VALUE",
@@ -2496,7 +2489,7 @@ exports[`Block Snapshots > Blockly JSON > io_controls_if 1`] = `
   "inputsInline": false,
   "type": "io_controls_if",
   "colour": 60,
-  "tooltip": "Conditionally execute specified commands based on the outcome of conditional checks.\\n-\\nInputs:\\n---------------\\nif - the first value to check for truthiness\\ndo - the commands to execute if the first check was true\\nelse if - (optional, repeating) an extra value to check for truthiness\\ndo - the commands to execute if the previous check was true\\nelse - (optional) the commands to execute if no checks were true",
+  "tooltip": "Execute different block diagrams based on the outcome of conditional checks.",
   "nextStatement": "expression",
   "previousStatement": "expression",
   "message0": "if %1",

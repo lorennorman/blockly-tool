@@ -1,23 +1,24 @@
 // deprecated: use feeds/get_value
 export default {
   type: "feed_selector",
-
-  visualization: {
-    colour: 300,
-    tooltip: "The last value of this feed or component, always a String"
-  },
+  bytecodeKey: "feed",
+  name: "Feed",
+  colour: 300,
+  description: "The last value of this feed or component, always a String",
 
   mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
 
-  lines: [
-    [ "Feed:", {
-      field: "FEED_KEY",
+  template: "Feed: %FEED_KEY",
+
+  fields: {
+    FEED_KEY: {
+      description: "A listing of the User's Feeds to select from.",
       options: [
         [ "Loading Feeds...", "" ],
       ]
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: block => {
