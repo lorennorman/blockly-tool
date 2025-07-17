@@ -2886,7 +2886,7 @@ exports[`Block Snapshots > Blockly JSON > io_variables_get 1`] = `
   "inputsInline": false,
   "type": "io_variables_get",
   "colour": 240,
-  "tooltip": "Retrieve the value in a variable that was set earlier",
+  "tooltip": "Get the value previously assigned to a variable.",
   "output": "String",
   "message0": "Get variable %1 %2",
   "args0": [
@@ -2918,13 +2918,6 @@ exports[`Block Snapshots > Blockly JSON > io_variables_set 1`] = `
       "type": "field_variable",
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
     {
       "type": "input_value",
       "name": "VALUE",

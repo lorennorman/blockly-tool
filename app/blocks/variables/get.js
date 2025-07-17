@@ -1,26 +1,22 @@
 export default {
   type: 'io_variables_get',
-
-  toolbox: {
-    category: "Variables",
-  },
-
-  visualization: {
-    colour: 240,
-    tooltip: "Retrieve the value in a variable that was set earlier"
-  },
+  bytecodeKey: "getVariable",
+  name: "Get Variable",
+  colour: 240,
+  description: "Get the value previously assigned to a variable.",
 
   connections: {
     mode: 'value',
     output: "String",
   },
 
-  lines: [
-    ['Get variable %VAR', {
-      field: 'VAR',
+  template: "Get variable %VAR",
+
+  fields: {
+    VAR: {
       type: 'field_variable'
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: block => {

@@ -1,15 +1,10 @@
 export default {
   type: 'io_variables_set',
-
-  toolbox: {
-    category: "Variables",
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 240,
-    tooltip: "Set a variable to a value"
-  },
+  bytecodeKey: "setVariable",
+  name: "Set Variable",
+  inputsInline: true,
+  colour: 240,
+  description: "Set a variable to a value",
 
   connections: {
     mode: 'statement',
@@ -17,17 +12,19 @@ export default {
     next: "expression",
   },
 
-  lines: [
-    ['Set variable %VAR =', {
-      field: 'VAR',
-      type: 'field_variable'
-    }],
+  template: "Set variable %VAR = %VALUE",
 
-    ['', {
-      inputValue: "VALUE",
+  inputs: {
+    VALUE: {
       shadow: "io_text",
-    }]
-  ],
+    }
+  },
+
+  fields: {
+    VAR: {
+      type: 'field_variable'
+    }
+  },
 
   generators: {
     json: (block, generator) => {
