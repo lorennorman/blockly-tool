@@ -1,11 +1,25 @@
-import { capitalize } from 'lodash-es'
+import { capitalize, trim } from 'lodash-es'
 
 import renderFields from './render_block_fields.js'
 import renderInputs from './render_block_inputs.js'
 
 
 const
+  IO_PLUS_ALERT = `
+::: tip :warning: IO+ Required
+This Block requires an IO+ subscription to use. [Learn more about IO+](https://io.adafruit.com/plus)
+:::
+`,
+
+  renderBlockTitle = ({ name, ioPlus }) => {
+    const ioPlusBadge = ioPlus ? '<Badge type="tip">IO+</Badge>' : ""
+
+    return trim(`${name} ${ioPlusBadge}`)
+  },
+
   renderDescription = ({ description }) => description || "No docs for this block, yet.",
+
+  renderIOPlusAlert = ({ ioPlus }) => ioPlus ? IO_PLUS_ALERT : "",
 
   renderWorkspace = definition => {
     const workspaceProps = JSON.stringify({
@@ -31,11 +45,13 @@ title: "Block: ${definition.name}"
 editLink: true
 ---
 
-# Block: ${definition.name}
+# Block: ${ renderBlockTitle(definition) }
 
 Type: \`${definition.type}\`
 
 ${ renderDescription(definition) }
+
+${ renderIOPlusAlert(definition)}
 
 ## Workspace
 ${ renderWorkspace(definition) }
