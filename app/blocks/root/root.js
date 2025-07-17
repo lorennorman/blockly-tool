@@ -1,36 +1,36 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./action_settings/mutator.js?key=${random}`)).default
+import mutator from './action_settings/mutator.js'
+
 
 export default {
   type: "action_root",
+  name: "Root",
+  colour: "0",
+  description: "Add Triggers to determine when this Action runs.\nAdd Actions to determine what this Action does.",
 
   connections: {},
 
-  visualization: {
-    colour: "0",
-    tooltip: "Add Triggers to determine when this Action runs.\nAdd Actions to determine what this Action does."
-  },
-
   mutator,
 
-  lines: [
-    [ "Triggers:", "LEFT" ],
-    [ "", {
-      inputStatement: "TRIGGERS",
+  template: `
+    Triggers: |LEFT
+    %TRIGGERS
+
+    Actions: |LEFT
+    %EXPRESSIONS
+    \u3164
+  `,
+
+  inputs: {
+    TRIGGERS: {
+      type: 'statement',
       check: 'trigger'
-    }],
+    },
 
-    [ "", "LEFT" ],
-
-    [ "Actions:", "LEFT" ],
-    [ "", {
-      inputStatement: "EXPRESSIONS",
-      check: "expression"
-    }],
-
-    [ "", "LEFT" ],
-  ],
+    EXPRESSIONS: {
+      type: 'statement',
+      check: 'expression'
+    }
+  },
 
   generators: {
     json: (block, generator) => {

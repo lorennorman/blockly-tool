@@ -90,7 +90,7 @@ exports[`Block Snapshots > Blockly JSON > action_root 1`] = `
   "inputsInline": false,
   "type": "action_root",
   "colour": "0",
-  "tooltip": "Add Triggers to determine when this Action runs.\\nAdd Actions to determine what this Action does.",
+  "tooltip": "Add Triggers to determine when this Action runs.",
   "message0": "Triggers: %1",
   "args0": [
     {
@@ -98,7 +98,7 @@ exports[`Block Snapshots > Blockly JSON > action_root 1`] = `
       "align": "LEFT"
     }
   ],
-  "message1": " %1",
+  "message1": "%1",
   "args1": [
     {
       "type": "input_statement",
@@ -107,22 +107,15 @@ exports[`Block Snapshots > Blockly JSON > action_root 1`] = `
       "align": "RIGHT"
     }
   ],
-  "message2": " %1",
+  "message2": "Actions: %1",
   "args2": [
     {
       "type": "input_dummy",
       "align": "LEFT"
     }
   ],
-  "message3": "Actions: %1",
+  "message3": "%1",
   "args3": [
-    {
-      "type": "input_dummy",
-      "align": "LEFT"
-    }
-  ],
-  "message4": " %1",
-  "args4": [
     {
       "type": "input_statement",
       "name": "EXPRESSIONS",
@@ -130,11 +123,11 @@ exports[`Block Snapshots > Blockly JSON > action_root 1`] = `
       "align": "RIGHT"
     }
   ],
-  "message5": " %1",
-  "args5": [
+  "message4": "ㅤ %1",
+  "args4": [
     {
       "type": "input_dummy",
-      "align": "LEFT"
+      "align": "RIGHT"
     }
   ],
   "mutator": "action_root"
