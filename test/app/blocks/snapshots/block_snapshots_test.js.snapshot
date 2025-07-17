@@ -37,7 +37,7 @@ exports[`Block Snapshots > Blockly JSON > action_log 1`] = `
   "inputsInline": false,
   "type": "action_log",
   "colour": "0",
-  "tooltip": "Executes the block you plug in and reveals its final value or error message.\\n---------------\\nParameters:\\nEXPRESSION - a block you'd like to see the resolved value of",
+  "tooltip": "Executes the block you plug in and reveals its final value or error message.",
   "nextStatement": "expression",
   "previousStatement": "expression",
   "message0": "Log: %1",
@@ -56,7 +56,7 @@ exports[`Block Snapshots > Blockly JSON > action_publish 1`] = `
   "inputsInline": false,
   "type": "action_publish",
   "colour": "0",
-  "tooltip": "Sends a given VALUE to a given FEED.\\n---------------\\nParameters:\\nVALUE - the value to write\\nFEED - the feed to write to",
+  "tooltip": "Sends the given value to the specified Feed.",
   "nextStatement": "expression",
   "previousStatement": "expression",
   "message0": "📈 Publish %1",
@@ -146,7 +146,7 @@ exports[`Block Snapshots > Blockly JSON > action_sms 1`] = `
   "inputsInline": false,
   "type": "action_sms",
   "colour": "0",
-  "tooltip": "(IO+ only)\\nSends a text message with a given BODY template.\\n---------------\\nParameters:\\nBODY - a template for generating the SMS body",
+  "tooltip": "Sends a text message with a given body template.",
   "nextStatement": "expression",
   "previousStatement": "expression",
   "message0": "📲 SMS %1",
@@ -172,7 +172,7 @@ exports[`Block Snapshots > Blockly JSON > action_webhook 1`] = `
   "inputsInline": false,
   "type": "action_webhook",
   "colour": "0",
-  "tooltip": "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.\\n---------------\\nParameters:\\nURL - a valid web location to send a request to\\nBODY - a JSON template to render and POST\\nFORM_ENCODE - optionally encode as form input",
+  "tooltip": "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.",
   "nextStatement": "expression",
   "previousStatement": "expression",
   "message0": "🔗 Webhook %1",
@@ -2695,9 +2695,9 @@ exports[`Block Snapshots > Blockly JSON > io_math_arithmetic 1`] = `
   "inputsInline": true,
   "type": "io_math_arithmetic",
   "colour": 120,
-  "tooltip": "Perform the specified arithmetic operation on two specified operands.\\n-\\nInputs:\\n---------------\\nNumber A - the first input\\nOperation - the operation to perform on the operands\\n+ addition\\n- subtraction\\nx multiplication\\n/ division\\n^ exponent\\nNumber B - the second input",
+  "tooltip": "Perform the specified arithmetic operation on two specified operands.",
   "output": null,
-  "message0": " %1",
+  "message0": "%1",
   "args0": [
     {
       "type": "input_value",
@@ -2734,13 +2734,6 @@ exports[`Block Snapshots > Blockly JSON > io_math_arithmetic 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
     {
       "type": "input_value",
       "name": "B",

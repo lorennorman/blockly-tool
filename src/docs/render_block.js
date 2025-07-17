@@ -51,7 +51,7 @@ Type: \`${definition.type}\`
 
 ${ renderDescription(definition) }
 
-${ renderIOPlusAlert(definition)}
+${ renderIOPlusAlert(definition) }
 
 ## Workspace
 ${ renderWorkspace(definition) }

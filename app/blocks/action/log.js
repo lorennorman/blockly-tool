@@ -1,19 +1,9 @@
 export default {
   type: "action_log",
-
-  toolbox: {
-    category: 'Actions',
-  },
-
-  visualization: {
-    colour: "0",
-    tooltip: [
-      "Executes the block you plug in and reveals its final value or error message.",
-      "---------------",
-      "Parameters:",
-      "EXPRESSION - a block you'd like to see the resolved value of"
-    ].join('\n'),
-  },
+  bytecodeKey: "logAction",
+  name: "Log",
+  colour: "0",
+  description: "Executes the block you plug in and reveals its final value or error message.",
 
   connections: {
     mode: "statement",
@@ -21,13 +11,14 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    ["Log:", {
-      inputValue: 'EXPRESSION',
-       // check: ['expression', 'String'],
+  template: "Log: %EXPRESSION",
+
+  inputs: {
+    EXPRESSION: {
+      description: "A Block diagram you'd like to see the resolved value and type of.",
       shadow: 'io_text'
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {
