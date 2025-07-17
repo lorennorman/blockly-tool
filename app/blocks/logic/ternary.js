@@ -1,21 +1,28 @@
 export default {
   disabled: true,
-
   type: 'io_logic_ternary',
+  name: "Ternary",
+  colour: 60,
 
-  toolbox: {
-    category: 'Logic',
+  template: `
+    if %IF
+    then %THEN
+    else %ELSE
+  `,
+
+  inputs: {
+    IF: {
+      shadow: 'io_logic_boolean'
+    },
+
+    THEN: {
+      shadow: 'io_logic_boolean'
+    },
+
+    ELSE: {
+      shadow: 'io_logic_boolean'
+    }
   },
-
-  visualization: {
-    colour: 60,
-  },
-
-  lines: [
-    ["if", { inputValue: 'IF', shadow: 'io_logic_boolean' }],
-    ["then", { inputValue: 'THEN', shadow: 'io_logic_boolean' }],
-    ["else", { inputValue: 'ELSE', shadow: 'io_logic_boolean' }],
-  ],
 
   generators: {
     json: (block, generator) => {

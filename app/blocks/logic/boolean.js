@@ -1,29 +1,24 @@
 export default {
   type: 'io_logic_boolean',
-
-  toolbox: {
-    category: 'Logic',
-  },
-
-  visualization: {
-    colour: 60,
-    tooltip: "A true or false value."
-  },
+  name: "Boolean",
+  colour: 60,
+  description: "A true or false value.",
 
   connections: {
     mode: "value",
     output: "boolean",
   },
 
-  lines: [
-    ["", {
-      field: "BOOL",
+  template: "%BOOL",
+
+  fields: {
+    BOOL: {
       options: [
         ['true', 'TRUE'],
         ['false', 'FALSE'],
-      ],
-    }]
-  ],
+      ]
+    }
+  },
 
   generators: {
     json: block => {

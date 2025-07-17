@@ -23,7 +23,7 @@ const
     const lines = []
 
     // title for this field
-    lines.push(`### \`${capitalize(field.field)}\`:`)
+    lines.push(`### \`${capitalize(field.field)}\``)
 
     // add lines based on what properties are present
     Object.hasOwn(field, 'description') && lines.push(niceTemplate(field.description))

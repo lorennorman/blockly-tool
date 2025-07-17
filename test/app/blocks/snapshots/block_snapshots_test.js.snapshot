@@ -2535,7 +2535,7 @@ exports[`Block Snapshots > Blockly JSON > io_logic_boolean 1`] = `
   "colour": 60,
   "tooltip": "A true or false value.",
   "output": "boolean",
-  "message0": " %1 %2",
+  "message0": "%1 %2",
   "args0": [
     {
       "name": "BOOL",
@@ -2622,7 +2622,7 @@ exports[`Block Snapshots > Blockly JSON > io_logic_negate 1`] = `
   "inputsInline": false,
   "type": "io_logic_negate",
   "colour": 60,
-  "tooltip": "Swaps a truthy value to false, or a falsy value to true.",
+  "tooltip": "Swaps a truthy value to \`false\`, or a falsy value to \`true\`.",
   "output": null,
   "message0": "not %1",
   "args0": [
@@ -2640,9 +2640,9 @@ exports[`Block Snapshots > Blockly JSON > io_logic_operation 1`] = `
   "inputsInline": true,
   "type": "io_logic_operation",
   "colour": 60,
-  "tooltip": "Perform the specifed boolean logic operation on two operands.\\n-\\nInputs:\\n---------------\\nOperator - the type of operation to perform, \\"and\\" or \\"or\\"\\n\\"and\\" - true if all inputs are true, false otherwise\\n\\"or\\" - true if any input is true, false otherwise\\nBoolean A - the first boolean\\nBoolean B - the second boolean\\n-\\nCasting:\\n---------------\\nboth inputs are coerced to true or false before the operation",
+  "tooltip": "Perform the specifed boolean logic operation on two operands.",
   "output": null,
-  "message0": " %1",
+  "message0": "%1",
   "args0": [
     {
       "type": "input_value",
@@ -2667,13 +2667,6 @@ exports[`Block Snapshots > Blockly JSON > io_logic_operation 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": " %1",
-  "args2": [
     {
       "type": "input_value",
       "name": "B",
