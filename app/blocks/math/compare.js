@@ -13,6 +13,7 @@ export default {
       description: "The left side of the comparison. Will be coerced to a number",
       shadow: 'io_math_number'
     },
+
     B: {
       description: "The right side of the comparison. Will be coerced to a number",
       shadow: 'io_math_number'
