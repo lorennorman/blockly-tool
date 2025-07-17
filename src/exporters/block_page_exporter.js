@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'fs'
 import { dirname } from 'path'
-import { capitalize, find, forEach, isString, map } from 'lodash-es'
+import { forEach } from 'lodash-es'
 
 import toBlockMarkdown from "#src/docs/render_block.js"
 

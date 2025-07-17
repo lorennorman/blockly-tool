@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { capitalize, find, forEach, isString, map } from 'lodash-es'
+import { find, forEach, isString, map } from 'lodash-es'
 
 
 export default class SidebarExporter {
@@ -37,7 +37,7 @@ export default class SidebarExporter {
       const
         blockSidebarPath = `/blocks/${docPath.slice(0, -3)}`,
         sidebarEntry = {
-          text: capitalize(blockDefinition.name),
+          text: blockDefinition.name,
           link: blockSidebarPath
         }
 

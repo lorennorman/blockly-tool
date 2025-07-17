@@ -22,7 +22,7 @@ export default {
 
   inputs: {
     VALUE: {
-      description: "A value you'd like to round to a whole number",
+      description: "A value you'd like to round to a whole number. Will be coerced to a number.",
       bytecodeProperty: "value",
       shadow: "io_math_number"
     }

@@ -1,19 +1,36 @@
-import { capitalize, filter, isArray, isObject, isString, map } from 'lodash-es'
+import { capitalize, filter, forEach, isArray, isObject, keys, map } from 'lodash-es'
 
 
 const
-  getLineObjects = definition => filter(map(filter(definition.lines, isArray), "[1]"), isObject),
-
   renderInputs = definition => {
+    // TODO: legacy api, remove when blocks no longer use
+    if(definition.lines) {
+      return renderLineInputs(definition)
+    }
+
+    if(!keys(definition.inputs).length) {
+      return "This block has no inputs"
+    }
+
+    const lines = []
+    forEach(definition.inputs, (input, inputName) => {
+      lines.push(`### \`${ capitalize(inputName) }\``)
+      lines.push(input.description)
+    })
+
+    return lines.join("\n\n")
+  },
+
+  renderLineInputs = definition => {
     const
-      lineObjs = getLineObjects(definition),
+      lineObjs = filter(map(filter(definition.lines, isArray), "[1]"), isObject),
       inputObjects = filter(lineObjs, line => line.inputValue || line.inputStatement),
-      renderedInputs = inputObjects.map(renderInput).join("\n\n")
+      renderedInputs = inputObjects.map(renderLineInput).join("\n\n")
 
     return renderedInputs
   },
 
-  renderInput = input => {
+  renderLineInput = input => {
     const
       inputName = input.inputValue || input.inputStatement,
       lines = []
