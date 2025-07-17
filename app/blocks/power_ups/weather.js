@@ -1,17 +1,13 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  weatherMixin = (await import(`./weather_mixin.js?key=${random}`)).default
+import weatherMixin from "./weather_mixin.js"
+
 
 export default {
   type: "weather",
-
-  toolbox: {
-  },
-
-  visualization: {
-    colour: 360,
-    tooltip: "Current and forecast weather conditions"
-  },
+  bytecodeKey: "weather",
+  name: "Weather",
+  colour: 360,
+  ioPlus: true,
+  description: "Fetch the current or forecast weather conditions at the specified location.",
 
   mixins: [
     'replaceDropdownOptions',
@@ -21,7 +17,7 @@ export default {
   extensions: {
     prepareWeather: ({ block, observeData, data: { weatherLocationOptions } }) => {
       // populate weather locations
-      if(!weatherLocationOptions.length) {
+      if(!weatherLocationOptions?.length) {
         weatherLocationOptions = [[ "No locations! Visit Power-Ups -> Weather", "" ]]
         block.setEnabled(false)
 
@@ -55,18 +51,24 @@ export default {
     }
   },
 
-  lines: [
-    [ "Weather", "CENTER" ],
+  template: `
+    Weather |CENTER
+    At: %POWER_UP_ID
+    When: %WEATHER_TIME
+    Metric: %WEATHER_PROPERTY
+    %WEATHER_PROPERTY_HELP
+  `,
 
-    [ "At:", {
-      field: "POWER_UP_ID",
+  fields: {
+    POWER_UP_ID: {
+      description: "Select a location from those defined by the Weather Power-Up",
       options: [
         [ "Loading locations...", "" ],
       ]
-    }],
+    },
 
-    [ "When:", {
-      field: "WEATHER_TIME",
+    WEATHER_TIME: {
+      description: "Select which kind of forecast to query",
       options: [
         [ "Now", "current" ],
         [ "In 5 minutes", "forecast_minutes_5" ],
@@ -88,20 +90,17 @@ export default {
         [ "In 8 days", "forecast_days_8" ],
         [ "In 9 days", "forecast_days_9" ],
       ]
-    }],
+    },
 
-    [ "Metric:", {
-      field: "WEATHER_PROPERTY",
-       // fake label so it can hold any data
-       // gets replaced with a dropdown on load
+    WEATHER_PROPERTY: {
+      description: "Select which metric of the forecast to use.",
       label: ""
-    }],
+    },
 
-    [ "", {
-      field: "WEATHER_PROPERTY_HELP",
+    WEATHER_PROPERTY_HELP: {
       label: ""
-    }],
-  ],
+    },
+  },
 
   generators: {
     json: block => {

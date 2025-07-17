@@ -4030,7 +4030,7 @@ exports[`Block Snapshots > Blockly JSON > weather 1`] = `
   "inputsInline": false,
   "type": "weather",
   "colour": 360,
-  "tooltip": "Current and forecast weather conditions",
+  "tooltip": "Fetch the current or forecast weather conditions at the specified location.",
   "output": null,
   "message0": "Weather %1",
   "args0": [
@@ -4159,7 +4159,7 @@ exports[`Block Snapshots > Blockly JSON > weather 1`] = `
       "align": "RIGHT"
     }
   ],
-  "message4": " %1 %2",
+  "message4": "%1 %2",
   "args4": [
     {
       "name": "WEATHER_PROPERTY_HELP",
