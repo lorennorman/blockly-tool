@@ -225,7 +225,13 @@ export default processLines
 const
   ALIGNMENT_REGEX = /\s*\|(CENTER|CENTRE|RIGHT|LEFT)$/m,
   // %, followed by a letter, optionally followed by letters/numbers, followed by whitespace or EoI
-  ARG_REGEX = /(%[a-zA-Z]\w*)/gm
+  ARG_REGEX = /(%[a-zA-Z]\w*)/gm,
+
+  INPUT_TYPE_MAP = {
+    label: 'input_dummy',
+    value: 'input_value',
+    statement: 'input_statement'
+  }
 
 export const processTemplate = blockDefinition => {
   const { template, inputs={}, fields={} } = blockDefinition
@@ -289,7 +295,7 @@ export const processTemplate = blockDefinition => {
           foundInput = true
           // add the input arg
           args.push({
-            type: "input_value",
+            type: inputMatch.type ? INPUT_TYPE_MAP[inputMatch.type] : "input_value",
             name: matchName,
             ...(inputMatch.check ? { check: inputMatch.check } : {}),
             align: alignment,

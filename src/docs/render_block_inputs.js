@@ -14,6 +14,8 @@ const
 
     const lines = []
     forEach(definition.inputs, (input, inputName) => {
+      if(input.type === 'label') { return }
+
       lines.push(`### \`${ capitalize(inputName) }\``)
       lines.push(input.description)
     })
