@@ -2953,7 +2953,7 @@ exports[`Block Snapshots > Blockly JSON > matcher_boolean_operation 1`] = `
   "inputsInline": true,
   "type": "matcher_boolean_operation",
   "colour": 60,
-  "tooltip": "",
+  "tooltip": "Perform a logic operation between the triggering Feed value and a block diagram.",
   "output": "matcher",
   "message0": "is true %1 %2",
   "args0": [
@@ -2973,13 +2973,6 @@ exports[`Block Snapshots > Blockly JSON > matcher_boolean_operation 1`] = `
       "text": ""
     },
     {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
       "type": "input_value",
       "name": "B",
       "align": "RIGHT"
@@ -2993,9 +2986,9 @@ exports[`Block Snapshots > Blockly JSON > matcher_compare 1`] = `
   "inputsInline": true,
   "type": "matcher_compare",
   "colour": 224,
-  "tooltip": "Compare the new feed value with a number in various ways.\\n-\\nInputs:\\n---------------\\nComparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?\\nNumber B - the number to compare the feed value with\\n-\\nCasting:\\n---------------\\nThe feed value and Number B are coerced to floating point numbers",
+  "tooltip": "Numerically compare the new Feed value with another number.",
   "output": "matcher",
-  "message0": " %1 %2",
+  "message0": "%1 %2",
   "args0": [
     {
       "name": "OP",
@@ -3029,13 +3022,6 @@ exports[`Block Snapshots > Blockly JSON > matcher_compare 1`] = `
       "text": ""
     },
     {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
-    {
       "type": "input_value",
       "name": "B",
       "align": "RIGHT"
@@ -3049,9 +3035,9 @@ exports[`Block Snapshots > Blockly JSON > matcher_text_compare 1`] = `
   "inputsInline": true,
   "type": "matcher_text_compare",
   "colour": 180,
-  "tooltip": "Compare the new feed value with text for equality, inequality, or inclusion.\\n-\\nInputs:\\n---------------\\nComparator - check for equality, inequality, or inclusion.\\nText B - the string of text to compare against the feed value\\n-\\nCasting:\\n---------------\\nBoth the Feed value and Text B input are coerced to strings",
+  "tooltip": "Compare the new feed value with text for equality, inequality, or inclusion.",
   "output": "matcher",
-  "message0": " %1 %2",
+  "message0": "%1 %2",
   "args0": [
     {
       "name": "OP",
@@ -3072,13 +3058,6 @@ exports[`Block Snapshots > Blockly JSON > matcher_text_compare 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message1": " %1",
-  "args1": [
     {
       "type": "input_value",
       "name": "B",
