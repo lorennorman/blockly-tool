@@ -1,20 +1,18 @@
 import { makeOptions } from "#app/util/fields.js"
-
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./day_mutator.js?key=${random}`)).default
+import mutator from "./day_mutator.js"
 
 
 export default {
   type: "one_day",
+  name: "One Day",
+  colour: 30,
+  description: `
+    Runs during a particular day of the month.
 
-  visualization: {
-    colour: 30,
-    tooltip: [
-      "Runs during a particular day of the month.",
-      "Remember: not all months have days after 28!"
-    ].join("\n")
-  },
+    ::: tip
+    Remember: not all months have days after 28!
+    :::
+  `,
 
   connections: {
     mode: 'value',
@@ -23,12 +21,13 @@ export default {
 
   mutator,
 
-  lines: [
-    ["On date:", {
-      field: 'DAY',
+  template: "On date: %DAY",
+
+  fields: {
+    DAY: {
       options: makeOptions({ from: 1, upTo: 32 })
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: block => {

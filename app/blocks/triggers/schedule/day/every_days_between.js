@@ -1,16 +1,12 @@
 import { makeOptions } from "#app/util/fields.js"
+import mutator from "./day_mutator.js"
 
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./day_mutator.js?key=${random}`)).default
 
 export default {
   type: "every_days_between",
-
-  visualization: {
-    colour: 30,
-    tooltip: "Runs every X days, between days Y and Z."
-  },
+  name: "Every X Days",
+  colour: 30,
+  description: "Runs every X days, between days Y and Z.",
 
   connections: {
     mode: 'value',
@@ -19,17 +15,21 @@ export default {
 
   mutator,
 
-  lines: [
-    ["Every %FREQUENCY days between %START and %END", {
-      fields: {
-        FREQUENCY: { options: makeOptions({ factorsOf: 30 }) },
+  template: "Every %FREQUENCY days between %START and %END",
 
-        START: { options: makeOptions({ from: 1, upTo: 32 }) },
+  fields: {
+    FREQUENCY: {
+      options: makeOptions({ factorsOf: 30 })
+    },
 
-        END: { options: makeOptions({ from: 1, upTo: 32, reverse: true }) }
-      }
-    }]
-  ],
+    START: {
+      options: makeOptions({ from: 1, upTo: 32 })
+    },
+
+    END: {
+      options: makeOptions({ from: 1, upTo: 32, reverse: true })
+    }
+  },
 
   generators: {
     json: block => {
