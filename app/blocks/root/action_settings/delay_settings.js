@@ -1,49 +1,39 @@
 export default {
   type: "delay_settings",
-
-  // same as Blockly JSON
-  visualization: {
-    colour: '0',
-    tooltip: [
-      "Causes a delay between this Action's trigger and its execution",
-      "---------------",
-      "Parameters:",
-      "Delay - how long to delay, from 1 second to 1 day",
-      "Mode - how to proceed if another action is already on delay.",
-      "...'keep' will keep the existing delay and ignore new triggers",
-      "...'reset' will delete the existing delay and start a new one",
-    ].join('\n'),
-  },
+  name: "Delay Settings",
+  colour: '0',
+  description: "Causes a delay between this Action's trigger and its execution",
 
   connections: { },
 
-  lines: [
-    ["Delay Settings", "CENTER"],
-    ["Delay:", {
-      // for a single block input
-      inputValue: 'DELAY_PERIOD',
+
+  template: `
+    Delay Settings |CENTER
+    Delay: %DELAY_PERIOD
+    and %DELAY_MODE
+    existing delays
+  `,
+
+  inputs: {
+    DELAY_PERIOD: {
+      description: "how long to delay, from 1 second to 1 day",
       check: 'delay_period',
       shadow: 'delay_none',
-    }],
+    }
+  },
 
-    ["and", {
-      field: 'DELAY_MODE',
+  fields: {
+    DELAY_MODE: {
+      description: "how to proceed if another action is already on delay",
       options: [
-        ['reset', 'extend'],
-        ['keep', 'static'],
+        ['reset', 'extend', "deletes the existing delay and start a new one"],
+        ['keep', 'static', "keeps the existing delay and ignore new triggers"],
       ],
-    }],
+    }
+  },
 
-    "existing delays"
-  ],
-
-  // generators for this block type
-  // these get aggregated and registered together
   generators: {
     json: (block, generator) => {
-      // fetch connected block: block.getInputTargetBlock('INPUT_VALUE_NAME')?.type,
-      // generate connected block: generator.valueToCode(block, 'INPUT_VALUE_NAME', 0)
-      // field value: block.getFieldValue('FIELD_NAME')
 
       return [ {}, 0 ]
     }

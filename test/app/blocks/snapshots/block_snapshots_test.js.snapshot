@@ -478,8 +478,7 @@ exports[`Block Snapshots > Blockly JSON > delay_hours 1`] = `
           "23",
           "82800"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -738,8 +737,7 @@ exports[`Block Snapshots > Blockly JSON > delay_minutes 1`] = `
           "59",
           "3540"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -1015,8 +1013,7 @@ exports[`Block Snapshots > Blockly JSON > delay_seconds 1`] = `
           "59",
           "59"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -1031,7 +1028,7 @@ exports[`Block Snapshots > Blockly JSON > delay_settings 1`] = `
   "inputsInline": false,
   "type": "delay_settings",
   "colour": "0",
-  "tooltip": "Causes a delay between this Action's trigger and its execution\\n---------------\\nParameters:\\nDelay - how long to delay, from 1 second to 1 day\\nMode - how to proceed if another action is already on delay.\\n...'keep' will keep the existing delay and ignore new triggers\\n...'reset' will delete the existing delay and start a new one",
+  "tooltip": "Causes a delay between this Action's trigger and its execution",
   "message0": "Delay Settings %1",
   "args0": [
     {
@@ -1062,8 +1059,7 @@ exports[`Block Snapshots > Blockly JSON > delay_settings 1`] = `
           "keep",
           "static"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
