@@ -19,10 +19,10 @@
     "lint": "eslint src/",
     "lint-export": "eslint export/",
     "export:app": "node export.js app",
-    "export:docs": "node export.js docs",
     "build": "npm run export:app && vite build",
     "build-all-branches": "node build_all_branches.js",
     "preview": "npm run build && vite preview",
+    "docs:export": "node export.js docs",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
