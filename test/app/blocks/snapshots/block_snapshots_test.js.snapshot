@@ -188,8 +188,7 @@ exports[`Block Snapshots > Blockly JSON > action_webhook 1`] = `
     {
       "name": "FORM_ENCODE",
       "type": "field_checkbox",
-      "checked": false,
-      "text": ""
+      "checked": false
     },
     {
       "type": "input_dummy",
@@ -2378,8 +2377,7 @@ exports[`Block Snapshots > Blockly JSON > feed_get_value 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -2410,8 +2408,7 @@ exports[`Block Snapshots > Blockly JSON > feed_selector 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -2443,8 +2440,7 @@ exports[`Block Snapshots > Blockly JSON > feed_set_value 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2542,8 +2538,7 @@ exports[`Block Snapshots > Blockly JSON > io_logic_boolean 1`] = `
           "false",
           "FALSE"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -2598,8 +2593,7 @@ exports[`Block Snapshots > Blockly JSON > io_logic_compare 1`] = `
           "‏≥",
           "GTE"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2657,8 +2651,7 @@ exports[`Block Snapshots > Blockly JSON > io_logic_operation 1`] = `
           "or",
           "OR"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2710,8 +2703,7 @@ exports[`Block Snapshots > Blockly JSON > io_math_arithmetic 1`] = `
           "^",
           "POWER"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2799,8 +2791,7 @@ exports[`Block Snapshots > Blockly JSON > io_math_round 1`] = `
           "Ceiling",
           "ceiling"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2892,8 +2883,7 @@ exports[`Block Snapshots > Blockly JSON > io_variables_get 1`] = `
   "args0": [
     {
       "name": "VAR",
-      "type": "field_variable",
-      "text": ""
+      "type": "field_variable"
     },
     {
       "type": "input_dummy",
@@ -2915,8 +2905,7 @@ exports[`Block Snapshots > Blockly JSON > io_variables_set 1`] = `
   "args0": [
     {
       "name": "VAR",
-      "type": "field_variable",
-      "text": ""
+      "type": "field_variable"
     },
     {
       "type": "input_value",
@@ -2948,8 +2937,7 @@ exports[`Block Snapshots > Blockly JSON > matcher_boolean_operation 1`] = `
           "or",
           "OR"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -2997,8 +2985,7 @@ exports[`Block Snapshots > Blockly JSON > matcher_compare 1`] = `
           "‏≥",
           "GTE"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -3034,8 +3021,7 @@ exports[`Block Snapshots > Blockly JSON > matcher_text_compare 1`] = `
           "includes",
           "INC"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -3217,7 +3203,7 @@ exports[`Block Snapshots > Blockly JSON > one_day 1`] = `
   "inputsInline": false,
   "type": "one_day",
   "colour": 30,
-  "tooltip": "Runs during a particular day of the month.\\nRemember: not all months have days after 28!",
+  "tooltip": "Runs during a particular day of the month.",
   "output": "cron_day",
   "message0": "On date: %1 %2",
   "args0": [
@@ -3349,8 +3335,7 @@ exports[`Block Snapshots > Blockly JSON > one_day 1`] = `
           "31",
           "31"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -3945,8 +3930,7 @@ exports[`Block Snapshots > Blockly JSON > text_compare 1`] = `
           "includes",
           "INC"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -3999,8 +3983,7 @@ exports[`Block Snapshots > Blockly JSON > weather 1`] = `
           "Loading locations...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -4089,8 +4072,7 @@ exports[`Block Snapshots > Blockly JSON > weather 1`] = `
           "In 9 days",
           "forecast_days_9"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -4147,8 +4129,7 @@ exports[`Block Snapshots > Blockly JSON > when_data 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
@@ -4180,8 +4161,7 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",
@@ -4215,8 +4195,7 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching_state 1`] = `
           "Loading Feeds...",
           ""
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "name": "MATCH_STATE",
@@ -4238,8 +4217,7 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching_state 1`] = `
           "keeps not",
           "avoids"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_value",

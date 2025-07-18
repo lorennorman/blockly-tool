@@ -231,7 +231,13 @@ const
     label: 'input_dummy',
     value: 'input_value',
     statement: 'input_statement'
-  }
+  },
+
+  TEXT_FIELD_TYPES = [
+    "field_input",
+    "field_label",
+    "field_multilinetext",
+  ]
 
 export const processTemplate = blockDefinition => {
   const { template, inputs={}, fields={} } = blockDefinition
@@ -305,14 +311,15 @@ export const processTemplate = blockDefinition => {
           // add the field arg
           const
             fieldData = fields[matchName],
-            type = fieldTypeFromProperties(fieldData)
+            type = fieldTypeFromProperties(fieldData),
+            isTextType = TEXT_FIELD_TYPES.includes(type)
 
           args.push({
             name: matchName,
             type,
             checked: fieldData.checked,
             options: fieldData.options?.map(option => option.slice(0,2)), // slice out option documentation
-            text: fieldData.text || fieldData.multiline_text || fieldData.label || "",
+            text: fieldData.text || fieldData.multiline_text || fieldData.label || (isTextType ? "" : undefined),
             spellcheck: fieldData.spellcheck,
             value: fieldData.value,
           })
