@@ -1,3 +1,15 @@
+# todo:
+- io-actions repo, gh:p deploy
+- purge legacy converters:
+  - ...
+- block generator
+- type hints for definitions
+- key warnings
+- bailouts for:
+  - blockly json
+  - docs markdown
+
+
 ### Action Specification
 
 ```js
