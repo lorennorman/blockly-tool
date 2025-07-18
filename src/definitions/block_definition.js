@@ -22,8 +22,6 @@ class BlockDefinition {
   colour = null
   color = null
 
-  visualization = null
-
   inputsInline = false
 
   connections = null
@@ -141,7 +139,6 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   blockDef.ioPlus = rawBlockDefinition.ioPlus
   blockDef.tooltip = blockDef.description.split("\n")[0]
   blockDef.disabled = !!rawBlockDefinition.disabled
-  blockDef.visualization = rawBlockDefinition.visualization
   blockDef.connections = rawBlockDefinition.connections
   blockDef.template = rawBlockDefinition.template
   blockDef.inputs = rawBlockDefinition.inputs
@@ -151,7 +148,7 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   blockDef.mutator = rawBlockDefinition.mutator
   blockDef.generators = rawBlockDefinition.generators
   blockDef.regenerators = rawBlockDefinition.regenerators
-  blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || rawBlockDefinition.visualization?.color || rawBlockDefinition.visualization?.colour || "0"
+  blockDef.colour = rawBlockDefinition.color || rawBlockDefinition.colour || "0"
   blockDef.color = blockDef.colour
   blockDef.inputsInline = rawBlockDefinition.inputsInline || false
 
