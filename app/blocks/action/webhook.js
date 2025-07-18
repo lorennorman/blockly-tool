@@ -1,21 +1,12 @@
+import { multilineLineTemplate } from "#app/blocks/shadows.js"
+
+
 export default {
   type: "action_webhook",
-
-  toolbox: {
-    category: 'Actions',
-  },
-
-  visualization: {
-    colour: "0",
-    tooltip: [
-      "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.",
-      "---------------",
-      "Parameters:",
-      "URL - a valid web location to send a request to",
-      "BODY - a JSON template to render and POST",
-      "FORM_ENCODE - optionally encode as form input",
-    ].join('\n')
-  },
+  bytecodeKey: "webhookAction",
+  name: "Webhook",
+  colour: "0",
+  description: "Sends an HTTP POST request to a given URL, with a BODY template using FEED data.",
 
   connections: {
     mode: "statement",
@@ -23,41 +14,35 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    [ "🔗 Webhook", "CENTER" ],
 
-    [ "URL:", {
-      inputValue: "URL",
-      // check: "String",
+  template: `
+    🔗 Webhook |CENTER
+    URL: %URL
+    Form Encode? %FORM_ENCODE
+    POST Body: %BODY
+  `,
+
+  inputs: {
+    URL: {
+      description:  "A valid web location to send a POST request to.",
       shadow: {
         type: 'io_text',
         fields: { TEXT: 'https://...' }
       }
-    }],
+    },
 
-    [ "Form Encode?", {
-      field: "FORM_ENCODE",
+    BODY: {
+      description: "A JSON template to render and POST",
+      shadow: multilineLineTemplate
+    }
+  },
+
+  fields: {
+    FORM_ENCODE: {
+      description: "Encode as an HTML form input",
       checked: false
-    }],
-
-    [ "POST Body:", {
-      inputValue: "BODY",
-      // check: "String",
-      shadow: {
-        type: 'text_template',
-        inputs: {
-          TEMPLATE: {
-            shadow: {
-              type: 'io_text_multiline',
-              fields: {
-                TEXT: '                     \n\n\n'
-              }
-            }
-          }
-        }
-      }
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {

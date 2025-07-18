@@ -1,13 +1,9 @@
 export default {
   type: "on_schedule",
-
-  toolbox: {
-  },
-
-  visualization: {
-    colour: 30,
-    tooltip: "A schedule to run the action, from every minute to once a year."
-  },
+  bytecodeKey: "onSchedule",
+  name: "Schedule",
+  colour: 30,
+  description: "A schedule to run the action, from every minute to once a year.",
 
   connections: {
     mode: "statement",
@@ -15,29 +11,31 @@ export default {
     next: "trigger"
   },
 
-  lines: [
-    [ "Schedule", "CENTER" ],
+  template: `
+    Schedule |CENTER
+    Months: %MONTH
+    Days: %DAY
+    Hours: %HOUR
+    Minutes: %MINUTE
+  `,
 
-    [ "Months:", {
-      inputValue: "MONTH",
+  inputs: {
+    MONTH: {
       check: "cron_month",
       block: "all_months",
-    }],
+    },
 
-    [ "Days:", {
-      inputValue: "DAY",
+    DAY: {
       check: "cron_day",
       block: "all_days"
-    }],
+    },
 
-    [ "Hours:", {
-      inputValue: "HOUR",
+    HOUR: {
       check: "cron_hour",
       block: "all_hours"
-    }],
+    },
 
-    [ "Minutes:", {
-      inputValue: "MINUTE",
+    MINUTE: {
       check: "cron_minute",
       block: {
         type: "one_minute",
@@ -45,8 +43,8 @@ export default {
           MINUTE: '15'
         }
       }
-    }],
-  ],
+    },
+  },
 
   generators: {
     json: (block, generator) => {

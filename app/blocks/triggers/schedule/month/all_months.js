@@ -1,14 +1,11 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./month_mutator.js?key=${random}`)).default
+import mutator from './month_mutator.js'
+
 
 export default {
   type: "all_months",
-
-  visualization: {
-    colour: 30,
-    tooltip: "Runs during all months."
-  },
+  name: "All Months",
+  colour: 30,
+  description: "Runs during all months.",
 
   connections: {
     mode: 'value',
@@ -17,7 +14,7 @@ export default {
 
   mutator,
 
-  lines: [ "Every month" ],
+  template: "Every month",
 
   generators: {
     json: block => {

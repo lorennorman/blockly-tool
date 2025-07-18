@@ -1,20 +1,19 @@
 export default {
   type: "minute_settings",
-
-  visualization: {
-    colour: 30,
-    tooltip: "How would you like to specify minutes of the hour for your schedule?"
-  },
+  name: "Minute Settings",
+  colour: 30,
+  description: "How would you like to specify minutes of the hour for your schedule?",
 
   connections: {},
 
-  lines: [
-    [ "Minute:", {
-      inputValue: 'MINUTE_BLOCK',
+  template: "Minute: %MINUTE_BLOCK",
+
+  inputs: {
+    MINUTE_BLOCK: {
       check: 'cron_minute',
       shadow: 'all_minutes'
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: block => { }

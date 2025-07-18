@@ -1,17 +1,15 @@
 export default {
   type: "delay_days",
-
-  visualization: {
-    colour: "0",
-    tooltip: "1 day is the maximum delay available"
-  },
+  name: "Delay Days",
+  colour: "0",
+  description: "1 day is the maximum delay available",
 
   connections: {
     mode: 'value',
     output: "delay_period",
   },
 
-  lines: [ "1 day" ],
+  template: "1 day",
 
   generators: {
     json: () => {

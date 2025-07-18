@@ -1,15 +1,11 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./minute_mutator.js?key=${random}`)).default
+import mutator from './minute_mutator.js'
 
 
 export default {
   type: "all_minutes",
-
-  visualization: {
-    colour: 30,
-    tooltip: "Runs every minute of the hour."
-  },
+  name: "All Minutes",
+  colour: 30,
+  description: "Runs every minute of the hour.",
 
   connections: {
     mode: 'value',
@@ -18,7 +14,7 @@ export default {
 
   mutator,
 
-  lines: [ "Every minute" ],
+  template: "Every minute",
 
   generators: {
     json: block => {

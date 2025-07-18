@@ -1,29 +1,31 @@
 export default {
   type: "math_map",
-
-  toolbox: { },
-
-  visualization: {
-    colour: 120,
-    tooltip: "Scale a value from one range of numbers to another"
-  },
+  bytecodeKey: "mapValue",
+  name: "Map",
+  colour: 120,
+  description: "Scale a value from one range of numbers to another",
 
   connections: {
     mode: "value",
     output: "number",
   },
 
-  lines: [
-    "Map",
+  template: `
+    Map
+    Value: %VALUE
+    From: %FROM_RANGE
+    To: %TO_RANGE
+  `,
 
-    [ "Value:", {
-      inputValue: "VALUE",
-      shadow: "io_math_number"
-    }],
+  inputs: {
+    VALUE: {
+      bytecodeProperty: "value",
+      shadow: 'io_math_number'
+    },
 
-    [ "From:", {
-      inputValue: "FROM_RANGE",
+    FROM_RANGE: {
       check: 'range',
+      bytecodeProperty: "from",
       shadow: {
         type: "math_range",
         inputs: {
@@ -37,11 +39,11 @@ export default {
           }}
         }
       }
-    }],
+    },
 
-    [ "To:", {
-      inputValue: "TO_RANGE",
+    TO_RANGE: {
       check: 'range',
+      bytecodeProperty: "to",
       shadow: {
         type: "math_range",
         inputs: {
@@ -55,8 +57,8 @@ export default {
           }}
         }
       }
-    }],
-  ],
+    },
+  },
 
   generators: {
     json: (block, generator) => {
@@ -64,7 +66,7 @@ export default {
         value = JSON.parse(generator.valueToCode(block, 'VALUE', 0)),
         from = JSON.parse(generator.valueToCode(block, 'FROM_RANGE', 0)),
         to = JSON.parse(generator.valueToCode(block, 'TO_RANGE', 0)),
-        payload = { mapValue: {value, from, to } }
+        payload = { mapValue: { value, from, to }}
 
       return [ JSON.stringify(payload), 0 ]
     }

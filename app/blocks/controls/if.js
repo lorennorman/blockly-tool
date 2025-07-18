@@ -1,28 +1,18 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./if/mutator.js?key=${random}`)).default
+import mutator from './if/mutator.js'
+
 
 export default {
   type: 'io_controls_if',
+  bytecodeKey: "conditional",
+  name: "Conditional",
+  description: "Execute different block diagrams based on the outcome of conditional checks.",
+  colour: 60,
 
-  toolbox: {
-    category: 'Logic',
-  },
-
-  visualization: {
-    colour: 60,
-    tooltip: [
-      "Conditionally execute specified commands based on the outcome of conditional checks.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "if - the first value to check for truthiness",
-      "do - the commands to execute if the first check was true",
-      "else if - (optional, repeating) an extra value to check for truthiness",
-      "do - the commands to execute if the previous check was true",
-      "else - (optional) the commands to execute if no checks were true",
-    ].join('\n'),
-  },
+      // "if - the first value to check for truthiness",
+      // "do - the commands to execute if the first check was true",
+      // "else if - (optional, repeating) an extra value to check for truthiness",
+      // "do - the commands to execute if the previous check was true",
+      // "else - (optional) the commands to execute if no checks were true",
 
   connections: {
     mode: "statement",
@@ -32,12 +22,36 @@ export default {
 
   mutator,
 
-  lines: [
-    [ "if", { inputValue: 'IF0', shadow: 'io_logic_boolean' }],
-    [ "do", { inputStatement: 'THEN0' }],
-    [ "else if", { inputDummy: 'ELSE_IF_LABEL' }],
-    [ "else", { inputDummy: 'ELSE_LABEL' }]
-  ],
+  template: `
+    if %IF0
+    do %THEN0
+    else if %ELSE_IF_LABEL
+    else %ELSE_LABEL
+  `,
+
+  // TODO: open a way to send raw documentation for the inputs section
+  // the conditional block has a lot of dynamic behavior that is harder to
+  // document plainly alongside the data definitions
+
+  inputs: {
+    IF0: {
+      description: "Runs the given block tree and checks whether it resolve true or false. If true, executes the 'do' branch, otherwise moves onto the next if (if present), or the final else (if present.)",
+      shadow: 'io_logic_boolean'
+    },
+
+    THEN0: {
+      description: "The block diagram to execute when the preceding 'if' clause resolves to true",
+      type: 'statement',
+    },
+
+    ELSE_IF_LABEL: {
+      type: 'label',
+    },
+
+    ELSE_LABEL: {
+      type: 'label',
+    }
+  },
 
   generators: {
     json: (block, generator) => {

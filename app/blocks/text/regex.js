@@ -2,33 +2,27 @@ export default {
   disabled: true,
 
   type: 'text_regex',
+  bytecodeKey: "textRegex",
+  name: "Regular Expression",
+  colour: 180,
+  description: "Apply the given regular expression to the given text, returning the first match.",
 
-  toolbox: {
-    category: 'Text',
+  template: `
+    Regex: %REGEX
+    Matches? %TARGET
+  `,
+
+  inputs: {
+    REGEX: {
+      description: "The regular expression to apply to the target text.",
+      shadow: "io_text"
+    },
+
+    TARGET: {
+      description: "The target text that the regular expression will be applied to",
+      shadow: "io_text"
+    },
   },
-
-  visualization: {
-    colour: 180,
-    tooltip: [
-      "Check for a regex match",
-      "-",
-      "Inputs:",
-      "---------------",
-      // "Text A - the first string of text",
-      // "Text B - the second string of text",
-      "-",
-      "Casting:",
-      "---------------",
-      "-",
-      "Options:",
-      "---------------",
-    ].join('\n'),
-  },
-
-  lines: [
-    ["Regex:", { inputValue: 'REGEX', shadow: "io_text" }],
-    ["Matches?", { inputValue: 'TARGET', shadow: "io_text" }]
-  ],
 
   generators: {
     json: (block, generator) => {

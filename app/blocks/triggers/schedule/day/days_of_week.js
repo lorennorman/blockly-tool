@@ -1,14 +1,11 @@
-const
-  random = Math.random()*100000000, // busts the NodeJS file cache
-  mutator = (await import(`./day_mutator.js?key=${random}`)).default
+import mutator from "./day_mutator.js"
+
 
 export default {
   type: "days_of_week",
-
-  visualization: {
-    colour: 30,
-    tooltip: "Runs during certain days of the week."
-  },
+  name: "Days of the Week",
+  colour: 30,
+  description: "Runs during certain days of the week.",
 
   connections: {
     mode: 'value',
@@ -17,25 +14,20 @@ export default {
 
   mutator,
 
-  lines: [
-    [ 'Sun: %SUN Mon: %MON Tue: %TUE Wed: %WED', {
-      fields: {
-        SUN: { checked: true },
-        MON: { checked: true },
-        TUE: { checked: true },
-        WED: { checked: true },
-      }
-    } ],
+  template: `
+    Sun: %SUN Mon: %MON Tue: %TUE Wed: %WED
+    Thu: %THU Fri: %FRI Sat: %SAT |CENTER
+  `,
 
-    [ 'Thu: %THU Fri: %FRI Sat: %SAT', {
-      align: 'CENTER',
-      fields: {
-        THU: { checked: true },
-        FRI: { checked: true },
-        SAT: { checked: true }
-      }
-    } ],
-  ],
+  fields: {
+    SUN: { checked: true },
+    MON: { checked: true },
+    TUE: { checked: true },
+    WED: { checked: true },
+    THU: { checked: true },
+    FRI: { checked: true },
+    SAT: { checked: true }
+  },
 
   generators: {
     json: block => {

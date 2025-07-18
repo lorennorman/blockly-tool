@@ -1,20 +1,10 @@
 export default {
   type: "feed_set_value",
-
-  toolbox: {
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 300,
-    tooltip: [
-      "Publish the specified data point to the specified Feed.",
-      "-",
-      "Inputs:",
-      "Feed - the Feed to publish to",
-      "Value - the value to write",
-    ].join('\n'),
-  },
+  bytecodeKey: "setFeedValue",
+  name: "Set Feed Value",
+  inputsInline: true,
+  colour: 300,
+  descritpion: "Publish the specified data point to the specified Feed.",
 
   mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
@@ -25,19 +15,23 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    [ "Set %FEED_KEY to: ", {
-      field: "FEED_KEY",
+  template: "Set %FEED_KEY to: %VALUE",
+
+  inputs: {
+    VALUE: {
+      description: "The value to publish to the Feed.",
+      shadow: 'io_text'
+    }
+  },
+
+  fields: {
+    FEED_KEY: {
+      description: "Select the Feed you wish to publish to",
       options: [
         [ "Loading Feeds...", "" ],
       ]
-    }],
-
-    ["%VALUE", {
-      inputValue: "VALUE",
-      shadow: 'io_text'
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {

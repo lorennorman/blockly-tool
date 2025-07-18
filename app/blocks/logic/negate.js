@@ -1,18 +1,18 @@
 export default {
   type: 'io_logic_negate',
+  bytecodeKey: "negate",
+  name: "Negate",
+  colour: 60,
+  description: "Swaps a truthy value to `false`, or a falsy value to `true`.",
 
-  toolbox: {
-    category: 'Logic',
+  template: "not %EXPRESSION",
+
+  inputs: {
+    EXPRESSION: {
+      description: "Block diagram that will be resolved, then have its truthiness flipped.",
+      shadow: 'io_logic_boolean'
+    }
   },
-
-  visualization: {
-    colour: 60,
-    tooltip: "Swaps a truthy value to false, or a falsy value to true."
-  },
-
-  lines: [
-    ["not", { inputValue: 'EXPRESSION', shadow: 'io_logic_boolean' }]
-  ],
 
   generators: {
     json: (block, generator) => {

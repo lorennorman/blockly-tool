@@ -1,43 +1,37 @@
 export default {
   type: 'io_math_arithmetic',
+  bytecodeKey: "arithmetic",
+  name: "Arithmetic",
+  colour: 120,
+  inputsInline: true,
+  description: "Perform the specified arithmetic operation on two specified operands.",
 
-  toolbox: {
-    category: 'Math',
+  template: `%A %OP %B`,
+
+  inputs: {
+    A: {
+      description: "The left side of the operation. Will be coerced to a number",
+      shadow: 'io_math_number'
+    },
+
+    B: {
+      description: "The right side of the operation. Will be coerced to a number",
+      shadow: 'io_math_number'
+    },
   },
 
-  visualization: {
-    inputsInline: true,
-    colour: 120,
-    tooltip: [
-      "Perform the specified arithmetic operation on two specified operands.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Number A - the first input",
-      "Operation - the operation to perform on the operands",
-      "+ addition",
-      "- subtraction",
-      "x multiplication",
-      "/ division",
-      "^ exponent",
-      "Number B - the second input",
-    ].join('\n'),
-  },
-
-  lines: [
-    [ "", { inputValue: 'A', shadow: 'io_math_number'}],
-    [ "", {
-      field: 'OP',
+  fields: {
+    OP: {
+      description: "The mathematical operation to perform.",
       options: [
-        ['+', 'ADD'],
-        ['-', 'MINUS'],
-        ['x', 'MULTIPLY'],
-        ['/', 'DIVIDE'],
-        ['^', 'POWER'],
+        ['+', 'ADD', "add two numbers"],
+        ['-', 'MINUS', "subtract number B from number A"],
+        ['x', 'MULTIPLY', "multiply two numbers"],
+        ['/', 'DIVIDE', "divide number A by number B"],
+        ['^', 'POWER', "raise number A to the power of number B"],
       ]
-    }],
-    [ "", { inputValue: 'B', shadow: 'io_math_number'}],
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {

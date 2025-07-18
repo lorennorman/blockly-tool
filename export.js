@@ -1,50 +1,60 @@
-import fs from 'fs'
+import { cleanDir, write, totalBytesWritten } from "./export_util.js"
+import DefinitionSet from '#src/definitions/definition_set.js'
+import { exportTo } from '#src/exporters/index.js'
 
-// make a tiny DSL
-const withCleanDir = async (dirName, writeFunction) => {
-  const startTime = Date.now()
-  console.log("Starting Blockly Export")
-  console.log("=======================")
 
-  if(fs.existsSync(dirName)) {
-    fs.rmSync(dirName, { recursive: true, force: true })
-  }
-  fs.mkdirSync(dirName)
-  console.log(`/${dirName}: clean`)
+const toExport = process.argv[2]
 
-  let totalBytesWritten = 0
-  const write = (filename, fileContents) => {
-    const
-      exportFilename = `${dirName}/${filename}`,
-      bytesToWrite = fileContents.length/1000
-
-    fs.writeFileSync(exportFilename, fileContents)
-
-    console.log(`/${exportFilename} (${bytesToWrite}k)`)
-    totalBytesWritten += bytesToWrite
-  }
-
-  await writeFunction(write)
-
-  const elapsed = Date.now() - startTime
-  console.log("=======================")
-  console.log(`🏁 Done. Wrote ${totalBytesWritten.toString().slice(0,5)}k in ${elapsed}ms 🏁`)
+if(!toExport) {
+  console.error(`Export Error: Missing export name!\nUsage: node export.js [export name]`)
+  process.exit(1)
 }
 
-import { importBlockJson } from './src/importer/block_importer.js'
-import importToolboxJson from './src/importer/toolbox_importer.js'
-import importWorkspaceJson from './src/importer/workspace_importer.js'
-import importBlocklyJs from './src/importer/blockly_importer.js'
+const
+  // load the definitions
+  definitions = await DefinitionSet.load(),
 
+  exporters = {
+    "app": async (destination="export") => {
 
-const pretty = jsObject => JSON.stringify(jsObject, null, 2) + "\n"
+      // clear the export directory
+      cleanDir(destination)
 
-withCleanDir("export", async write => {
-  // JSON
-  write("blocks.json", pretty(await importBlockJson()))
-  write("toolbox.json", pretty(await importToolboxJson()))
-  write("workspace.json", pretty(await importWorkspaceJson()))
+      // app export routine
+      await exportTo(destination, definitions, exportItem => {
+        exportItem.toolbox("toolbox.json")
+        exportItem.workspace("workspace.json")
+        exportItem.blocks("blocks.json")
+        exportItem.script("blockly_app.js")
+      })
+    },
 
-  // JS
-  write("blockly.js", await importBlocklyJs())
-})
+    "docs": async () => {
+      await exporters.app("docs/blockly")
+
+      cleanDir("docs/blocks")
+
+      await exportTo("docs", definitions, exportItem => {
+        exportItem.sidebar("blocks/_blocks_sidebar.json")
+        exportItem.blockPages(block => `blocks/${block.definitionPath.replace(/.js$/, '.md')}`)
+        // exportItem.blockExamples(block => "blocks/${block.definitionPath}/examples.json")
+      })
+    },
+  },
+  exporterNames = Object.keys(exporters)
+
+if(!exporterNames.includes(toExport)) {
+  console.error(`Export Error: No exporter found for: "${toExport}"\nValid exporters: "${exporterNames.join('", "')}"`)
+  process.exit(1)
+}
+
+const startTime = Date.now()
+console.log(`\nStarting Export: ${toExport}`)
+console.log("=======================")
+
+const exporter = exporters[toExport]
+await exporter()
+
+const elapsed = Date.now() - startTime
+console.log("=======================")
+console.log(`🏁 Done. Wrote ${totalBytesWritten.toFixed(3)}k in ${elapsed}ms 🏁`)

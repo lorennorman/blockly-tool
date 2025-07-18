@@ -5,6 +5,7 @@
   "type": "module",
   "imports": {
     "#app/*.js": "./app/*.js",
+    "#app/*.json": "./app/*.json",
     "#src/*.js": "./src/*.js",
     "#test/*.js": "./test/*.js"
   },
@@ -13,12 +14,18 @@
     "start": "vite --force",
     "test": "node --test",
     "test-watch": "node --test --watch",
+    "test-snapshots": "node --test test/app/blocks/snapshots/block_snapshots_test.js",
+    "test-update-snapshots": "node --test --test-update-snapshots test/app/blocks/snapshots/block_snapshots_test.js",
     "lint": "eslint src/",
     "lint-export": "eslint export/",
-    "build": "npm run export && vite build",
+    "export:app": "node export.js app",
+    "build": "npm run export:app && vite build",
     "build-all-branches": "node build_all_branches.js",
     "preview": "npm run build && vite preview",
-    "export": "node export.js"
+    "docs:export": "node export.js docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "blockly"
@@ -32,7 +39,8 @@
     "esm-reload": "^1.0.1",
     "glob": "^10.4.2",
     "globals": "^15.2.0",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitepress": "^1.6.3"
   },
   "dependencies": {
     "@blockly/theme-modern": "^5.0.5",

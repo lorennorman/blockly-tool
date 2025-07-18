@@ -1,40 +1,32 @@
 export default {
   type: 'matcher_text_compare',
-
-  toolbox: {
-    category: 'Matchers',
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 180,
-    tooltip: [
-      "Compare the new feed value with text for equality, inequality, or inclusion.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Comparator - check for equality, inequality, or inclusion.",
-      "Text B - the string of text to compare against the feed value",
-      "-",
-      "Casting:",
-      "---------------",
-      "Both the Feed value and Text B input are coerced to strings",
-    ].join('\n'),
-  },
+  bytecodeKey: "matcherTextCompare",
+  name: "Compare Text Matcher",
+  colour: 180,
+  inputsInline: true,
+  description: "Compare the new feed value with text for equality, inequality, or inclusion.",
 
   connections: { mode: 'value', output: 'matcher' },
 
-  lines: [
-    [ "", {
-      field: "OP",
+  template: "%OP %B",
+
+  inputs: {
+    B: {
+      description: "The string to compare with the Feed value.",
+      shadow: 'io_text'
+    }
+  },
+
+  fields: {
+    OP: {
+      description: "Select what kind of comparison to do:",
       options: [
-        ['=', 'EQ'],
-        ['\u2260', 'NEQ'],
-        ['includes', 'INC'],
+        ['=', 'EQ', "Returns true if the Feed value and text are the same."],
+        ['\u2260', 'NEQ', "Returns true if the Feed value and text are not the same."],
+        ['includes', 'INC', "Returns true if the Feed value includes the text."],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: "io_text" }]
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {

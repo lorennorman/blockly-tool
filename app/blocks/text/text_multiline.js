@@ -1,26 +1,21 @@
 export default {
   type: 'io_text_multiline',
-
-  toolbox: {
-    category: 'Text',
-  },
-
-  visualization: {
-    colour: 180,
-    tooltip: "A String of longer-form text with newlines.",
-  },
+  name: "Multiline Text",
+  colour: 180,
+  description: "A String of longer-form text with newlines.",
 
   connections: {
     mode: "value",
     output: "String",
   },
 
-  lines: [
-    ["P", {
-      field: 'TEXT',
+  template: "P %TEXT",
+
+  fields: {
+    TEXT: {
       multiline_text: ''
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: block => {

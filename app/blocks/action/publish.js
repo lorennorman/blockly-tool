@@ -1,17 +1,10 @@
 // deprecated: use feeds/set_value
 export default {
   type: "action_publish",
-
-  visualization: {
-    colour: "0",
-    tooltip: [
-      "Sends a given VALUE to a given FEED.",
-      "---------------",
-      "Parameters:",
-      "VALUE - the value to write",
-      "FEED - the feed to write to",
-    ].join('\n'),
-  },
+  bytecodeKey: "publishAction",
+  name: "Publish to Feed",
+  colour: "0",
+  description: "Sends the given value to the specified Feed.",
 
   connections: {
     mode: "statement",
@@ -19,21 +12,23 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    [ "📈 Publish", "CENTER" ],
+  template: `
+    📈 Publish |CENTER
+    ...value: %VALUE
+    ...to: %FEED
+  `,
 
-    [ "...value:", {
-      inputValue: "VALUE",
-      // check: [ "String", "Number" ],
+  inputs: {
+    VALUE: {
+      description: "The value to write to the Feed.",
       shadow: 'io_text'
-    }],
+    },
 
-    [ "...to:", {
-      inputValue: "FEED",
-      // check: "feed",
+    FEED: {
+      description: "The Feed to write to.",
       shadow: 'feed_selector'
-    }]
-  ],
+    },
+  },
 
   generators: {
     json: (block, generator) => {

@@ -1,21 +1,10 @@
 export default {
   type: "when_data",
-
-  toolbox: {
-    category: 'Triggers',
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 30,
-    tooltip: [
-      "Run this action when a Feed receives a new data point.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Feed - the Feed to watch for new data points",
-    ].join("\n")
-  },
+  bytecodeKey: "whenData",
+  name: "Any Data",
+  colour: 30,
+  inputsInline: true,
+  description: "Run this action when a Feed receives a new data point.",
 
   connections: {
     mode: "statement",
@@ -26,15 +15,16 @@ export default {
   mixins: ['replaceDropdownOptions'],
   extensions: ['populateFeedDropdown'],
 
-  lines: [
-    [ "When %FEED_KEY gets any data", {
-      align: 'LEFT',
-      field: "FEED_KEY",
+  template: "When %FEED_KEY gets any data |LEFT",
+
+  fields: {
+    FEED_KEY: {
+      description: "the Feed to watch for new data points",
       options: [
         [ "Loading Feeds...", ""]
       ]
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: block => {

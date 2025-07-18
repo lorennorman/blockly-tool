@@ -1,25 +1,29 @@
 export default {
   type: 'matcher_boolean_operation',
-
-  toolbox: {},
-
-  visualization: {
-    inputsInline: true,
-    colour: 60,
-  },
+  bytecodeKey: "matcherBooleanOperation",
+  name: "Compare Matcher",
+  colour: 60,
+  inputsInline: true,
+  description: "Perform a logic operation between the triggering Feed value and a block diagram.",
 
   connections: { mode: 'value', output: 'matcher' },
 
-  lines: [
-    ["is true", {
-      field: 'OP',
+  template: `is true %OP %B`,
+
+  fields: {
+    OP: {
       options: [
         ['and', 'AND'],
         ['or', 'OR'],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: 'io_logic_boolean' }],
-  ],
+    }
+  },
+
+  inputs: {
+    B: {
+      shadow: 'io_logic_boolean'
+    }
+  },
 
   generators: {
     json: (block, generator) => {

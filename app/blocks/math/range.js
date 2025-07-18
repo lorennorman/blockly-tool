@@ -1,30 +1,32 @@
 export default {
   type: "math_range",
+  bytecodeKey: "range",
+  name: "Range",
+  color: 120,
+  inputsInline: true,
 
-  toolbox: { },
-
-  visualization: {
-    inputsInline: true,
-    colour: 120,
-    tooltip: "A range of numbers specified by a lower and upper bound.",
-  },
+  description: "A range of numbers specified by a lower and upper bound.",
 
   connections: {
     mode: "value",
     output: "range",
   },
 
-  lines: [
-    [ "(%FROM,", {
-      inputValue: "FROM",
-      shadow: "io_math_number"
-    }],
+  template: `(%FROM,%TO)`,
 
-    [ "%TO)", {
-      inputValue: "TO",
+  inputs: {
+    FROM: {
+      description: "The lower bound of the range.",
+      bytecodeProperty: "from",
       shadow: "io_math_number"
-    }],
-  ],
+    },
+
+    TO: {
+      description: "The upper bound of the range.",
+      bytecodeProperty: "to",
+      shadow: "io_math_number"
+    },
+  },
 
   generators: {
     json: (block, generator) => {

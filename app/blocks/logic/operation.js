@@ -1,41 +1,34 @@
 export default {
   type: 'io_logic_operation',
+  bytecodeKey: "logic",
+  name: "Logic Operation",
+  inputsInline: true,
+  colour: 60,
+  description: "Perform the specifed boolean logic operation on two operands.",
 
-  toolbox: {
-    category: 'Logic',
+  template: `%A %OP %B`,
+
+  inputs: {
+    A: {
+      description: "A block diagram that will be resolved to a truthy/falsy value",
+      shadow: 'io_logic_boolean'
+    },
+
+    B: {
+      description: "A block diagram that will be resolved to a truthy/falsy value",
+      shadow: 'io_logic_boolean'
+    }
   },
 
-  visualization: {
-    inputsInline: true,
-    colour: 60,
-    tooltip: [
-      "Perform the specifed boolean logic operation on two operands.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Operator - the type of operation to perform, \"and\" or \"or\"",
-      "\"and\" - true if all inputs are true, false otherwise",
-      "\"or\" - true if any input is true, false otherwise",
-      "Boolean A - the first boolean",
-      "Boolean B - the second boolean",
-      "-",
-      "Casting:",
-      "---------------",
-      "both inputs are coerced to true or false before the operation",
-    ].join('\n'),
-  },
-
-  lines: [
-    ["", { inputValue: 'A', shadow: 'io_logic_boolean' }],
-    ["", {
-      field: 'OP',
+  fields: {
+    OP: {
+      description: "Select the logic operation to perform on the inputs:",
       options: [
-        ['and', 'AND'],
-        ['or', 'OR'],
+        ['and', 'AND', "Resolve `true` if both operands are true, otherwise `false`."],
+        ['or', 'OR', "Resolve `true` if either or both operands are true, otherwise `false`."],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: 'io_logic_boolean' }],
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {

@@ -1,20 +1,13 @@
+import { singleLineTemplate, multilineLineTemplate } from "#app/blocks/shadows.js"
+
+
 export default {
   type: "action_email",
-
-  toolbox: {
-    category: 'Actions',
-  },
-
-  visualization: {
-    colour: "0",
-    tooltip: [
-      "Sends an email with given SUBJECT and BODY",
-      "---------------",
-      "Parameters:",
-      "SUBJECT - a template for generating the email subject",
-      "BODY - a template for generating the email body",
-    ].join('\n'),
-  },
+  bytecodeKey: "emailAction",
+  name: "Email",
+  description: `Sends an email with given subject and body templates`,
+  primaryCategory: 'Actions',
+  color: "0",
 
   connections: {
     mode: "statement",
@@ -22,40 +15,25 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    [ "📧 Email", 'CENTER'],
+  inputs: {
+    SUBJECT: {
+      description: "a template for generating the email subject",
+      bytecodeProperty: "subjectTemplate",
+      shadow: singleLineTemplate,
+    },
 
-    [ "Subject:", {
-      inputValue: "SUBJECT",
-      shadow: {
-        type: 'text_template',
-        inputs: { TEMPLATE: {
-          shadow: {
-            type: 'io_text',
-            fields: {
-              TEXT: '                      '
-            }
-          }
-        }}
-      }
-    }],
+    BODY: {
+      description: "a multi-line template for generating the email body",
+      bytecodeProperty: "bodyTemplate",
+      shadow: multilineLineTemplate,
+    }
+  },
 
-    [ "Body:", {
-      inputValue: "BODY",
-      // check: 'String',
-      shadow: {
-        type: 'text_template',
-        inputs: { TEMPLATE: {
-          shadow: {
-            type: 'io_text_multiline',
-            fields: {
-              TEXT: '                     \n\n\n'
-            }
-          }
-        }}
-      }
-    }]
-  ],
+  template: `
+    📧 Email |CENTER
+    Subject: %SUBJECT
+    Body: %BODY
+  `,
 
   generators: {
     json: (block, generator) => {

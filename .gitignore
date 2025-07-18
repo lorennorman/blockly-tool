@@ -106,6 +106,9 @@ dist
 # vitepress
 docs/.vitepress/dist
 docs/.vitepress/cache
+# temporary
+docs/blocks/*
+docs/blockly/*
 
 # vuepress build output
 .vuepress/dist

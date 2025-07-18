@@ -1,20 +1,13 @@
+import { multilineLineTemplate } from "#app/blocks/shadows.js"
+
+
 export default {
   type: "action_sms",
-
-  toolbox: {
-    category: 'Actions',
-  },
-
-  visualization: {
-    colour: "0",
-    tooltip: [
-      "(IO+ only)",
-      "Sends a text message with a given BODY template.",
-      "---------------",
-      "Parameters:",
-      "BODY - a template for generating the SMS body",
-    ].join('\n')
-  },
+  bytecodeKey: "smsAction",
+  name: "SMS",
+  colour: "0",
+  description: "Sends a text message with a given body template.",
+  ioPlus: true,
 
   connections: {
     mode: "statement",
@@ -22,25 +15,17 @@ export default {
     next: 'expression'
   },
 
-  lines: [
-    [ "📲 SMS", "CENTER" ],
+  template: `
+    📲 SMS |CENTER
+    Message: %BODY
+  `,
 
-    [ "Message:", {
-      inputValue: "BODY",
-      // check: "String",
-      shadow: {
-        type: 'text_template',
-        inputs: { TEMPLATE: {
-          shadow: {
-            type: 'io_text_multiline',
-            fields: {
-              TEXT: '                     \n\n\n'
-            }
-          }
-        }}
-      }
-    }],
-  ],
+  inputs: {
+    BODY: {
+      description: "A template for generating the SMS body",
+      shadow: multilineLineTemplate
+    }
+  },
 
   generators: {
     json: (block, generator) => {

@@ -1,29 +1,22 @@
 export default {
   type: "io_text",
-
-  toolbox: {
-    category: 'Text',
-  },
-
-  visualization: {
-    colour: 180,
-    tooltip: "A String of text",
-  },
+  name: "Text",
+  colour: 180,
+  description: "A String of text",
 
   connections: {
     mode: "value",
     output: "String",
   },
 
-  lines: [
-    ["\"", {
-      field: 'TEXT',
-      text: ''
-    }]
-  ],
+  template: `"%TEXT`,
 
-  // generators for this block type
-  // these get aggregated and registered together
+  fields: {
+    TEXT: {
+      text: ''
+    }
+  },
+
   generators: {
     json: block => {
       const text = block.getFieldValue('TEXT')

@@ -3,20 +3,19 @@ import { makeOptions } from "#app/util/fields.js"
 
 export default {
   type: "delay_hours",
-
-  visualization: {
-    colour: "0",
-    tooltip: "Set a delay between 1 and 23 hours",
-  },
+  name: "Delay Hours",
+  colour: "0",
+  description: "Set a delay between 1 and 23 hours",
 
   connections: {
     mode: 'value',
     output: "delay_period",
   },
 
-  lines: [
-    [ "%SECONDS hours", {
-      field: 'SECONDS',
+  template: "%SECONDS hours",
+
+  fields: {
+    SECONDS: {
       options: makeOptions({ from: 1, upTo: 24, valueFunc: sec => sec*60*60 })
       // options: [
       //   ['1', '3600'],
@@ -25,8 +24,8 @@ export default {
       //   ['58', '79200'],
       //   ['59', '82800'],
       // ]
-    }]
-  ],
+    }
+  },
 
   generators: {
     json: () => {

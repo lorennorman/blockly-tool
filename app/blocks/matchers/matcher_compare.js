@@ -1,43 +1,35 @@
 export default {
   type: 'matcher_compare',
-
-  toolbox: {
-    category: 'Matchers',
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 224,
-    tooltip: [
-      "Compare the new feed value with a number in various ways.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Comparator - check equality, inequality, greater than, greater than or equal to, less than, less than or equal to?",
-      "Number B - the number to compare the feed value with",
-      "-",
-      "Casting:",
-      "---------------",
-      "The feed value and Number B are coerced to floating point numbers",
-    ].join('\n'),
-  },
+  bytecodeKey: "matcherCompare",
+  name: "Compare Numbers Matcher",
+  colour: 224,
+  inputsInline: true,
+  description: "Numerically compare the new Feed value with another number.",
 
   connections: { mode: 'value', output: 'matcher' },
 
-  lines: [
-    [ "", {
-      field: "OP",
+  template: "%OP %B",
+
+  fields: {
+    OP: {
+      description: "Select a comparison to perform",
       options: [
-        ['=', 'EQ'],
-        ['\u2260', 'NEQ'],
-        ['\u200F<', 'LT'],
-        ['\u200F\u2264', 'LTE'],
-        ['\u200F>', 'GT'],
-        ['\u200F\u2265', 'GTE'],
+        ['=', 'EQ', "True if the two numbers are equal"],
+        ['\u2260', 'NEQ', "True if the two numbers are not equal"],
+        ['\u200F<', 'LT', "True if the Feed value is less than number B"],
+        ['\u200F\u2264', 'LTE', "True if the Feed value is less than or equal to number B"],
+        ['\u200F>', 'GT', "True if the Feed value is greater than number B"],
+        ['\u200F\u2265', 'GTE', "True if the Feed value is greater than or equal to number B"],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: 'io_math_number' }]
-  ],
+    }
+  },
+
+  inputs: {
+    B: {
+      description: "The value to compare with the Feed value.",
+      shadow: 'io_math_number'
+    }
+  },
 
   generators: {
     json: (block, generator) => {

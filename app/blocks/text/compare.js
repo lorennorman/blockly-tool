@@ -1,40 +1,35 @@
 export default {
   type: 'text_compare',
+  bytecodeKey: 'textCompare',
+  name: "Compare Text",
+  colour: 180,
+  inputsInline: true,
+  description: "Compare two chunks of text for equality, inequality, or inclusion.",
 
-  toolbox: {
-    category: 'Text',
+  template: `%A %OP %B`,
+
+  inputs: {
+    A: {
+      description: "The left side of the comparison. Will be coerced to a string",
+      shadow: 'io_text'
+    },
+
+    B: {
+      description: "The right side of the comparison. Will be coerced to a string",
+      shadow: 'io_text'
+    },
   },
 
-  visualization: {
-    inputsInline: true,
-    colour: 180,
-    tooltip: [
-      "Compare two chunks of text for equality, inequality, or inclusion.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Comparator - check for equality, inequality, or inclusion",
-      "Text A - the first string of text",
-      "Text B - the second string of text",
-      "-",
-      "Casting:",
-      "---------------",
-      "both inputs are coerced to strings",
-    ].join('\n'),
-  },
-
-  lines: [
-    ["", { inputValue: 'A', shadow: "io_text" }],
-    [ "", {
-      field: "OP",
+  fields: {
+    OP: {
+      description: "Select what kind of comparison to do:",
       options: [
-        ['=', 'EQ'],
-        ['\u2260', 'NEQ'],
-        ['includes', 'INC'],
+        ['=', 'EQ', "Returns true if the the inputs are the same."],
+        ['\u2260', 'NEQ', "Returns true if the inputs not the same."],
+        ['includes', 'INC', "Returns true if input A includes input B."],
       ]
-    }],
-    ["", { inputValue: 'B', shadow: "io_text" }]
-  ],
+    }
+  },
 
   generators: {
     json: (block, generator) => {
