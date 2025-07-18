@@ -1,5 +1,5 @@
 import processConnections from './connections.js'
-import processLines, { processTemplate } from './lines.js'
+import processTemplate from './template.js'
 import processExtensions from './extensions.js'
 import processMutator from './mutators.js'
 
@@ -10,7 +10,6 @@ export const toBlockJSON = block => ({
   tooltip: block.tooltip,
   ...block.visualization,
   ...processConnections(block),
-  ...processLines(block),
   ...processTemplate(block),
   ...processExtensions(block),
   ...processMutator(block),

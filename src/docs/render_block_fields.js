@@ -1,18 +1,14 @@
-import { capitalize, filter, isArray, isObject, isString, map, mapValues, values } from 'lodash-es'
+import { capitalize, map, mapValues, values } from 'lodash-es'
 
 import { niceTemplate } from '#src/util.js'
 
 
 const
-  getLineObjects = definition => filter(map(filter(definition.lines, isArray), "[1]"), isObject),
-
   renderFields = definition => {
-    const fields = filter(getLineObjects(definition), "field").concat(
-      values(mapValues(definition.fields, (newField, name) => {
-        newField.field = name
-        return newField
-      }))
-    )
+    const fields = values(mapValues(definition.fields, (newField, name) => {
+      newField.field = name
+      return newField
+    }))
 
     if(!fields.length) { return "This block has no form fields." }
 

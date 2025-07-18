@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import { range, flatMap } from 'lodash-es'
 import { assert } from 'chai'
 
-import { processTemplate } from '#src/exporters/block_processor/lines.js'
+import processTemplate from '#src/exporters/block_processor/template.js'
 
 
 const TEMPLATE_FIXTURE = {

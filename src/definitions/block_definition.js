@@ -28,8 +28,6 @@ class BlockDefinition {
 
   connections = null
 
-  lines = null
-
   template = null
 
   inputs = []
@@ -73,58 +71,19 @@ class BlockDefinition {
   }
 
   getInstanceInputs() {
-    const { lines, inputs } = this
+    const { inputs } = this
+    if(!inputs) { return }
 
-    if(lines) {
-      const inputValues =
-        mapValues(
-          keyBy(
-            filter(
-              map(lines, '[1]'),
-              "inputValue"),
-            "inputValue"),
-          definitionPropsToInputs)
-
-      return isEmpty(inputValues) ? undefined : inputValues
-    }
-
-    if(inputs) {
-      const inputValues = mapValues(inputs, definitionPropsToInputs)
-
-      return isEmpty(inputValues) ? undefined : inputValues
-    }
+    const inputValues = mapValues(inputs, definitionPropsToInputs)
+    return isEmpty(inputValues) ? undefined : inputValues
   }
 
   getInstanceFields() {
-    const { lines, fields } = this
+    const { fields } = this
+    if (!fields) { return }
 
-    if(lines) {
-      // get every field that contains a "value" property
-      const defaultFields =
-        reduce(
-          map(
-            filter(
-              map(lines, '[1]'),
-              "fields"),
-            "fields"),
-          (acc, fields) => {
-            forEach(fields, (field, fieldKey) => {
-              if(field.value){
-                acc[fieldKey] = field.value
-              }
-            })
-
-            return acc
-          }, {})
-
-      return isEmpty(defaultFields) ? undefined : defaultFields
-    }
-
-    if(fields) {
-      const defaultFields = pickBy(mapValues(fields, "value"), identity)
-
-      return isEmpty(defaultFields) ? undefined : defaultFields
-    }
+    const defaultFields = pickBy(mapValues(fields, "value"), identity)
+    return isEmpty(defaultFields) ? undefined : defaultFields
   }
 }
 
@@ -184,7 +143,6 @@ BlockDefinition.parseRawDefinition = function(rawBlockDefinition, definitionPath
   blockDef.disabled = !!rawBlockDefinition.disabled
   blockDef.visualization = rawBlockDefinition.visualization
   blockDef.connections = rawBlockDefinition.connections
-  blockDef.lines = rawBlockDefinition.lines
   blockDef.template = rawBlockDefinition.template
   blockDef.inputs = rawBlockDefinition.inputs
   blockDef.fields = rawBlockDefinition.fields
