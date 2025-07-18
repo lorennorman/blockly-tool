@@ -3719,8 +3719,7 @@ exports[`Block Snapshots > Blockly JSON > one_minute 1`] = `
           "59",
           "59"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",
