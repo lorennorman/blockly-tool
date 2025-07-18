@@ -3737,7 +3737,7 @@ exports[`Block Snapshots > Blockly JSON > one_month 1`] = `
   "colour": 30,
   "tooltip": "Runs during a particular month.",
   "output": "cron_month",
-  "message0": " %1 %2",
+  "message0": "%1 %2",
   "args0": [
     {
       "name": "MONTH",
@@ -3791,8 +3791,7 @@ exports[`Block Snapshots > Blockly JSON > one_month 1`] = `
           "December",
           "12"
         ]
-      ],
-      "text": ""
+      ]
     },
     {
       "type": "input_dummy",

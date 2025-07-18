@@ -1,20 +1,19 @@
 export default {
   type: "month_settings",
-
-  visualization: {
-    colour: 30,
-    tooltip: "How would you like to specify the months portion of your schedule?"
-  },
+  name: "Month Settings",
+  colour: 30,
+  description: "How would you like to specify the months portion of your schedule?",
 
   connections: {},
 
-  lines: [
-    [ "Month:", {
-      inputValue: 'MONTH_BLOCK',
+  template: "Month: %MONTH_BLOCK",
+
+  inputs: {
+    MONTH_BLOCK: {
       check: 'cron_month',
       shadow: 'all_months'
-    }],
-  ],
+    }
+  },
 
   generators: {
     json: block => { }
