@@ -1,22 +1,10 @@
 export default {
   type: "when_data_matching",
-
-  toolbox: {
-    category: 'Triggers',
-  },
-
-  visualization: {
-    inputsInline: true,
-    colour: 30,
-    tooltip: [
-      "Run this Action when the specified Feed receives data that matches the specified condition.",
-      "-",
-      "Inputs:",
-      "---------------",
-      "Feed - the Feed to watch for new data points",
-      "Matcher - a numerical or textual matcher block to try new Feed data points with",
-    ].join('\n'),
-  },
+  bytecodeKey: "whenDataMatching",
+  name: "Data Matching",
+  colour: 30,
+  inputsInline: true,
+  description: "Run this Action when the specified Feed receives data that matches the specified condition.",
 
   connections: {
     mode: "statement",
@@ -27,17 +15,11 @@ export default {
   mixins: ['replaceDropdownOptions'],
   extensions: [ "populateFeedDropdown" ],
 
-  lines: [
-    [ "When %FEED_KEY", {
-      align: "LEFT",
-      field: 'FEED_KEY',
-      options: [
-        [ "Loading Feeds...", ""]
-      ]
-    }],
+  template: "When %FEED_KEY gets data matching: %MATCHER",
 
-    [ "gets data matching: %MATCHER", {
-      inputValue: "MATCHER",
+  inputs: {
+    MATCHER: {
+      description: "Attach a Matcher block to compare against new Feed values",
       check: 'matcher',
       shadow: {
         type: 'matcher_compare',
@@ -45,8 +27,17 @@ export default {
           B: { shadow: { type: 'io_math_number' } },
         }
       }
-    }],
-  ],
+    }
+  },
+
+  fields: {
+    FEED_KEY: {
+      description: "Select the Feed to watch for new data.",
+      options: [
+        [ "Loading Feeds...", ""]
+      ]
+    }
+  },
 
   generators: {
     json: (block, generator) => {

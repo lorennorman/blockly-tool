@@ -4134,7 +4134,7 @@ exports[`Block Snapshots > Blockly JSON > when_data 1`] = `
   "inputsInline": true,
   "type": "when_data",
   "colour": 30,
-  "tooltip": "Run this action when a Feed receives a new data point.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points",
+  "tooltip": "Run this action when a Feed receives a new data point.",
   "nextStatement": "trigger",
   "previousStatement": "trigger",
   "message0": "When %1 gets any data %2",
@@ -4167,10 +4167,10 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching 1`] = `
   "inputsInline": true,
   "type": "when_data_matching",
   "colour": 30,
-  "tooltip": "Run this Action when the specified Feed receives data that matches the specified condition.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatcher - a numerical or textual matcher block to try new Feed data points with",
+  "tooltip": "Run this Action when the specified Feed receives data that matches the specified condition.",
   "nextStatement": "trigger",
   "previousStatement": "trigger",
-  "message0": "When %1 %2",
+  "message0": "When %1 gets data matching: %2",
   "args0": [
     {
       "name": "FEED_KEY",
@@ -4183,13 +4183,6 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "LEFT"
-    }
-  ],
-  "message1": "gets data matching: %1",
-  "args1": [
     {
       "type": "input_value",
       "name": "MATCHER",
@@ -4209,10 +4202,10 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching_state 1`] = `
   "inputsInline": true,
   "type": "when_data_matching_state",
   "colour": 30,
-  "tooltip": "Run this Action when the specified Feed receives a data point that compares to its previous data point in the specified way.\\n-\\nInputs:\\n---------------\\nFeed - the Feed to watch for new data points\\nMatch State - the kind of change to watch for:\\n- \\"starts\\" - the last data point DID NOT match, but this one DOES\\n- \\"stops\\" - the last data point DID match, but this one DOES NOT\\n- \\"keeps\\" - both data points DO match\\n- \\"keeps not\\" - both data points DO NOT match\\nMatcher - a numerical or textual matcher block to use on both data points before making the above comparison",
+  "tooltip": "Run this Action when the specified Feed receives a data point that compares to its previous data point in the specified way.",
   "nextStatement": "trigger",
   "previousStatement": "trigger",
-  "message0": "When %1 %2",
+  "message0": "When %1 gets data that %2 matching %3",
   "args0": [
     {
       "name": "FEED_KEY",
@@ -4225,13 +4218,6 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching_state 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "LEFT"
-    }
-  ],
-  "message1": "gets data that %1 %2",
-  "args1": [
     {
       "name": "MATCH_STATE",
       "type": "field_dropdown",
@@ -4255,13 +4241,6 @@ exports[`Block Snapshots > Blockly JSON > when_data_matching_state 1`] = `
       ],
       "text": ""
     },
-    {
-      "type": "input_dummy",
-      "align": "RIGHT"
-    }
-  ],
-  "message2": "matching %1",
-  "args2": [
     {
       "type": "input_value",
       "name": "MATCHER",
